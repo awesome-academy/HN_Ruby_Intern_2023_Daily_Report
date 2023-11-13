@@ -1,0 +1,14 @@
+en:
+  page_title: "Daily Report"
+  home: "Home"
+  help: "Help"
+  log_in: "Log in"
+  languages: "Languages"
+  english: "English"
+  vietnamese: "Vietnamese"
+  static_pages:
+    home:
+      text: "This is the home page for the daily report website."
+      sign_up: "Sign up now!"
+    help:
+      text: "Find some help?"
