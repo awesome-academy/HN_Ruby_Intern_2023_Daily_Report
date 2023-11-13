@@ -1,0 +1,14 @@
+vi:
+  page_title: "Hệ thống báo cáo hàng ngày"
+  home: "Trang chủ"
+  help: "Hỗ trợ"
+  log_in: "Đăng nhập"
+  languages: "Ngôn ngữ"
+  english: "Tiếng anh"
+  vietnamese: "Tiếng việt"
+  static_pages:
+    home:
+      text: "Đây là trang chủ của hệ thống báo cáo hàng ngày"
+      sign_up: "Chưa có tài khoản? Đăng ký ngay!"
+    help:
+      text: "Cần trợ giúp?"
