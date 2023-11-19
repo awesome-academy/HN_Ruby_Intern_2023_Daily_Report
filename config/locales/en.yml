@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  admin:
+    base:
+      footer:
+        copyrights: "Copyright © Libma"
+        contact: "Admin page from Libma"
