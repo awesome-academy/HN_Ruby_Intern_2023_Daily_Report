@@ -1,0 +1,8 @@
+<% local_assigns.with_defaults(button_class: "") => {
+      id:, button_class:
+} %>
+<% id = "#{id}-dropdown" %>
+<%= link_to "#", class: button_class, id:,
+                 data: {bs_toggle: "dropdown"} do %>
+  <%= yield %>
+<% end %>

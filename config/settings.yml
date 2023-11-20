@@ -1,3 +1,6 @@
 valid_email_regex: !ruby/regexp /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 digit_255: 255
 digit_50: 50
+
+admin:
+  credit_link: "https://www.bootstrapdash.com/product/corona-free/"

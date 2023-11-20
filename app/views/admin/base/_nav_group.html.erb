@@ -1,0 +1,15 @@
+<% id = "#{id}-nav" %>
+<li class="nav-item menu-group">
+  <%= link_to "##{id}", class: "nav-link", data: {bs_toggle: "collapse"}, aria: {expanded:"false", controls: id} do %>
+    <span class="menu-icon">
+      <i class="mdi mdi-<%= icon %>"></i>
+    </span>
+    <span class="menu-title"><%= title %></span>
+    <i class="menu-arrow"></i>
+  <% end %>
+  <div class="collapse" id="<%= id %>">
+    <ul class="nav flex-column sub-menu">
+      <%= yield %>
+    </ul>
+  </div>
+</li>

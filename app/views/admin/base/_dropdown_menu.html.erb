@@ -1,0 +1,12 @@
+<% local_assigns.with_defaults(left: true, menu_class: "", title: nil) => {
+  id:, left:, menu_class:, title:,
+} %>
+<% id = "#{id}-dropdown" %>
+<% pos = left ? "left" : "right" %>
+<div class="dropdown-menu preview-list dropdown-menu-<%= pos %> <%= menu_class %>"
+     aria-labelledby="<%= id %>">
+  <% if title %>
+    <h6 class="p-3 mb-0"><%= title %></h6>
+  <% end %>
+  <%= yield %>
+</div>
