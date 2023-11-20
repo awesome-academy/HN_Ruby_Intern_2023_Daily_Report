@@ -74,3 +74,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "rails-i18n"
+gem "sass-rails"

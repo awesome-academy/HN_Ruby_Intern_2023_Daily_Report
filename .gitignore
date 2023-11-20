@@ -90,3 +90,5 @@ build-iPhoneSimulator/
 /config/database.yml
 /config/credentials.yml.enc
 /test/*
+
+/vendor/theme
