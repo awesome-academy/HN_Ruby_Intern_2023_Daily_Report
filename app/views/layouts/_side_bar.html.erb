@@ -1,0 +1,49 @@
+<div class="wrapper">
+  <aside id="sidebar">
+    <div class="h-100">
+      <div class="sidebar-logo">
+        <%= link_to "LIBMA", root_path %>
+      </div>
+      <ul class="sidebar-nav">
+        <li class="sidebar-header"><%= t "navigation" %></li>
+        <li class="sidebar-item">
+          <%= link_to root_path, class: "sidebar-link" do %>
+            <i class="fa-solid fa-house pe-2"></i> <%= t "home" %>
+          <% end %>
+        </li>
+        <li class="sidebar-header"></li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#languages" aria-expanded="false" aria-controls="languages">
+            <i class="fa-solid fa-language pe-2"></i> <%= t "languages" %>
+          </a>
+          <ul id="languages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <li class="sidebar-item">
+              <%= link_to t("english"), root_path(locale: "en"), class: "sidebar-link" %>
+            </li>
+            <li class="sidebar-item">
+              <%= link_to t("vietnamese"), root_path(locale: "vi"), class: "sidebar-link" %>
+            </li>
+          </ul>
+        </li>
+        <li class="sidebar-item">
+          <%= link_to "#", class: "sidebar-link" do %>
+            <i class="fa-regular fa-user pe-2"></i> <%= t "log_in" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <div class="main">
+    <nav class="navbar navbar-expand px-3 py-3 border-bottom">
+      <%= form_with url: "/search", method: :get, class: "search-form" do |form| %>
+        <%= form.label :query, class: "search-icon-wrapper" do %>
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <% end %>
+        <%= form.text_field :query, class: "search-input", placeholder: t("search") %>
+      <% end %>
+    </nav>
+    <main class="content px-3 py-2">
+      <%= yield %>
+    </main>
+  </div>
+</div>
