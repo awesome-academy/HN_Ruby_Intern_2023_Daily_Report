@@ -5,5 +5,8 @@ Rails.application.routes.draw do
     end
 
     root "home#index"
+    get "/signup", to: "accounts#new"
+    post "/signup", to: "accounts#create"
+    resources :accounts, only: %i(show)
   end
 end

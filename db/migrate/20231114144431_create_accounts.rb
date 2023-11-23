@@ -3,7 +3,6 @@ class CreateAccounts < ActiveRecord::Migration[7.0]
     create_table :accounts do |t|
       t.string :email, null: false
       t.string :username, null: false
-      t.string :password, null: false
       t.boolean :is_admin, null: false, default: false
 
       t.timestamps

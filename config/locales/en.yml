@@ -1,14 +1,21 @@
 en:
-  navigation: "Navigation"
   home: "Home"
-  log_in: "Log In"
+  log_in: "Log in"
   languages: "Languages"
   english: "English"
   vietnamese: "Vietnamese"
   welcome_text: "Welcome to the LIBMA website"
   home_text: "This is the home page for the LIBMA - Library management application."
-  sign_up_now: "Sign up now!"
   search: "Search..."
+  sign_up: "Sign up"
+  create_account: "Create my account"
+  shared:
+    error_messages:
+      the_form_contains: "The form contains"
+      error: "error"
+  account_not_found: "Account not found!"
+  account_create_success: "Welcome!"
+
   admin:
     base:
       footer:

@@ -1,0 +1,34 @@
+<header>
+  <nav class="navbar navbar-expand-lg py-3 border-bottom">
+    <div class="container">
+      <%= link_to "LIBMA", root_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <div class="d-flex flex-grow-1">
+          <%= form_with url: "/search", method: :get, class: "d-flex flex-grow-1" do |form| %>
+            <%= button_tag type: "submit", class: "btn" do %>
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <% end %>
+            <%= form.text_field :query, class: "me-2 search-input flex-grow-1", autocomplete: "off", placeholder: t("search") %>
+          <% end %>
+        </div>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><%= link_to t("home"), root_path, class: "nav-link active", "aria-current": "page" %></li>
+          <li class="nav-item"><%= link_to t("log_in"), "#", class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t("sign_up"), signup_path, class: "nav-link" %></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= t "languages" %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><%= link_to t("english"), locale: "en" %></li>
+              <li><%= link_to t("vietnamese"), locale: "vi" %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
