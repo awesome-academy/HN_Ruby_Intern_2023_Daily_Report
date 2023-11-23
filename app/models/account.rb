@@ -1,5 +1,7 @@
 class Account < ApplicationRecord
-  belongs_to :user_info
+  before_save :downcase_email
+
+  has_one :user_info, dependent: :nullify
   has_many :borrow_requests, class_name: BorrowInfo.name,
                              dependent: :destroy
   has_many :author_followings, class_name: AuthorFollower.name,
@@ -18,4 +20,18 @@ class Account < ApplicationRecord
                       dependent: :destroy
   has_many :commented_books, through: :comments,
                              source: :book
+
+  validates :email, presence: true, length: {maximum: Settings.digit_255},
+            format: Settings.valid_email_regex,
+            uniqueness: {case_sensitive: false}
+  validates :password, length: {in: 6..20}
+  validates :username, presence: true, length: {maximum: Settings.digit_50},
+            uniqueness: true
+
+  has_secure_password
+
+  private
+  def downcase_email
+    email.downcase!
+  end
 end
