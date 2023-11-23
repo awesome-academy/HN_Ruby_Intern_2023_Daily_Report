@@ -1,11 +1,11 @@
 class JoinBooksBorrowInfosBorrowedItem < ActiveRecord::Migration[7.0]
   def change
-    create_table :borrowed_items do |t|
+    create_table :borrow_items do |t|
       t.belongs_to :book, null: false, foreign_key: true
       t.belongs_to :borrow_info, null: false, foreign_key: true
 
       t.timestamps
     end
-    add_index :borrowed_items, [:book_id, :borrow_info_id], unique: true
+    add_index :borrow_items, [:book_id, :borrow_info_id], unique: true
   end
 end

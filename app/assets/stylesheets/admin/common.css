@@ -1,6 +1,11 @@
 /*
  *= require vendors/mdi/css/materialdesignicons.min.css
  *= require vendors/css/vendor.bundle.base.css
+ *= require vendors/jvectormap/jquery-jvectormap.css
+ *= require vendors/flag-icon-css/css/flag-icon.min.css
+ *= require vendors/owl-carousel-2/owl.carousel.min.css
+ *= require vendors/owl-carousel-2/owl.theme.default.min.css
+ *= require vendors/jquery-toast-plugin/jquery.toast.min.css
  *= require css/style.css
  *= require_self
  */

@@ -1,14 +1,6 @@
 <% id = "sidebar-profile" %>
 <div class="profile-desc">
-  <div class="profile-pic">
-    <div class="count-indicator">
-      <%= image_tag "admin/face15.jpg", class: "img-xs rounded-circle" %>
-      <span class="count bg-success"></span>
-    </div>
-    <div class="profile-name">
-      <h5 class="mb-0 font-weight-normal"><%= @current_account.username %></h5>
-    </div>
-  </div>
+  <%= render "admin/shared/profile", status: "success", avatar_size: "sm", username_class: "fs-6" %>
   <%= render "dropdown_button", id: do %>
     <i class="mdi mdi-dots-vertical"></i>
   <% end %>

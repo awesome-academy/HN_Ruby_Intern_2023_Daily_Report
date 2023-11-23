@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
-  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_075923) do
+  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
     t.boolean "is_admin", default: false, null: false
@@ -19,11 +19,51 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
     t.datetime "updated_at", null: false
     t.string "password_digest", null: false
     t.string "remember_digest"
+    t.boolean "is_active", default: false, null: false
+    t.boolean "is_activated", default: false, null: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["username"], name: "index_accounts_on_username", unique: true
   end
 
-  create_table "authors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", charset: "utf8mb4", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "author_followers", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "author_id"], name: "index_author_followers_on_account_id_and_author_id", unique: true
+    t.index ["account_id"], name: "index_author_followers_on_account_id"
+    t.index ["author_id"], name: "index_author_followers_on_author_id"
+  end
+
+  create_table "authors", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "about", null: false
     t.string "phone"
@@ -33,17 +73,59 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
     t.index ["name"], name: "index_authors_on_name"
   end
 
-  create_table "authors_followers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "account_id", null: false
+  create_table "book_authors", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "book_id", null: false
     t.bigint "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id", "author_id"], name: "index_authors_followers_on_account_id_and_author_id", unique: true
-    t.index ["account_id"], name: "index_authors_followers_on_account_id"
-    t.index ["author_id"], name: "index_authors_followers_on_author_id"
+    t.index ["author_id"], name: "index_book_authors_on_author_id"
+    t.index ["book_id", "author_id"], name: "index_book_authors_on_book_id_and_author_id", unique: true
+    t.index ["book_id"], name: "index_book_authors_on_book_id"
   end
 
-  create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "book_comments", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "account_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_book_comments_on_account_id"
+    t.index ["book_id", "account_id"], name: "index_book_comments_on_book_id_and_account_id", unique: true
+    t.index ["book_id"], name: "index_book_comments_on_book_id"
+  end
+
+  create_table "book_favorites", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_book_favorites_on_account_id"
+    t.index ["book_id", "account_id"], name: "index_book_favorites_on_book_id_and_account_id", unique: true
+    t.index ["book_id"], name: "index_book_favorites_on_book_id"
+  end
+
+  create_table "book_genres", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "genre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id", "genre_id"], name: "index_book_genres_on_book_id_and_genre_id", unique: true
+    t.index ["book_id"], name: "index_book_genres_on_book_id"
+    t.index ["genre_id"], name: "index_book_genres_on_genre_id"
+  end
+
+  create_table "book_rates", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "account_id", null: false
+    t.integer "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_book_rates_on_account_id"
+    t.index ["book_id", "account_id"], name: "index_book_rates_on_book_id_and_account_id", unique: true
+    t.index ["book_id"], name: "index_book_rates_on_book_id"
+  end
+
+  create_table "books", charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
     t.integer "amount", null: false
@@ -57,59 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
     t.index ["title"], name: "index_books_on_title", unique: true
   end
 
-  create_table "books_authors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "book_id", null: false
-    t.bigint "author_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_books_authors_on_author_id"
-    t.index ["book_id", "author_id"], name: "index_books_authors_on_book_id_and_author_id", unique: true
-    t.index ["book_id"], name: "index_books_authors_on_book_id"
-  end
-
-  create_table "books_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "book_id", null: false
-    t.bigint "account_id", null: false
-    t.text "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_books_comments_on_account_id"
-    t.index ["book_id", "account_id"], name: "index_books_comments_on_book_id_and_account_id", unique: true
-    t.index ["book_id"], name: "index_books_comments_on_book_id"
-  end
-
-  create_table "books_favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "book_id", null: false
-    t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_books_favorites_on_account_id"
-    t.index ["book_id", "account_id"], name: "index_books_favorites_on_book_id_and_account_id", unique: true
-    t.index ["book_id"], name: "index_books_favorites_on_book_id"
-  end
-
-  create_table "books_genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "book_id", null: false
-    t.bigint "genre_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id", "genre_id"], name: "index_books_genres_on_book_id_and_genre_id", unique: true
-    t.index ["book_id"], name: "index_books_genres_on_book_id"
-    t.index ["genre_id"], name: "index_books_genres_on_genre_id"
-  end
-
-  create_table "books_rates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "book_id", null: false
-    t.bigint "account_id", null: false
-    t.integer "value", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_books_rates_on_account_id"
-    t.index ["book_id", "account_id"], name: "index_books_rates_on_book_id_and_account_id", unique: true
-    t.index ["book_id"], name: "index_books_rates_on_book_id"
-  end
-
-  create_table "borrow_infos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "borrow_infos", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
     t.integer "status", null: false
@@ -122,7 +152,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
     t.index ["start_at"], name: "index_borrow_infos_on_start_at"
   end
 
-  create_table "borrow_responses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "borrow_items", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "borrow_info_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id", "borrow_info_id"], name: "index_borrow_items_on_book_id_and_borrow_info_id", unique: true
+    t.index ["book_id"], name: "index_borrow_items_on_book_id"
+    t.index ["borrow_info_id"], name: "index_borrow_items_on_borrow_info_id"
+  end
+
+  create_table "borrow_responses", charset: "utf8mb4", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -130,17 +170,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
     t.index ["borrow_info_id"], name: "index_borrow_responses_on_borrow_info_id"
   end
 
-  create_table "borrowed_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "book_id", null: false
-    t.bigint "borrow_info_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id", "borrow_info_id"], name: "index_borrowed_items_on_book_id_and_borrow_info_id", unique: true
-    t.index ["book_id"], name: "index_borrowed_items_on_book_id"
-    t.index ["borrow_info_id"], name: "index_borrowed_items_on_borrow_info_id"
-  end
-
-  create_table "genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "genres", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
     t.datetime "created_at", null: false
@@ -148,7 +178,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
     t.index ["name"], name: "index_genres_on_name", unique: true
   end
 
-  create_table "publishers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "publishers", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "address", null: false
     t.text "about", null: false
@@ -158,7 +188,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
     t.index ["name"], name: "index_publishers_on_name"
   end
 
-  create_table "user_infos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "user_infos", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.integer "gender", null: false
     t.string "address", null: false
@@ -175,22 +205,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_024142) do
     t.index ["phone"], name: "index_user_infos_on_phone"
   end
 
-  add_foreign_key "authors_followers", "accounts"
-  add_foreign_key "authors_followers", "authors"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "author_followers", "accounts"
+  add_foreign_key "author_followers", "authors"
+  add_foreign_key "book_authors", "authors"
+  add_foreign_key "book_authors", "books"
+  add_foreign_key "book_comments", "accounts"
+  add_foreign_key "book_comments", "books"
+  add_foreign_key "book_favorites", "accounts"
+  add_foreign_key "book_favorites", "books"
+  add_foreign_key "book_genres", "books"
+  add_foreign_key "book_genres", "genres"
+  add_foreign_key "book_rates", "accounts"
+  add_foreign_key "book_rates", "books"
   add_foreign_key "books", "publishers"
-  add_foreign_key "books_authors", "authors"
-  add_foreign_key "books_authors", "books"
-  add_foreign_key "books_comments", "accounts"
-  add_foreign_key "books_comments", "books"
-  add_foreign_key "books_favorites", "accounts"
-  add_foreign_key "books_favorites", "books"
-  add_foreign_key "books_genres", "books"
-  add_foreign_key "books_genres", "genres"
-  add_foreign_key "books_rates", "accounts"
-  add_foreign_key "books_rates", "books"
   add_foreign_key "borrow_infos", "accounts"
+  add_foreign_key "borrow_items", "books"
+  add_foreign_key "borrow_items", "borrow_infos"
   add_foreign_key "borrow_responses", "borrow_infos"
-  add_foreign_key "borrowed_items", "books"
-  add_foreign_key "borrowed_items", "borrow_infos"
   add_foreign_key "user_infos", "accounts"
 end

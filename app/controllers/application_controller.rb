@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  include Pagy::Backend
 
   before_action :set_locale
 
@@ -13,5 +14,6 @@ class ApplicationController < ActionController::Base
     locale = params[:locale].to_s.strip.to_sym
     I18n.locale = I18n.default_locale
     I18n.locale = locale if I18n.available_locales.include?(locale)
+    @pagy_locale = params[:locale]
   end
 end

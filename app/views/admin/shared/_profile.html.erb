@@ -1,0 +1,16 @@
+<% local_assigns.with_defaults(user: @current_account, username_class: "", avatar_size: "xs", link: nil, status: false) => {
+  user:, username_class:, status:, avatar_size:, link:
+} %>
+<div class="profile-wrapper">
+  <div class="profile-avatar">
+    <%= image_tag get_avatar(user), class: "img-#{avatar_size} rounded-circle" %>
+    <% unless status.blank? %>
+      <span class="count bg-<%= status %>"></span>
+    <% end %>
+  </div>
+  <div class="profile-name">
+    <p class="mb-0 <%= username_class %>">
+      <%= link_to_unless link.nil?, user.username, link%>
+    </p>
+  </div>
+</div>

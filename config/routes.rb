@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       get "/login", to: "sessions#new"
       post "/login", to: "sessions#create"
       delete "/logout", to: "sessions#destroy"
+      post "/users/:id/active", to: "users#active", as: :user_active
+      post "/users/:id/inactive", to: "users#inactive", as: :user_inactive
+
+      resources :users, only: %i(index show)
     end
   end
 
