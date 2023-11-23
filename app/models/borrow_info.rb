@@ -1,6 +1,5 @@
 class BorrowInfo < ApplicationRecord
-  enum :status, %i(prepend approved rejected returned),
-       default: :prepend
+  enum :status, %i(pending approved rejected returned)
 
   belongs_to :account
   has_one :response, class_name: BorrowResponse.name,

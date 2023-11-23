@@ -1,0 +1,33 @@
+/*
+*= require vendors/jvectormap/jquery-jvectormap.css
+*= require vendors/flag-icon-css/css/flag-icon.min.css
+*= require vendors/owl-carousel-2/owl.carousel.min.css
+*= require vendors/owl-carousel-2/owl.theme.default.min.css
+*= require_self
+*/
+
+.sidebar .nav .menu-group:nth-child(3n + 1) > .nav-link .menu-icon i {
+  color: yellow;
+}
+.sidebar .nav .menu-group:nth-child(3n + 2) > .nav-link .menu-icon i {
+  color: salmon;
+}
+.sidebar .nav .menu-group:nth-child(3n) > .nav-link .menu-icon i {
+  color: cyan;
+}
+
+.preview-list .preview-item:nth-child(5n + 1) .preview-icon i {
+  color: #8f5fe8;
+}
+.preview-list .preview-item:nth-child(5n + 2) .preview-icon i {
+  color: #ffab00;
+}
+.preview-list .preview-item:nth-child(5n + 3) .preview-icon i {
+  color: #0090e7;
+}
+.preview-list .preview-item:nth-child(5n + 4) .preview-icon i {
+  color: #00d25b;
+}
+.preview-list .preview-item:nth-child(5n) .preview-icon i {
+  color: #fc424a;
+}

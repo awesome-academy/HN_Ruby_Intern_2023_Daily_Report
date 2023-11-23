@@ -1,0 +1,21 @@
+<% local_assigns.with_defaults(link_data: {}, image: nil, icon: nil, title: nil) => {
+  link:, link_data:, icon:, image:, title:
+} %>
+<div class="dropdown-divider"></div>
+<%= link_to link, class: "dropdown-item preview-item", data: link_data do %>
+  <div class="preview-thumbnail">
+    <% if image %>
+      <%= image_tag image, class: "rounded-circle" %>
+    <% elsif icon %>
+      <div class="preview-icon bg-dark rounded-circle">
+        <i class="mdi mdi-<%= icon %>"></i>
+      </div>
+    <% end %>
+  </div>
+  <div class="preview-item-content">
+    <% if title %>
+      <p class="preview-subject ellipsis mb-1"><%= title %></p>
+    <% end %>
+    <% yield %>
+  </div>
+<% end %>

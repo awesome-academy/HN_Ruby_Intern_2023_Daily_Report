@@ -1,0 +1,16 @@
+<% id = "navbar-profile" %>
+<%= render "dropdown_button", id:, button_class: "nav-link" do %>
+  <div class="navbar-profile">
+    <%= image_tag "admin/face15.jpg", class: "img-xs rounded-circle" %>
+    <p class="mb-0 d-none d-sm-block navbar-profile-name"><%= @current_account.username %></p>
+    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+  </div>
+<% end %>
+<%= render "dropdown_menu", id:, pos: "right", title: t(".system"),
+      menu_class: "navbar-dropdown" do %>
+  <%= render "dropdown_item", link: "#",
+          icon: "settings", title: t(".settings") %>
+  <%= render "dropdown_item", link: admin_logout_path,
+          icon: "logout", title: t(".logout"),
+          link_data: { "turbo-method": :delete, turbo_confirm: t(".logout_confirm") } %>
+<% end %>

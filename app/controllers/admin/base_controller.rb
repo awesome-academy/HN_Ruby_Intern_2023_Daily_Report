@@ -5,7 +5,6 @@ class Admin::BaseController < ApplicationController
   private
 
   def require_admin
-    is_admin = true
-    redirect_to root_path unless is_admin
+    redirect_to admin_login_path unless current_account&.is_admin?
   end
 end
