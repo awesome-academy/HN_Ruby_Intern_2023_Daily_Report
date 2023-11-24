@@ -14,14 +14,17 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new account_params
     if @account.save
+      reset_session
+      store_to_session @account
       flash[:success] = t "account_create_success"
-      redirect_to @account, status: :see_other
+      redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :bad_request
     end
   end
 
   private
+
   def account_params
     params.require(:account).permit :email, :password, :password_confirmation,
                                     :username

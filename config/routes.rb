@@ -13,5 +13,9 @@ Rails.application.routes.draw do
     get "/signup", to: "accounts#new"
     post "/signup", to: "accounts#create"
     resources :accounts, only: %i(show)
+
+    get "/login", to: "sessions#new"
+    post "/login", to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
   end
 end
