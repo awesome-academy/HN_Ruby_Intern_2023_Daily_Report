@@ -4,6 +4,9 @@ class Account < ApplicationRecord
   attr_accessor :remember_token
 
   has_one :user_info, dependent: :nullify
+  has_one_attached :avatar
+
+  has_one :user_info, dependent: :nullify
   has_many :borrow_requests, class_name: BorrowInfo.name,
                              dependent: :destroy
   has_many :author_followings, class_name: AuthorFollower.name,
@@ -29,6 +32,9 @@ class Account < ApplicationRecord
   validates :password, length: {in: 6..20}
   validates :username, presence: true, length: {maximum: Settings.digit_50},
                        uniqueness: true
+
+  scope :exclude, ->(account){where.not(id: account.id)}
+  scope :includes_info, ->{includes(:user_info).with_attached_avatar}
 
   has_secure_password
 

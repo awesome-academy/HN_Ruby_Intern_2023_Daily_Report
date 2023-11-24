@@ -1,10 +1,6 @@
 <% id = "navbar-profile" %>
 <%= render "dropdown_button", id:, button_class: "nav-link" do %>
-  <div class="navbar-profile">
-    <%= image_tag "admin/face15.jpg", class: "img-xs rounded-circle" %>
-    <p class="mb-0 d-none d-sm-block navbar-profile-name"><%= @current_account.username %></p>
-    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-  </div>
+  <%= render "admin/shared/profile", username_class: "d-none d-sm-block navbar-profile-name ps-2" %>
 <% end %>
 <%= render "dropdown_menu", id:, pos: "right", title: t(".system"),
       menu_class: "navbar-dropdown" do %>

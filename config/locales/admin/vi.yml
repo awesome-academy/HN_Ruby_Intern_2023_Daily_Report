@@ -1,42 +1,61 @@
 vi:
   sessions:
-    login_fail: "Đăng nhập thất bại"
+    login_fail: 'Đăng nhập thất bại'
+  datetime:
+    less_than: 'chưa tới'
+    about: 'khoảng'
+    over: 'hơn'
+    almost: 'gần'
   admin:
     base:
       sidebar:
-        navigation: "Điều hướng"
-        dashboard: "Bảng điều khiển"
-        borrow_requests: "Yêu cầu mượn sách"
-        users: "Quản lý người dùng"
-        library: "Quản lý thư viện"
+        navigation: 'Điều hướng'
+        dashboard: 'Bảng điều khiển'
+        borrow_requests: 'Yêu cầu mượn sách'
+        users: 'Quản lý người dùng'
+        library: 'Quản lý thư viện'
       nav_group:
-        book: "Sách"
-        author: "Tác giả"
-        genre: "Thể loại"
-        publisher: "Nhà phát hành"
-        pending_request: "Chờ xử lý"
-        request_history: "Lịch sử"
+        book: 'Sách'
+        author: 'Tác giả'
+        genre: 'Thể loại'
+        publisher: 'Nhà phát hành'
+        pending_request: 'Chờ xử lý'
+        request_history: 'Lịch sử'
       dropdown_menu:
-        account_settings: "Thiết lập tài khoản"
-        change_password: "Đổi mật khẩu"
-        settings: "Cài đặt chung"
-        logout: "Đăng xuất"
-        logout_confirm: "Bạn có chắc muốn đăng xuất?"
+        account_settings: 'Thiết lập tài khoản'
+        change_password: 'Đổi mật khẩu'
+        settings: 'Cài đặt chung'
+        logout: 'Đăng xuất'
+        logout_confirm: 'Bạn có chắc muốn đăng xuất?'
       sidebar_profile:
-        account: "Tài khoản"
+        account: 'Tài khoản'
       navbar:
-        messages: "Tin nhắn"
-        notifications: "Thông báo"
+        messages: 'Tin nhắn'
+        notifications: 'Thông báo'
       navbar_profile:
-        system: "Hệ thống"
+        system: 'Hệ thống'
       footer:
-        info: "Dành cho Administrator - Libma"
-        credit: "Mẫu giao diện: BootstrapDash - Corona"
+        info: 'Dành cho Administrator - Libma'
+        credit: 'Mẫu giao diện: BootstrapDash - Corona'
     sessions:
       new:
-        title: "Đăng nhập"
-        rememberme: "Lưu phiên đăng nhập"
-        forgot_pwd: "Quên mật khẩu?"
-        login: "Đăng nhập"
-        email: "Email"
-        password: "Mật khẩu"
+        title: 'Đăng nhập'
+        rememberme: 'Lưu phiên đăng nhập'
+        forgot_pwd: 'Quên mật khẩu?'
+        login: 'Đăng nhập'
+        email: 'Email'
+        password: 'Mật khẩu'
+    users:
+      index:
+        title: 'Danh sách người dùng'
+        profile: 'Tài khoản'
+        full_name: 'Họ tên'
+        phone: 'SĐT'
+        dob: 'Ngày sinh'
+        status: 'Trạng thái'
+        join_from: 'Tham gia'
+      user:
+        active: 'Hoạt động'
+        inactive: 'Đã khóa'
+        do_active: 'Kích hoạt'
+        do_inactive: 'Khóa'

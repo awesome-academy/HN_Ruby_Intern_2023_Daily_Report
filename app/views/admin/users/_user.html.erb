@@ -1,0 +1,21 @@
+<% if u = get_info(user) %>
+  <% u => {
+      full_name:, email:, user_path:, join_about:,
+      phone:, dob:, button_color:, button_link:, is_active:
+  } %>
+  <tr>
+    <td title="<%= email %>">
+      <%= render "admin/shared/profile", user:, link: user_path, username_class: "ps-3" %>
+    </td>
+    <td><%= link_to full_name, user_path %></td>
+    <td><%= phone %></td>
+    <td><%= dob %></td>
+    <td><%= join_about %></td>
+    <td>
+      <%= button_to button_link, class: "btn btn-outline-#{button_color} btn-flip" do %>
+        <span><%= is_active ? t(".do_inactive") : t(".do_active") %></span>
+        <span><%= is_active ? t(".active") : t(".inactive") %></span>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
