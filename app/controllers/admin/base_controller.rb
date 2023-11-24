@@ -1,5 +1,6 @@
 class Admin::BaseController < ApplicationController
   layout "admin/layouts/base"
+  include Admin::BaseHelper
   before_action :require_admin
 
   private

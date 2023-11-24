@@ -1,0 +1,45 @@
+<% get_info(@user) => {email:, address:, phone:, join_from:, join_about:, avatar:, username:} %>
+<div class="col-12">
+  <%= render "admin/shared/back_button", name: t("admin.default.users_list"), path: admin_users_path %>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="border-bottom text-center pb-4">
+            <%= image_tag avatar, class: "img-lg rounded-circle mb-3" %>
+            <% if join_from %>
+              <div>
+                <span class="fs-6">
+                  <span class="me-1"><%= t "users.join_from" %></span>
+                  <b><%= join_from %></b>
+                </span>
+                <p class="ms-1 d-inline text-muted">(<%= join_about %>)</p>
+              </div>
+            <% end %>
+          </div>
+          <!-- Contact -->
+          <div class="py-4">
+            <%= render("info_field", name: t("users.email"), value: email) %>
+            <%= render("info_field", name: t("users.phone"), value: phone) if phone %>
+            <%= render("info_field", name: t("users.address"), value: address) if address %>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h3><%= username %></h3>
+              <div class="d-flex align-items-center">
+              </div>
+            </div>
+            <div>
+              <%= render "status_button", user: @user, flip: false %>
+            </div>
+          </div>
+          <div class="mt-4 py-2">
+            <%= render_tabs %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

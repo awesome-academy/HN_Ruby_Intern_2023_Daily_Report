@@ -8,5 +8,5 @@
           icon: "settings", title: t(".settings") %>
   <%= render "dropdown_item", link: admin_logout_path,
           icon: "logout", title: t(".logout"),
-          link_data: { "turbo-method": :delete, turbo_confirm: t(".logout_confirm") } %>
+          link_data: { turbo_method: :delete, turbo_confirm: t(".logout_confirm") } %>
 <% end %>

@@ -35,6 +35,7 @@ class Account < ApplicationRecord
 
   scope :exclude, ->(account){where.not(id: account.id)}
   scope :includes_info, ->{includes(:user_info).with_attached_avatar}
+  scope :only_activated, ->{where(is_activated: true)}
 
   has_secure_password
 

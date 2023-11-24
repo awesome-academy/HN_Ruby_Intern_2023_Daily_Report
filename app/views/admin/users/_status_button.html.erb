@@ -1,0 +1,8 @@
+<% if btn = get_status_button(user) %>
+  <% btn => {link:, color:, id:, do_text:, status_text:, confirm_text:} %>
+  <%= button_to link, form: {id:, data: {turbo_confirm: confirm_text}},
+                class: "btn btn-flip btn-outline-#{color}", remote: true do %>
+    <span><%= do_text %></span>
+    <span><%= status_text %></span>
+  <% end %>
+<% end %>

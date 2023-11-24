@@ -5,8 +5,13 @@ class Admin::SessionsController < SessionsController
     redirect_to admin_root_path
   end
 
+  def on_login_fail_inactive
+    flash.now[:danger] = t ".errors.account_not_activated_or_lock"
+    render :new, status: :bad_request
+  end
+
   def on_login_fail
-    flash.now[:danger] = t "sessions.login_fail"
+    flash.now[:danger] = t ".errors.invalid_email_password"
     render :new, status: :bad_request
   end
 

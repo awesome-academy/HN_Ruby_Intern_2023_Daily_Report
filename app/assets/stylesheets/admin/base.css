@@ -49,7 +49,8 @@ body {
 }
 
 .table tr:hover {
-  font-weight: 700;
+  color: cyan;
+  cursor: default;
 }
 
 /* Sorting */

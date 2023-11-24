@@ -6,7 +6,36 @@ vi:
     about: 'khoảng'
     over: 'hơn'
     almost: 'gần'
+  date:
+    formats:
+      short: '%d/%m/'
+      long: '%d/%m/%Y'
+  users:
+    account: 'Tài khoản'
+    full_name: 'Họ tên'
+    phone: 'SĐT'
+    address: 'Địa chỉ'
+    dob: 'Ngày sinh'
+    gender: 'Giới tính'
+    male: 'Nam'
+    female: 'Nữ'
+    others: 'Khác'
+    citizen_id: 'CMND/CCCD'
+    updated_at: 'Cập nhật lần cuối'
+    status: 'Trạng thái'
+    join_from: 'Tham gia từ'
+    email: 'Email'
+    profile: 'Thông tin'
+    favorite: 'Yêu thích'
+    active: 'Hiệu lực'
+    inactive: 'Đã khóa'
   admin:
+    default:
+      back: 'Trở lại %{path}'
+      users_list: 'trang danh sách'
+    notif:
+      user_not_found: 'Tài khoản không tồn tại'
+      user_info_not_found: 'Tài khoản chưa có thông tin'
     base:
       sidebar:
         navigation: 'Điều hướng'
@@ -38,6 +67,9 @@ vi:
         info: 'Dành cho Administrator - Libma'
         credit: 'Mẫu giao diện: BootstrapDash - Corona'
     sessions:
+      errors:
+        account_not_activated_or_lock: 'Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa'
+        invalid_email_password: 'Email hoặc mật khẩu không đúng'
       new:
         title: 'Đăng nhập'
         rememberme: 'Lưu phiên đăng nhập'
@@ -48,14 +80,9 @@ vi:
     users:
       index:
         title: 'Danh sách người dùng'
-        profile: 'Tài khoản'
-        full_name: 'Họ tên'
-        phone: 'SĐT'
-        dob: 'Ngày sinh'
-        status: 'Trạng thái'
-        join_from: 'Tham gia'
-      user:
-        active: 'Hoạt động'
-        inactive: 'Đã khóa'
+      show:
+      status_button:
         do_active: 'Kích hoạt'
         do_inactive: 'Khóa'
+        do_active_confirm: 'Bạn có chắc muốn mở khóa tài khoản này?'
+        do_inactive_confirm: 'Bạn có chắc muốn khóa tài khoản này?'
