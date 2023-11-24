@@ -1,8 +1,9 @@
 class Account < ApplicationRecord
   before_save :downcase_email
 
-  has_one :user_info, dependent: :nullify
+  attr_accessor :remember_token
 
+  has_one :user_info, dependent: :nullify
   has_many :borrow_requests, class_name: BorrowInfo.name,
                              dependent: :destroy
   has_many :author_followings, class_name: AuthorFollower.name,
@@ -28,8 +29,6 @@ class Account < ApplicationRecord
   validates :password, length: {in: 6..20}
   validates :username, presence: true, length: {maximum: Settings.digit_50},
                        uniqueness: true
-
-  attr_accessor :remember_token
 
   has_secure_password
 

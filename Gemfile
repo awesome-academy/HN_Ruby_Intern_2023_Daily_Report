@@ -71,7 +71,8 @@ group :test do
 end
 
 gem "bcrypt", "~> 3.1.7"
-gem "bootstrap"
+gem "bootstrap", "~> 5.3.2"
 gem "config"
 gem "faker"
-gem "sass-rails"
+gem "rails-i18n"
+gem "sassc-rails"

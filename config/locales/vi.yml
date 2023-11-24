@@ -15,6 +15,19 @@ vi:
       error: "lỗi"
   account_not_found: "Không tìm thấy tài khoản!"
   account_create_success: "Đăng ký thành công!"
+  email: "Email"
+  password: "Mật khẩu"
+  remember_me: "Ghi nhớ đăng nhập"
+  sessions:
+    new:
+      new_user: "Người dùng mới?"
+      sign_up_now: "Đăng ký ngay!"
+  library: "Thư viện"
+  account: "Tài khoản"
+  profile: "Trang cá nhân"
+  settings: "Cài đặt"
+  log_out: "Đăng xuất"
+  invalid_email_password: "Tài khoản hoặc mật khẩu không đúng"
 
   activerecord:
     models:
