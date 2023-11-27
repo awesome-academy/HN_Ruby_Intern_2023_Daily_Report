@@ -17,4 +17,10 @@ class Book < ApplicationRecord
   has_many :comments, class_name: BookComment.name,
                       dependent: :destroy
   has_many :commenters, through: :comments
+  has_one_attached :image
+
+  scope :sorted_by_title, ->{order(title: :asc)}
+  scope :ordered_and_grouped_by_first_letter,
+        ->{order(:title).group_by{|book| book.title[0].upcase}}
+  scope :include_authors, ->{includes(:authors)}
 end

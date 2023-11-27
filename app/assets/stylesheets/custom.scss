@@ -11,24 +11,14 @@ a {
   text-decoration: none;
 }
 
-h1 {
-  margin-bottom: 1rem;
-}
-
 .dropdown-menu a {
   @extend .dropdown-item !optional;
 }
 
-/* Search bar */
+/* Navbar */
 
-.search-input {
-  margin-left: -10px;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  border: none;
-  outline: none;
+.navbar-nav > li > a:hover {
+  color: blue;
 }
 
 /* Error explaination display */

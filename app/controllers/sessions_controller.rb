@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
   protected
 
   def on_login_success
-    redirect_back_or root_path
+    redirect_back_or library_path
   end
 
   def on_login_fail

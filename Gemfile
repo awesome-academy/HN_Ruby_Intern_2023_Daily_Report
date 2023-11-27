@@ -40,9 +40,6 @@ gem "tzinfo-data", platforms: %i(mingw mswin x64_mingw jruby)
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html]
-# gem "image_processing", "~> 1.2"
-
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html
   gem "debug", platforms: %i(mri mingw x64_mingw)
@@ -61,6 +58,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "bullet"
+  gem "pry", "~> 0.14.2"
 end
 
 group :test do
@@ -70,10 +69,12 @@ group :test do
   gem "webdrivers"
 end
 
+gem "active_storage_validations", "~> 0.9.8"
 gem "bcrypt", "~> 3.1.7"
 gem "bootstrap", "~> 5.3.2"
 gem "config"
 gem "faker"
+gem "image_processing", "~> 1.12.2"
 gem "pagy"
 gem "rails-i18n"
 gem "sassc-rails"
