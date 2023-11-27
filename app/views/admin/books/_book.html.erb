@@ -1,5 +1,5 @@
 <% populate_book(book) => {
-    cover:, title:, isbn:, amount:, publisher:, publish_date:,
+    cover:, title:, isbn:, remain:, publisher:, publish_date:,
     authors:, genres:, book_path:, id:
 }%>
 <tr id="<%= id %>">
@@ -10,7 +10,7 @@
       <span title="<%= title %>"><%= title %></span>
     <% end %>
   </td>
-  <td><%= amount %></td>
+  <td><%= remain %></td>
   <td>
     <%= render "admin/shared/ref_list", obj: authors, resource: :author %>
   </td>

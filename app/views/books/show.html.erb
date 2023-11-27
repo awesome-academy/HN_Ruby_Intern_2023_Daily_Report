@@ -16,7 +16,7 @@
       <p><span class="fw-semibold"><%= t "genre" %>: </span><%= @book.genres.map(&:name).join(", ") %></p>
       <p><span class="fw-semibold">ISBN10: </span><%= @book.isbn %></p>
       <p><span class="fw-semibold"><%= t "publish_date" %>: </span><%= @book.publish_date %></p>
-      <p><span class="fw-semibold"><%= t "copies" %>: </span><%= @book.amount %></p>
+      <p><span class="fw-semibold"><%= t "copies" %>: </span><%= @book.remain %></p>
       <p><span class="fw-semibold"><%= t "publisher" %>: </span><%= @book.publisher.name %></p>
       <%= button_to t(".add_to_cart"), borrow_items_path(book_id: @book.id), class: "btn btn-primary" %>
     </div>

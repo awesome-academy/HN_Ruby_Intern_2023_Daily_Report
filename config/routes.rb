@@ -9,7 +9,8 @@ Rails.application.routes.draw do
       resources :authors, :genres, :publishers
       resources :books do
         member do
-          get :amend, :authors, :genres
+          get :amend, to: "books#amend_edit"
+          get :authors, :genres
           post :amend
         end
       end
@@ -18,14 +19,17 @@ Rails.application.routes.draw do
           post :active, :inactive
         end
       end
-      resources :borrows, only: %i(index show) do
+      resources :borrows, only: %i(index show), constraints: {id: /\d+/} do
         member do
           post :approve, :reject, :return, :remind
         end
         collection do
-          get "/:group", to: "borrows#index"
+          get ":group", to: "borrows#index", as: "",
+                        constraints: {group: /pending|history|approved/},
+                        defaults: {group: :approved}
         end
       end
+
     end
   end
 

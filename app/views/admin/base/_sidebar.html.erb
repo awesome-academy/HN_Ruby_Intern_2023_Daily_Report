@@ -16,7 +16,7 @@
     </li>
     <%= render "nav_item", link: admin_root_path, icon: "speedometer", title: t(".dashboard") %>
     <%= render "nav_group", id: "request", icon: "receipt", title: t(".borrow_requests") do %>
-      <%= render "nav_item", link: admin_borrows_path, icon: "cards", title: t("borrows.approved") %>
+      <%= render "nav_item", link: admin_borrows_path, icon: "cards", title: t("borrows.borrowing") %>
       <%= render "nav_item", link: admin_borrows_path(group: :pending), icon: "note-plus", title: t("borrows.pending") %>
       <%= render "nav_item", link: admin_borrows_path(group: :history), icon: "history", title: t("borrows.history") %>
     <% end %>

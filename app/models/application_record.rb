@@ -1,7 +1,7 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
-  scope :sort_on, ->(col, desc){order("#{col} #{:desc if desc}")}
+  scope :sort_on, ->(col, desc){order Arel.sql("#{col} #{:desc if desc}")}
   scope :newest, ->{order(updated_at: :desc)}
 
   protected

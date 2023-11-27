@@ -89,25 +89,30 @@ vi:
   borrows:
     _name: 'yêu cầu mượn sách'
     _item: 'phiếu mượn'
-    pending: 'Chờ xử lý'
+    pending: 'chờ xử lý'
+    new: 'mượn mới'
+    incrementing: 'gia hạn'
     approve: 'Chấp nhận'
-    approved: 'chấp nhận'
+    approved: 'được chấp nhận'
     borrowing: 'đang mượn'
     reject: 'Từ chối'
-    rejected: 'Từ chối'
+    rejected: 'bị từ chối'
     return: 'Trả sách'
-    returned: 'Đã trả'
-    response: 'phản hồi'
-    history: 'Lịch sử'
+    returned: 'đã trả'
+    reject_reason: 'Lý do từ chối'
+    history: 'Lịch sử mượn'
     start_at: 'Ngày mượn'
     end_at: 'Hạn trả'
-    remain_turns: 'Gia hạn còn lại'
-    turns: 'Đã gia hạn'
+    turn: 'lần'
     remind: 'Nhắc trả'
     status: 'Trạng thái'
     finish: 'Hoàn thành'
-    updated_at: 'Cập nhật'
+    updated_at: 'Xác nhận'
     approved_at: 'Xác nhận'
+    user: 'người mượn'
+    type: 'Yêu cầu'
+    placeholder:
+      reject_response: 'Phản hồi lý do từ chối yêu cầu'
   admin:
     misc:
       back: 'Quay lại'
@@ -124,6 +129,7 @@ vi:
       cancel: 'Huỷ'
       skip: 'Bỏ qua'
       last_updated: 'Cập nhật'
+      send: 'Gửi'
     notif:
       user_info_not_found: 'Tài khoản chưa có thông tin'
       no_items: 'Không có %{item} nào tìm thấy'
@@ -132,6 +138,7 @@ vi:
       cancel_confirm: 'Dữ liệu bạn nhập có thể bị mất. Bạn có muốn hủy?'
       account_not_activated_or_lock: 'Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa'
       invalid_email_password: 'Email hoặc mật khẩu không đúng'
+      update_borrow_status_success: 'Cập nhật trạng thái của phiếu mượn thành công. Trạng thái mới: %{status}'
     title:
       index: 'Danh sách %{name}'
       new: 'Thêm %{name}'
@@ -145,6 +152,12 @@ vi:
         do_inactive: 'Khóa'
         do_active_confirm: 'Bạn có chắc muốn mở khóa tài khoản này?'
         do_inactive_confirm: 'Bạn có chắc muốn khóa tài khoản này?'
+    borrows:
+      action_buttons:
+        remind_confirm: 'Bạn có muốn gửi email nhắc nhở tới người dùng này?'
+        approve_confirm: 'Bạn chấp thuận với yêu cầu mượn này?'
+        return_confirm: 'Bạn xác nhận người dùng này đã trả đủ sách?'
+        reject_confirm: 'Bạn từ chối với yêu cầu mượn này?'
     shared:
       form_button:
         update: 'Sửa'

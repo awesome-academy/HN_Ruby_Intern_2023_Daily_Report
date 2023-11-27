@@ -1,0 +1,18 @@
+<% content_for :modal_body do %>
+  <%= form_with do |f| %>
+    <%= tag.p t("borrows.placeholder.reject_response"), class: "d-none",
+                          data: {placeholder_for: :reject_reason} %>
+    <%= f.collection_select :reject_reason, BorrowResponse.newest_limit, :content, :content,
+                            {prompt: true},
+                            id: :reject_reason, class: "form-control modal-selector2",
+                            data: {parent_id: :reject_response_modal} %>
+    <div class="modal-footer">
+      <%= f.submit t("admin.misc.send"), class: "btn btn-success btn-control",
+                                         data: {bs_dismiss: "modal"} %>
+      <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+        <%= t "admin.misc.cancel" %>
+      </button>
+    </div>
+  <% end %>
+<% end %>
+<%= render "admin/shared/modal", id: :reject_response_modal, title: t("borrows.reject_reason") %>

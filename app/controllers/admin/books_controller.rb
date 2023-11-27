@@ -30,18 +30,18 @@ class Admin::BooksController < Admin::BaseController
   def create
     @book = Book.new book_params
     if @book.save
-      redirect_to admin_book_amend_path(@book)
+      redirect_to amend_admin_book_path(@book)
     else
       respond_to_form_fail @book
     end
   end
 
   def update
-    return redirect_to admin_book_amend_path(@book) if params.key? :skip
+    return redirect_to amend_admin_book_path(@book) if params.key? :skip
 
     if @book.update book_params
       flash[:success] = t "admin.notif.update_success"
-      redirect_to admin_book_amend_path(@book)
+      redirect_to amend_admin_book_path(@book)
     else
       respond_to_form_fail @book
     end
@@ -101,7 +101,7 @@ class Admin::BooksController < Admin::BaseController
   end
 
   def book_params
-    params.require(:book).permit :title, :description, :amount,
+    params.require(:book).permit :title, :description, :remain,
                                  :isbn, :publish_date, :image
   end
 
@@ -114,7 +114,7 @@ class Admin::BooksController < Admin::BaseController
       publisher: "publishers.name",
       title: "books.title",
       publish_date: "books.publish_date",
-      amount: "books.amount",
+      remain: "books.amount - books.borrowed_count",
       author: "authors.name",
       genre: "genres.name"
     }

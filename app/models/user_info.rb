@@ -9,6 +9,8 @@ class UserInfo < ApplicationRecord
 
   validates :name, :gender, :address, :phone, :citizen_id, :dob, presence: true
   validates :name, length: {maximum: Settings.digit_50}
-  validates :phone, length: {is: Settings.digit_10}
+
   validates :citizen_id, uniqueness: true
+  validates :phone, format: Settings.valid_phone_regex,
+                    allow_blank: true
 end

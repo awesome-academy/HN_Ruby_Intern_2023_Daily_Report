@@ -27,7 +27,7 @@ module Admin::BaseHelper
   end
 
   def get_link item, resource, for_text: :name, class: nil
-    text = item&.public_send(for_text)
+    text = item&.public_send for_text
     link_to_if item, text,
                (send("admin_#{resource}_path", item) if item),
                class:, title: text
@@ -38,7 +38,7 @@ module Admin::BaseHelper
     is_desc = params[:style]&.downcase == "desc"
     style = (is_desc ? :desc : :asc) if current
     new_style = style == :asc ? :desc : :asc
-    link = url_for(request.params.merge(style: new_style, sort: name))
+    link = url_for request.params.merge(style: new_style, sort: name)
     render "admin/shared/table_header", style:,
             sortable: name.present?, link:, title:
   end

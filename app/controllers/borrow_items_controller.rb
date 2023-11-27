@@ -5,7 +5,7 @@ class BorrowItemsController < ApplicationController
   def create
     chosen_book = Book.find_by(id: params[:book_id])
 
-    if chosen_book.amount.positive?
+    if chosen_book.amount > chosen_book.borrowed_count
       handle_cart_item chosen_book
     else
       flash[:warning] = t "book_out_of_stock"

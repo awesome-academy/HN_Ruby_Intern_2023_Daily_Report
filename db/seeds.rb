@@ -71,7 +71,7 @@ end
   phone = Faker::PhoneNumber.cell_phone
   email = Faker::Internet.email(name: name)
 
-  Author.create!(name:, about:, phone:, email:)
+  Author.create(name:, about:, phone:, email:)
 end
 
 Author.all.each do |author|
@@ -117,7 +117,6 @@ Book.all.each do |book|
 
   BookGenre.create!(book_id:, genre_id:)
 end
-
 
 100.times do |i|
   b = BorrowInfo.create(
