@@ -4,9 +4,14 @@ digit_50: 50
 digit_10: 10
 
 default_avatar_path: 'admin/default_avatar.jpg'
-items_per_page: 25
 
 display_for_nil: 'NULL'
+isbn_max_digits: 13
+
+validations:
+  isbn_regex: !ruby/regexp /\A(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+\z/
+  title_max_len: 255
+  image_type: <%= %w[image/jpeg image/gif image/png] %>
 
 admin:
   credit_link: 'https://www.bootstrapdash.com/product/corona-free/'

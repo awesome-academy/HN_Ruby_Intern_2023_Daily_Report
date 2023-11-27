@@ -1,9 +1,11 @@
 import '@vendor/jquery-toast-plugin/jquery.toast.min';
 import '@vendor/jq.tablesort';
 
+import './file_preview';
+
 $(function () {
-  if ($('#users-table').length) {
-    $('#users-table').tablesort();
+  if ($('.sortable-table').length) {
+    $('.sortable-table').tablesort();
   }
 });
 

@@ -2,7 +2,3 @@
   background: url(admin/Login_bg.jpg);
   background-size: cover;
 }
-
-.form-control:focus {
-  color: #ff0;
-}

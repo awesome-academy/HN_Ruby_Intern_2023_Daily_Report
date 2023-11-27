@@ -5,7 +5,7 @@ class Admin::UsersController < Admin::BaseController
     @pagy, @users = pagy Account.exclude(@current_account)
                                 .only_activated
                                 .includes_info,
-                         items: params[:items] || Settings.items_per_page
+                         items: params[:items]
   end
 
   def show; end

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post "/users/:id/inactive", to: "users#inactive", as: :user_inactive
 
       resources :users, only: %i(index show)
+      resources :books, :authors, :genres, :publishers
     end
   end
 

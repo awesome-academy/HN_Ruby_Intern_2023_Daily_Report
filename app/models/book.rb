@@ -17,10 +17,35 @@ class Book < ApplicationRecord
   has_many :comments, class_name: BookComment.name,
                       dependent: :destroy
   has_many :commenters, through: :comments
+
   has_one_attached :image
+
+  validates :title, :description, :amount,
+            :publish_date, :isbn, :publisher, presence: true
+
+  validates :title, length: {maximum: Settings.validations.title_max_len}
+  validates :amount, numericality: {
+    only_integer: true,
+    greater_than_or_equal_to: 0
+  }
+  validates :publish_date, datetime: {to: :date, check: :past}
+  validates :isbn, format: {
+    with: Settings.validations.isbn_regex,
+    message: I18n.t("validations.isbn_valid")
+  }
+  validates :image,
+            content_type: {
+              in: Settings.validations.image_type,
+              message: I18n.t("validations.image_type_valid")
+            }
 
   scope :sorted_by_title, ->{order(title: :asc)}
   scope :ordered_and_grouped_by_first_letter,
         ->{order(:title).group_by{|book| book.title[0].upcase}}
   scope :include_authors, ->{includes(:authors)}
+
+  scope :includes_info, lambda {\
+    includes(:authors, :publisher, :genres)
+      .with_attached_image
+  }
 end

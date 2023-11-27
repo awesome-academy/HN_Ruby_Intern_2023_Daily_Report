@@ -55,9 +55,30 @@ vi:
   activerecord:
     models:
       account: "Tài khoản"
+      book: "Sách"
+      publisher: "Nhà xuất bản"
+      author: "Tác giả"
+      genre: "Thể loại"
     attributes:
       account:
         email: "Email"
         password: "Mật khẩu"
         password_confirmation: "Nhập lại mật khẩu"
         username: "Tên đăng nhập"
+      book:
+        title: "Tên sách"
+        description: "Mô tả"
+        amount: "Số lượng"
+        isbn: "ISBN"
+        publish_date: "Ngày xuất bản"
+        publisher: "Nhà xuất bản"
+        authors: "Tác giả"
+        genres: "Thể loại"
+  validations:
+    isbn_valid: "chỉ bao gồm 10 hoặc 13 chữ số , cùng với các ký tự -"
+    image_type_valid: "chỉ hỗ trợ các định dạng JPEG, PNG, GIF"
+    datetime:
+      date_not_in_past: "phải là một ngày trong quá khứ"
+      date_not_in_future: "phải là một ngày trong tương lai"
+      not_in_past: "phải là một thời điểm trong quá khứ"
+      not_in_future: "phải là một thời điểm trong tương lai"
