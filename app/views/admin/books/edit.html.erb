@@ -19,10 +19,10 @@
               <%= f.file_field :image, id: chooser_id,
                                        accept: Settings.image_type.join(","),
                                        multiple: false, class: "file-chooser d-none" %>
-              <div id="form-fail"></div>
             </div>
           </div>
           <div class="col-lg-8">
+            <div id="form-fail"></div>
             <!-- Basic Info -->
             <div class="">
               <div class="form-group">
@@ -32,7 +32,7 @@
               </div>
               <div class="form-group">
                 <%= f.label :description %>
-                <%= f.text_area :description, class: "form-control",
+                <%= f.text_area :description, class: "form-control area-large",
                               placeholder: t("books.placeholder.description") %>
               </div>
               <div class="form-group">

@@ -1,10 +1,10 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-  <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+  <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top text-center">
     <%= link_to "#", class: "sidebar-brand brand-logo" do %>
-      <%= image_tag "admin/logo.svg" %>
+      <span class="brand-name"><%= Settings.app_name %></span>
     <% end %>
     <%= link_to "#", class: "sidebar-brand brand-logo-mini" do %>
-      <%= image_tag "admin/logo-mini.svg" %>
+      <span class="brand-name"><%= Settings.app_name[0] %></span>
     <% end %>
   </div>
   <ul class="nav">

@@ -1,3 +1,4 @@
+app_name: 'LIBMA'
 valid_email_regex: !ruby/regexp /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 digit_255: 255
 digit_50: 50

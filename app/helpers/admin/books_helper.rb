@@ -8,7 +8,7 @@ module Admin::BooksHelper
       cover: get_image(book, :image),
       title: book.title,
       description: book.description,
-      publish_date: localize_date(book.publish_date, :long),
+      publish_date: localize_date(book.publish_date, :year),
       remain: book.remain,
       isbn: format_isbn(book.isbn),
       updated_at: localize_date(book.updated_at, :long),
@@ -16,7 +16,7 @@ module Admin::BooksHelper
       authors: book.authors,
       genres: book.genres,
       book_path: admin_book_path(book),
-      id: dom_id(book, :book)
+      id: dom_id(book)
     }
   end
 

@@ -33,7 +33,7 @@ class Admin::UsersController < Admin::BaseController
     @user = Account.find_by id: params[:id]
     return if @user&.is_activated
 
-    flash[:danger] = {
+    flash[:error] = {
       content: t("admin.notif.item_not_found", name: t("accounts._name"))
     }
     redirect_to admin_users_path
@@ -41,16 +41,19 @@ class Admin::UsersController < Admin::BaseController
 
   def respond_to_change_active to
     @user.update_attribute :is_active, to
+    text = t(
+      "admin.notif.update_user_status_success_html",
+      status: t("users.#{to ? :active : :inactive}")
+    )
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          helpers.dom_id(@user, :status),
-          partial: "admin/users/status_button",
-          locals: {user: @user}
-        )
+        flash.now[:success] = text
+        render :change_status
       end
-      format.html{redirect_to admin_users_path}
-      format.js
+      format.html do
+        flash[:success] = text
+        redirect_to admin_users_path
+      end
     end
   end
 

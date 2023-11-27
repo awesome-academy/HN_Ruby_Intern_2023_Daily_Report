@@ -76,6 +76,6 @@ class Book < ApplicationRecord
 
   def borrowed_count_below_amount
     errors.add :borrowed_count, I18n.t("validations.not_borrowable") if
-      borrowed_count.negative? || amount < borrowed_count
+      borrowed_count.negative? || (amount && amount < borrowed_count)
   end
 end

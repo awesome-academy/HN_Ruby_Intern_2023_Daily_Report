@@ -1,0 +1,8 @@
+<p class="greeting"><%= t "mailer.greeting" %> <b><%= @user %></b>,</p>
+<p><%= t ".content" %></p>
+<p><%= t ".warning" %></p>
+<p>
+  <%= t ".note" %>
+  <%=link_to t(".renewal_button"), borrow_info_url(id: @borrow), class: "btn btn-warning" %>
+</p>
+<%= render "borrow" %>

@@ -148,3 +148,20 @@ en:
       date_future: "must be a date in future"
       date_between: "must be a date between %{min} and %{max}"
       date_eql: "must be %{other}"
+  mailer:
+    greeting: "Dear"
+    thanks: "Thank you"
+    from: "LIBMA Team"
+  borrow_mailer:
+    borrow:
+      button_detail: 'Go to borrow request'
+      info: 'Borrow request information'
+    notify_result:
+      subject: "Borrow request result"
+      status: 'your borrow request was'
+    remind:
+      subject: "Borrow due date"
+      content: "Your borrowings will expire in a few days. Please come to Libma Library to return the books on time"
+      warning: "If you don't return before the due date, you will be fined for late days, as you are confirmed with us on registration."
+      note: "In case you need a renewal, please click the link: "
+      renewal_button: "Renew for me"

@@ -1,7 +1,0 @@
-<%= turbo_stream.remove @borrow %>
-<%= turbo_stream.replace "buttons_#{dom_id @borrow}" do %>
-  <%= render "admin/borrows/action_buttons", borrow: @borrow %>
-<% end %>
-<%= turbo_stream.replace "status_#{dom_id @borrow}" do %>
-  <%= render "admin/borrows/status_badge", borrow: @borrow %>
-<% end %>

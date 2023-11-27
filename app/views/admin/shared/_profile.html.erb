@@ -6,6 +6,6 @@
     <%= image_tag get_image(user), class: "img-#{avatar_size} rounded-circle" %>
   </div>
   <p class="profile-name mb-0 <%= username_class %>">
-    <%= link_to_unless link.nil?, user.username, link %>
+    <%= link_to_unless link.nil?, user&.username, link %>
   </p>
 </div>

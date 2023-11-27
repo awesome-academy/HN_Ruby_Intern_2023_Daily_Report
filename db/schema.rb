@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_08_153201) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_10_083938) do
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
@@ -148,8 +148,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_08_153201) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "account_id", null: false
-    t.date "renewal_at"
     t.integer "turns", default: 0, null: false
+    t.date "renewal_at"
     t.index ["account_id"], name: "index_borrow_infos_on_account_id"
     t.index ["end_at"], name: "index_borrow_infos_on_end_at"
     t.index ["start_at"], name: "index_borrow_infos_on_start_at"

@@ -5,6 +5,6 @@
                     data: {"bs-toggle": "pill"},
                     aria: {controls: "#{item[:id]}", selected: active} do %>
     <span><i class="mdi mdi-<%= item[:icon] %>"></i></span>
-    <span class="ms-2"><%= item[:title] %></span>
+    <span class="tab-title ms-2"><%= item[:title] %></span>
   <% end %>
 </li>

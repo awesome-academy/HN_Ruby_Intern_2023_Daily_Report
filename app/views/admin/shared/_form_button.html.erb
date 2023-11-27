@@ -1,18 +1,15 @@
 <% local_assigns.with_defaults(
-  update_text: t(".update"), destroy_text: t(".delete"),
-  update_color: :warning, destroy_color: :danger,
-  destroy_remote: true, destroy_confirm: nil, container_class: "flex-column"
+  destroy_remote: true, destroy_confirm: nil, row: false
 ) => {
-      update_text:, destroy_text:, update_color:, destroy_color:,
-      destroy_confirm:, destroy_remote:, item:, name:, container_class:
+  destroy_confirm:, destroy_remote:, row:, item:, name:,
 } %>
-<div class="d-flex <%= container_class %>">
-  <%= link_to update_text, url_for(action: :edit, id: item.id),
-                         class: "btn btn-outline-#{update_color} btn-form" %>
-  <%= link_to destroy_text, url_for(action: :destroy, id: item.id),
-                              class: "btn btn-outline-#{destroy_color} btn-form",
-                              data: {
-                                  turbo_method: :delete,
-                                  turbo_confirm: destroy_confirm || t(".delete_confirm", name:)
-                              } %>
+<div class="d-flex flex-<%= row ? :row : :column %> justify-content-end">
+  <%= link_to t(".update"), url_for(action: :edit, id: item.id),
+                         class: "btn btn-outline-warning btn-form" %>
+  <%= link_to t(".delete"), url_for(action: :destroy, id: item.id),
+                            class: "btn btn-outline-danger btn-form #{'ms-auto' if row}",
+                            data: {
+                              turbo_method: :delete,
+                              turbo_confirm: destroy_confirm || t(".delete_confirm", name: t("#{name}s._item"))
+                            } if !item.respond_to?(:is_active) || item.is_active %>
 </div>

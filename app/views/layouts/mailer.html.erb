@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
-    </style>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <style></style>
   </head>
-
-  <body>
+  <body class="mailer">
     <%= yield %>
+    <p><%= t "mailer.thanks" %>,</p>
+    <p><%= t "mailer.from" %></p>
   </body>
 </html>

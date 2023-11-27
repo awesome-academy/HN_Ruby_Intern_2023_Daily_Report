@@ -29,64 +29,35 @@ class Admin::BooksController < Admin::BaseController
 
   def create
     @book = Book.new book_params
-    if @book.save
-      redirect_to amend_admin_book_path(@book)
-    else
-      respond_to_form_fail @book
-    end
+    admin_save @book, :book,
+               success_to: :amend_admin_book_path
   end
 
   def update
     return redirect_to amend_admin_book_path(@book) if params.key? :skip
 
-    if @book.update book_params
-      flash[:success] = t "admin.notif.update_success"
-      redirect_to amend_admin_book_path(@book)
-    else
-      respond_to_form_fail @book
-    end
+    admin_update @book, book_params, :book,
+                 success_to: :amend_admin_book_path
   end
 
   def amend_edit; end
 
   def amend
-    @book.transaction do
-      if publisher_id = params.dig(:book, :publisher)
-        @book.update publisher_id:
-      end
+    return redirect_to admin_book_path(@book) if params.key? :skip
 
-      if author_ids = params.dig(:book, :authors)
-        @book.update_relation_with_ids(:author, author_ids)
-      end
-
-      if genre_ids = params.dig(:book, :genres)
-        @book.update_relation_with_ids(:genre, genre_ids)
-      end
-    end
+    update_book
 
     if @book.errors.any?
       respond_to_form_fail @book
     else
-      flash[:success] = t "admin.notif.update_success"
+      flash[:success] = t "admin.notif.update_success", name: t("books._name")
       redirect_to [:admin, @book]
     end
   end
 
   def destroy
-    if @book.update is_active: false
-      flash[:success] = t "admin.notif.delete_success"
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.remove(
-            helpers.dom_id(@book, :book)
-          )
-        end
-        format.html
-        format.js
-      end
-    else
-      flash[:danger] = t "admin.notif.delete_fail"
-    end
+    custom_condition = @book.update is_active: false
+    admin_destroy @book, :book, custom_condition:
   end
 
   private
@@ -94,14 +65,24 @@ class Admin::BooksController < Admin::BaseController
     @book = Book.find_by id: params[:id]
     return if @book
 
-    flash[:danger] = {
-      content: t("admin.notif.item_not_found", name: t("books._name"))
-    }
+    flash[:error] = t "admin.notif.item_not_found", name: t("books._name")
     redirect_to admin_books_path
   end
 
+  def update_book
+    publisher_id = params.dig(:book, :publisher)
+    author_ids = params.dig(:book, :authors)
+    genre_ids = params.dig(:book, :genres)
+
+    @book.transaction do
+      @book.update(publisher_id:) if publisher_id
+      @book.update_relation_with_ids(:author, author_ids) if author_ids
+      @book.update_relation_with_ids(:genre, genre_ids) if genre_ids
+    end
+  end
+
   def book_params
-    params.require(:book).permit :title, :description, :remain,
+    params.require(:book).permit :title, :description, :amount,
                                  :isbn, :publish_date, :image
   end
 

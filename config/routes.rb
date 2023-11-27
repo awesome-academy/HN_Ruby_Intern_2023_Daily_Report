@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         member do
           get :amend, to: "books#amend_edit"
           get :authors, :genres
-          post :amend
+          patch :amend
         end
       end
       resources :users, only: %i(index show) do
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
           post :active, :inactive
         end
       end
-      resources :borrows, only: %i(index show), constraints: {id: /\d+/} do
+      resources :borrows, only: %i(index show) do
         member do
           post :approve, :reject, :return, :remind
         end

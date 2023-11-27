@@ -1,5 +1,5 @@
 class Admin::BorrowsController < Admin::BaseController
-  before_action :get_borrow, only: %i(show return reject approve)
+  before_action :get_borrow, only: %i(show return reject approve remind)
   before_action :get_group, only: :index
 
   def index
@@ -18,27 +18,24 @@ class Admin::BorrowsController < Admin::BaseController
   end
 
   def return
-    if @borrow.approved? && @borrow.add_to_book_borrowed_count(-1)
-      respond_to_change_status :returned
-    else
-      redirect_back_or_to admin_borrows_path
-    end
+    respond_to_change_status @borrow.approved?, :returned
   end
 
   def reject
-    if @borrow.pending? && @borrow.create_response(content: reject_params)
-      respond_to_change_status :rejected
-    else
-      redirect_back_or_to admin_borrows_path
-    end
+    respond_to_change_status(
+      @borrow.pending? && @borrow.create_response(content: reject_params),
+      :rejected
+    )
+  end
+
+  def remind
+    BorrowMailer.with(borrow: @borrow).remind.deliver_later
+    flash[:success] = t "admin.notif.send_remind_email_success"
+    application_notify
   end
 
   def approve
-    if @borrow.pending? && @borrow.add_to_book_borrowed_count(1)
-      respond_to_change_status :approved
-    else
-      redirect_back_or_to admin_borrows_path
-    end
+    respond_to_change_status @borrow.pending?, :approved
   end
 
   private
@@ -47,22 +44,46 @@ class Admin::BorrowsController < Admin::BaseController
     @borrow = BorrowInfo.find_by id: params[:id]
     return if @borrow
 
-    flash[:danger] = {
-      content: t("admin.notif.item_not_found", name: t("borrows._name"))
-    }
+    text = t(
+      "admin.notif.item_not_found",
+      name: t("borrows._name")
+    )
+    flash[:error] = text
     redirect_to admin_borrows_path
   end
 
-  def respond_to_change_status to
-    @borrow.update_attribute :status, to
-    flash[:success] = {
-      content: t("admin.notif.update_borrow_status_success",
-                 status: t("borrows.#{to}"))
-    }
-    respond_to do |format|
-      format.turbo_stream{render :change_status}
-      format.html{redirect_to admin_borrows_path}
+  def update_books_borrowed_count status
+    pass = %i(approved returned).include?(status) &&
+           @borrow.add_to_book_borrowed_count(status == :approved ? 1 : -1)
+    unless pass
+      flash[:error] = t(
+        "admin.notif.update_borrow_status_fail",
+        status: t("borrows.#{status}")
+      )
     end
+    pass
+  end
+
+  def send_notify_email status
+    BorrowMailer.with(borrow: @borrow).notify_result.deliver_later if
+           %i(approved rejected).include? status
+  end
+
+  def respond_to_change_status condition, to
+    unless condition || update_books_borrowed_count(to)
+      redirect_to admin_borrows_path
+    end
+
+    @borrow.update_attribute :status, to
+
+    send_notify_email to
+
+    text = t(
+      "admin.notif.update_borrow_status_success_html",
+      status: t("borrows.#{to}")
+    )
+    flash[:success] = text
+    redirect_to admin_borrows_path
   end
 
   def respond_to_list borrows
@@ -73,7 +94,7 @@ class Admin::BorrowsController < Admin::BaseController
     borrows = borrows.merge(BorrowInfo.bquery(q)) if q
 
     s = params[:sort]
-    borrows = s ? borrows.sort_on(s, params[:desc]) : borrows.due_first
+    borrows = s ? borrows.sort_on(s, params[:desc]) : borrows.newest
 
     @pagy, @borrows = pagy borrows
   end

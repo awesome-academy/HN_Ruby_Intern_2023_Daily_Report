@@ -12,5 +12,6 @@
   </head>
   <body lang="<%= params[:locale] %>">
     <%= yield :body %>
+    <%= render "admin/shared/notify" %>
   </body>
 </html>

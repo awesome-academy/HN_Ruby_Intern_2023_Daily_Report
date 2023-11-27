@@ -1,3 +1,6 @@
 <%= turbo_stream.replace dom_id(@user, :status) do %>
   <%= render "status_button", user: @user %>
 <% end %>
+<%= turbo_stream.replace "application-notify" do %>
+  <%= render "admin/shared/notify" %>
+<% end %>

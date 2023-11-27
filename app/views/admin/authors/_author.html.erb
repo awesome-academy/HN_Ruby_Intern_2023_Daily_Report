@@ -1,19 +1,18 @@
 <% populate_author(author) => {
     avatar:, name:, email:, phone:, about:, author_path:, id:, updated_at:
 }%>
-<% null = Settings.display_for_nil %>
 <tr id="<%= id %>">
   <td><%= @pagy.from + author_iteration.index %></td>
-  <td class="long-name">
+  <td class="mw-12 text-truncate">
     <%= link_to author_path do %>
       <%= image_tag avatar, class: "image-rect", title: about %>
       <span title="<%= name %>"><%= name %></span>
     <% end %>
   </td>
-  <td><%= email.presence || null %></td>
-  <td><%= phone.presence || null %></td>
+  <td><%= email %></td>
+  <td><%= phone %></td>
   <td><%= updated_at %></td>
   <td>
-    <%= render "admin/shared/form_button", item: author, name: t("authors._item") %>
+    <%= render "admin/shared/form_button", item: author, name: :author %>
   </td>
 </tr>

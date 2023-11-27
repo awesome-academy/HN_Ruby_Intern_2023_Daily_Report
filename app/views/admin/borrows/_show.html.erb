@@ -19,13 +19,11 @@
             <%= render("admin/shared/info_field", name: t("borrows.user"), value: full_name) %>
             <%= render("admin/shared/info_field", name: t("borrows.start_at"), value: start) %>
             <%= render("admin/shared/info_field", name: t("borrows.end_at"), value: due) %>
-            <%= render("admin/shared/info_field", name: t("borrows.turns"), value: turns) %>
+            <%= render("admin/shared/info_field", name: t("borrows.incrementing"), value: turns) %>
             <%= render "admin/shared/info_field", name: t("borrows.status") do %>
               <%= render "status_badge", borrow: @borrow %>
             <% end %>
-            <%= render "admin/shared/info_field", name: t("borrows.reject_reason") do %>
-              <%= @borrow.response&.content %>
-            <% end %>
+            <%= render "admin/shared/info_field", name: t("borrows.reject_reason"), value: @borrow.response&.content if @borrow.rejected? %>
           </div>
         </div>
         <div class="col-lg-8">

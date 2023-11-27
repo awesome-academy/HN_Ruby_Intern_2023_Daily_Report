@@ -1,6 +1,4 @@
 vi:
-  sessions:
-    login_fail: 'Đăng nhập thất bại'
   datetime:
     less_than: 'chưa tới'
     about: 'khoảng'
@@ -11,6 +9,10 @@ vi:
       short: '%d/%m'
       long: '%d/%m/%Y'
       year: '%Y'
+  time:
+    formats:
+      long: '%H:%M:%S %d/%m/%Y'
+      short: '%H:%M %d/%m'
   accounts:
     _name: 'tài khoản'
     email: 'Email'
@@ -21,6 +23,7 @@ vi:
     phone: 'SĐT'
     address: 'Địa chỉ'
     dob: 'Ngày sinh'
+    email: 'Email'
     gender: 'Giới tính'
     male: 'Nam'
     female: 'Nữ'
@@ -42,9 +45,10 @@ vi:
     amount: 'Tổng số'
     remain: 'Còn lại'
     isbn: 'ISBN'
-    publish_date: 'Ngày xuất bản'
+    publish_date: 'Xuất bản'
     detail: 'Thông tin'
     review: 'Bình luận'
+    inactive: 'Đã xóa'
     placeholder:
       cover: 'Ảnh bìa'
       title: 'Tiêu đề sách'
@@ -108,8 +112,8 @@ vi:
     status: 'Trạng thái'
     finish: 'Hoàn thành'
     updated_at: 'Xác nhận'
-    approved_at: 'Xác nhận'
     user: 'người mượn'
+    books: 'Sách mượn'
     type: 'Yêu cầu'
     placeholder:
       reject_response: 'Phản hồi lý do từ chối yêu cầu'
@@ -120,16 +124,17 @@ vi:
       upload: 'Tải lên %{name}'
       table_info: 'Hiển thị %{from} - %{to} / %{total}'
       search: 'Lọc'
-      new: 'Thêm'
-      create: 'Thêm'
-      edit: 'Cập nhật'
+      new: 'Thêm mới'
+      create: 'Tạo'
+      edit: 'Cập nhật'
       update: 'Cập nhật'
       amend: 'Cập nhật'
-      amend_edit: 'Cập nhật'
       cancel: 'Huỷ'
       skip: 'Bỏ qua'
       last_updated: 'Cập nhật'
       send: 'Gửi'
+      loading: 'Xin chờ...'
+      errors: 'Có một số lỗi sau'
     notif:
       user_info_not_found: 'Tài khoản chưa có thông tin'
       no_items: 'Không có %{item} nào tìm thấy'
@@ -138,7 +143,15 @@ vi:
       cancel_confirm: 'Dữ liệu bạn nhập có thể bị mất. Bạn có muốn hủy?'
       account_not_activated_or_lock: 'Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa'
       invalid_email_password: 'Email hoặc mật khẩu không đúng'
-      update_borrow_status_success: 'Cập nhật trạng thái của phiếu mượn thành công. Trạng thái mới: %{status}'
+      update_borrow_status_success_html: 'Trạng thái phiếu mượn được cập nhật thành <b>%{status}</b>'
+      update_user_status_success_html: 'Trạng thái tài khoản được cập nhật thành <b>%{status}</b>'
+      create_success: 'Tạo %{name} thành công'
+      update_success: 'Cập nhật %{name} thành công'
+      delete_success: 'Xóa %{name} thành công'
+      delete_fail: 'Xóa %{name} thất bại'
+      login_fail: 'Đăng nhập thất bại'
+      login_success: 'Xin chào'
+      send_remind_email_success: 'Gửi email nhắc nhở thành công'
     title:
       index: 'Danh sách %{name}'
       new: 'Thêm %{name}'
@@ -157,7 +170,6 @@ vi:
         remind_confirm: 'Bạn có muốn gửi email nhắc nhở tới người dùng này?'
         approve_confirm: 'Bạn chấp thuận với yêu cầu mượn này?'
         return_confirm: 'Bạn xác nhận người dùng này đã trả đủ sách?'
-        reject_confirm: 'Bạn từ chối với yêu cầu mượn này?'
     shared:
       form_button:
         update: 'Sửa'
@@ -185,7 +197,8 @@ vi:
         info: 'Dành cho Administrator - Libma'
         credit: 'Mẫu giao diện: BootstrapDash - Corona'
     home:
-      title: 'Trang chủ'
+      index:
+        title: 'Trang chủ'
     sessions:
       new:
         title: 'Đăng nhập'

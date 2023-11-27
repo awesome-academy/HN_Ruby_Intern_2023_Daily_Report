@@ -8,7 +8,7 @@ module Admin::AuthorsHelper
       email: author.email,
       updated_at: localize_date(author.updated_at, :long),
       author_path: admin_author_path(author),
-      id: dom_id(author, :author)
+      id: dom_id(author)
     }
   end
 

@@ -7,7 +7,7 @@ module Admin::PublishersHelper
       email: publisher.email,
       updated_at: localize_date(publisher.updated_at, :long),
       publisher_path: admin_publisher_path(publisher),
-      id: dom_id(publisher, :publisher)
+      id: dom_id(publisher)
     }
   end
 

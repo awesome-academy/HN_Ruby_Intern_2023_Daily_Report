@@ -29,37 +29,15 @@ class Admin::AuthorsController < Admin::BaseController
 
   def create
     @author = Author.new author_params
-    if @author.save
-      flash[:success] = t "admin.notif.create_success"
-      redirect_to admin_authors_path
-    else
-      respond_to_form_fail @author
-    end
+    admin_save @author, :author
   end
 
   def update
-    if @author.update author_params
-      flash[:success] = t "admin.notif.update_success"
-      redirect_to [:admin, @author]
-    else
-      respond_to_form_fail @author
-    end
+    admin_update @author, author_params, :author
   end
 
   def destroy
-    if @author.destroy
-      flash[:success] = t "admin.notif.delete_success"
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.remove(
-            helpers.dom_id(@author, :author)
-          )
-        end
-        format.html{redirect_to admin_authors_path}
-      end
-    else
-      flash[:danger] = t "admin.notif.delete_fail" # TODO
-    end
+    admin_destroy @author, :author
   end
 
   private
@@ -68,9 +46,7 @@ class Admin::AuthorsController < Admin::BaseController
     @author = Author.find_by id: params[:id]
     return if @author
 
-    flash[:danger] = {
-      content: t("admin.notif.item_not_found", name: t("authors._name"))
-    }
+    flash[:error] = t "admin.notif.item_not_found", name: t("authors._name")
     redirect_to admin_authors_path
   end
 

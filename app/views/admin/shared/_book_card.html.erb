@@ -1,7 +1,12 @@
 <%= link_to admin_book_path(book), class: "book-card" do %>
   <%= image_tag get_image(book, :image), class: "book-card-cover" %>
   <div class="book-card-content text-truncate w-100">
-    <h3><%= book.title %></h3>
+    <div class="d-flex w-100 align-items-center mb-2">
+      <h3 class="mb-0"><%= book.title %></h3>
+      <% unless book.is_active %>
+        <span class="badge badge-danger ms-auto"><%= t "books.inactive" %></span>
+      <% end %>
+    </div>
     <p class="fst-italic text-truncate mw-100"><%= book.description %></p>
     <div class="divider"></div>
     <p class="mt-auto"><%= t "books.remain" %>: <%= book.remain %></p>
