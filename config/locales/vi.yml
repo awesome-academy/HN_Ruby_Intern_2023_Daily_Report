@@ -27,7 +27,6 @@ vi:
   profile: "Trang cá nhân"
   settings: "Cài đặt"
   log_out: "Đăng xuất"
-  invalid_email_password: "Tài khoản hoặc mật khẩu không đúng"
   all: "Tất cả"
   title: "Tiêu đề"
   description: "Mô tả"
@@ -37,7 +36,8 @@ vi:
   books:
     index:
       no_authors_found: "Không tìm thấy tác giả"
-
+  invalid_email_password: "Tài khoản hoặc mật khẩu không đúng"
+  account_not_activated_or_lock: "Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa"
   activerecord:
     models:
       account: "Tài khoản"

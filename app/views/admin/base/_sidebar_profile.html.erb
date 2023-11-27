@@ -1,14 +1,11 @@
 <% id = "sidebar-profile" %>
 <div class="profile-desc">
-  <%= render "admin/shared/profile", status: "success", avatar_size: "sm", username_class: "fs-6" %>
+  <%= render "admin/shared/profile", avatar_size: "sm", username_class: "fs-6" %>
   <%= render "dropdown_button", id: do %>
     <i class="mdi mdi-dots-vertical"></i>
   <% end %>
-  <%= render "dropdown_menu", id:, pos: "right",
-      menu_class: "sidebar-dropdown" do %>
-    <%= render "dropdown_item", link: "#",
-          icon: "settings", title: t(".account_settings") %>
-    <%= render "dropdown_item", link: "#",
-          icon: "onepassword", title: t(".change_password") %>
+  <%= render "dropdown_menu", id:, pos: "right", menu_class: "sidebar-dropdown" do %>
+    <%= render "dropdown_item", link: "#", icon: "settings", title: t(".account_settings") %>
+    <%= render "dropdown_item", link: "#", icon: "onepassword", title: t(".change_password") %>
   <% end %>
 </div>

@@ -27,7 +27,6 @@ en:
   profile: "Profile"
   settings: "Settings"
   log_out: "Log out"
-  invalid_email_password: "Invalid email or password"
   all: "All"
   title: "title"
   description: "Description"
@@ -37,9 +36,5 @@ en:
   books:
     index:
       no_authors_found: "No authors found"
-
-  admin:
-    base:
-      footer:
-        copyrights: "Copyright © Libma"
-        contact: "Admin page from Libma"
+  invalid_email_password: "Invalid email or password"
+  account_not_activated_or_lock: "Account is locked or not to be activated"

@@ -4,19 +4,19 @@
     <div class="card-body">
       <h4 class="card-title"><%= t(".title") %></h4>
       <div class="d-flex justify-content-between flex-row">
-        <%== pagy_bootstrap_nav(@pagy) %>
+        <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
         <%== pagy_items_selector_js(@pagy) %>
       </div>
       <div class="table-responsive">
         <table class="table sortable-table" id="users-table" data-toggle="bootstrap-table">
           <thead>
             <tr>
-              <th class="sortStyle"><%= t ".profile" %></th>
-              <th class="sortStyle"><%= t ".full_name" %></th>
-              <th class="sortStyle"><%= t ".phone" %></th>
-              <th class="sortStyle"><%= t ".dob" %></th>
-              <th class="sortStyle"><%= t ".join_from" %></th>
-              <th class="sortStyle"><%= t ".status" %></th>
+              <th class="sortStyle"><%= t "users.account" %></th>
+              <th class="sortStyle"><%= t "users.full_name" %></th>
+              <th class="sortStyle"><%= t "users.phone" %></th>
+              <th class="sortStyle"><%= t "users.dob" %></th>
+              <th class="sortStyle"><%= t "users.join_from" %></th>
+              <th class="sortStyle"><%= t "users.status" %></th>
             </tr>
           </thead>
           <tbody>
