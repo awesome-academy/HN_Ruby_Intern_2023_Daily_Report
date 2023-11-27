@@ -43,6 +43,7 @@ account = Account.create!(
   else
     ac = account
   end
+
   begin
     img = URI.parse(Faker::Avatar.image).open
     ac.avatar.attach(io: img, filename: "user#{i}-avatar.png")
@@ -56,5 +57,70 @@ account = Account.create!(
     citizen_id: Faker::IDNumber.valid,
     dob: Faker::Date.birthday(min_age: 18, max_age: 65),
     account: ac,
+  )
+end
+
+30.times do |n|
+  name = Faker::Book.unique.publisher
+  address = Faker::Address.full_address
+  about = "#{name} #{Faker::Lorem.paragraph}"
+  email = Faker::Internet.email(name: name)
+
+  Publisher.create!(
+    name: name,
+    address: address,
+    about: about,
+    email: email,
+  )
+end
+
+180.times do |n|
+  title = Faker::Book.title
+  while Book.exists?(title: title)
+    title = Faker::Book.title
+  end
+  description = "#{title} #{Faker::Lorem.paragraph}"
+  amount = rand(1..100)
+  publish_date = Faker::Date.backward
+  isbn = Faker::Code.unique.isbn
+  publisher_id = Publisher.pluck(:id).sample
+
+  Book.create!(
+    title: title,
+    description: description,
+    amount: amount,
+    publish_date: publish_date,
+    isbn: isbn,
+    publisher_id: publisher_id
+  )
+end
+
+Book.all.each do |book|
+  file_path = URI.parse(Faker::LoremFlickr.image(size: "200x250")).open
+  book.image.attach(io: file_path, filename: "image.jpg")
+end
+
+100.times do |n|
+  name = Faker::Name.name
+  about = "#{name} #{Faker::Lorem.paragraph}"
+  phone = Faker::PhoneNumber.cell_phone
+  email = Faker::Internet.email(name: name)
+
+  Author.create!(
+    name: name,
+    about: about,
+    phone: phone,
+    email: email,
+  )
+end
+
+# Create fake associations between books and authors
+Book.all.each do |book|
+  book_id = book.id
+  author_id = Author.pluck(:id).sample
+
+  BookAuthor.create!(
+    book_id: book_id,
+    author_id: author_id,
   )
 end

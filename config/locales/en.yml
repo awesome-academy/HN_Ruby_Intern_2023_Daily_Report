@@ -28,6 +28,15 @@ en:
   settings: "Settings"
   log_out: "Log out"
   invalid_email_password: "Invalid email or password"
+  all: "All"
+  title: "title"
+  description: "Description"
+  author: "Author"
+  publisher: "publisher"
+  genre: "genre"
+  books:
+    index:
+      no_authors_found: "No authors found"
 
   admin:
     base:

@@ -1,0 +1,46 @@
+<% provide(:title, "Library") %>
+
+<div>
+  <h1><%= t "library" %></h1>
+  <div class="search d-flex">
+    <%= form_with url: "/search", method: :get, class: "d-flex flex-grow-1 me-2 position-relative" do |form| %>
+      <%= form.text_field :query, class: "form-control flex-grow-1 pe-5", autocomplete: "off", placeholder: t("search") %>
+      <%= button_tag type: "submit", class: "btn btn-outline-primary position-absolute end-0" do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
+    <% end %>
+    <%= select_tag :search_option, options_for_select([t("all"), t("title"), t("description"), t("author"), t("publisher"), t("genre")]), class: "form-select w-auto custom-select"%>
+  </div>
+  <div class="filter text-center mt-4">
+    <div class="filter-letter">
+      <% ('A'..'Z').each do |letter| %>
+        <a href="#" class="mx-1"><%= letter %></a>
+      <% end %>
+      <a href="#" class="mx-1"><%= t "all" %></a>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+  <div class="mb-5">
+    <div class="mt-1 row row-cols-1 row-cols-md-5 g-4">
+      <% @books.each do |book| %>
+        <div class="col">
+          <div class="card">
+            <a href="#">
+              <%= image_tag book.image, class: "card-img-top" if book.image.attached? %>
+            </a>
+            <div class="card-body text-center">
+              <h5 class="card-title fw-semibold"><%= book.title %></h5>
+              <% if book.authors.any? %>
+                <p class="card-text text-secondary"><%= book.authors.map(&:name).join %></p>
+              <% else %>
+                <p class="card-text text-secondary"><%= t ".no_authors_found" %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

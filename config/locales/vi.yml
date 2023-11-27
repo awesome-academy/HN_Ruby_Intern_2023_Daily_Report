@@ -28,6 +28,15 @@ vi:
   settings: "Cài đặt"
   log_out: "Đăng xuất"
   invalid_email_password: "Tài khoản hoặc mật khẩu không đúng"
+  all: "Tất cả"
+  title: "Tiêu đề"
+  description: "Mô tả"
+  author: "Tác giả"
+  publisher: "Nhà xuất bản"
+  genre: "Thể loại"
+  books:
+    index:
+      no_authors_found: "Không tìm thấy tác giả"
 
   activerecord:
     models:
