@@ -46,7 +46,7 @@ module Admin::UsersHelper
     {status_text:, do_text:, confirm_text:, link:, color:, id:}
   end
 
-  def render_tabs
+  def render_users_tabs
     render "admin/shared/tab_content", group_id: :user, items: [
       {
         icon: :account,

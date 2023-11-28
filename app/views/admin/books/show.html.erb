@@ -1,2 +1,33 @@
-<h1>Admin::Books#show</h1>
-<p>Find me in app/views/admin/books/show.html.erb</p>
+<% provide :title, t(".title") %>
+<% populate_book(@book) => {
+    cover:, title:, isbn:, amount:, publisher:, publish_date:,
+    description:, authors:, genres:,}
+%>
+<div class="col-12">
+  <%= render "admin/shared/back_button", name: t("admin.default.books_list"), path: admin_books_path %>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-4 order-2 order-lg-0">
+          <div class="border-bottom text-center pb-4">
+            <%= image_tag cover, class: "cover-rect" %>
+          </div>
+          <div class="py-4">
+            <span><%= description %></span>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="d-flex justify-content-between">
+            <h3><%= title %></h3>
+            <div>
+              <%#= render "status_button", user: @user, flip: false %>
+            </div>
+          </div>
+          <div class="mt-4 py-2">
+            <%= render_books_tabs %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

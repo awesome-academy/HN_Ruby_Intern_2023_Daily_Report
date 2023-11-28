@@ -16,15 +16,15 @@
     </li>
     <%= render "nav_item", link: admin_root_path, icon: "speedometer", title: t(".dashboard") %>
     <%= render "nav_group", id: "request", icon: "receipt", title: t(".borrow_requests") do %>
-      <%= render "nav_item", link: "#", icon: "note-plus", title: t(".pending_request") %>
-      <%= render "nav_item", link: "#", icon: "history", title: t(".request_history") %>
+      <%= render "nav_item", link: "#", icon: "note-plus", title: t("borrow_requests.pending") %>
+      <%= render "nav_item", link: "#", icon: "history", title: t("borrow_requests.history") %>
     <% end %>
     <%= render "nav_item", link: admin_users_path, icon: "account", title: t(".users") %>
     <%= render "nav_group", id: "library", icon: "library", title: t(".library") do %>
-      <%= render "nav_item", link: "#", icon: "book", title: t(".book") %>
-      <%= render "nav_item", link: "#", icon: "account", title: t(".author") %>
-      <%= render "nav_item", link: "#", icon: "tag", title: t(".genre") %>
-      <%= render "nav_item", link: "#", icon: "briefcase", title: t(".publisher") %>
+      <%= render "nav_item", link: admin_books_path, icon: "book", title: t("books._name") %>
+      <%= render "nav_item", link: admin_authors_path, icon: "account", title: t("authors._name") %>
+      <%= render "nav_item", link: admin_genres_path, icon: "tag", title: t("genres._name") %>
+      <%= render "nav_item", link: admin_publishers_path, icon: "briefcase", title: t("publishers._name") %>
     <% end %>
   </ul>
 </nav>

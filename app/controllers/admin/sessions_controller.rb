@@ -6,12 +6,12 @@ class Admin::SessionsController < SessionsController
   end
 
   def on_login_fail_inactive
-    flash.now[:danger] = t ".errors.account_not_activated_or_lock"
+    flash.now[:danger] = t "admin.notif.account_not_activated_or_lock"
     render :new, status: :bad_request
   end
 
   def on_login_fail
-    flash.now[:danger] = t ".errors.invalid_email_password"
+    flash.now[:danger] = t "admin.notif.invalid_email_password"
     render :new, status: :bad_request
   end
 

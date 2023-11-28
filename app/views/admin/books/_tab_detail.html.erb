@@ -1,0 +1,9 @@
+<% populate_book(@book) => {isbn:, amount:, publisher:, publish_date:}%>
+<%= render "admin/shared/info_field", name: t("books.isbn"), value: isbn %>
+<%= render "admin/shared/info_field", name: t("publishers._name") do %>
+  <%= link_to publisher[1], admin_publisher_path(publisher[0]) %>
+<% end %>
+<%= render "admin/shared/info_field", name: t("books.publish_date"), value: publish_date %>
+<hr>
+<%= render "admin/shared/info_field", name: t("books.amount"), value: amount %>
+<%= render "admin/shared/info_field", name: t("books.remain"), value: amount %>

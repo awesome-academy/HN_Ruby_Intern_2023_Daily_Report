@@ -48,4 +48,5 @@ class Book < ApplicationRecord
     includes(:authors, :publisher, :genres)
       .with_attached_image
   }
+  scope :available, ->{where is_active: true}
 end
