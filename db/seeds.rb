@@ -79,7 +79,7 @@ end
   while Book.exists?(title: title)
     title = Faker::Book.title
   end
-  description = "#{title} #{Faker::Lorem.paragraph}"
+  description = "#{title} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   amount = rand(1..100)
   publish_date = Faker::Date.backward
   isbn = Faker::Code.unique.isbn
@@ -114,13 +114,29 @@ end
   )
 end
 
-# Create fake associations between books and authors
+# Create fake associations for books
 Book.all.each do |book|
   book_id = book.id
   author_id = Author.pluck(:id).sample
+  genre_id = Genre.pluck(:id).sample
 
   BookAuthor.create!(
     book_id: book_id,
     author_id: author_id,
+  )
+
+  BookGenre.create!(
+    book_id: book_id,
+    genre_id: genre_id,
+  )
+end
+
+30.times do |n|
+  name = Faker::Book.unique.genre
+  description = "#{name} #{Faker::Lorem.paragraph}"
+
+  Genre.create!(
+    name: name,
+    description: description,
   )
 end

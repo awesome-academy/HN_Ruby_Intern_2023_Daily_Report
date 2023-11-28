@@ -38,6 +38,20 @@ vi:
       no_authors_found: "Không tìm thấy tác giả"
   invalid_email_password: "Tài khoản hoặc mật khẩu không đúng"
   account_not_activated_or_lock: "Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa"
+  book_not_found: "Sách không tồn tại"
+  borrow_book: "Mượn sách từ thư viện"
+  author_not_found: "Tác giả không có trong hệ thống"
+  phone: "Số điện thoại"
+  authors:
+    show:
+      follow_this_author: "Theo dõi tác giả"
+      about_this_author: "Thông tin về tác giả"
+      list_of_books: "Danh sách các tác phẩm"
+  genre: "Thể loại"
+  publish_date: "Ngày xuất bản"
+  copies: "Số lượng còn lại"
+  publisher: "Nhà xuất bản"
+
   activerecord:
     models:
       account: "Tài khoản"

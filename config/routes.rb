@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
 
-    get "library", to: "books#index"
+    resources :books, only: %i(index show), path: "library"
+    resources :authors, only: %i(show)
   end
 end

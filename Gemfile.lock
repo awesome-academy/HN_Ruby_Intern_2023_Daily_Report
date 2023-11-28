@@ -147,6 +147,9 @@ GEM
     ffi (1.16.3)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    gretel (4.6.0)
+      actionview (>= 5.1, < 7.2)
+      railties (>= 5.1, < 7.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -353,6 +356,7 @@ DEPENDENCIES
   config
   debug
   faker
+  gretel
   image_processing (~> 1.12.2)
   importmap-rails
   jbuilder
