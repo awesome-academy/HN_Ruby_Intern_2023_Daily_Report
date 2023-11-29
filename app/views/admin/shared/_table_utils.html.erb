@@ -1,0 +1,11 @@
+<div class="p-lg-3">
+  <% q = params[:q] %>
+  <%= form_with url: url_for(request.params.merge(q:)), method: :get, class: "d-flex flex-row-reverse mb-4" do |f| %>
+    <%= f.text_field :q, value: q, class: "form-control ms-3" %>
+    <%= f.submit t("admin.misc.search"), class: "btn btn-success" %>
+  <% end %>
+  <div class="d-flex flex-row flex-wrap flex-lg-nowrap justify-content-between align-items-end">
+    <%== pagy_bootstrap_nav(pagy) if pagy.pages > 1 %>
+    <p class="text-muted mb-0 mt-2 ms-auto"><%= t "admin.misc.table_info", from: pagy.from, to: pagy.to, total: pagy.count %></p>
+  </div>
+</div>

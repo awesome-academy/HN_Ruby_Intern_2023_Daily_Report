@@ -1,11 +1,17 @@
 class Admin::UsersController < Admin::BaseController
   before_action :get_user, only: %i(show active inactive)
+  before_action :transform_params, only: :index
 
   def index
-    @pagy, @users = pagy Account.exclude(@current_account)
-                                .only_activated
-                                .includes_info,
-                         items: params[:items]
+    users = Account.exclude(@current_account).only_activated.includes_info
+
+    q = params[:q]
+    users = users.merge(Account.bquery(q)) if q
+
+    sort = params[:sort]
+    users = users.sort_on(sort, params[:desc]) if sort
+
+    @pagy, @users = pagy users, items: params[:items]
   end
 
   def show; end
@@ -41,5 +47,18 @@ class Admin::UsersController < Admin::BaseController
       format.html{redirect_to admin_users_path}
       format.js
     end
+  end
+
+  def transform_params
+    permit_sorts = {
+      username: "accounts.username",
+      name: "user_infos.name",
+      phone: "user_infos.phone",
+      dob: "user_infos.dob",
+      join: "user_infos.created_at"
+    }
+    s = params[:sort]&.downcase&.to_sym
+    params[:sort] = permit_sorts[s]
+    params[:desc] = !params[:desc] if %i(join).include? s
   end
 end

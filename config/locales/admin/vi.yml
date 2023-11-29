@@ -61,15 +61,18 @@ vi:
     pending: 'Chờ xử lý'
     history: 'Lịch sử'
   admin:
-    default:
+    misc:
       back: 'Trở lại %{path}'
-      users_list: 'danh sách'
-      books_list: 'danh sách'
+      list: 'danh sách'
       upload: 'Tải lên %{name}'
+      table_info: 'Hiển thị %{from} - %{to} / %{total}'
+      search: 'Lọc'
     notif:
       user_not_found: 'Tài khoản không tồn tại'
       user_info_not_found: 'Tài khoản chưa có thông tin'
+      no_users: 'Không có tài khoản nào tìm thấy'
       book_not_found: 'Sách không tồn tại'
+      no_books: 'Không có cuốn sách nào tìm thấy'
       logout_confirm: 'Bạn có chắc muốn đăng xuất?'
       account_not_activated_or_lock: 'Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa'
       invalid_email_password: 'Email hoặc mật khẩu không đúng'
