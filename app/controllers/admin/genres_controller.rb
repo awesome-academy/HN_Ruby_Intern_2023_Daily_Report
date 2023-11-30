@@ -1,5 +1,5 @@
 class Admin::GenresController < Admin::BaseController
-  before_action :get_genre, only: %i(show update destroy)
+  before_action :get_genre, only: %i(show edit update destroy)
   before_action :transform_params, only: :index
 
   def index
@@ -9,20 +9,42 @@ class Admin::GenresController < Admin::BaseController
     genres = genres.bquery(q) if q
 
     s = params[:sort]
-    genres = genres.sort_on(s, params[:desc]) if s
+    genres = s ? genres.sort_on(s, params[:desc]) : genres.newest
 
     @pagy, @genres = pagy genres, items: params[:items]
   end
 
-  def show; end
+  def show
+    @tab_id = :genre_books
+    @pagy, @books = pagy @genre.books.newest.with_attached_image
+    render "admin/shared/tab_books"
+  end
 
-  def new; end
+  def new
+    @genre = Genre.new
+    render :edit
+  end
 
   def edit; end
 
-  def create; end
+  def create
+    @genre = Genre.new genre_params
+    if @genre.save
+      flash[:success] = t "admin.notif.create_success"
+      redirect_to admin_genres_path
+    else
+      respond_to_form_fail @genre
+    end
+  end
 
-  def update; end
+  def update
+    if @genre.update genre_params
+      flash[:success] = t "admin.notif.update_success"
+      redirect_to [:admin, @genre]
+    else
+      respond_to_form_fail @genre
+    end
+  end
 
   def destroy
     if @genre.destroy
@@ -33,11 +55,10 @@ class Admin::GenresController < Admin::BaseController
             helpers.dom_id(@genre, :genre)
           )
         end
-        format.html
-        format.js
+        format.html{redirect_to admin_genres_path}
       end
     else
-      flash[:danger] = t "admin.notif.delete_fail"
+      flash[:danger] = t "admin.notif.delete_fail" # TODO
     end
   end
 

@@ -1,7 +1,7 @@
 <% provide :title, t("admin.title.show", name: t("accounts._name")) %>
 <% get_info(@user) => {email:, address:, phone:, join_from:, join_about:, avatar:, username:} %>
 <div class="col-12">
-  <%= render "admin/shared/back_button", name: t("admin.misc.list"), path: admin_users_path %>
+  <%= navigate_to %>
   <div class="card">
     <div class="card-body">
       <div class="row">
@@ -33,7 +33,17 @@
             </div>
           </div>
           <div class="mt-4 py-2">
-            <%= render_users_tabs %>
+            <ul class="nav nav-pills nav-pills-secondary" id="user-tab" role="tablist">
+              <%= render  partial: "admin/shared/tab_header_item",
+                          collection: get_user_tab_headers(@user), as: :item %>
+            </ul>
+            <div class="tab-content" id="user-tabContent">
+              <div  class="tab-pane fade show active"
+                    id="<%= @tab_id %>" role="tabpanel"
+                    aria-labelledby="<%= @tab_id %>-tab">
+                <%= yield :tab_content %>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 <% provide :title, t("admin.title.index", name: t("accounts._name")) %>
 <% content_for :table_header  do %>
   <tr>
+    <th>#</th>
     <%= render_table_header t("accounts._name"), :username %>
     <%= render_table_header t("users.full_name"), :name %>
     <%= render_table_header t("users.phone"), :phone %>

@@ -3,26 +3,19 @@ module Admin::GenresHelper
     {
       name: genre.name,
       description: genre.description,
+      updated_at: localize_date(genre.updated_at, :long),
       genre_path: admin_genre_path(genre),
       id: dom_id(genre, :genre)
     }
   end
 
-  def render_genres_tabs
-    render "admin/shared/tab_content", group_id: :genre, items: [
+  def get_genre_tab_headers genre
+    [
       {
-        icon: :note,
-        title: t("genres.detail"),
-        id: :detail,
-        active: true,
-        partial: nil
-      },
-      {
-        icon: :comment,
-        title: t("genres.review"),
-        id: :review,
-        active: false,
-        partial: nil
+        icon: :book,
+        title: t("books._name"),
+        id: :genre_books,
+        link: admin_genre_path(genre)
       }
     ]
   end

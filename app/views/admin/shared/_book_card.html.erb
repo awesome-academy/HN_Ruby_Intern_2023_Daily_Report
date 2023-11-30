@@ -1,0 +1,11 @@
+<%= link_to admin_book_path(book), class: "book-card" do %>
+  <%= image_tag book.image, class: "book-card-cover" %>
+  <div class="book-card-content">
+    <h3><%= book.title %></h3>
+    <p class="font-italic"><%= book.description %></p>
+    <div class="divider"></div>
+    <p class="mt-auto"><%= t "books.amount" %>: <%= book.amount %></p>
+    <p><%= t "books.publish_date" %>: <%= localize_date(book.publish_date, :long) %></p>
+    <p><%= t "books.isbn" %>: <%= format_isbn(book.isbn) %></p>
+  </div>
+<% end %>

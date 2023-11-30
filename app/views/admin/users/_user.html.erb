@@ -1,13 +1,14 @@
 <% get_info(user) => {full_name:, email:, user_path:, join_about:, phone:, dob:} %>
 <% null = Settings.display_for_nil %>
 <tr>
+  <td><%= @pagy.from + user_iteration.index %></td>
   <td title="<%= email %>">
     <%= render "admin/shared/profile", user:, link: user_path, username_class: "ps-3" %>
   </td>
-  <td><%= link_to_if full_name, full_name || null, user_path %></td>
-  <td><%= phone || null %></td>
-  <td><%= dob || null %></td>
-  <td><%= join_about || null %></td>
+  <td><%= link_to_if full_name.present?, full_name.presence || null, user_path %></td>
+  <td><%= phone.presence || null %></td>
+  <td><%= dob.presence || null %></td>
+  <td><%= join_about.presence || null %></td>
   <td>
     <%= render "status_button", user: %>
   </td>

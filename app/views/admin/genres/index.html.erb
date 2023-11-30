@@ -1,8 +1,10 @@
 <% provide :title, t("admin.title.index", name: t("genres._name")) %>
 <% content_for :table_header do %>
   <tr>
+    <th>#</th>
     <%= render_table_header t("genres.name"), :name %>
     <%= render_table_header t("genres.description") %>
+    <%= render_table_header t("admin.misc.last_updated") %>
     <th></th>
   </tr>
 <% end %>

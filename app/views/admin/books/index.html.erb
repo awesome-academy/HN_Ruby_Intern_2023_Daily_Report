@@ -1,6 +1,7 @@
 <% provide :title, t("admin.title.index", name: t("books._name")) %>
 <% content_for :table_header do %>
   <tr>
+    <th>#</th>
     <%= render_table_header t("books.title"), :title %>
     <%= render_table_header t("books.amount"), :amount %>
     <%= render_table_header t("authors._name"), :author %>
@@ -10,6 +11,6 @@
     <th></th>
   </tr>
 <% end %>
-<% content_for :table_body, render(partial: "book", collection: @books) %>
+<% content_for :table_body, render(partial: "admin/books/book", collection: @books) %>
 <% content_for :table_empty, name: :books %>
 <%= render "admin/shared/index", name: :books %>

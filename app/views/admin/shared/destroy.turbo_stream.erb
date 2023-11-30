@@ -1,0 +1,5 @@
+<%= turbo_stream.remove(id) %>
+<%= turbo_stream.update(
+  ".table-index",
+  t("admin.misc.table_info", from: @pagy.from, to: @pagy.to - 1, total: @pagy.count - 1)
+) %>

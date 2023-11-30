@@ -1,2 +1,53 @@
-<h1>Admin::Publishers#edit</h1>
-<p>Find me in app/views/admin/publishers/edit.html.erb</p>
+<% action = controller.action_name %>
+<% provide :title, t("admin.title.#{action}", name: t("publishers._name")) %>
+<div class="col-12">
+  <%= navigate_to list: action == "new" %>
+  <div class="card">
+    <div class="card-body">
+      <%= form_with model: [:admin, @publisher], local: true do |f| %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="sub-content">
+              <div id="form-fail"></div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <!-- Basic Info -->
+            <div class="">
+              <div class="form-group">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control",
+                                 placeholder: t("publishers.placeholder.name") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, class: "form-control",
+                                 placeholder: t("publishers.placeholder.email") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :address %>
+                <%= f.text_field :address, class: "form-control",
+                                 placeholder: t("publishers.placeholder.address") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :about %>
+                <%= f.text_area :about, class: "form-control",
+                                 placeholder: t("publishers.placeholder.about") %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3 d-flex flex-row justify-content-end">
+          <%= f.submit t("admin.misc.#{action}"), name: action,
+                        class: "btn btn-success btn-control" %>
+          <%= link_to t("admin.misc.cancel"), admin_publishers_path,
+                        class: "btn btn-warning btn-control",
+                        data: {
+                          turbo_method: :get,
+                          turbo_confirm: t("admin.notif.cancel_confirm")
+                        } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

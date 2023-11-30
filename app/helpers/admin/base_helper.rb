@@ -21,14 +21,16 @@ module Admin::BaseHelper
     l(datetime.to_date, format:) if datetime
   end
 
-  def get_avatar account
-    avatar = account&.avatar
-    avatar&.attached? ? avatar : Settings.default_avatar_path
+  def get_image obj, attribute = :avatar
+    image = obj&.public_send(attribute)
+    image&.attached? ? image : Settings.public_send("default_#{attribute}_path")
   end
 
-  # Should use this if need a default display value if not nil
-  def get_attr obj, attribute
-    obj&.send(attribute) || Settings.display_for_nil
+  def get_link item, resource, for_text: :name, class: nil
+    text = item&.public_send(for_text)
+    link_to_if item, text,
+               (send("admin_#{resource}_path", item) if item),
+               class:, title: text
   end
 
   def render_table_header title, name = nil
@@ -38,6 +40,22 @@ module Admin::BaseHelper
     new_style = style == :asc ? :desc : :asc
     link = url_for(request.params.merge(style: new_style, sort: name))
     render "admin/shared/table_header", style:,
-      sortable: name.present?, link:, title:
+            sortable: name.present?, link:, title:
+  end
+
+  def navigate_to list: false, path: nil, path_text: nil, replace: false
+    link_class = "btn btn-info mb-3"
+    data = {turbo_action: :replace} if replace
+
+    if path
+      link_to path_text, path,
+              class: link_class, data:
+    elsif list
+      link_to t("admin.misc.to_list"), url_for(action: :index),
+              class: link_class, data:
+    else
+      link_to t("admin.misc.back"), "javascript:history.back()",
+              class: link_class, data:
+    end
   end
 end

@@ -1,0 +1,10 @@
+<% active = current_page? item[:link] %>
+<li class="nav-item">
+  <%= link_to "#{active ? "#" : item[:link]}", id: "#{item[:id]}-tab", role: "tab",
+                    class: "nav-link d-flex flex-space-between #{"active" if active}",
+                    data: {"bs-toggle": "pill"},
+                    aria: {controls: "#{item[:id]}", selected: active} do %>
+    <span><i class="mdi mdi-<%= item[:icon] %>"></i></span>
+    <span class="ms-2"><%= item[:title] %></span>
+  <% end %>
+</li>

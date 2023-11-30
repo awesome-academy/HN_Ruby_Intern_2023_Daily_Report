@@ -1,0 +1,5 @@
+<% content_for :tab_content do %>
+  <%= render "admin/shared/pagy_utils" %>
+  <%= render partial: "admin/shared/book_card", collection: @books, as: :book %>
+<% end %>
+<%= render "show" %>

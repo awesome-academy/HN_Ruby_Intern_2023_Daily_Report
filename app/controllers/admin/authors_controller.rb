@@ -1,5 +1,5 @@
 class Admin::AuthorsController < Admin::BaseController
-  before_action :get_author, only: %i(show update destroy)
+  before_action :get_author, only: %i(show edit update destroy)
   before_action :transform_params, only: :index
 
   def index
@@ -9,20 +9,42 @@ class Admin::AuthorsController < Admin::BaseController
     authors = authors.bquery(q) if q
 
     s = params[:sort]
-    authors = authors.sort_on(s, params[:desc]) if s
+    authors = s ? authors.sort_on(s, params[:desc]) : authors.newest
 
     @pagy, @authors = pagy authors, items: params[:items]
   end
 
-  def show; end
+  def show
+    @tab_id = :author_books
+    @pagy, @books = pagy @author.books.newest.with_attached_image
+    render "admin/shared/tab_books"
+  end
 
-  def new; end
+  def new
+    @author = Author.new
+    render :edit
+  end
 
   def edit; end
 
-  def create; end
+  def create
+    @author = Author.new author_params
+    if @author.save
+      flash[:success] = t "admin.notif.create_success"
+      redirect_to admin_authors_path
+    else
+      respond_to_form_fail @author
+    end
+  end
 
-  def update; end
+  def update
+    if @author.update author_params
+      flash[:success] = t "admin.notif.update_success"
+      redirect_to [:admin, @author]
+    else
+      respond_to_form_fail @author
+    end
+  end
 
   def destroy
     if @author.destroy
@@ -33,11 +55,10 @@ class Admin::AuthorsController < Admin::BaseController
             helpers.dom_id(@author, :author)
           )
         end
-        format.html
-        format.js
+        format.html{redirect_to admin_authors_path}
       end
     else
-      flash[:danger] = t "admin.notif.delete_fail"
+      flash[:danger] = t "admin.notif.delete_fail" # TODO
     end
   end
 

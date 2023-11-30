@@ -7,15 +7,15 @@ class Admin::SessionsController < SessionsController
 
   def on_login_fail_inactive
     flash.now[:danger] = t "admin.notif.account_not_activated_or_lock"
-    render :new, status: :bad_request
+    render :new, status: :unprocessable_entity
   end
 
   def on_login_fail
     flash.now[:danger] = t "admin.notif.invalid_email_password"
-    render :new, status: :bad_request
+    render :new, status: :unprocessable_entity
   end
 
   def on_logout
-    redirect_back_or admin_login_path
+    redirect_to admin_login_path
   end
 end

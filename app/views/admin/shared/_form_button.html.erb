@@ -1,12 +1,12 @@
 <% local_assigns.with_defaults(
   update_text: t(".update"), destroy_text: t(".delete"),
   update_color: :warning, destroy_color: :danger,
-  destroy_remote: true, destroy_confirm: nil
+  destroy_remote: true, destroy_confirm: nil, container_class: "flex-column"
 ) => {
       update_text:, destroy_text:, update_color:, destroy_color:,
-      item:, destroy_confirm:, destroy_remote:, name:
+      destroy_confirm:, destroy_remote:, item:, name:, container_class:
 } %>
-<div class="d-flex flex-column">
+<div class="d-flex <%= container_class %>">
   <%= link_to update_text, url_for(action: :edit, id: item.id),
                          class: "btn btn-outline-#{update_color} btn-form" %>
   <%= link_to destroy_text, url_for(action: :destroy, id: item.id),
