@@ -6,11 +6,6 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-a {
-  cursor: pointer;
-  text-decoration: none;
-}
-
 .dropdown-menu a {
   @extend .dropdown-item !optional;
 }

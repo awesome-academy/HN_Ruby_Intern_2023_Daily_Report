@@ -1,0 +1,28 @@
+<% provide(:title, @book.title) %>
+
+<% breadcrumb :book, @book %>
+<div class="d-flex">
+  <div class="me-5">
+    <%= image_tag @book.image, style: "width: 16rem;" if @book.image.attached? %>
+  </div>
+  <div>
+    <div>
+      <h1 class="fw-bold"><%= @book.title %></h1>
+      <div class="mb-3">
+        <% @book.authors.each do |author| %>
+          <%= link_to author_link_with_comma(author, @book.authors.last), author_path(find_author_id_by_name(author.name)), class: "link-secondary fs-4" %>
+        <% end %>
+      </div>
+      <p><span class="fw-semibold"><%= t "genre" %>: </span><%= @book.genres.map(&:name).join(", ") %></p>
+      <p><span class="fw-semibold">ISBN10: </span><%= @book.isbn %></p>
+      <p><span class="fw-semibold"><%= t "publish_date" %>: </span><%= @book.publish_date %></p>
+      <p><span class="fw-semibold"><%= t "copies" %>: </span><%= @book.amount %></p>
+      <p><span class="fw-semibold"><%= t "publisher" %>: </span><%= @book.publisher.name %></p>
+      <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <%= t "borrow_book" %></button>
+    </div>
+    <div class="mt-4">
+      <h2 class="border-bottom"><%= t "description" %></h2>
+      <p><%= @book.description %></p>
+    </div>
+  </div>
+</div>

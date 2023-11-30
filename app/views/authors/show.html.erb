@@ -1,0 +1,24 @@
+<% provide :title, @author.name %>
+
+<div>
+  <div>
+    <h1 class="fw-bold mb-4"><%= @author.name %></h1>
+    <p><span class="fw-semibold">Email: </span><%= @author.email %></p>
+    <p><span class="fw-semibold"><%= t "phone" %>: </span><%= @author.phone %></p>
+    <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <%= t ".follow_this_author" %></button>
+  </div>
+  <div class="mt-5 w-50">
+    <h2 class="border-bottom"><%= t ".about_this_author" %></h2>
+    <p class="mt-3"><%= @author.about %></p>
+  </div>
+  <div class="mt-5">
+    <h2 class="border-bottom"><%= t ".list_of_books" %></h2>
+    <div class="mt-1 mb-5 row row-cols-1 row-cols-md-5 g-4">
+      <% @author.books.with_attached_image.include_authors.each do |book| %>
+        <div class="col">
+          <%= render "shared/book_card", book: book %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
