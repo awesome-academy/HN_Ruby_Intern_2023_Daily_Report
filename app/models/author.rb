@@ -5,5 +5,17 @@ class Author < ApplicationRecord
                         dependent: :destroy
   has_many :followers, through: :followings
 
-  scope :bquery, ->(q){where("authors.name LIKE ?", "%#{q}%")}
+  has_one_attached :avatar
+
+  validates :avatar,
+            content_type: {
+              in: Settings.validations.image_type,
+              message: I18n.t("validations.image_type_valid")
+            }
+
+  scope :bquery, lambda {|q|
+    where("authors.name LIKE ?", "%#{q}%")
+      .or(where("authors.email LIKE ?", "%#{q}%"))
+      .or(where("authors.about LIKE ?", "%#{q}%"))
+  }
 end

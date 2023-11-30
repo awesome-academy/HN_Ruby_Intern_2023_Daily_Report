@@ -59,7 +59,7 @@ account = Account.create(
 end
 
 # Publisher
-30.times do |n|
+15.times do |n|
   name = Faker::Book.unique.publisher
   address = Faker::Address.full_address
   about = "#{name} #{Faker::Lorem.paragraph}"
@@ -74,13 +74,18 @@ end
 end
 
 # Author
-100.times do |n|
+20.times do |n|
   name = Faker::Name.name
   about = "#{name} #{Faker::Lorem.paragraph}"
   phone = Faker::PhoneNumber.cell_phone
   email = Faker::Internet.email(name: name)
 
   Author.create(name:, about:, phone:, email:)
+end
+
+Author.all.each do |author|
+  file_path = URI.parse(Faker::LoremFlickr.image(size: "200x250")).open
+  author.image.attach(io: file_path, filename: "author#{i}-avatar.png")
 end
 
 # Genre
@@ -92,7 +97,7 @@ end
 end
 
 # Book
-180.times do |n|
+30.times do |n|
   title = Faker::Book.title
   while Book.exists?(title: title)
     title = Faker::Book.title

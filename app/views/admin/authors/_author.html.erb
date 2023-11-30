@@ -1,0 +1,17 @@
+<% populate_author(author) => {
+    avatar:, name:, email:, phone:, about:, author_path:, id:
+}%>
+<% null = Settings.display_for_nil %>
+<tr id="<%= id %>">
+  <td class="long-name">
+    <%= link_to author_path do %>
+      <%= image_tag avatar, class: "image-rect", title: about %>
+      <span title="<%= name %>"><%= name %></span>
+    <% end %>
+  </td>
+  <td><%= email || null %></td>
+  <td><%= phone || null %></td>
+  <td>
+    <%= render "admin/shared/form_button", item: author, name: t("authors._name") %>
+  </td>
+</tr>

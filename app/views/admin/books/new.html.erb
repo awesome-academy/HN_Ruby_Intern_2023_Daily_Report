@@ -1,4 +1,4 @@
-<% provide :title, t(".title") %>
+<% provide :title, t("admin.title.new", name: t("books._name")) %>
 <% book = Book.new %>
 <% chooser_id = dom_id(book, :chooser) %>
 <div class="col-12">
@@ -43,9 +43,9 @@
             <!-- Author -->
           </div>
         </div>
-        <div class="row mt-5 d-flex flex-row justify-content-end">
-          <%= f.submit t(".submit"), class: "btn btn-success btn-control" %>
-          <%= link_to t(".cancel"), admin_books_path, class: "btn btn-info btn-control" %>
+        <div class="row mt-3 d-flex flex-row justify-content-end">
+          <%= f.submit t("admin.misc.create"), class: "btn btn-success btn-control" %>
+          <%= link_to t("admin.misc.cancel"), admin_books_path, class: "btn btn-info btn-control" %>
         </div>
       <% end %>
     </div>

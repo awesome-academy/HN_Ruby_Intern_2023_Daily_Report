@@ -46,7 +46,9 @@ class Admin::BooksController < Admin::BaseController
     @book = Book.find_by id: params[:id]
     return if @book
 
-    flash[:danger] = {content: t("admin.notif.book_not_found")}
+    flash[:danger] = {
+      content: t("admin.notif.item_not_found", name: t("books._name"))
+    }
     redirect_to admin_books_path
   end
 

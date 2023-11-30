@@ -1,2 +1,2 @@
-<% local_assigns.with_defaults(path: admin_root_path) => {name:, path:} %>
+<% local_assigns.with_defaults(path: admin_root_path, name: t("admin.misc.list")) => {name:, path:} %>
 <%= link_to t("admin.misc.back", path: name), path, class: "btn btn-info mb-3" %>

@@ -1,0 +1,11 @@
+<% provide :title, t("admin.title.index", name: t("genres._name")) %>
+<% content_for :table_header do %>
+  <tr>
+    <%= render_table_header t("genres.name"), :name %>
+    <%= render_table_header t("genres.description") %>
+    <th></th>
+  </tr>
+<% end %>
+<% content_for :table_body, render(partial: "genre", collection: @genres) %>
+<% content_for :table_empty, name: :genres %>
+<%= render "admin/shared/index", name: :genres %>

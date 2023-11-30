@@ -4,5 +4,8 @@ class Genre < ApplicationRecord
 
   validates :name, uniqueness: true
 
-  scope :bquery, ->(q){where("genres.name LIKE ?", "%#{q}%")}
+  scope :bquery, lambda {|q|
+    where("genres.name LIKE ?", "%#{q}%")
+      .or(where("genres.description LIKE ?", "%#{q}%"))
+  }
 end

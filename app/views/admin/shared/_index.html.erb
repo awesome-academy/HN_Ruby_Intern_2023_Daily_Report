@@ -1,7 +1,14 @@
-<div class="col-lg-12 grid-margin stretch-card">
+<div class="col-12">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title"><%= yield :title %></h4>
+      <h4 class="card-title d-flex">
+        <div class="fs-4"><%= yield :title %></div>
+        <% unless %w(users).include? controller.controller_name %>
+          <%= link_to t("admin.title.new", name: t("#{name}._name")),
+                    url_for(action: :new),
+                    class: "btn btn-success ms-auto fs-6 d-lg-none" %>
+        <% end %>
+      </h4>
       <div class="d-flex flex-column">
         <%= render "admin/shared/table_utils", pagy: @pagy %>
       </div>
@@ -15,7 +22,7 @@
           </tbody>
         </table>
         <% unless content_for? :table_body %>
-          <div class="text-muted ps-3 pt-2"><%= yield :table_empty %></div>
+          <div class="text-muted ps-3 pt-2"><%= t("admin.notif.no_items", item: t("#{name}._item")) %></div>
         <% end %>
       </div>
     </div>

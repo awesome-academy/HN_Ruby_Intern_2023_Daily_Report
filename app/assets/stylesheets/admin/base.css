@@ -85,6 +85,11 @@ body {
   border-right: 1px solid #2c2e33 !important;
 }
 
+.nav-item .nav-link .menu-title:first-letter,
+.nav-item .preview-item-content .preview-subject:first-letter {
+  text-transform: uppercase;
+}
+
 /*** Form ***/
 
 .form-group label {

@@ -53,8 +53,8 @@ class Book < ApplicationRecord
     where("books.title LIKE ?", "%#{q}%")
       .or(where("books.isbn LIKE ?", "%#{q}%"))
       .references(:authors, :publisher, :genres)
-      .or(Author.bquery(q))
-      .or(Genre.bquery(q))
-      .or(Publisher.bquery(q))
+      .or(where("authors.name LIKE ?", "%#{q}%"))
+      .or(where("genres.name LIKE ?", "%#{q}%"))
+      .or(where("publishers.name LIKE ?", "%#{q}%"))
   }
 end

@@ -1,0 +1,42 @@
+<% provide :title, t("admin.title.new", name: t("publishers._name")) %>
+<% publisher = Publisher.new %>
+<div class="col-12">
+  <%= render "admin/shared/back_button", name: t("admin.misc.list"), path: admin_publishers_path %>
+  <div class="card">
+    <div class="card-body">
+      <%= form_with model: publisher, url: admin_publishers_path, local: true do |f| %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="border-right pe-3 bg-info bg-gradient">
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <!-- Basic Info -->
+            <div class="">
+              <div class="form-group">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control", placeholder: t("publishers.placeholder.name") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, class: "form-control", placeholder: t("publishers.placeholder.email") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :address %>
+                <%= f.text_field :address, class: "form-control", placeholder: t("publishers.placeholder.address") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :about %>
+                <%= f.text_area :about, class: "form-control", placeholder: t("publishers.placeholder.about") %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3 d-flex flex-row justify-content-end">
+          <%= f.submit t("admin.misc.create"), class: "btn btn-success btn-control" %>
+          <%= link_to t("admin.misc.cancel"), admin_publishers_path, class: "btn btn-info btn-control" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

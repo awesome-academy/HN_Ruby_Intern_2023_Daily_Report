@@ -73,6 +73,19 @@ vi:
         publisher: "Nhà xuất bản"
         authors: "Tác giả"
         genres: "Thể loại"
+      author:
+        name: "Họ tên"
+        phone: "Số điện thoại"
+        email: "Email"
+        about: "Giới thiệu"
+      genre:
+        name: "Tên"
+        description: "Mô tả"
+      publisher:
+        name: "Tên"
+        address: "Địa chỉ"
+        email: "Email"
+        about: "Giới thiệu"
   validations:
     isbn_valid: "chỉ bao gồm 10 hoặc 13 chữ số , cùng với các ký tự -"
     image_type_valid: "chỉ hỗ trợ các định dạng JPEG, PNG, GIF"

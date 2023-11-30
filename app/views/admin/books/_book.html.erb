@@ -6,7 +6,7 @@
 <tr id="<%= id %>">
   <td class="long-name">
     <%= link_to book_path do %>
-      <%#= image_tag cover, class: "image-rect", title: "ISBN: #{isbn}" %>
+      <%= image_tag cover, class: "image-rect", title: "ISBN: #{isbn}" %>
       <span title="<%= title %>"><%= title %></span>
     <% end %>
   </td>
