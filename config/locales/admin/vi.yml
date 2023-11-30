@@ -10,6 +10,8 @@ vi:
     formats:
       short: '%d/%m/'
       long: '%d/%m/%Y'
+  item:
+    book: 'cuốn sách'
   users:
     account: 'Tài khoản'
     full_name: 'Họ tên'
@@ -29,13 +31,55 @@ vi:
     favorite: 'Yêu thích'
     active: 'Hiệu lực'
     inactive: 'Đã khóa'
+  books:
+    cover: 'Ảnh bìa'
+    title: 'Tên sách'
+    amount: 'Số lượng'
+    isbn: 'ISBN'
+    publish_date: 'Ngày xuất bản'
+    publisher: 'Nhà xuất bản'
+    authors: 'Tác giả'
+    genres: 'Thể loại'
+    placeholder:
+      cover: 'Ảnh bìa'
+      title: 'Tiêu đề sách'
+      description: 'Tóm tắt nội dung sách'
+      amount: 'Số lượng sách có thể phục vụ'
+      isbn: 'Mã ISBN 10 hoặc ISBN 13'
   admin:
     default:
       back: 'Trở lại %{path}'
-      users_list: 'trang danh sách'
+      users_list: 'danh sách'
+      books_list: 'danh sách'
+      upload: 'Tải lên %{name}'
     notif:
       user_not_found: 'Tài khoản không tồn tại'
       user_info_not_found: 'Tài khoản chưa có thông tin'
+      book_not_found: 'Sách không tồn tại'
+    books:
+      index:
+        title: 'Danh sách sách'
+      new:
+        title: 'Thêm sách'
+        submit: 'Thêm'
+        cancel: 'Huỷ'
+        cancel_confirm: 'Dữ liệu bạn nhập có thể bị mất. Bạn có muốn hủy?'
+      edit:
+        title: 'Cập nhật sách'
+    users:
+      index:
+        title: 'Danh sách người dùng'
+      show:
+      status_button:
+        do_active: 'Kích hoạt'
+        do_inactive: 'Khóa'
+        do_active_confirm: 'Bạn có chắc muốn mở khóa tài khoản này?'
+        do_inactive_confirm: 'Bạn có chắc muốn khóa tài khoản này?'
+    shared:
+      form_button:
+        view: 'Xem'
+        delete: 'Xóa'
+        delete_confirm: 'Bạn có chắc muốn xóa %{name} này?'
     base:
       sidebar:
         navigation: 'Điều hướng'
@@ -61,6 +105,7 @@ vi:
       navbar:
         messages: 'Tin nhắn'
         notifications: 'Thông báo'
+        add_book: 'Thêm sách'
       navbar_profile:
         system: 'Hệ thống'
       footer:
@@ -77,12 +122,3 @@ vi:
         login: 'Đăng nhập'
         email: 'Email'
         password: 'Mật khẩu'
-    users:
-      index:
-        title: 'Danh sách người dùng'
-      show:
-      status_button:
-        do_active: 'Kích hoạt'
-        do_inactive: 'Khóa'
-        do_active_confirm: 'Bạn có chắc muốn mở khóa tài khoản này?'
-        do_inactive_confirm: 'Bạn có chắc muốn khóa tài khoản này?'

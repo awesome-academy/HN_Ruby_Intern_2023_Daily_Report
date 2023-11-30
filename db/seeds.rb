@@ -5,11 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Account.destroy_all
-UserInfo.destroy_all
-
 # Standard Accounts
-admin = Account.create!(
+admin = Account.create(
   email: "admin@gmail.com",
   username: "administrator",
   password: "libma-123",
@@ -20,7 +17,7 @@ admin = Account.create!(
 )
 admin.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/admin/face5.jpg"), filename: "admin-face.jpg")
 
-account = Account.create!(
+account = Account.create(
   email: "account01@gmail.com",
   username: Faker::Internet.username,
   password: "111111",
@@ -28,10 +25,10 @@ account = Account.create!(
   is_admin: false,
 )
 
-# Fake
+# Fake Accounts
 10.times do |i|
   if i > 0
-    ac = Account.create!(
+    ac = Account.create(
       email: Faker::Internet.email,
       username: Faker::Internet.username,
       password: "111111",
@@ -45,11 +42,12 @@ account = Account.create!(
   end
 
   begin
-    img = URI.parse(Faker::Avatar.image).open
+    img = URI.parse(Faker::LoremFlickr.image).open
     ac.avatar.attach(io: img, filename: "user#{i}-avatar.png")
   rescue
   end
-  u = UserInfo.create!(
+
+  u = UserInfo.create(
     name: Faker::Name.name,
     gender: rand(3),
     address: Faker::Address.full_address,
@@ -60,13 +58,14 @@ account = Account.create!(
   )
 end
 
+# Publisher
 30.times do |n|
   name = Faker::Book.unique.publisher
   address = Faker::Address.full_address
   about = "#{name} #{Faker::Lorem.paragraph}"
   email = Faker::Internet.email(name: name)
 
-  Publisher.create!(
+  Publisher.create(
     name: name,
     address: address,
     about: about,
@@ -74,6 +73,25 @@ end
   )
 end
 
+# Author
+100.times do |n|
+  name = Faker::Name.name
+  about = "#{name} #{Faker::Lorem.paragraph}"
+  phone = Faker::PhoneNumber.cell_phone
+  email = Faker::Internet.email(name: name)
+
+  Author.create(name:, about:, phone:, email:)
+end
+
+# Genre
+7.times do |n|
+  name = Faker::Book.genre
+  description = "#{name} #{Faker::Lorem.paragraph}"
+
+  Genre.create(name:, description:)
+end
+
+# Book
 180.times do |n|
   title = Faker::Book.title
   while Book.exists?(title: title)
@@ -82,10 +100,10 @@ end
   description = "#{title} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   amount = rand(1..100)
   publish_date = Faker::Date.backward
-  isbn = Faker::Code.unique.isbn
+  isbn = Faker::Code.unique.isbn(base: (rand % 2 == 1 ? 13 : 10))
   publisher_id = Publisher.pluck(:id).sample
 
-  Book.create!(
+  Book.create(
     title: title,
     description: description,
     amount: amount,
@@ -98,20 +116,6 @@ end
 Book.all.each do |book|
   file_path = URI.parse(Faker::LoremFlickr.image(size: "200x250")).open
   book.image.attach(io: file_path, filename: "image.jpg")
-end
-
-100.times do |n|
-  name = Faker::Name.name
-  about = "#{name} #{Faker::Lorem.paragraph}"
-  phone = Faker::PhoneNumber.cell_phone
-  email = Faker::Internet.email(name: name)
-
-  Author.create!(
-    name: name,
-    about: about,
-    phone: phone,
-    email: email,
-  )
 end
 
 # Create fake associations for books
@@ -139,4 +143,3 @@ end
     name: name,
     description: description,
   )
-end

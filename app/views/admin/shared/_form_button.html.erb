@@ -1,0 +1,18 @@
+<% local_assigns.with_defaults(
+  show_text: t(".view"), destroy_text: t(".delete"),
+  show_color: :warning, destroy_color: :danger,
+  destroy_remote: true, destroy_confirm: nil
+) => {
+      show_text:, destroy_text:, show_color:, destroy_color:,
+      item:, destroy_confirm:, destroy_remote:, name:
+} %>
+<div class="d-flex flex-column">
+  <%= link_to show_text, url_for(action: :edit, id: item.id),
+                         class: "btn btn-outline-#{show_color} btn-form" %>
+  <%= button_to destroy_text, url_for(action: :destroy, id: item.id),
+                              class: "btn btn-outline-#{destroy_color} btn-form",
+                              form: {data: {
+                                  turbo_method: :delete,
+                                  turbo_confirm: destroy_confirm || t(".delete_confirm", name:)
+                              }}, remote: destroy_remote %>
+</div>

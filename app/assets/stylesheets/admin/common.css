@@ -9,3 +9,7 @@
  *= require css/style.css
  *= require_self
  */
+
+.form-control:focus {
+  color: #ff0;
+}
