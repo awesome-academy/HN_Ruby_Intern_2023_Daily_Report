@@ -20,24 +20,20 @@
           </div>
           <!-- Contact -->
           <div class="py-4">
-            <%= render("info_field", name: t("users.email"), value: email) %>
-            <%= render("info_field", name: t("users.phone"), value: phone) if phone %>
-            <%= render("info_field", name: t("users.address"), value: address) if address %>
+            <%= render("admin/shared/info_field", name: t("users.email"), value: email) %>
+            <%= render("admin/shared/info_field", name: t("users.phone"), value: phone) if phone %>
+            <%= render("admin/shared/info_field", name: t("users.address"), value: address) if address %>
           </div>
         </div>
         <div class="col-lg-8">
           <div class="d-flex justify-content-between">
-            <div>
-              <h3><%= username %></h3>
-              <div class="d-flex align-items-center">
-              </div>
-            </div>
+            <h3><%= username %></h3>
             <div>
               <%= render "status_button", user: @user, flip: false %>
             </div>
           </div>
           <div class="mt-4 py-2">
-            <%= render_tabs %>
+            <%= render_users_tabs %>
           </div>
         </div>
       </div>

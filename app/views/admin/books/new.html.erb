@@ -1,6 +1,6 @@
 <% provide :title, t(".title") %>
 <% book = Book.new %>
-<% dom_book = dom_id(book) %>
+<% chooser_id = dom_id(book, :chooser) %>
 <div class="col-12">
   <%= render "admin/shared/back_button", name: t("admin.default.books_list"), path: admin_books_path %>
   <div class="card">
@@ -9,11 +9,11 @@
         <div class="row">
           <div class="col-lg-4">
             <div class="border-right pe-3 d-flex flex-column align-items-center">
-              <img class="mb-6 file-preview" data-preview-for="<%= dom_book %>-chooser" >
-              <button class="file-input-replacer btn btn-primary mt-3" data-replace-for="<%= dom_book %>-chooser" >
+              <img class="mb-6 file-preview" data-preview-for="<%= chooser_id %>" >
+              <button class="file-input-replacer btn btn-primary mt-3" data-replace-for="<%= chooser_id %>" >
                 <%= t "admin.default.upload", name: t("books.cover").downcase %>
               </button>
-              <%= f.file_field :image, id: "#{dom_book}-chooser", accept: Settings.validations.image_type.join(","), multiple: false, class: "file-chooser d-none" %>
+              <%= f.file_field :image, id: chooser_id, accept: Settings.validations.image_type.join(","), multiple: false, class: "file-chooser d-none" %>
             </div>
           </div>
           <div class="col-lg-8">
@@ -21,11 +21,11 @@
             <div class="">
               <div class="form-group">
                 <%= f.label :title %>
-                <%= f.text_field :title, class: "form-control", placeholder: t("books.title") %>
+                <%= f.text_field :title, class: "form-control", placeholder: t("books.placeholder.title") %>
               </div>
               <div class="form-group">
                 <%= f.label :description %>
-                <%= f.text_area :description, class: "form-control", placeholder: t("books.description") %>
+                <%= f.text_area :description, class: "form-control", placeholder: t("books.placeholder.description") %>
               </div>
               <div class="form-group">
                 <%= f.label :publish_date %>
@@ -33,11 +33,11 @@
               </div>
               <div class="form-group">
                 <%= f.label :amount %>
-                <%= f.number_field :amount, min: 0, class: "form-control", placeholder: t("books.amount") %>
+                <%= f.number_field :amount, min: 0, class: "form-control", placeholder: t("books.placeholder.amount") %>
               </div>
               <div class="form-group">
                 <%= f.label :isbn %>
-                <%= f.text_field :isbn, pattern: Settings.validations.isbn_regex, class: "form-control", placeholder: t("books.isbn") %>
+                <%= f.text_field :isbn, pattern: Settings.validations.isbn_regex, class: "form-control", placeholder: t("books.placeholder.isbn") %>
               </div>
             </div>
             <!-- Author -->
@@ -45,8 +45,7 @@
         </div>
         <div class="row mt-5 d-flex flex-row justify-content-end">
           <%= f.submit t(".submit"), class: "btn btn-success btn-control" %>
-          <%= link_to t(".cancel"), admin_books_path, class: "btn btn-info btn-control",
-              data: { turbo_confirm: t(".cancel_confirm") } %>
+          <%= link_to t(".cancel"), admin_books_path, class: "btn btn-info btn-control" %>
         </div>
       <% end %>
     </div>

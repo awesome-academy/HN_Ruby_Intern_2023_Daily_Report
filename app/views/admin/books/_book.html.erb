@@ -1,12 +1,12 @@
 <% populate_book(book) => {
     cover:, title:, isbn:, amount:, publisher:, publish_date:,
-    authors:, genres:, book_path:}
-%>
+    authors:, genres:, book_path:, id:
+}%>
 <% null = Settings.display_for_nil %>
-<tr>
+<tr id="<%= id %>">
   <td class="long-name">
     <%= link_to book_path do %>
-      <%= image_tag cover, class: "image-rect", title: "ISBN: #{isbn}" %>
+      <%#= image_tag cover, class: "image-rect", title: "ISBN: #{isbn}" %>
       <span title="<%= title %>"><%= title %></span>
     <% end %>
   </td>
@@ -30,6 +30,6 @@
   </td>
   <td><%= publish_date %></td>
   <td>
-    <%= render "admin/shared/form_button", item: book, name: t("item.book") %>
+    <%= render "admin/shared/form_button", item: book, name: t("books._item") %>
   </td>
 </tr>

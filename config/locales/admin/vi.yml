@@ -10,10 +10,12 @@ vi:
     formats:
       short: '%d/%m/'
       long: '%d/%m/%Y'
-  item:
-    book: 'cuốn sách'
+  accounts:
+    _name: 'Tài khoản'
+    email: 'Email'
+    password: 'Mật khẩu'
   users:
-    account: 'Tài khoản'
+    _name: 'Người dùng'
     full_name: 'Họ tên'
     phone: 'SĐT'
     address: 'Địa chỉ'
@@ -26,26 +28,38 @@ vi:
     updated_at: 'Cập nhật lần cuối'
     status: 'Trạng thái'
     join_from: 'Tham gia từ'
-    email: 'Email'
+    join_about: 'Tham gia'
     profile: 'Thông tin'
     favorite: 'Yêu thích'
     active: 'Hiệu lực'
     inactive: 'Đã khóa'
   books:
+    _name: 'Sách'
+    _item: 'cuốn sách'
     cover: 'Ảnh bìa'
     title: 'Tên sách'
-    amount: 'Số lượng'
+    amount: 'Tổng số'
+    remain: 'Còn lại'
     isbn: 'ISBN'
     publish_date: 'Ngày xuất bản'
-    publisher: 'Nhà xuất bản'
-    authors: 'Tác giả'
-    genres: 'Thể loại'
+    detail: 'Thông tin'
+    review: 'Bình luận'
     placeholder:
       cover: 'Ảnh bìa'
       title: 'Tiêu đề sách'
       description: 'Tóm tắt nội dung sách'
       amount: 'Số lượng sách có thể phục vụ'
       isbn: 'Mã ISBN 10 hoặc ISBN 13'
+  authors:
+    _name: 'Tác giả'
+  genres:
+    _name: 'Thể loại'
+  publishers:
+    _name: 'Nhà xuất bản'
+  borrow_requests:
+    _name: 'Yêu cầu mượn sách'
+    pending: 'Chờ xử lý'
+    history: 'Lịch sử'
   admin:
     default:
       back: 'Trở lại %{path}'
@@ -56,6 +70,9 @@ vi:
       user_not_found: 'Tài khoản không tồn tại'
       user_info_not_found: 'Tài khoản chưa có thông tin'
       book_not_found: 'Sách không tồn tại'
+      logout_confirm: 'Bạn có chắc muốn đăng xuất?'
+      account_not_activated_or_lock: 'Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa'
+      invalid_email_password: 'Email hoặc mật khẩu không đúng'
     books:
       index:
         title: 'Danh sách sách'
@@ -64,12 +81,15 @@ vi:
         submit: 'Thêm'
         cancel: 'Huỷ'
         cancel_confirm: 'Dữ liệu bạn nhập có thể bị mất. Bạn có muốn hủy?'
+      show:
+        title: 'Thông tin sách'
       edit:
         title: 'Cập nhật sách'
     users:
       index:
         title: 'Danh sách người dùng'
       show:
+        title: 'Thông tin người dùng'
       status_button:
         do_active: 'Kích hoạt'
         do_inactive: 'Khóa'
@@ -77,7 +97,7 @@ vi:
         do_inactive_confirm: 'Bạn có chắc muốn khóa tài khoản này?'
     shared:
       form_button:
-        view: 'Xem'
+        update: 'Sửa'
         delete: 'Xóa'
         delete_confirm: 'Bạn có chắc muốn xóa %{name} này?'
     base:
@@ -87,21 +107,11 @@ vi:
         borrow_requests: 'Yêu cầu mượn sách'
         users: 'Quản lý người dùng'
         library: 'Quản lý thư viện'
-      nav_group:
-        book: 'Sách'
-        author: 'Tác giả'
-        genre: 'Thể loại'
-        publisher: 'Nhà phát hành'
-        pending_request: 'Chờ xử lý'
-        request_history: 'Lịch sử'
       dropdown_menu:
         account_settings: 'Thiết lập tài khoản'
         change_password: 'Đổi mật khẩu'
         settings: 'Cài đặt chung'
         logout: 'Đăng xuất'
-        logout_confirm: 'Bạn có chắc muốn đăng xuất?'
-      sidebar_profile:
-        account: 'Tài khoản'
       navbar:
         messages: 'Tin nhắn'
         notifications: 'Thông báo'
@@ -112,13 +122,8 @@ vi:
         info: 'Dành cho Administrator - Libma'
         credit: 'Mẫu giao diện: BootstrapDash - Corona'
     sessions:
-      errors:
-        account_not_activated_or_lock: 'Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa'
-        invalid_email_password: 'Email hoặc mật khẩu không đúng'
       new:
         title: 'Đăng nhập'
         rememberme: 'Lưu phiên đăng nhập'
         forgot_pwd: 'Quên mật khẩu?'
         login: 'Đăng nhập'
-        email: 'Email'
-        password: 'Mật khẩu'
