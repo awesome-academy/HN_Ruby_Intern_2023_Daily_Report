@@ -18,7 +18,7 @@
       <p><span class="fw-semibold"><%= t "publish_date" %>: </span><%= @book.publish_date %></p>
       <p><span class="fw-semibold"><%= t "copies" %>: </span><%= @book.amount %></p>
       <p><span class="fw-semibold"><%= t "publisher" %>: </span><%= @book.publisher.name %></p>
-      <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <%= t "borrow_book" %></button>
+      <%= button_to t(".add_to_cart"), borrow_items_path(book_id: @book.id), class: "btn btn-primary" %>
     </div>
     <div class="mt-4">
       <h2 class="border-bottom"><%= t "description" %></h2>

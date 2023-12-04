@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_01_033737) do
-  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_12_04_152240) do
+  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
     t.boolean "is_admin", default: false, null: false
@@ -140,11 +140,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_033737) do
     t.index ["title"], name: "index_books_on_title", unique: true
   end
 
-  create_table "borrow_infos", charset: "utf8mb4", force: :cascade do |t|
-    t.datetime "start_at", null: false
-    t.datetime "end_at", null: false
-    t.integer "status", null: false
-    t.integer "remain_turns", null: false
+  create_table "borrow_infos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.date "start_at", null: false
+    t.date "end_at", null: false
+    t.integer "status", default: 0, null: false
+    t.integer "remain_turns", default: 5, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "account_id", null: false
@@ -155,12 +155,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_033737) do
 
   create_table "borrow_items", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "book_id", null: false
-    t.bigint "borrow_info_id", null: false
+    t.bigint "borrow_info_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1, null: false
+    t.bigint "cart_id", null: false
     t.index ["book_id", "borrow_info_id"], name: "index_borrow_items_on_book_id_and_borrow_info_id", unique: true
     t.index ["book_id"], name: "index_borrow_items_on_book_id"
     t.index ["borrow_info_id"], name: "index_borrow_items_on_borrow_info_id"
+    t.index ["cart_id", "borrow_info_id"], name: "index_borrow_items_on_cart_id_and_borrow_info_id", unique: true
+    t.index ["cart_id"], name: "index_borrow_items_on_cart_id"
   end
 
   create_table "borrow_responses", charset: "utf8mb4", force: :cascade do |t|
@@ -171,7 +175,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_033737) do
     t.index ["borrow_info_id"], name: "index_borrow_responses_on_borrow_info_id"
   end
 
-  create_table "genres", charset: "utf8mb4", force: :cascade do |t|
+  create_table "carts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
     t.datetime "created_at", null: false
@@ -224,6 +233,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_033737) do
   add_foreign_key "borrow_infos", "accounts"
   add_foreign_key "borrow_items", "books"
   add_foreign_key "borrow_items", "borrow_infos"
+  add_foreign_key "borrow_items", "carts"
   add_foreign_key "borrow_responses", "borrow_infos"
   add_foreign_key "user_infos", "accounts"
 end

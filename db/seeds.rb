@@ -18,11 +18,13 @@ admin = Account.create(
 admin.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/admin/face5.jpg"), filename: "admin-face.jpg")
 
 account = Account.create(
-  email: "account01@gmail.com",
+  email: "test@gmail.com",
   username: Faker::Internet.username,
   password: "111111",
   password_confirmation: "111111",
   is_admin: false,
+  is_activated: true,
+  is_active: true,
 )
 
 # Fake Accounts
@@ -123,6 +125,30 @@ Book.all.each do |book|
   book.image.attach(io: file_path, filename: "image.jpg")
 end
 
+100.times do |n|
+  name = Faker::Name.name
+  about = "#{name} #{Faker::Lorem.paragraph}"
+  phone = Faker::PhoneNumber.cell_phone
+  email = Faker::Internet.email(name: name)
+
+  Author.create!(
+    name: name,
+    about: about,
+    phone: phone,
+    email: email,
+  )
+end
+
+30.times do |n|
+  name = Faker::Book.unique.genre
+  description = "#{name} #{Faker::Lorem.paragraph}"
+
+  Genre.create!(
+    name: name,
+    description: description,
+  )
+end
+
 # Create fake associations for books
 Book.all.each do |book|
   book_id = book.id
@@ -139,12 +165,3 @@ Book.all.each do |book|
     genre_id: genre_id,
   )
 end
-
-30.times do |n|
-  name = Faker::Book.unique.genre
-  description = "#{name} #{Faker::Lorem.paragraph}"
-
-  Genre.create!(
-    name: name,
-    description: description,
-  )

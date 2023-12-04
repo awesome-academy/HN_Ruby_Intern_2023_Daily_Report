@@ -10,12 +10,6 @@ body {
   @extend .dropdown-item !optional;
 }
 
-/* Navbar */
-
-.navbar-nav > li > a:hover {
-  color: blue;
-}
-
 /* Error explaination display */
 
 #error_explanation {

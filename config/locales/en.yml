@@ -36,6 +36,8 @@ en:
   books:
     index:
       no_authors_found: "No authors found"
+    show:
+      add_to_cart: "Add to cart"
   invalid_email_password: "Invalid email or password"
   account_not_activated_or_lock: "Account is locked or not to be activated"
   book_not_found: "Book not found"
@@ -51,3 +53,19 @@ en:
   publish_date: "Publish date"
   copies: "Copies"
   publisher: "Publisher"
+  book_added_successfully: "Book added successfully"
+  book_borrow_one: "You cannot borrow duplicate books"
+  log_in_required: "Log in required"
+  cart: "Cart"
+  book: "Books"
+  empty_cart: "Empty cart"
+  quantity: "Quantity"
+  function: "Function"
+  carts:
+    show:
+      cart_empty: "Your cart is empty"
+      cart_add_borrow_info: "Add borrow information"
+  you_sure?: "Are you sure?"
+  delete_success: "Delete successfully"
+  delete_fail: "Delete failed"
+  item_not_found: "Item not found"

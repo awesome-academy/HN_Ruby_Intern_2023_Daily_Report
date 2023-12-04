@@ -25,5 +25,9 @@ Rails.application.routes.draw do
 
     resources :books, only: %i(index show), path: "library"
     resources :authors, only: %i(show)
+
+    resource :carts, only: %i(show destroy)
+    resources :borrow_items, only: %i(create destroy)
+    resources :borrow_infos, only: %i(index show new)
   end
 end

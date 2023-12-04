@@ -53,4 +53,16 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+  # Login is required to use functions
+  def require_login
+    return if logged_in?
+
+    flash[:warning] = t("log_in_required")
+    redirect_to login_path
+  end
+
+  def borrow_item_quantity
+    @current_cart.borrowings.sum(&:quantity)
+  end
 end

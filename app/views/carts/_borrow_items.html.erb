@@ -1,0 +1,25 @@
+<% @cart.borrowings.includes(book: [:authors, :publisher, {image_attachment: :blob}]).each do |borrow_item| %>
+  <% book = borrow_item.book %>
+  <tr>
+    <th scope="row">
+      <div class="d-flex align-items-center">
+        <%= image_tag book.image if book.image.attached? %>
+        <div class="flex-column ms-4">
+          <p class="mb-2"><%= book.title %></p>
+          <p class="mb-0 text-secondary"><%= book.authors.map(&:name).join(", ") %></p>
+        </div>
+      </div>
+    </th>
+    <td class="align-middle">
+      <span><%= book.publisher.name %></span>
+    </td>
+    <td class="align-middle">
+      <span class="text-secondary"><%= borrow_item.quantity %></span>
+    </td>
+    <td class="align-middle">
+      <%= link_to borrow_item_path(borrow_item), data: { "turbo-method": :delete, turbo_confirm: t("you_sure?") }, class: "btn btn-primary btn-sm" do %>
+        <i class="fas fa-trash"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end%>
