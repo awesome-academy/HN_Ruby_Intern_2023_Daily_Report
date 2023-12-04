@@ -1,4 +1,4 @@
-<% provide :title, t(".title") %>
+<% provide :title, t("admin.title.index", name: t("books._name")) %>
 <% content_for :table_header do %>
   <tr>
     <%= render_table_header t("books.title"), :title %>
@@ -11,5 +11,5 @@
   </tr>
 <% end %>
 <% content_for :table_body, render(partial: "book", collection: @books) %>
-<% content_for :table_empty, t("admin.notif.no_books") %>
-<%= render "admin/shared/index" %>
+<% content_for :table_empty, name: :books %>
+<%= render "admin/shared/index", name: :books %>

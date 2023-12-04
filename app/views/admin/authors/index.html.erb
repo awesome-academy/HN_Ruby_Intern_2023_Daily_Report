@@ -1,0 +1,12 @@
+<% provide :title, t("admin.title.index", name: t("authors._name")) %>
+<% content_for :table_header do %>
+  <tr>
+    <%= render_table_header t("authors.name"), :name %>
+    <%= render_table_header t("authors.email"), :email %>
+    <%= render_table_header t("authors.phone"), :phone %>
+    <th></th>
+  </tr>
+<% end %>
+<% content_for :table_body, render(partial: "author", collection: @authors) %>
+<% content_for :table_empty, name: :authors %>
+<%= render "admin/shared/index", name: :authors %>

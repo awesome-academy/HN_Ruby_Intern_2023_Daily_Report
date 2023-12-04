@@ -30,7 +30,9 @@ class Admin::UsersController < Admin::BaseController
     @user = Account.find_by id: params[:id]
     return if @user&.is_activated
 
-    flash[:danger] = {content: t("admin.notif.user_not_found")}
+    flash[:danger] = {
+      content: t("admin.notif.item_not_found", name: t("accounts._name"))
+    }
     redirect_to admin_users_path
   end
 

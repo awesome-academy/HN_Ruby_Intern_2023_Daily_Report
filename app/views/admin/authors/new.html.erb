@@ -1,0 +1,48 @@
+<% provide :title, t("admin.title.new", name: t("authors._name")) %>
+<% author = Author.new %>
+<% chooser_id = dom_id(author, :chooser) %>
+<div class="col-12">
+  <%= render "admin/shared/back_button", name: t("admin.misc.list"), path: admin_authors_path %>
+  <div class="card">
+    <div class="card-body">
+      <%= form_with model: author, url: admin_authors_path, local: true do |f| %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="border-right pe-3 d-flex flex-column align-items-center">
+              <img class="mb-6 file-preview" data-preview-for="<%= chooser_id %>" >
+              <button class="file-input-replacer btn btn-primary mt-3" data-replace-for="<%= chooser_id %>" >
+                <%= t "admin.misc.upload", name: t("authors.avatar").downcase %>
+              </button>
+              <%= f.file_field :avatar, id: chooser_id, accept: Settings.validations.image_type.join(","), multiple: false, class: "file-chooser d-none" %>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <!-- Basic Info -->
+            <div class="">
+              <div class="form-group">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control", placeholder: t("authors.placeholder.name") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, class: "form-control", placeholder: t("authors.placeholder.email") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :phone %>
+                <%= f.telephone_field :phone, class: "form-control", placeholder: t("authors.placeholder.phone") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :about %>
+                <%= f.text_area :about, class: "form-control", placeholder: t("authors.placeholder.about") %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3 d-flex flex-row justify-content-end">
+          <%= f.submit t("admin.misc.create"), class: "btn btn-success btn-control" %>
+          <%= link_to t("admin.misc.cancel"), admin_authors_path, class: "btn btn-info btn-control" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

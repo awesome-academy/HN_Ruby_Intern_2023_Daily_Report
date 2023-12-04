@@ -1,7 +1,7 @@
-<% provide :title, t(".title") %>
+<% provide :title, t("admin.title.show", name: t("accounts._name")) %>
 <% get_info(@user) => {email:, address:, phone:, join_from:, join_about:, avatar:, username:} %>
 <div class="col-12">
-  <%= render "admin/shared/back_button", name: t("admin.default.list"), path: admin_users_path %>
+  <%= render "admin/shared/back_button", name: t("admin.misc.list"), path: admin_users_path %>
   <div class="card">
     <div class="card-body">
       <div class="row">

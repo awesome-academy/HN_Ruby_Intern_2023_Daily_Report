@@ -11,11 +11,11 @@ vi:
       short: '%d/%m/'
       long: '%d/%m/%Y'
   accounts:
-    _name: 'Tài khoản'
+    _name: 'tài khoản'
     email: 'Email'
     password: 'Mật khẩu'
   users:
-    _name: 'Người dùng'
+    _name: 'người dùng'
     full_name: 'Họ tên'
     phone: 'SĐT'
     address: 'Địa chỉ'
@@ -34,7 +34,7 @@ vi:
     active: 'Hiệu lực'
     inactive: 'Đã khóa'
   books:
-    _name: 'Sách'
+    _name: 'sách'
     _item: 'cuốn sách'
     cover: 'Ảnh bìa'
     title: 'Tên sách'
@@ -51,13 +51,39 @@ vi:
       amount: 'Số lượng sách có thể phục vụ'
       isbn: 'Mã ISBN 10 hoặc ISBN 13'
   authors:
-    _name: 'Tác giả'
+    _name: 'tác giả'
+    _item: 'tác giả'
+    avatar: 'Ảnh bìa'
+    name: 'Họ tên'
+    phone: 'SĐT'
+    email: 'Email'
+    placeholder:
+      avatar: 'Ảnh bìa'
+      name: 'Họ tên đầy đủ'
+      about: 'Giới thiệu chung về tác giả'
+      phone: 'Số điện thoại'
+      email: 'Địa chỉ email'
   genres:
-    _name: 'Thể loại'
+    _name: 'thể loại'
+    _item: 'thể loại'
+    name: 'Tên'
+    description: 'Mô tả'
+    placeholder:
+      name: 'Từ khóa đại diện cho thể loại'
+      description: 'Mô tả chi tiết về thể loại'
   publishers:
-    _name: 'Nhà xuất bản'
+    _name: 'nhà xuất bản'
+    _item: 'nhà xuất bản'
+    name: 'Tên'
+    email: 'Email'
+    address: 'Địa chỉ'
+    placeholder:
+      name: 'Tên nhà xuất bản'
+      about: 'Giới thiệu chung về nhà xuất bản'
+      email: 'Email'
+      address: 'Địa chỉ'
   borrow_requests:
-    _name: 'Yêu cầu mượn sách'
+    _name: 'yêu cầu mượn sách'
     pending: 'Chờ xử lý'
     history: 'Lịch sử'
   admin:
@@ -67,32 +93,22 @@ vi:
       upload: 'Tải lên %{name}'
       table_info: 'Hiển thị %{from} - %{to} / %{total}'
       search: 'Lọc'
+      create: 'Thêm'
+      cancel: 'Huỷ'
     notif:
-      user_not_found: 'Tài khoản không tồn tại'
       user_info_not_found: 'Tài khoản chưa có thông tin'
-      no_users: 'Không có tài khoản nào tìm thấy'
-      book_not_found: 'Sách không tồn tại'
-      no_books: 'Không có cuốn sách nào tìm thấy'
+      no_items: 'Không có %{item} nào tìm thấy'
+      item_not_found: '%{name} không tồn tại'
       logout_confirm: 'Bạn có chắc muốn đăng xuất?'
+      cancel_confirm: 'Dữ liệu bạn nhập có thể bị mất. Bạn có muốn hủy?'
       account_not_activated_or_lock: 'Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa'
       invalid_email_password: 'Email hoặc mật khẩu không đúng'
-    books:
-      index:
-        title: 'Danh sách sách'
-      new:
-        title: 'Thêm sách'
-        submit: 'Thêm'
-        cancel: 'Huỷ'
-        cancel_confirm: 'Dữ liệu bạn nhập có thể bị mất. Bạn có muốn hủy?'
-      show:
-        title: 'Thông tin sách'
-      edit:
-        title: 'Cập nhật sách'
+    title:
+      index: 'Danh sách %{name}'
+      new: 'Thêm %{name}'
+      show: 'Thông tin %{name}'
+      edit: 'Cập nhật %{name}'
     users:
-      index:
-        title: 'Danh sách người dùng'
-      show:
-        title: 'Thông tin người dùng'
       status_button:
         do_active: 'Kích hoạt'
         do_inactive: 'Khóa'
@@ -118,7 +134,7 @@ vi:
       navbar:
         messages: 'Tin nhắn'
         notifications: 'Thông báo'
-        add_book: 'Thêm sách'
+        create: 'Thêm mới'
       navbar_profile:
         system: 'Hệ thống'
       footer:

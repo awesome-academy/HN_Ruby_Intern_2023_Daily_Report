@@ -1,0 +1,37 @@
+<% provide :title, t("admin.title.show", name: t("authors._name")) %>
+<% populate_author(@author) => {
+    avatar:, name:, phone:, email:, about:
+}%>
+<div class="col-12">
+  <%= render "admin/shared/back_button", path: admin_authors_path %>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="border-bottom text-center pb-4">
+            <%= image_tag avatar, class: "img-lg rounded-circle mb-3" %>
+            <div class="py-4">
+              <span><%= about %></span>
+            </div>
+          </div>
+          <!-- Contact -->
+          <div class="py-4">
+            <%= render("admin/shared/info_field", name: t("authors.email"), value: email) if email %>
+            <%= render("admin/shared/info_field", name: t("authors.phone"), value: phone) if phone %>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="d-flex justify-content-between">
+            <h3><%= name %></h3>
+            <div>
+              <%#= render "status_button", user: @user, flip: false %>
+            </div>
+          </div>
+          <div class="mt-4 py-2">
+            <%= render_authors_tabs %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

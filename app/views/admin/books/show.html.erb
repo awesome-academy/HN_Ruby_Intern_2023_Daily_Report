@@ -1,10 +1,7 @@
-<% provide :title, t(".title") %>
-<% populate_book(@book) => {
-    cover:, title:, isbn:, amount:, publisher:, publish_date:,
-    description:, authors:, genres:,}
-%>
+<% provide :title, t("admin.title.show", name: t("books._name")) %>
+<% populate_book(@book) => {cover:, title:, description:}%>
 <div class="col-12">
-  <%= render "admin/shared/back_button", name: t("admin.misc.list"), path: admin_books_path %>
+  <%= render "admin/shared/back_button", path: admin_books_path %>
   <div class="card">
     <div class="card-body">
       <div class="row">
