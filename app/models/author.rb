@@ -4,4 +4,6 @@ class Author < ApplicationRecord
   has_many :followings, class_name: AuthorFollower.name,
                         dependent: :destroy
   has_many :followers, through: :followings
+
+  scope :bquery, ->(q){where("authors.name LIKE ?", "%#{q}%")}
 end

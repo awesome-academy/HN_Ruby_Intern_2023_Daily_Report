@@ -30,4 +30,14 @@ module Admin::BaseHelper
   def get_attr obj, attribute
     obj&.send(attribute) || Settings.display_for_nil
   end
+
+  def render_table_header title, name = nil
+    current = request.params[:sort] == name.to_s
+    is_desc = params[:style]&.downcase == "desc"
+    style = (is_desc ? :desc : :asc) if current
+    new_style = style == :asc ? :desc : :asc
+    link = url_for(request.params.merge(style: new_style, sort: name))
+    render "admin/shared/table_header", style:,
+      sortable: name.present?, link:, title:
+  end
 end

@@ -49,4 +49,12 @@ class Book < ApplicationRecord
       .with_attached_image
   }
   scope :available, ->{where is_active: true}
+  scope :bquery, lambda {|q|
+    where("books.title LIKE ?", "%#{q}%")
+      .or(where("books.isbn LIKE ?", "%#{q}%"))
+      .references(:authors, :publisher, :genres)
+      .or(Author.bquery(q))
+      .or(Genre.bquery(q))
+      .or(Publisher.bquery(q))
+  }
 end

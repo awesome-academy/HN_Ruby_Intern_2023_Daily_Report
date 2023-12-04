@@ -5,6 +5,46 @@ body {
   font-family: 'Noto Serif', 'serif';
 }
 
+/** Misc **/
+.navbar .navbar-menu-wrapper .count-indicator .count {
+  position: absolute;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  color: #ffffff;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 0.625rem;
+  line-height: 1.5;
+  top: 0px;
+}
+
+.pagination .page-item .page-link {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #c2c2c2;
+  font-size: 0.875rem;
+  background: #2e2f32;
+  transition-duration: 0.3s;
+}
+
+.pagination .page-item:hover .page-link,
+.pagination .page-item.active .page-link,
+.pagination .page-item:active .page-link,
+.pagination .page-item:focus .page-link {
+  background: #0088cc;
+  border-color: #0088cc;
+}
+
+.pagy-bootstrap-nav ul {
+  margin: 0;
+}
+
+.pagy-items-selector-js input[type='number'] {
+  width: 2.5rem !important;
+  background-color: inherit;
+  color: inherit;
+  border: 1px solid white;
+}
 /* Sidebar & Navbar */
 
 .sidebar .nav .menu-group:nth-child(3n + 1) > .nav-link .menu-icon i {
@@ -123,16 +163,21 @@ img.file-preview {
 }
 /* Sorting */
 
-th.sortStyle {
+th.sortable {
   cursor: pointer;
 }
 
-th.sortStyle.ascStyle::after {
+th.sortable a {
+  text-decoration: none;
+  color: inherit;
+}
+
+th.sortable.asc::after {
   content: '\25b4';
   margin-left: 10px;
 }
 
-th.sortStyle.descStyle::after {
+th.sortable.desc::after {
   content: '\25be';
   margin-left: 10px;
 }

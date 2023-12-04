@@ -1,9 +1,17 @@
 class Admin::BooksController < Admin::BaseController
   before_action :get_book, only: %i(show update destroy)
+  before_action :transform_params, only: :index
 
   def index
-    @pagy, @books = pagy Book.includes_info.available,
-                         items: params[:items]
+    books = Book.includes_info.available
+
+    q = params[:q]
+    books = books.merge(Book.bquery(q)) if q
+
+    sort = params[:sort]
+    books = books.sort_on(sort, params[:desc]) if sort
+
+    @pagy, @books = pagy books, items: params[:items]
   end
 
   def show; end
@@ -45,5 +53,18 @@ class Admin::BooksController < Admin::BaseController
   def book_params
     params.require(:book).permit :title, :description, :amount,
                                  :isbn, :publish_date, :image
+  end
+
+  def transform_params
+    permit_sorts = {
+      publisher: "publishers.name",
+      title: "books.title",
+      publish_date: "books.publish_date",
+      amount: "books.amount",
+      author: "authors.name",
+      genre: "genres.name"
+    }
+    s = params[:sort]&.downcase&.to_sym
+    params[:sort] = permit_sorts[s]
   end
 end

@@ -2,7 +2,7 @@
 <% book = Book.new %>
 <% chooser_id = dom_id(book, :chooser) %>
 <div class="col-12">
-  <%= render "admin/shared/back_button", name: t("admin.default.books_list"), path: admin_books_path %>
+  <%= render "admin/shared/back_button", name: t("admin.misc.list"), path: admin_books_path %>
   <div class="card">
     <div class="card-body">
       <%= form_with model: book, url: admin_books_path, local: true do |f| %>
@@ -11,7 +11,7 @@
             <div class="border-right pe-3 d-flex flex-column align-items-center">
               <img class="mb-6 file-preview" data-preview-for="<%= chooser_id %>" >
               <button class="file-input-replacer btn btn-primary mt-3" data-replace-for="<%= chooser_id %>" >
-                <%= t "admin.default.upload", name: t("books.cover").downcase %>
+                <%= t "admin.misc.upload", name: t("books.cover").downcase %>
               </button>
               <%= f.file_field :image, id: chooser_id, accept: Settings.validations.image_type.join(","), multiple: false, class: "file-chooser d-none" %>
             </div>
