@@ -1,0 +1,33 @@
+<% populate_borrow(borrow) => {
+    user:, start:, due:, updated_at:, status:,
+    borrow_path:, id:, full_name:, turns:
+}%>
+<tr id="<%= id %>">
+  <td><%= (@pagy ? @pagy.from : 1) + borrow_iteration.index %></td>
+  <td class="long-name">
+    <%= render "admin/shared/profile", user:,
+                link: admin_user_path(user), username_class: "ps-3" %>
+  </td>
+  <td><%= full_name %></td>
+  <td><%= link_to start, borrow_path %></td>
+  <% unless @group == :pending %>
+    <td><%= link_to updated_at, borrow_path %></td>
+  <% end %>
+  <% unless @group == :history %>
+    <td><%= link_to due, borrow_path %></td>
+  <% end %>
+  <td><%= turns %></td>
+  <% if @group == :history %>
+    <td>
+      <div class="d-flex flex-column">
+        <% if borrow.rejected? %>
+          <span class="badge badge-outline-danger"><%= status %></span>
+        <% elsif borrow.returned? %>
+          <span class="badge badge-outline-warning"><%= status %></span>
+        <% end %>
+      </div>
+    </td>
+  <% else %>
+    <td></td>
+  <% end %>
+</tr>

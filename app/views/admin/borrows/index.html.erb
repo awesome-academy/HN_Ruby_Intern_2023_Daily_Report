@@ -1,0 +1,22 @@
+<% title = t("admin.title.index", name: t("borrows.borrowing")) %>
+<% title = t("borrows.history") if @group == :history %>
+<% title = t("admin.title.index", name: t("borrows.pending")) if @group == :pending %>
+<% provide :title, title %>
+<% content_for :table_header do %>
+  <tr>
+    <th>#</th>
+    <%= render_table_header t("accounts._name"), :account %>
+    <%= render_table_header t("users.full_name"), :user %>
+    <%= render_table_header t("borrows.start_at"), :start %>
+    <% unless @group == :pending %>
+      <%= render_table_header (@group == :history ? t("borrows.finish") : t("borrows.approved_at")), :updated %>
+    <% end %>
+    <%= render_table_header t("borrows.end_at"), :due unless @group == :history %>
+    <%= render_table_header t("borrows.turns"), :turns %>
+    <%= render_table_header t("borrows.status"), :status if @group == :history %>
+    <% tag.th unless @group == :history %>
+  </tr>
+<% end %>
+<% content_for :table_body, render(partial: "borrow", collection: @borrows) %>
+<% content_for :table_empty, name: :borrows %>
+<%= render "admin/shared/index", name: :borrows %>

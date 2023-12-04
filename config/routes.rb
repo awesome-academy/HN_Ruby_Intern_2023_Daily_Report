@@ -18,6 +18,14 @@ Rails.application.routes.draw do
           post :active, :inactive
         end
       end
+      resources :borrows, only: %i(index show) do
+        member do
+          post :approve, :reject, :return, :remind
+        end
+        collection do
+          get "/:group", to: "borrows#index"
+        end
+      end
     end
   end
 
