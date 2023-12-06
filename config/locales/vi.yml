@@ -69,6 +69,16 @@ vi:
   delete_success: "Xóa thành công"
   delete_fail: "Xóa thất bại"
   item_not_found: "Không tìm thấy sách trong giỏ hàng"
+  update_success: "Cập nhật thành công"
+  no_books_in_cart: "Không có sách trong giỏ hàng"
+  accounts:
+    edit:
+      update_profile: "Cập nhật thông tin"
+      leave_password_blank: "Bỏ trống nếu không muốn thay đổi"
+  change: "Thay đổi"
+  male: "Nam"
+  female: "Nữ"
+  others: "Khác"
 
   activerecord:
     models:
@@ -77,6 +87,7 @@ vi:
       publisher: "Nhà xuất bản"
       author: "Tác giả"
       genre: "Thể loại"
+      user_info: "Thông tin người dùng"
     attributes:
       account:
         email: "Email"
@@ -105,6 +116,13 @@ vi:
         address: "Địa chỉ"
         email: "Email"
         about: "Giới thiệu"
+      user_info:
+        name: "Tên"
+        address: "Địa chỉ"
+        phone: "Số điện thoại"
+        citizen_id: "Mã công dân"
+        dob: "Ngày sinh"
+        gender: "Giới tính"
   validations:
     isbn_valid: "chỉ bao gồm 10 hoặc 13 chữ số , cùng với các ký tự -"
     image_type_valid: "chỉ hỗ trợ các định dạng JPEG, PNG, GIF"

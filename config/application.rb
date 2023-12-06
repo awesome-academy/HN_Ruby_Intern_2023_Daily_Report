@@ -18,7 +18,7 @@ module RailsTutorial
     config.i18n.available_locales = [:en, :vi]
 
     # Set default locale
-    config.i18n.default_locale = :vi
+    config.i18n.default_locale = :en
 
     config.autoload_paths += %W["#{config.root}/app/validators/"]
     # Configuration for the application, engines, and railties goes here.

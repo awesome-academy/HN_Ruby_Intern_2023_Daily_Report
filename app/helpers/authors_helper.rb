@@ -1,3 +1,3 @@
-module AccountsHelper
+module AuthorsHelper
   include AvatarHelper
 end
