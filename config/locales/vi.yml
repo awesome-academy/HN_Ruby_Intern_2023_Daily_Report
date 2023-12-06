@@ -36,6 +36,8 @@ vi:
   books:
     index:
       no_authors_found: "Không tìm thấy tác giả"
+    show:
+      add_to_cart: "Thêm vào giỏ hàng"
   invalid_email_password: "Tài khoản hoặc mật khẩu không đúng"
   account_not_activated_or_lock: "Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa"
   book_not_found: "Sách không tồn tại"
@@ -51,6 +53,23 @@ vi:
   publish_date: "Ngày xuất bản"
   copies: "Số lượng còn lại"
   publisher: "Nhà xuất bản"
+  book_added_successfully: "Sách thêm vào giỏ hàng thành công"
+  book_borrow_one: "Bạn không được mượn sách trùng lặp nhau"
+  log_in_required: "Cần đăng nhập để sử dụng chức năng"
+  cart: "Giỏ hàng"
+  book: "Quyển sách"
+  empty_cart: "Làm mới giỏ hàng"
+  quantity: "Số lượng"
+  function: "Chức năng"
+  carts:
+    show:
+      cart_empty: "Giỏ hàng của bạn đang trống"
+      cart_add_borrow_info: "Thêm thông tin mượn sách"
+  you_sure?: "Bạn có chắc không?"
+  delete_success: "Xóa thành công"
+  delete_fail: "Xóa thất bại"
+  item_not_found: "Không tìm thấy sách trong giỏ hàng"
+
   activerecord:
     models:
       account: "Tài khoản"

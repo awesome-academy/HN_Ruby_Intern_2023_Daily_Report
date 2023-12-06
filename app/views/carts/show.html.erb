@@ -1,0 +1,36 @@
+<% provide(:title, t("cart")) %>
+
+<div class="h-100 h-custom">
+  <div class="container h-100 pb-5">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h2><%= t "cart" %> - <%= borrow_item_quantity %> <%= t "book" %></h2>
+      <%= link_to t("empty_cart"), carts_path, data: { "turbo-method": :delete, turbo_confirm: t("you_sure?") }, class: "btn btn-primary" %>
+    </div>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table">
+            <% if @cart.borrowings.count > 0 %>
+              <thead>
+                <tr>
+                  <th scope="col"><%= t "book" %></th>
+                  <th scope="col"><%= t "publisher" %></th>
+                  <th scope="col"><%= t "quantity" %></th>
+                  <th scope="col"><%= t "function" %></th>
+                </tr>
+              </thead>
+              <tbody>
+                  <%= render "carts/borrow_items" %>
+              </tbody>
+            <% else %>
+              <p><%= t ".cart_empty" %></p>
+            <% end %>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end">
+          <%= link_to t(".cart_add_borrow_info"), new_borrow_info_path, class: "btn btn-primary btn-lg" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
