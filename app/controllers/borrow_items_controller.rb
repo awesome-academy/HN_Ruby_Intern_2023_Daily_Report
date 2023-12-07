@@ -5,17 +5,12 @@ class BorrowItemsController < ApplicationController
   def create
     chosen_book = Book.find_by(id: params[:book_id])
 
-    if @current_cart.books.include?(chosen_book)
-      @borrow_item = @current_cart.borrowings.find_by(book_id: chosen_book)
-      handle_quantity_change
-      return
+    if chosen_book.amount.positive?
+      handle_cart_item chosen_book
     else
-      @borrow_item = BorrowItem.new(cart: @current_cart, book: chosen_book)
+      flash[:warning] = t "book_out_of_stock"
+      redirect_back(fallback_location: root_path)
     end
-
-    @borrow_item.save
-    flash[:success] = t "book_added_successfully"
-    redirect_back(fallback_location: root_path)
   end
 
   def destroy
@@ -37,9 +32,15 @@ class BorrowItemsController < ApplicationController
     redirect_to root_path
   end
 
-  # Only borrow 1 book
-  def handle_quantity_change
-    flash[:warning] = t "book_borrow_one" if @borrow_item.quantity == 1
+  def handle_cart_item chosen_book
+    if @current_cart.books.include?(chosen_book)
+      @borrow_item = @current_cart.borrowings.find_by(book_id: chosen_book)
+      flash[:warning] = t "book_borrow_one" if @borrow_item.quantity == 1
+    else
+      @borrow_item = BorrowItem.new(cart: @current_cart, book: chosen_book)
+      @borrow_item.save
+      flash[:success] = t "book_added_successfully"
+    end
     redirect_back(fallback_location: root_path)
   end
 end

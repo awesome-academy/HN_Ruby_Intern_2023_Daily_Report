@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   protected
 
   def on_login_success
-    redirect_back(fallback_location: library_path)
+    redirect_back_or books_path
   end
 
   def on_login_fail_inactive

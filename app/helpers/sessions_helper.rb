@@ -58,6 +58,6 @@ module SessionsHelper
   end
 
   def borrow_item_quantity
-    @current_cart.borrowings.sum(&:quantity)
+    @current_cart.borrowings.sum(&:quantity) if logged_in?
   end
 end

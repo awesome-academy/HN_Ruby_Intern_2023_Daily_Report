@@ -1,4 +1,4 @@
-<% @cart.borrowings.includes(book: [:authors, :publisher, {image_attachment: :blob}]).each do |borrow_item| %>
+<% @cart.borrowings.include_books.each do |borrow_item| %>
   <% book = borrow_item.book %>
   <tr>
     <th scope="row">

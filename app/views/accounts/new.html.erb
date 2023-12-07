@@ -3,7 +3,7 @@
 <div class="mx-auto auth-form">
   <h1><%= t "sign_up" %></h1>
   <%= form_for @account, url: signup_path do |f| %>
-    <%= render "shared/error_messages" %>
+    <%= render "shared/error_messages", model: @account, as: "user_signup" %>
     <div class="mb-3">
       <%= f.label :email, class: "form-label" %>
       <%= f.email_field :email, class: "form-control" %>
@@ -24,4 +24,5 @@
       <%= f.submit t("create_account"), class: "btn btn-primary form-control" %>
     </div>
   <% end %>
+  <p><%= t ".have_account" %> <%= link_to t(".sign_in_now"), login_path %></p>
 </div>

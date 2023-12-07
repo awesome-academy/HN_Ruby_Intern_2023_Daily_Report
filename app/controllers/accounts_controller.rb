@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
       reset_session
       store_to_session @account
       flash[:success] = t "account_create_success"
-      redirect_to root_path
+      redirect_to edit_account_path(@account)
     else
       render :new, status: :unprocessable_entity
     end

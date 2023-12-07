@@ -14,7 +14,7 @@ vi:
       the_form_contains: "Biểu mẫu có"
       error: "lỗi"
   account_not_found: "Không tìm thấy tài khoản!"
-  account_create_success: "Đăng ký thành công!"
+  account_create_success: "Đăng ký thành công! Vui lòng điền thông tin cá nhân của bạn để có thể mượn sách"
   email: "Email"
   password: "Mật khẩu"
   remember_me: "Ghi nhớ đăng nhập"
@@ -55,6 +55,7 @@ vi:
   publisher: "Nhà xuất bản"
   book_added_successfully: "Sách thêm vào giỏ hàng thành công"
   book_borrow_one: "Bạn không được mượn sách trùng lặp nhau"
+  book_out_of_stock: "Quyển sách này đã được mượn hết hoặc không còn"
   log_in_required: "Cần đăng nhập để sử dụng chức năng"
   cart: "Giỏ hàng"
   book: "Quyển sách"
@@ -75,10 +76,35 @@ vi:
     edit:
       update_profile: "Cập nhật thông tin"
       leave_password_blank: "Bỏ trống nếu không muốn thay đổi"
+    new:
+      have_account: "Đã có tài khoản?"
+      sign_in_now: "Đăng nhập ngay!"
   change: "Thay đổi"
   male: "Nam"
   female: "Nữ"
   others: "Khác"
+  borrow_info_not_found: "Không tìm thấy thông tin mượn sách"
+  borrow_info_success: "Tạo thông tin mượn sách thành công"
+  borrow_info_fill_user_info: "Bạn cần phải điền thông tin cá nhân để có thể mượn sách"
+  user_info: "Thông tin cá nhân"
+  borrow_infos:
+    new:
+      borrow_info_create: "Tạo thông tin mượn sách"
+    show:
+      borrow_info: "Thông tin mượn sách"
+      borrow_book_list: "Những sách đã mượn"
+    borrow_date: "Ngày mượn sách"
+    return_date: "Ngày trả sách"
+    borrow_renewals: "Số lần gia hạn mượn sách còn lại"
+  status: "Trạng thái mượn sách"
+  pending: "Đang chờ"
+  approved: "Chấp nhận"
+  rejected: "Từ chối"
+  returned: "Trả lại"
+  borrow_history: "Lịch sử mượn sách"
+  date_greater_than_today: "phải từ ngày hôm nay trở lên"
+  date_minimum_3_days: "tối thiêu phải sau ngày mượn 3 ngày"
+  date_maximum_10_days: "tối đa là 10 ngày kể từ khi mượn"
 
   activerecord:
     models:
@@ -88,6 +114,7 @@ vi:
       author: "Tác giả"
       genre: "Thể loại"
       user_info: "Thông tin người dùng"
+      borrow_info: "Thông tin mượn sách"
     attributes:
       account:
         email: "Email"
@@ -123,6 +150,11 @@ vi:
         citizen_id: "Mã công dân"
         dob: "Ngày sinh"
         gender: "Giới tính"
+      borrow_info:
+        borrow_date: "Ngày mượn sách"
+        start_at: "Ngày mượn sách"
+        return_date: "Ngày trả sách"
+        end_at: "Ngày trả sách"
   validations:
     isbn_valid: "chỉ bao gồm 10 hoặc 13 chữ số , cùng với các ký tự -"
     image_type_valid: "chỉ hỗ trợ các định dạng JPEG, PNG, GIF"
