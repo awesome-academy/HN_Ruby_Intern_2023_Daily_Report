@@ -50,6 +50,9 @@ vi:
       description: 'Tóm tắt nội dung sách'
       amount: 'Số lượng sách có thể phục vụ'
       isbn: 'Mã ISBN 10 hoặc ISBN 13'
+      authors: 'Lựa chọn một hoặc nhiều tác giả'
+      genres: 'Lựa chọn một hoặc nhiều thể loại'
+      publisher: 'Lựa chọn chỉ một nhà xuất bản'
   authors:
     _name: 'tác giả'
     _item: 'tác giả'
@@ -88,13 +91,20 @@ vi:
     history: 'Lịch sử'
   admin:
     misc:
-      back: 'Trở lại %{path}'
-      list: 'danh sách'
+      back: 'Quay lại'
+      to_list: 'Đến trang danh sách'
       upload: 'Tải lên %{name}'
       table_info: 'Hiển thị %{from} - %{to} / %{total}'
       search: 'Lọc'
+      new: 'Thêm'
       create: 'Thêm'
+      edit: 'Cập nhật'
+      update: 'Cập nhật'
+      amend: 'Cập nhật'
+      amend_edit: 'Cập nhật'
       cancel: 'Huỷ'
+      skip: 'Bỏ qua'
+      last_updated: 'Cập nhật'
     notif:
       user_info_not_found: 'Tài khoản chưa có thông tin'
       no_items: 'Không có %{item} nào tìm thấy'
@@ -108,6 +118,8 @@ vi:
       new: 'Thêm %{name}'
       show: 'Thông tin %{name}'
       edit: 'Cập nhật %{name}'
+      amend: 'Cập nhật %{name}'
+      amend_edit: 'Cập nhật %{name}'
     users:
       status_button:
         do_active: 'Kích hoạt'

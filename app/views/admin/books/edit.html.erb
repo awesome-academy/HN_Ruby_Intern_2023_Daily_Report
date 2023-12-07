@@ -1,2 +1,70 @@
-<h1>Admin::Books#update</h1>
-<p>Find me in app/views/admin/books/update.html.erb</p>
+<% action = controller.action_name %>
+<% provide :title, t("admin.title.#{action}", name: t("books._name")) %>
+<% chooser_id = dom_id(@book, :chooser) %>
+<div class="col-12">
+  <%= navigate_to list: action == "new" %>
+  <div class="card">
+    <div class="card-body">
+      <%= form_with model: [:admin, @book], local: true do |f| %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="sub-content">
+              <%= image_tag @book.image, class: "mb-6 file-original",
+                      data: {original_for: chooser_id} if @book.image.attached? %>
+              <img class="mb-6 file-preview" data-preview-for="<%= chooser_id %>">
+              <button class="file-input-replacer btn btn-primary mt-3"
+                      data-replace-for="<%= chooser_id %>" >
+                <%= t "admin.misc.upload", name: t("books.cover").downcase %>
+              </button>
+              <%= f.file_field :image, id: chooser_id,
+                                       accept: Settings.image_type.join(","),
+                                       multiple: false, class: "file-chooser d-none" %>
+              <div id="form-fail"></div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <!-- Basic Info -->
+            <div class="">
+              <div class="form-group">
+                <%= f.label :title %>
+                <%= f.text_field :title, class: "form-control",
+                              placeholder: t("books.placeholder.title") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :description %>
+                <%= f.text_area :description, class: "form-control",
+                              placeholder: t("books.placeholder.description") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :publish_date %>
+                <%= f.date_field :publish_date, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :amount %>
+                <%= f.number_field :amount, min: 0, class: "form-control",
+                              placeholder: t("books.placeholder.amount") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :isbn %>
+                <%= f.text_field :isbn, class: "form-control",
+                              placeholder: t("books.placeholder.isbn") %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3 d-flex flex-row justify-content-end">
+          <%= f.submit t("admin.misc.#{action}"), name: action,
+                        class: "btn btn-success btn-control" %>
+          <%= f.submit t("admin.misc.skip"), name: :skip,
+                        class: "btn btn-primary btn-control" unless action == "new" %>
+          <%= link_to t("admin.misc.cancel"), admin_books_path,
+                        class: "btn btn-warning btn-control",
+                        data: {
+                          turbo_method: :get,
+                          turbo_confirm: t("admin.notif.cancel_confirm")
+                        } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

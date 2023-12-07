@@ -6,15 +6,15 @@ class DatetimeValidator < ActiveModel::EachValidator
       check: :eql, to: :date
     ) => {check:, to:, **pivots}
 
-    value = value.send("to_#{to}") if value.respond_to? "to_#{to}"
+    value = value.public_send("to_#{to}") if value.respond_to? "to_#{to}"
 
     pass = true
     if value.respond_to? "#{check}?"
       params = value.method("#{check}?").parameters
       pass = if params.blank?
-               value.send("#{check}?")
+               value.public_send("#{check}?")
              else
-               value.send("#{check}?", *pivots.values[0...params.length])
+               value.public_send("#{check}?", *pivots.values[0...params.length])
              end
     end
 

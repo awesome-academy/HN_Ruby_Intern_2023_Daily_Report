@@ -5,26 +5,19 @@ module Admin::PublishersHelper
       about: publisher.about,
       address: publisher.address,
       email: publisher.email,
+      updated_at: localize_date(publisher.updated_at, :long),
       publisher_path: admin_publisher_path(publisher),
       id: dom_id(publisher, :publisher)
     }
   end
 
-  def render_publishers_tabs
-    render "admin/shared/tab_content", group_id: :publisher, items: [
+  def get_publisher_tab_headers publisher
+    [
       {
-        icon: :note,
-        title: t("publishers.detail"),
-        id: :detail,
-        active: true,
-        partial: nil
-      },
-      {
-        icon: :comment,
-        title: t("publishers.review"),
-        id: :review,
-        active: false,
-        partial: nil
+        icon: :book,
+        title: t("books._name"),
+        id: :publisher_books,
+        link: admin_publisher_path(publisher)
       }
     ]
   end

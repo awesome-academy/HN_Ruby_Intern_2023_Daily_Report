@@ -5,35 +5,34 @@ module Admin::BooksHelper
 
   def populate_book book
     {
-      cover: book.image,
+      cover: get_image(book, :image),
       title: book.title,
       description: book.description,
       publish_date: localize_date(book.publish_date, :long),
       amount: book.amount,
       isbn: format_isbn(book.isbn),
-      publisher: [book.publisher.id, book.publisher.name],
-      authors: book.authors.pluck(:id, :name),
-      genres: book.genres.pluck(:id, :name),
+      updated_at: localize_date(book.updated_at, :long),
+      publisher: book.publisher,
+      authors: book.authors,
+      genres: book.genres,
       book_path: admin_book_path(book),
       id: dom_id(book, :book)
     }
   end
 
-  def render_books_tabs
-    render "admin/shared/tab_content", group_id: :book, items: [
+  def get_book_tab_headers book
+    [
       {
         icon: :note,
         title: t("books.detail"),
-        id: :detail,
-        active: true,
-        partial: "tab_detail"
+        id: :book_detail,
+        link: admin_book_path(book)
       },
       {
         icon: :comment,
         title: t("books.review"),
-        id: :review,
-        active: false,
-        partial: nil
+        id: :book_review,
+        link: "#"
       }
     ]
   end

@@ -1,0 +1,61 @@
+<% action = controller.action_name %>
+<% provide :title, t("admin.title.#{action}", name: t("books._name")) %>
+<% populate_book(@book) => {cover:, title:, description:}%>
+<div class="col-12">
+  <%= navigate_to %>
+  <div class="card">
+    <div class="card-body">
+      <%= form_with model: @book, url: admin_book_amend_path(@book), local: true do |f| %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="sub-content">
+              <%= image_tag cover, class: "cover-rect" %>
+              <div id="form-fail"></div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="pb-4">
+              <h3><%= title %></h3>
+              <span class="text-description"><%= description %></span>
+            </div>
+            <div class="mt-4">
+              <div class="form-group">
+                <%= tag.p t("books.placeholder.publisher"), class: "d-none",
+                          data: {placeholder_for: f.field_id(:publisher)} %>
+                <%= f.label :publisher %>
+                <%= f.collection_select :publisher, Publisher.all, :id, :name,
+                                  {prompt: true}, {class: "form-control selector2"} %>
+              </div>
+              <div class="form-group">
+                <%= tag.p t("books.placeholder.authors"), class: "d-none",
+                          data: {placeholder_for: f.field_id(:authors)} %>
+                <%= f.label :authors %>
+                <%= f.collection_select :authors, Author.all, :id, :name,
+                      {}, {class: "form-control selector2", multiple: true} %>
+              </div>
+              <div class="form-group">
+                <%= tag.p t("books.placeholder.genres"), class: "d-none",
+                          data: {placeholder_for: f.field_id(:genres)} %>
+                <%= f.label :genres %>
+                <%= f.collection_select :genres, Genre.all, :id, :name,
+                      {}, {class: "form-control selector2", multiple: true} %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3 d-flex flex-row justify-content-end">
+          <%= f.submit t("admin.misc.amend"), name: :amend,
+                        class: "btn btn-success btn-control" %>
+          <%= f.submit t("admin.misc.skip"), name: :skip,
+                        class: "btn btn-primary btn-control" %>
+          <%= link_to t("admin.misc.cancel"), admin_books_path,
+                        class: "btn btn-warning btn-control",
+                        data: {
+                          turbo_method: :get,
+                          turbo_confirm: t("admin.notif.cancel_confirm")
+                        } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

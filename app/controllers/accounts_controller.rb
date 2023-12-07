@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
       flash[:success] = t "account_create_success"
       redirect_to root_path
     else
-      render :new, status: :bad_request
+      render :new, status: :unprocessable_entity
     end
   end
 

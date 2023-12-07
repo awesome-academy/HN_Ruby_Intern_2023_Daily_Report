@@ -1,5 +1,5 @@
 class Admin::PublishersController < Admin::BaseController
-  before_action :get_publisher, only: %i(show update destroy)
+  before_action :get_publisher, only: %i(show edit update destroy)
   before_action :transform_params, only: :index
 
   def index
@@ -9,20 +9,42 @@ class Admin::PublishersController < Admin::BaseController
     publishers = publishers.bquery(q) if q
 
     s = params[:sort]
-    publishers = publishers.sort_on(s, params[:desc]) if s
+    publishers = s ? publishers.sort_on(s, params[:desc]) : publishers.newest
 
     @pagy, @publishers = pagy publishers, items: params[:items]
   end
 
-  def show; end
+  def show
+    @tab_id = :publisher
+    @pagy, @books = pagy @publisher.books.newest.with_attached_image
+    render "admin/shared/tab_books"
+  end
 
-  def new; end
+  def new
+    @publisher = Publisher.new
+    render :edit
+  end
 
   def edit; end
 
-  def create; end
+  def create
+    @publisher = Publisher.new publisher_params
+    if @publisher.save
+      flash[:success] = t "admin.notif.create_success"
+      redirect_to admin_publishers_path
+    else
+      respond_to_form_fail @publisher
+    end
+  end
 
-  def update; end
+  def update
+    if @publisher.update publisher_params
+      flash[:success] = t "admin.notif.update_success"
+      redirect_to [:admin, @publisher]
+    else
+      respond_to_form_fail @publisher
+    end
+  end
 
   def destroy
     if @publisher.destroy
@@ -33,11 +55,10 @@ class Admin::PublishersController < Admin::BaseController
             helpers.dom_id(@publisher, :publisher)
           )
         end
-        format.html
-        format.js
+        format.html{redirect_to admin_publishers_path}
       end
     else
-      flash[:danger] = t "admin.notif.delete_fail"
+      flash[:danger] = t "admin.notif.delete_fail" # TODO
     end
   end
 

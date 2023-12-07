@@ -79,10 +79,6 @@ class Account < ApplicationRecord
 
   private
 
-  def downcase_email
-    email.downcase!
-  end
-
   def match_digest? digest, token
     BCrypt::Password.new(digest).is_password? token
   end

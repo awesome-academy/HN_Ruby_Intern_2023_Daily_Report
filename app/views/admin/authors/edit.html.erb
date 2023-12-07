@@ -1,2 +1,65 @@
-<h1>Admin::Authors#edit</h1>
-<p>Find me in app/views/admin/authors/edit.html.erb</p>
+<% action = controller.action_name %>
+<% provide :title, t("admin.title.#{action}", name: t("authors._name")) %>
+<% chooser_id = dom_id(@author, :chooser) %>
+<div class="col-12">
+  <%= navigate_to list: action == "new" %>
+  <div class="card">
+    <div class="card-body">
+      <%= form_with model: [:admin, @author], local: true do |f| %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="sub-content">
+              <%= image_tag @author.avatar, class: "mb-6 file-original",
+                            data: {original_for: chooser_id} if @author.avatar.attached? %>
+              <img class="mb-6 file-preview" data-preview-for="<%= chooser_id %>">
+              <div class="file-input-replacer btn btn-primary mt-3"
+                                  data-replace-for="<%= chooser_id %>"
+                                  data-turbo="false">
+                <%= t "admin.misc.upload", name: t("authors.avatar").downcase %>
+              </div>
+              <%= f.file_field :avatar, id: chooser_id, multiple: false,
+                                        accept: Settings.image_type.join(","),
+                                        class: "file-chooser d-none" %>
+              <div id="form-fail"></div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <!-- Basic Info -->
+            <div class="">
+              <div class="form-group">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control",
+                            placeholder: t("authors.placeholder.name") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, class: "form-control",
+                            placeholder: t("authors.placeholder.email") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :phone %>
+                <%= f.telephone_field :phone, class: "form-control",
+                            placeholder: t("authors.placeholder.phone") %>
+              </div>
+              <div class="form-group">
+                <%= f.label :about %>
+                <%= f.text_area :about, class: "form-control",
+                            placeholder: t("authors.placeholder.about") %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3 d-flex flex-row justify-content-end">
+          <%= f.submit t("admin.misc.#{action}"), name: action,
+                        class: "btn btn-success btn-control" %>
+          <%= link_to t("admin.misc.cancel"), admin_authors_path,
+                        class: "btn btn-warning btn-control",
+                        data: {
+                          turbo_method: :get,
+                          turbo_confirm: t("admin.notif.cancel_confirm")
+                        } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

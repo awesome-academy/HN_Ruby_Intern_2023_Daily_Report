@@ -1,0 +1,12 @@
+<% local_assigns.with_defaults(for_text: :name, link_class: nil) => {
+    obj:, resource:, for_text:, link_class:
+}%>
+<div class="ref-list">
+  <% if obj.respond_to? :length %>
+    <% obj.each do |item| %>
+      <%= get_link item, resource, for_text:, class: link_class %>
+    <% end %>
+  <% else %>
+    <%= get_link obj, resource, for_text:, class: link_class %>
+  <% end %>
+</div>

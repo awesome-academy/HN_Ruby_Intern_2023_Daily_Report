@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  belongs_to :publisher
+  belongs_to :publisher, optional: true
   has_many :book_authors, dependent: :destroy
   has_many :authors, through: :book_authors
   has_many :book_genres, dependent: :destroy
@@ -21,21 +21,22 @@ class Book < ApplicationRecord
   has_one_attached :image
 
   validates :title, :description, :amount,
-            :publish_date, :isbn, :publisher, presence: true
+            :publish_date, :isbn, presence: true
 
-  validates :title, length: {maximum: Settings.validations.title_max_len}
+  validates :title, uniqueness: {case_sensitive: false},
+                    length: {maximum: Settings.title_max_len}
   validates :amount, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 0
   }
   validates :publish_date, datetime: {to: :date, check: :past}
   validates :isbn, format: {
-    with: Settings.validations.isbn_regex,
+    with: Settings.isbn_regex,
     message: I18n.t("validations.isbn_valid")
-  }
+  }, uniqueness: true
   validates :image,
             content_type: {
-              in: Settings.validations.image_type,
+              in: Settings.image_type,
               message: I18n.t("validations.image_type_valid")
             }
 
@@ -57,4 +58,10 @@ class Book < ApplicationRecord
       .or(where("genres.name LIKE ?", "%#{q}%"))
       .or(where("publishers.name LIKE ?", "%#{q}%"))
   }
+
+  def update_relation_with_ids name, ids
+    attribute = send "book_#{name}s"
+    attribute.clear
+    attribute.create(ids.map{|id| {"#{name}_id": id}})
+  end
 end

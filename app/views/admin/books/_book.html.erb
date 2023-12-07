@@ -2,8 +2,8 @@
     cover:, title:, isbn:, amount:, publisher:, publish_date:,
     authors:, genres:, book_path:, id:
 }%>
-<% null = Settings.display_for_nil %>
 <tr id="<%= id %>">
+  <td><%= (@pagy ? @pagy.from : 1) + book_iteration.index %></td>
   <td class="long-name">
     <%= link_to book_path do %>
       <%= image_tag cover, class: "image-rect", title: "ISBN: #{isbn}" %>
@@ -12,21 +12,14 @@
   </td>
   <td><%= amount %></td>
   <td>
-    <div class="ref-list">
-      <% authors.each do |author| %>
-        <%= link_to author[1], admin_author_path(author[0]) %>
-      <% end %>
-    </div>
+    <%= render "admin/shared/ref_list", obj: authors, resource: :author %>
   </td>
   <td>
-    <div class="ref-list">
-      <% genres.each do |genre| %>
-        <%= link_to genre[1], admin_genre_path(genre[0]) %>
-      <% end %>
-    </div>
+    <%= render "admin/shared/ref_list", obj: genres, resource: :genre %>
   </td>
-  <td class="long-name" style="max-width: 100px;" title="<%= publisher[1] %>">
-    <%= link_to publisher[1], admin_publisher_path(publisher[0]) %>
+  <td style="max-width: 100px;">
+    <%= render "admin/shared/ref_list", obj: publisher, resource: :publisher,
+                link_class: "long-name" %>
   </td>
   <td><%= publish_date %></td>
   <td>

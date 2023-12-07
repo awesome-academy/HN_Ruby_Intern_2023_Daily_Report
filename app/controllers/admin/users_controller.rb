@@ -8,13 +8,16 @@ class Admin::UsersController < Admin::BaseController
     q = params[:q]
     users = users.merge(Account.bquery(q)) if q
 
-    sort = params[:sort]
-    users = users.sort_on(sort, params[:desc]) if sort
+    s = params[:sort]
+    users = s ? users.sort_on(s, params[:desc]) : users.newest
 
     @pagy, @users = pagy users, items: params[:items]
   end
 
-  def show; end
+  def show
+    @tab_id = :user_profile
+    render :tab_profile
+  end
 
   def active
     respond_to_change_active true

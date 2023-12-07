@@ -10,7 +10,7 @@
         <% end %>
       </h4>
       <div class="d-flex flex-column">
-        <%= render "admin/shared/table_utils", pagy: @pagy %>
+        <%= render "admin/shared/table_utils" %>
       </div>
       <div class="table-responsive">
         <table class="table">
@@ -22,7 +22,9 @@
           </tbody>
         </table>
         <% unless content_for? :table_body %>
-          <div class="text-muted ps-3 pt-2"><%= t("admin.notif.no_items", item: t("#{name}._item")) %></div>
+          <div class="text-muted ps-3 pt-2">
+            <%= t("admin.notif.no_items", item: t("#{name}._item")) %>
+          </div>
         <% end %>
       </div>
     </div>

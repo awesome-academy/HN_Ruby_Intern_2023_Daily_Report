@@ -8,7 +8,7 @@ module Admin::UsersHelper
       address: info&.address,
       # Account
       username: account.username,
-      avatar: get_avatar(account),
+      avatar: get_image(account),
       join_from: localize_date(info&.created_at, :long),
       join_about: time_ago(info&.created_at),
       # Profile
@@ -39,28 +39,26 @@ module Admin::UsersHelper
 
     color = is_active ? :success : :danger
 
-    link = admin_user_inactive_path account
-    link = admin_user_active_path account unless is_active
+    link = inactive_admin_user_path account
+    link = active_admin_user_path account unless is_active
     id = dom_id account, :status
 
     {status_text:, do_text:, confirm_text:, link:, color:, id:}
   end
 
-  def render_users_tabs
-    render "admin/shared/tab_content", group_id: :user, items: [
+  def get_user_tab_headers user
+    [
       {
-        icon: :account,
+        icon: :note,
         title: t("users.profile"),
-        id: :profile,
-        active: true,
-        partial: "tab_profile"
+        id: :user_profile,
+        link: admin_user_path(user)
       },
       {
         icon: :heart,
         title: t("users.favorite"),
-        id: :favorite,
-        active: false,
-        partial: nil
+        id: :user_favorite,
+        link: "#"
       }
     ]
   end

@@ -1,0 +1,18 @@
+<% populate_book(@book) => {isbn:, amount:, publisher:, publish_date:, authors:, genres:}%>
+<% content_for :tab_content do %>
+  <%= render "admin/shared/info_field", name: t("books.isbn"), value: isbn %>
+  <%= render "admin/shared/info_field", name: t("publishers._name") do %>
+    <%= get_link publisher, :publisher %>
+  <% end %>
+  <%= render "admin/shared/info_field", name: t("authors._name") do %>
+    <%= render "admin/shared/ref_list", obj: authors, resource: :author %>
+  <% end %>
+  <%= render "admin/shared/info_field", name: t("genres._name") do %>
+    <%= render "admin/shared/ref_list", obj: genres, resource: :genre %>
+  <% end %>
+  <%= render "admin/shared/info_field", name: t("books.publish_date"), value: publish_date %>
+  <hr>
+  <%= render "admin/shared/info_field", name: t("books.amount"), value: amount %>
+  <%= render "admin/shared/info_field", name: t("books.remain"), value: amount %>
+<% end %>
+<%= render "show" %>

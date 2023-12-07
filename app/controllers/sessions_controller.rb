@@ -29,17 +29,17 @@ class SessionsController < ApplicationController
   protected
 
   def on_login_success
-    redirect_back_or books_path
+    redirect_back(fallback_location: library_path)
   end
 
   def on_login_fail_inactive
     flash.now[:danger] = t "account_not_activated_or_lock"
-    render :new, status: :bad_request
+    render :new, status: :unprocessable_entity
   end
 
   def on_login_fail
     flash.now[:danger] = t "invalid_email_password"
-    render :new, status: :bad_request
+    render :new, status: :unprocessable_entity
   end
 
   def on_logout

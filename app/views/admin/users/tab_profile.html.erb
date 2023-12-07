@@ -1,0 +1,14 @@
+<% content_for :tab_content do %>
+  <% if @user.user_info %>
+    <% get_info(@user) => {full_name:, dob:, gender:, citizen_id:, updated_at:} %>
+    <%= render "admin/shared/info_field", name: t("users.full_name"), value: full_name %>
+    <%= render "admin/shared/info_field", name: t("users.gender"), value: gender %>
+    <%= render "admin/shared/info_field", name: t("users.dob"), value: dob %>
+    <%= render "admin/shared/info_field", name: t("users.citizen_id"), value: citizen_id %>
+    <hr>
+    <%= render "admin/shared/info_field", name: t("users.updated_at"), value: updated_at %>
+  <% else %>
+    <%= t "admin.notif.user_info_not_found" %>
+  <% end %>
+<% end %>
+<%= render "show" %>
