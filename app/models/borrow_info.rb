@@ -7,4 +7,6 @@ class BorrowInfo < ApplicationRecord
   has_many :borrowings, class_name: BorrowItem.name,
                         dependent: :destroy
   has_many :books, through: :borrowings
+
+  validates :start_at, :end_at, :status, :remain_turns, presence: true
 end

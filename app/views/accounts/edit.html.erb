@@ -1,0 +1,75 @@
+<% provide(:title, t(".update_profile")) %>
+
+<div class="mb-5">
+  <h1><%= t ".update_profile" %></h1>
+  <%= form_for @account do |f| %>
+    <%= render "shared/error_messages" %>
+    <div class="d-flex align-items-center my-3">
+      <%= avatar_for(@account, 80) %>
+      <%= f.file_field :avatar, class: "ms-3" %>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :password, class: "form-label" %>
+          <span class="text-secondary">(<%= t ".leave_password_blank" %>)</span>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :password_confirmation, class: "form-label" %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :username, class: "form-label" %>
+          <%= f.text_field :username, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <%= f.fields_for :user_info do |user_info| %>
+          <div class="mb-3">
+            <%= user_info.label :name, class: "form-label" %>
+            <%= user_info.text_field :name, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= user_info.label :address, class: "form-label" %>
+            <%= user_info.text_field :address, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= user_info.label :phone, class: "form-label" %>
+            <%= user_info.telephone_field :phone, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= user_info.label :citizen_id, t("activerecord.attributes.user_info.citizen_id"), class: "form-label" %>
+            <%= user_info.text_field :citizen_id, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= user_info.label :dob, t("activerecord.attributes.user_info.dob"), class: "form-label" %>
+            <%= user_info.date_field :dob, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= user_info.label :gender, class: "form-label me-3" %>
+            <div class="form-check form-check-inline">
+              <%= user_info.radio_button :gender, "male", class: "form-check-input" %>
+              <%= user_info.label :gender_male, t("male"), class: "form-check-label" %>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= user_info.radio_button :gender, "female", class: "form-check-input" %>
+              <%= user_info.label :gender_female, t("female"), class: "form-check-label"%>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= user_info.radio_button :gender, "others", class: "form-check-input" %>
+              <%= user_info.label :gender_others, t("others"), class: "form-check-label"%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= f.submit t(".update_profile"), class: "btn btn-primary form-control" %>
+    </div>
+  <% end %>
+</div>

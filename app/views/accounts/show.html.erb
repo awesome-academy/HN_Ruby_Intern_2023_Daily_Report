@@ -1,8 +1,16 @@
 <% provide :title, @account.username %>
 
-<div>
-  <h1>
-    <%= gravatar_for @account %>
-    <%= @account.username %>
-  </h1>
-</div>
+<h1 class="mb-4">
+  <%= avatar_for(@account, 80) %>
+  <%= @account.username %>
+</h1>
+<p>Email: <%= @account.email %></p>
+<% unless @account.user_info.nil? %>
+  <hr>
+  <p><%= t "activerecord.attributes.user_info.name" %>: <%= @account.user_info.name %></p>
+  <p><%= t "activerecord.attributes.user_info.gender" %>: <%= t("#{@account.user_info.gender}") %></p>
+  <p><%= t "activerecord.attributes.user_info.address" %>: <%= @account.user_info.address %></p>
+  <p><%= t "activerecord.attributes.user_info.phone" %>: <%= @account.user_info.phone %></p>
+  <p><%= t "activerecord.attributes.user_info.citizen_id" %>: <%= @account.user_info.citizen_id %></p>
+  <p><%= t "activerecord.attributes.user_info.dob" %>: <%= @account.user_info.dob %></p>
+<% end %>

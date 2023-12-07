@@ -2,7 +2,10 @@
 
 <div>
   <div>
-    <h1 class="fw-bold mb-4"><%= @author.name %></h1>
+    <h1 class="fw-bold mb-4">
+      <%= avatar_for(@author, 80) %>
+      <%= @author.name %>
+    </h1>
     <p><span class="fw-semibold">Email: </span><%= @author.email %></p>
     <p><span class="fw-semibold"><%= t "phone" %>: </span><%= @author.phone %></p>
     <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <%= t ".follow_this_author" %></button>

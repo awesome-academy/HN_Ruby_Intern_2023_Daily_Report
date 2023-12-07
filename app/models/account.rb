@@ -3,10 +3,10 @@ class Account < ApplicationRecord
 
   attr_accessor :remember_token
 
-  has_one :user_info, dependent: :nullify
+  has_one :user_info, dependent: :nullify, inverse_of: :account
   has_one_attached :avatar
+  accepts_nested_attributes_for :user_info
 
-  has_one :user_info, dependent: :nullify
   has_many :borrow_requests, class_name: BorrowInfo.name,
                              dependent: :destroy
   has_many :author_followings, class_name: AuthorFollower.name,
@@ -29,7 +29,7 @@ class Account < ApplicationRecord
   validates :email, presence: true, length: {maximum: Settings.digit_255},
                     format: Settings.valid_email_regex,
                     uniqueness: {case_sensitive: false}
-  validates :password, length: {in: 6..20}
+  validates :password, presence: true, length: {in: 6..20}, allow_nil: true
   validates :username, presence: true, length: {maximum: Settings.digit_50},
                        uniqueness: true
 

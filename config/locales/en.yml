@@ -69,3 +69,19 @@ en:
   delete_success: "Delete successfully"
   delete_fail: "Delete failed"
   item_not_found: "Item not found"
+  update_success: "Update successfully"
+  no_books_in_cart: "No books in your cart"
+  accounts:
+    edit:
+      update_profile: "Update your profile"
+      leave_password_blank: "Leave it blank if you don't want to change it"
+  change: "Change"
+  male: "Male"
+  female: "Female"
+  others: "Others"
+
+  activerecord:
+    attributes:
+      user_info:
+        citizen_id: "Citizen ID"
+        dob: "Date of Birth"
