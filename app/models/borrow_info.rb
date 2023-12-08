@@ -9,6 +9,7 @@ class BorrowInfo < ApplicationRecord
   has_many :books, through: :borrowings
 
   validates :start_at, :end_at, :status, :remain_turns, presence: true
+
   validate :start_at_validation, :end_at_validation
 
   def start_at_validation
@@ -23,5 +24,22 @@ class BorrowInfo < ApplicationRecord
     elsif end_at && end_at > start_at + 10
       errors.add(:end_at, I18n.t("date_maximum_10_days"))
     end
+  end
+
+  scope :due_first, ->{order(end_at: :desc)}
+  scope :includes_user, lambda {\
+    includes(account: [{avatar_attachment: [:blob]}, user_info: []])
+  }
+  scope :includes_response, ->{includes(:response)}
+  scope :bquery, lambda {|q|
+    references(:account, :user_info)
+      .where("accounts.username LIKE ?", "%#{q}%")
+      .or(Account.where("accounts.email LIKE ?", "%#{q}%"))
+      .or(UserInfo.where("user_infos.name LIKE ?", "%#{q}%"))
+  }
+  scope :history, ->{rejected.or(BorrowInfo.returned)}
+
+  def finished?
+    rejected? || returned?
   end
 end

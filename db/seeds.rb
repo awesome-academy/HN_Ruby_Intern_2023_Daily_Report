@@ -117,3 +117,33 @@ Book.all.each do |book|
 
   BookGenre.create!(book_id:, genre_id:)
 end
+
+
+30.times do |i|
+  b = BorrowInfo.create(
+    start_at: Faker::Date.backward(days: 20),
+    end_at: Faker::Date.forward(days: 10),
+    status: rand(4),
+    remain_turns: rand(5),
+    account_id: Account.pluck(:id).sample
+  )
+end
+
+BorrowInfo.all.each do |borrowinfo|
+  borrow_info_id = borrowinfo.id
+  book_id = Book.pluck(:id).sample
+
+  BorrowItem.create(borrow_info_id:, book_id:)
+  rand(7).times do |i|
+    book_id = Book.pluck(:id).sample
+
+    BorrowItem.find_or_create_by(borrow_info_id:, book_id:)
+  end
+end
+
+BorrowInfo.rejected.each do |rej|
+  BorrowResponse.create(
+    content: Faker::Lorem.paragraph,
+    borrow_info_id: rej.id
+  )
+end

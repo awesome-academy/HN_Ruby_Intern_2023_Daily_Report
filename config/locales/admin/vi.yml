@@ -8,8 +8,9 @@ vi:
     almost: 'gần'
   date:
     formats:
-      short: '%d/%m/'
+      short: '%d/%m'
       long: '%d/%m/%Y'
+      year: '%Y'
   accounts:
     _name: 'tài khoản'
     email: 'Email'
@@ -85,10 +86,28 @@ vi:
       about: 'Giới thiệu chung về nhà xuất bản'
       email: 'Email'
       address: 'Địa chỉ'
-  borrow_requests:
+  borrows:
     _name: 'yêu cầu mượn sách'
+    _item: 'phiếu mượn'
     pending: 'Chờ xử lý'
+    approve: 'Chấp nhận'
+    approved: 'chấp nhận'
+    borrowing: 'đang mượn'
+    reject: 'Từ chối'
+    rejected: 'Từ chối'
+    return: 'Trả sách'
+    returned: 'Đã trả'
+    response: 'phản hồi'
     history: 'Lịch sử'
+    start_at: 'Ngày mượn'
+    end_at: 'Hạn trả'
+    remain_turns: 'Gia hạn còn lại'
+    turns: 'Đã gia hạn'
+    remind: 'Nhắc trả'
+    status: 'Trạng thái'
+    finish: 'Hoàn thành'
+    updated_at: 'Cập nhật'
+    approved_at: 'Xác nhận'
   admin:
     misc:
       back: 'Quay lại'
@@ -152,6 +171,8 @@ vi:
       footer:
         info: 'Dành cho Administrator - Libma'
         credit: 'Mẫu giao diện: BootstrapDash - Corona'
+    home:
+      title: 'Trang chủ'
     sessions:
       new:
         title: 'Đăng nhập'

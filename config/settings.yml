@@ -3,6 +3,10 @@ digit_255: 255
 digit_50: 50
 digit_10: 10
 
+# Số lần gia hạn tối đa
+increment_max_times: 5
+days_per_increment: 15
+
 default_avatar_path: 'default_avatar.jpg'
 default_image_path: 'default_book.png'
 

@@ -17,7 +17,7 @@ module Admin::BaseHelper
     format_time_ago time_ago_in_words(date) if date
   end
 
-  def localize_date datetime, format = :long
+  def localize_date datetime, format = :short
     l(datetime.to_date, format:) if datetime
   end
 
