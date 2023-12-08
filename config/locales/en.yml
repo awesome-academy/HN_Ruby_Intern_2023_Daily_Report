@@ -14,7 +14,7 @@ en:
       the_form_contains: "The form contains"
       error: "error"
   account_not_found: "Account not found!"
-  account_create_success: "Welcome!"
+  account_create_success: "Welcome! Please fill in your information to borrow books"
   email: "Email"
   password: "Password"
   remember_me: "Remember me"
@@ -55,6 +55,7 @@ en:
   publisher: "Publisher"
   book_added_successfully: "Book added successfully"
   book_borrow_one: "You cannot borrow duplicate books"
+  book_out_of_stock: "This book is out of stock"
   log_in_required: "Log in required"
   cart: "Cart"
   book: "Books"
@@ -75,13 +76,41 @@ en:
     edit:
       update_profile: "Update your profile"
       leave_password_blank: "Leave it blank if you don't want to change it"
+    new:
+      have_account: "Already have an account?"
+      sign_in_now: "Log in now!"
   change: "Change"
   male: "Male"
   female: "Female"
   others: "Others"
+  borrow_info_not_found: "Borrow information not found"
+  borrow_info_success: "Create borrow infomation successfully"
+  borrow_info_fill_user_info: "You need to fill in your information to borrow books"
+  user_info: "User information"
+  borrow_infos:
+    new:
+      borrow_info_create: "Create borrow information"
+    show:
+      borrow_info: "Borrow information"
+      borrow_book_list: "List of borrowed books"
+    borrow_date: "Borrow date"
+    return_date: "Return date"
+    borrow_renewals: "Number of book borrow renewals"
+  status: "Borrow status"
+  pending: "Pending"
+  approved: "Approved"
+  rejected: "Rejected"
+  returned: "Returned"
+  borrow_history: "Borrow history"
+  date_greater_than_today: "must be equal or greater than today"
+  date_minimum_3_days: "minimum is 3 days from the borrow date"
+  date_maximum_10_days: "maximum is 10 days from the borrow date"
 
   activerecord:
     attributes:
       user_info:
         citizen_id: "Citizen ID"
         dob: "Date of Birth"
+      borrow_info:
+        start_at: "Borrow date"
+        end_at: "Return date"

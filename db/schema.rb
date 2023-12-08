@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_01_070158) do
-  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_12_07_032934) do
+  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
     t.boolean "is_admin", default: false, null: false
@@ -159,11 +159,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_070158) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 1, null: false
-    t.bigint "cart_id", null: false
+    t.bigint "cart_id"
     t.index ["book_id", "borrow_info_id"], name: "index_borrow_items_on_book_id_and_borrow_info_id", unique: true
     t.index ["book_id"], name: "index_borrow_items_on_book_id"
     t.index ["borrow_info_id"], name: "index_borrow_items_on_borrow_info_id"
-    t.index ["cart_id", "borrow_info_id"], name: "index_borrow_items_on_cart_id_and_borrow_info_id", unique: true
+    t.index ["cart_id", "borrow_info_id"], name: "index_borrow_items_on_cart_id_and_borrow_info_id"
     t.index ["cart_id"], name: "index_borrow_items_on_cart_id"
   end
 

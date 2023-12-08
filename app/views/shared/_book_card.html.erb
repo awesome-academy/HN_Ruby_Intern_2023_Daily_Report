@@ -1,15 +1,13 @@
-<div class="col">
-  <div class="card">
-    <%= link_to book_path(book) do %>
-      <%= image_tag book.image, class: "card-img-top" if book.image.attached? %>
+<div class="card">
+  <%= link_to book_path(book) do %>
+    <%= image_tag book.image, class: "card-img-top" if book.image.attached? %>
+  <% end %>
+  <div class="card-body text-center">
+    <h5 class="card-title fw-semibold"><%= book.title %></h5>
+    <% if book.authors.any? %>
+      <p class="card-text text-secondary"><%= book.authors.map(&:name).join(", ") %></p>
+    <% else %>
+      <p class="card-text text-secondary"><%= t ".no_authors_found" %></p>
     <% end %>
-    <div class="card-body text-center">
-      <h5 class="card-title fw-semibold"><%= book.title %></h5>
-      <% if book.authors.any? %>
-        <p class="card-text text-secondary"><%= book.authors.map(&:name).join(", ") %></p>
-      <% else %>
-        <p class="card-text text-secondary"><%= t ".no_authors_found" %></p>
-      <% end %>
-    </div>
   </div>
 </div>

@@ -1,11 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-# Standard Accounts
+# Admin
 admin = Account.create(
   email: "admin@gmail.com",
   username: "administrator",
@@ -17,6 +10,7 @@ admin = Account.create(
 )
 admin.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/admin/face5.jpg"), filename: "admin-face.jpg")
 
+# Test account
 account = Account.create(
   email: "test@gmail.com",
   username: Faker::Internet.username,
@@ -67,39 +61,26 @@ end
   about = "#{name} #{Faker::Lorem.paragraph}"
   email = Faker::Internet.email(name: name)
 
-  Publisher.create(
-    name: name,
-    address: address,
-    about: about,
-    email: email,
-  )
+  Publisher.create!(name:, address:, about:, email:)
 end
 
 # Author
-20.times do |n|
+50.times do |n|
   name = Faker::Name.name
   about = "#{name} #{Faker::Lorem.paragraph}"
   phone = Faker::PhoneNumber.cell_phone
   email = Faker::Internet.email(name: name)
 
-  Author.create(name:, about:, phone:, email:)
+  Author.create!(name:, about:, phone:, email:)
 end
 
 Author.all.each do |author|
   file_path = URI.parse(Faker::LoremFlickr.image(size: "200x250")).open
-  author.image.attach(io: file_path, filename: "author#{i}-avatar.png")
-end
-
-# Genre
-7.times do |n|
-  name = Faker::Book.genre
-  description = "#{name} #{Faker::Lorem.paragraph}"
-
-  Genre.create(name:, description:)
+  author.avatar.attach(io: file_path, filename: "#{author.name}-avatar.png")
 end
 
 # Book
-30.times do |n|
+100.times do |n|
   title = Faker::Book.title
   while Book.exists?(title: title)
     title = Faker::Book.title
@@ -110,14 +91,7 @@ end
   isbn = Faker::Code.unique.isbn(base: (rand % 2 == 1 ? 13 : 10))
   publisher_id = Publisher.pluck(:id).sample
 
-  Book.create(
-    title: title,
-    description: description,
-    amount: amount,
-    publish_date: publish_date,
-    isbn: isbn,
-    publisher_id: publisher_id
-  )
+  Book.create(title:, description:, amount:, publish_date:, isbn:, publisher_id:)
 end
 
 Book.all.each do |book|
@@ -125,28 +99,12 @@ Book.all.each do |book|
   book.image.attach(io: file_path, filename: "image.jpg")
 end
 
-100.times do |n|
-  name = Faker::Name.name
-  about = "#{name} #{Faker::Lorem.paragraph}"
-  phone = Faker::PhoneNumber.cell_phone
-  email = Faker::Internet.email(name: name)
-
-  Author.create!(
-    name: name,
-    about: about,
-    phone: phone,
-    email: email,
-  )
-end
-
+# Genre
 30.times do |n|
   name = Faker::Book.unique.genre
   description = "#{name} #{Faker::Lorem.paragraph}"
 
-  Genre.create!(
-    name: name,
-    description: description,
-  )
+  Genre.create!(name:, description:)
 end
 
 # Create fake associations for books
@@ -155,13 +113,7 @@ Book.all.each do |book|
   author_id = Author.pluck(:id).sample
   genre_id = Genre.pluck(:id).sample
 
-  BookAuthor.create!(
-    book_id: book_id,
-    author_id: author_id,
-  )
+  BookAuthor.create!(book_id:, author_id:)
 
-  BookGenre.create!(
-    book_id: book_id,
-    genre_id: genre_id,
-  )
+  BookGenre.create!(book_id:, genre_id:)
 end
