@@ -45,5 +45,7 @@ Rails.application.routes.draw do
     resource :carts, only: %i(show destroy)
     resources :borrow_items, only: %i(create destroy)
     resources :borrow_infos, only: %i(index show new create)
+    post "/status_action", to: "borrow_infos#handle_status_action"
+    patch "/status_action", to: "borrow_infos#handle_status_action"
   end
 end

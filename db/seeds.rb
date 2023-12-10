@@ -119,13 +119,13 @@ Book.all.each do |book|
 end
 
 
-30.times do |i|
+100.times do |i|
   b = BorrowInfo.create(
-    start_at: Faker::Date.backward(days: 20),
-    end_at: Faker::Date.forward(days: 10),
+    start_at: Date.current + 3,
+    end_at: Date.current + 10,
     status: rand(4),
     remain_turns: rand(5),
-    account_id: Account.pluck(:id).sample
+    account_id: 1
   )
 end
 
