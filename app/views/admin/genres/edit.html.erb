@@ -1,5 +1,6 @@
 <% action = controller.action_name %>
 <% provide :title, t("admin.title.#{action}", name: t("genres._name")) %>
+<% required_fields = validated_fields_of Genre %>
 <div class="col-12">
   <%= navigate_to list: action == "new" %>
   <div class="card">
@@ -17,12 +18,14 @@
               <div class="form-group">
                 <%= f.label :name %>
                 <%= f.text_field :name, class: "form-control",
-                          placeholder: t("genres.placeholder.name") %>
+                          placeholder: t("genres.placeholder.name"),
+                          required: required_fields.include?(:name) %>
               </div>
               <div class="form-group">
                 <%= f.label :description %>
                 <%= f.text_area :description, class: "form-control",
-                          placeholder: t("genres.placeholder.description") %>
+                          placeholder: t("genres.placeholder.description"),
+                          required: required_fields.include?(:description) %>
               </div>
             </div>
           </div>

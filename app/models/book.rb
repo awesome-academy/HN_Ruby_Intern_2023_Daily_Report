@@ -21,6 +21,7 @@ class Book < ApplicationRecord
   has_one_attached :image
 
   validates :title, :description, :amount, :borrowed_count,
+            :publisher, :authors,
             :publish_date, :isbn, presence: true
 
   validates :title, uniqueness: {case_sensitive: false},

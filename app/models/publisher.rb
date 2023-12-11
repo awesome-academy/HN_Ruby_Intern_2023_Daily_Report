@@ -4,7 +4,7 @@ class Publisher < ApplicationRecord
   validates :name, presence: true, length: {
     maximum: Settings.name_max_len
   }
-  validates :about, presence: true, length: {
+  validates :about, length: {
     maximum: Settings.desc_max_len
   }
   validates :address, presence: true, length: {

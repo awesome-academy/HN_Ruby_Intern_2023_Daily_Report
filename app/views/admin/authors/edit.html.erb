@@ -1,6 +1,7 @@
 <% action = controller.action_name %>
 <% provide :title, t("admin.title.#{action}", name: t("authors._name")) %>
 <% chooser_id = dom_id(@author, :chooser) %>
+<% required_fields = validated_fields_of Author %>
 <div class="col-12">
   <%= navigate_to list: action == "new" %>
   <div class="card">
@@ -19,7 +20,8 @@
               </div>
               <%= f.file_field :avatar, id: chooser_id, multiple: false,
                                         accept: Settings.image_type.join(","),
-                                        class: "file-chooser d-none" %>
+                                        class: "file-chooser d-none",
+                                        required: required_fields.include?(:avatar) %>
             </div>
           </div>
           <div class="col-lg-8">
@@ -29,22 +31,26 @@
               <div class="form-group">
                 <%= f.label :name %>
                 <%= f.text_field :name, class: "form-control",
-                            placeholder: t("authors.placeholder.name") %>
+                            placeholder: t("authors.placeholder.name"),
+                            required: required_fields.include?(:name) %>
               </div>
               <div class="form-group">
                 <%= f.label :email %>
                 <%= f.email_field :email, class: "form-control",
-                            placeholder: t("authors.placeholder.email") %>
+                            placeholder: t("authors.placeholder.email"),
+                            required: required_fields.include?(:email) %>
               </div>
               <div class="form-group">
                 <%= f.label :phone %>
                 <%= f.telephone_field :phone, class: "form-control",
-                            placeholder: t("authors.placeholder.phone") %>
+                            placeholder: t("authors.placeholder.phone"),
+                            required: required_fields.include?(:phone) %>
               </div>
               <div class="form-group">
                 <%= f.label :about %>
                 <%= f.text_area :about, class: "form-control",
-                            placeholder: t("authors.placeholder.about") %>
+                            placeholder: t("authors.placeholder.about"),
+                            required: required_fields.include?(:about) %>
               </div>
             </div>
           </div>

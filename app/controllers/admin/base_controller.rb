@@ -48,8 +48,8 @@ class Admin::BaseController < ApplicationController
     end
   end
 
-  def admin_destroy object, name, custom_condition: nil
-    if custom_condition.nil? ? object.destroy : custom_condition
+  def admin_destroy object, name, destroy_method: nil
+    if destroy_method.nil? ? object.destroy : destroy_method
       text = t "admin.notif.delete_success", name: t("#{name}s._name")
       flash[:success] = text
     else

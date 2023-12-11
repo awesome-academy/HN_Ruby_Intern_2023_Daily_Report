@@ -4,7 +4,8 @@
     <!-- 2 below hidden fields: merge with current form fields -->
     <%= f.hidden_field :sort, value: request.params[:sort] %>
     <%= f.hidden_field :style, value: request.params[:style] %>
-    <%= f.text_field :q, value: request.params[:q], class: "form-control ms-3" %>
+    <%= f.text_field :q, value: request.params[:q], class: "form-control ms-3",
+                         placeholder: t("admin.hint.search.#{controller.controller_name}") %>
     <%= f.submit t("admin.misc.search"), name: :search, class: "btn btn-primary" %>
   <% end %>
   <%= render "admin/shared/pagy_utils" %>

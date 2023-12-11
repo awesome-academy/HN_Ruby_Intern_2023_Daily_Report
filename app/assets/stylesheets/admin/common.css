@@ -3,8 +3,8 @@
  *= require vendors/css/vendor.bundle.base.css
  *= require vendors/flag-icon-css/css/flag-icon.min.css
  *= require vendors/jquery-toast-plugin/jquery.toast.min.css
- *= require select2
  *= require css/style.css
+ *= require select2
  *= require_self
  */
 
@@ -19,4 +19,10 @@
 
 .jq-toast-single {
   font-size: 0.875rem;
+}
+
+label:has(~ :required):after {
+  content: ' *';
+  color: red;
+  font-weight: bold;
 }

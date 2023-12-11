@@ -39,12 +39,13 @@ class Admin::UsersController < Admin::BaseController
     redirect_to admin_users_path
   end
 
-  def respond_to_change_active to
-    @user.update_attribute :is_active, to
+  def respond_to_change_active is_active
+    @user.update_attribute :is_active, is_active
     text = t(
       "admin.notif.update_user_status_success_html",
-      status: t("users.#{to ? :active : :inactive}")
+      status: t("users.#{is_active ? :active : :inactive}")
     )
+    UserMailer.with(user: @user).notify_inactive.deliver_later unless is_active
     respond_to do |format|
       format.turbo_stream do
         flash.now[:success] = text

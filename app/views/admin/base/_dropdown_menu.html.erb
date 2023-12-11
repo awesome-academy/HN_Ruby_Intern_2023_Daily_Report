@@ -1,8 +1,7 @@
-<% local_assigns.with_defaults(left: true, menu_class: "", title: nil) => {
-  id:, left:, menu_class:, title:,
+<% local_assigns.with_defaults(pos: :left, menu_class: "", title: nil) => {
+  id:, pos:, menu_class:, title:,
 } %>
 <% id = "#{id}-dropdown" %>
-<% pos = left ? "left" : "right" %>
 <div class="dropdown-menu preview-list dropdown-menu-<%= pos %> <%= menu_class %>"
      aria-labelledby="<%= id %>">
   <% if title %>

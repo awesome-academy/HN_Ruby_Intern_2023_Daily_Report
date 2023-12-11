@@ -165,3 +165,9 @@ en:
       warning: "If you don't return before the due date, you will be fined for late days, as you are confirmed with us on registration."
       note: "In case you need a renewal, please click the link: "
       renewal_button: "Renew for me"
+  user_mailer:
+    notify_inactive:
+      subject: "Your account has been locked"
+      info: "The system administrator locked your account at %{time}, for the following reason:"
+      note: "From this point on, you will not be able to log in nor continue to borrow books. Until the admin reactivates your account."
+      reason: "Returning books late too many times"
