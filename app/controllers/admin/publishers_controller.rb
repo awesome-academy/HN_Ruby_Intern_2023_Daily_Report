@@ -11,7 +11,7 @@ class Admin::PublishersController < Admin::BaseController
     s = params[:sort]
     publishers = s ? publishers.sort_on(s, params[:desc]) : publishers.newest
 
-    @pagy, @publishers = pagy publishers, items: params[:items]
+    @pagy, @publishers = pagy publishers
   end
 
   def show

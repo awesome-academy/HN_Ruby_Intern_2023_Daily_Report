@@ -11,7 +11,7 @@ class Admin::UsersController < Admin::BaseController
     s = params[:sort]
     users = s ? users.sort_on(s, params[:desc]) : users.newest
 
-    @pagy, @users = pagy users, items: params[:items]
+    @pagy, @users = pagy users
   end
 
   def show

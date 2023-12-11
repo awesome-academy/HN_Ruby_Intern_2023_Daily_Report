@@ -14,7 +14,7 @@
                     button_class: "nav-link btn btn-success px-2" do %>
           <span class="fs-6"><b>+</b> <%= t("admin.misc.new") %></span>
         <% end %>
-        <%= render "dropdown_menu", id: "createbtns", pos: :right,
+        <%= render "dropdown_menu", id: "createbtns",
                     menu_class: "navbar-dropdown" do %>
           <% get_new_buttons.each do |btn| %>
             <%= render("dropdown_item", link: btn[:link],
@@ -23,7 +23,7 @@
           <% end %>
         <% end %>
       </li>
-      <li class="nav-item dropdown border-left">
+      <li class="nav-item dropdown">
         <% langs = get_languages %>
         <% cur_locale = I18n.locale %>
         <% cur_lang = langs[cur_locale] %>
@@ -33,33 +33,22 @@
         <%= render "dropdown_menu", id: "languages", pos: :left,
                     menu_class: "navbar-dropdown" do %>
           <% langs.except(cur_locale).each do |locale, lang| %>
-            <%= link_to url_for(locale:), class: "dropdown-item preview-item my-1 align-items-baseline" do %>
-              <%= tag.i class: "flag-icon flag-icon-#{lang[:icon]} preview-thumbnail", title: lang[:title], id:"lang-#{lang[:icon]}" %>
-              <%= tag.span lang[:title], class: "text-white preview-subject ms-3 fs-6" %>
-            <% end %>
+            <%= render "dropdown_item", link: url_for(locale:), icon_type: "flag-icon",
+                                        icon: lang[:icon], title: lang[:title] %>
           <% end %>
         <% end %>
       </li>
-      <li class="nav-item dropdown border-left">
+      <li class="nav-item dropdown">
         <%= render "dropdown_button", id: "messages",
                     button_class: "nav-link count-indicator" do %>
           <i class="mdi mdi-email"></i>
           <span class="count bg-success"></span>
         <% end %>
-        <%= render "dropdown_menu", id: "messages", pos: :right, title: t(".messages"),
+        <%= render "dropdown_menu", id: "messages", title: t(".messages"),
                     menu_class: "navbar-dropdown" do %>
         <% end %>
       </li>
-      <li class="nav-item dropdown border-left">
-        <%= render "dropdown_button", id: "notifications",
-                    button_class: "nav-link count-indicator" do %>
-          <i class="mdi mdi-bell"></i>
-          <span class="count bg-danger"></span>
-        <% end %>
-        <%= render "dropdown_menu", id: "notifications", pos: :right, title: t(".notifications"),
-                    menu_class: "navbar-dropdown" do %>
-        <% end %>
-      </li>
+      <%= render "notification_wrapper" %>
       <li class="nav-item dropdown">
         <%= render "navbar_profile" %>
       </li>

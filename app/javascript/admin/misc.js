@@ -1,18 +1,5 @@
 $(document).on('turbo:load', function () {
-  var body = $('body');
   var sidebar = $('.sidebar');
-  // Minimize sidebar
-  $('[data-toggle="minimize"]').on('click', function () {
-    if (
-      body.hasClass('sidebar-toggle-display') ||
-      body.hasClass('sidebar-absolute')
-    ) {
-      body.toggleClass('sidebar-hidden');
-    } else {
-      body.toggleClass('sidebar-icon-only');
-    }
-  });
-
   // Close other submenu in sidebar on opening any
 
   sidebar.on('show.bs.collapse', '.collapse', function () {
@@ -43,6 +30,37 @@ $(document).on('turbo:load', function () {
         $this.parent().addClass('active');
       }
       $this.attr('href', '');
+    }
+  });
+});
+
+$(function () {
+  // Minimize sidebar
+  var body = $('body');
+  $('[data-toggle="minimize"]').on('click', function () {
+    if (
+      body.hasClass('sidebar-toggle-display') ||
+      body.hasClass('sidebar-absolute')
+    ) {
+      body.toggleClass('sidebar-hidden');
+    } else {
+      body.toggleClass('sidebar-icon-only');
+    }
+  });
+  // Check Notification
+  $(document).on('click', '#notification-read-all', function () {
+    $('.notification-item.unchecked')
+      .removeClass('unchecked')
+      .addClass('checked');
+    $('#notification-uncheck-count').css('display', 'none');
+  });
+  $(document).on('click', '.notification-item.unchecked', function () {
+    $(this).removeClass('unchecked').addClass('checked');
+    let counter = $('#notification-uncheck-count');
+    let count = counter.text();
+    counter.text(count - 1);
+    if (count == 1) {
+      counter.css('display', 'none');
     }
   });
 });

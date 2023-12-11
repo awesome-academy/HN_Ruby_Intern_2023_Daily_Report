@@ -12,7 +12,7 @@ class Admin::BooksController < Admin::BaseController
     s = params[:sort]
     books = s ? books.sort_on(s, params[:desc]) : books.newest
 
-    @pagy, @books = pagy books, items: params[:items]
+    @pagy, @books = pagy books
   end
 
   def show

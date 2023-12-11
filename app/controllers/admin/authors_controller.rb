@@ -11,7 +11,7 @@ class Admin::AuthorsController < Admin::BaseController
     s = params[:sort]
     authors = s ? authors.sort_on(s, params[:desc]) : authors.newest
 
-    @pagy, @authors = pagy authors, items: params[:items]
+    @pagy, @authors = pagy authors
   end
 
   def show

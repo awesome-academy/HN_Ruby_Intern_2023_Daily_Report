@@ -1,0 +1,18 @@
+<% get_notification_icon(notification) => {icon:, color:} %>
+<div class="dropdown-divider"></div>
+<% checked = notification.checked? %>
+<%= link_to (checked ? (notification.link || "#") : admin_notification_path(notification)),
+            data: {turbo_method: checked ? :get : :patch},
+            class: "dropdown-item notification-item #{checked ? :checked : :unchecked}" do %>
+  <div class="preview-icon fs-6">
+    <%= tag.i class: "mdi mdi-#{icon} text-#{color}" %>
+  </div>
+  <div class="ms-3 text-truncate text-muted w-100">
+    <%= tag.p notification.content, title: notification.content,
+              class: "text-#{color} mb-1 max-2-lines checked-change-color" %>
+    <div class="my-2 text-muted inline d-flex">
+      <%= tag.p time_ago(notification.created_at, suffix: true), class: "" %>
+      <%= tag.p t("admin.misc.detail"), class: "ms-auto" if notification.link %>
+    </div>
+  </div>
+<% end %>

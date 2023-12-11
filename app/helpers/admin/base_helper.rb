@@ -13,8 +13,9 @@ module Admin::BaseHelper
     string
   end
 
-  def time_ago date
-    format_time_ago time_ago_in_words(date) if date
+  def time_ago date, suffix: false
+    time_ago = format_time_ago time_ago_in_words(date)
+    "#{time_ago} #{t('datetime.ago') if suffix}" if date
   end
 
   def localize_date datetime, format = :short
@@ -92,5 +93,14 @@ module Admin::BaseHelper
     target.validators.select do |v|
       v.instance_of?(validator)
     end.map(&:attributes).flatten
+  end
+
+  def get_notification_icon notification
+    status2icon = {
+      info: {icon: "information-variant", color: :info},
+      notice: {icon: "flag-variant", color: :warning},
+      urgent: {icon: "flash", color: :danger}
+    }
+    status2icon[notification.status.to_sym]
   end
 end

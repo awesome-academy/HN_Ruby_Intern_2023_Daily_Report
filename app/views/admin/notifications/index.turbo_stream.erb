@@ -1,0 +1,9 @@
+<%= turbo_stream.append "notifications-list" do %>
+  <%= render partial: "admin/base/notification", collection: @notifications %>
+<% end %>
+<% group = "notification" %>
+<%= turbo_stream.replace "#{group}-load-placeholder" do %>
+  <% if @pagy.next.present? %>
+    <%= render "admin/shared/next_page", group:, link: :admin_notifications_path, page: @pagy.next %>
+  <% end %>
+<% end %>

@@ -29,7 +29,11 @@ Rails.application.routes.draw do
                         defaults: {group: :approved}
         end
       end
-
+      resources :notifications, only: %i(index update) do
+        collection do
+          post "read_all", to: "notifications#read_all"
+        end
+      end
     end
   end
 

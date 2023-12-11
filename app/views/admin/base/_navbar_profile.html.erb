@@ -2,7 +2,7 @@
 <%= render "dropdown_button", id:, button_class: "nav-link" do %>
   <%= render "admin/shared/profile", username_class: "d-none d-sm-block navbar-profile-name ps-2" %>
 <% end %>
-<%= render "dropdown_menu", id:, pos: :right, title: t(".system"),
+<%= render "dropdown_menu", id:, title: t(".system"),
       menu_class: "navbar-dropdown" do %>
   <%= render "dropdown_item", link: "#",
           icon: "settings", title: t(".settings") %>
