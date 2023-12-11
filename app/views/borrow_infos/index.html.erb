@@ -1,2 +1,49 @@
-<h1>BorrowInfos#index</h1>
-<p>Find me in app/views/borrow_infos/index.html.erb</p>
+<% provide(:title, t("borrow_history")) %>
+
+<div class="mb-5">
+  <% breadcrumb :borrow_infos, @borrow_infos %>
+  <h1><%= t "borrow_history" %></h1>
+  <div class="d-flex justify-content-between align-items-center mt-5 mb-2">
+    <h3 class="text-secondary"><%= t "borrow_history" %> - <%= t "#{@borrow_infos_sort.first.status}" if @borrow_infos_sort.any? %></h3>
+    <%= form_with url: borrow_infos_path, method: :get, class: "d-flex" do |form| %>
+      <%= form.select :status_option, options_for_select([t("pending"), t("approved"), t("rejected"), t("returned")], selected: params[:status_option]), {}, { class: "form-select" } %>
+      <%= form.submit t("filter"), class: "btn btn-primary ms-2", name: nil %>
+    <% end %>
+  </div>
+  <% if @borrow_infos_sort.any? %>
+    <div class="d-flex justify-content-center mb-4">
+      <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col"><%= t "borrow_id" %></th>
+          <th scope="col"><%= t "activerecord.attributes.borrow_info.borrow_date" %></th>
+          <th scope="col"><%= t "activerecord.attributes.borrow_info.return_date" %></th>
+          <th scope="col"><%= t "activerecord.attributes.borrow_info.remain_turns" %></th>
+          <th scope="col"><%= t "status" %></th>
+          <th scope="col"><%= t "action" %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @borrow_infos_sort.each do |borrow_info| %>
+          <tr>
+            <th scope="row"><%= borrow_info.id %></th>
+            <td><%= borrow_info.start_at %></td>
+            <td>
+              <%= borrow_info.end_at %>
+              <% if borrow_info.renewal_at && borrow_info.errors.empty? %>
+                <%= t "new_return_date" %>
+              <% end %>
+            </td>
+            <td><%= borrow_info.remain_turns %></td>
+            <td class="text-<%= set_class_based_on(borrow_info.status) %>"><%= t "#{@borrow_infos_sort.first.status}" %></td>
+            <td><%= link_to t("details"), borrow_info_path(borrow_info) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p><%= t "no_borrow_info" %></p>
+  <% end %>
+</div>

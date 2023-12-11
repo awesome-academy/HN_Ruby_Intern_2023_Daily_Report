@@ -11,6 +11,15 @@ crumb :book do |book|
   parent :books
 end
 
+crumb :borrow_infos do
+  link t("borrow_info"), borrow_infos_path
+end
+
+crumb :borrow_info do |borrow_info|
+  link borrow_info.id, borrow_info
+  parent :borrow_infos
+end
+
 # crumb :project_issues do |project|
 #   link "Issues", project_issues_path(project)
 #   parent :project, project

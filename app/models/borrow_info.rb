@@ -9,22 +9,10 @@ class BorrowInfo < ApplicationRecord
   has_many :books, through: :borrowings
 
   validates :start_at, :end_at, :status, :remain_turns, presence: true
-
-  validate :start_at_validation, :end_at_validation
-
-  def start_at_validation
-    return if start_at && start_at >= Date.current
-
-    errors.add(:start_at, I18n.t("date_greater_than_today"))
-  end
-
-  def end_at_validation
-    if end_at && end_at < start_at + 3
-      errors.add(:end_at, I18n.t("date_minimum_3_days"))
-    elsif end_at && end_at > start_at + 10
-      errors.add(:end_at, I18n.t("date_maximum_10_days"))
-    end
-  end
+  validate :start_at_validation, :end_at_validation, on: :create
+  validates :renewal_at, presence: true, on: :update
+  validate :renewal_at_validation, on: :update
+  validates :remain_turns, numericality: {greater_than: Settings.digit_0}
 
   scope :due_first, ->{order(end_at: :desc)}
   scope :includes_user, lambda {\
@@ -38,6 +26,31 @@ class BorrowInfo < ApplicationRecord
       .or(UserInfo.where("user_infos.name LIKE ?", "%#{q}%"))
   }
   scope :history, ->{rejected.or(BorrowInfo.returned)}
+  scope :for_account, ->(account_id){where(account_id:)}
+  scope :has_status, ->(status){where(status:)}
+  scope :desc_order, ->{order(updated_at: :desc)}
+
+  def start_at_validation
+    return if start_at && start_at >= Date.current
+
+    errors.add(:start_at, I18n.t("date_greater_than_today"))
+  end
+
+  def end_at_validation
+    if start_at && end_at && end_at > start_at + Settings.digit_10
+      errors.add(:end_at, I18n.t("date_maximum_10_days"))
+    elsif start_at && end_at && end_at <= start_at
+      errors.add(:end_at, I18n.t("return_date_greater_than_borrow_date"))
+    end
+  end
+
+  def renewal_at_validation
+    if renewal_at && renewal_at <= end_at
+      errors.add(:renewal_at, I18n.t("renewal_date_greater_than_return_date"))
+    elsif renewal_at && renewal_at > end_at + Settings.digit_10
+      errors.add(:renewal_at, I18n.t("renewal_date_maximum_10_days"))
+    end
+  end
 
   def finished?
     rejected? || returned?
