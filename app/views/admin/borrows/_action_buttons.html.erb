@@ -1,0 +1,10 @@
+<div class="action-buttons" id="buttons_<%= dom_id borrow %>">
+  <% get_borrow_buttons(borrow)&.each do |button| %>
+    <%= link_to button[:text], button[:link],
+                class: "btn btn-outline-#{button[:color]} btn-form",
+                data: {
+                  turbo_method: button[:method] || :post,
+                  turbo_confirm: button[:confirm]
+                }.merge(button[:data] || {}) %>
+  <% end %>
+</div>

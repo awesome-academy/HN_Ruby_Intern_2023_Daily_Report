@@ -145,6 +145,7 @@ vi:
         title: "Tên sách"
         description: "Mô tả"
         amount: "Số lượng"
+        borrowed_count: "Số lượng đã mượn"
         isbn: "ISBN"
         publish_date: "Ngày xuất bản"
         publisher: "Nhà xuất bản"
@@ -180,6 +181,7 @@ vi:
   validations:
     isbn_valid: "chỉ bao gồm 10 hoặc 13 chữ số , cùng với các ký tự -"
     image_type_valid: "chỉ hỗ trợ các định dạng JPEG, PNG, GIF"
+    not_borrowable: "phải không âm và ít hơn số lượng sách tổng cộng"
     datetime:
       date_past: "phải là một ngày trong quá khứ"
       date_future: "phải là một ngày trong tương lai"

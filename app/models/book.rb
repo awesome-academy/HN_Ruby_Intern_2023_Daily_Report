@@ -20,7 +20,7 @@ class Book < ApplicationRecord
 
   has_one_attached :image
 
-  validates :title, :description, :amount,
+  validates :title, :description, :amount, :borrowed_count,
             :publish_date, :isbn, presence: true
 
   validates :title, uniqueness: {case_sensitive: false},
@@ -39,6 +39,7 @@ class Book < ApplicationRecord
               in: Settings.image_type,
               message: I18n.t("validations.image_type_valid")
             }
+  validate :borrowed_count_below_amount
 
   scope :sorted_by_title, ->{order(title: :asc)}
   scope :ordered_and_grouped_by_first_letter,
@@ -58,10 +59,23 @@ class Book < ApplicationRecord
       .or(where("genres.name LIKE ?", "%#{q}%"))
       .or(where("publishers.name LIKE ?", "%#{q}%"))
   }
+  scope :borrowable, ->{where("amount >= borrowed_count")}
+  scope :remain_least, ->{order(Arel.sql("amount - borrowed_count ASC"))}
 
   def update_relation_with_ids name, ids
     attribute = send "book_#{name}s"
     attribute.clear
     attribute.create(ids.map{|id| {"#{name}_id": id}})
+  end
+
+  def remain
+    amount - borrowed_count
+  end
+
+  private
+
+  def borrowed_count_below_amount
+    errors.add :borrowed_count, I18n.t("validations.not_borrowable") if
+      borrowed_count.negative? || amount < borrowed_count
   end
 end

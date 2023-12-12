@@ -8,11 +8,11 @@
     <%= render_table_header t("accounts._name"), :account %>
     <%= render_table_header t("users.full_name"), :user %>
     <%= render_table_header t("borrows.start_at"), :start %>
-    <% unless @group == :pending %>
-      <%= render_table_header (@group == :history ? t("borrows.finish") : t("borrows.approved_at")), :updated %>
-    <% end %>
+    <%= render_table_header t("borrows.finish"), :updated if @group == :history %>
+    <%= render_table_header t("borrows.updated_at"), :updated if @group == :approved %>
     <%= render_table_header t("borrows.end_at"), :due unless @group == :history %>
-    <%= render_table_header t("borrows.turns"), :turns %>
+    <%= render_table_header t("borrows.incrementing"), :turns %>
+    <%= render_table_header t("borrows.type"), :type if @group == :pending %>
     <%= render_table_header t("borrows.status"), :status if @group == :history %>
     <% tag.th unless @group == :history %>
   </tr>

@@ -10,7 +10,7 @@
     <%= javascript_import_module_tag "admin/common" %>
     <%= yield :head %>
   </head>
-  <body>
+  <body lang="<%= params[:locale] %>">
     <%= yield :body %>
   </body>
 </html>

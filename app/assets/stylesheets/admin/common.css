@@ -6,7 +6,7 @@
  *= require vendors/owl-carousel-2/owl.carousel.min.css
  *= require vendors/owl-carousel-2/owl.theme.default.min.css
  *= require vendors/jquery-toast-plugin/jquery.toast.min.css
- *= require vendors/select2/select2.min.css
+ *= require select2
  *= require css/style.css
  *= require_self
  */

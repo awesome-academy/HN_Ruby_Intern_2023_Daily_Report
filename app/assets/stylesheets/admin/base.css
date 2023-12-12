@@ -118,10 +118,39 @@ a:hover {
 
 .nav-item .nav-link :first-letter,
 .nav-item .preview-item-content .preview-subject:first-letter,
-.info-field .info-header:first-letter {
+.info-field .info-header:first-letter,
+.borrow-status-badge:first-letter {
   text-transform: uppercase;
 }
 
+/*** Modal ***/
+
+.modal-header {
+  padding: 5px 1rem;
+}
+
+.modal-body {
+  padding: 15px 1rem;
+}
+
+.modal .modal-header .close {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+.modal .modal-header .close span {
+  font-size: 25px;
+  font-weight: 400;
+  color: #6a6a6a;
+}
+
+.modal .modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  padding: 15px 0 5px 0;
+  align-items: center;
+}
 /*** Form ***/
 
 .form-group label {
@@ -192,7 +221,7 @@ img.file-original {
 
 .btn-form {
   min-width: 70px;
-  max-width: 90%;
+  max-width: 150px;
   margin: 5px 0;
 }
 
@@ -295,7 +324,7 @@ th.sortable.desc::after {
   flex-direction: column;
 }
 
-.info-field .text-end {
+.tab-content .info-field .text-end {
   border-bottom: solid white 1px;
 }
 
@@ -335,4 +364,39 @@ th.sortable.desc::after {
 
 .book-card p {
   margin-bottom: 2px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  width: 40%;
+  max-width: 250px;
+  margin-left: auto;
+}
+
+.action-buttons .btn {
+  margin: 0 5px;
+}
+
+td .action-buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 100px;
+}
+
+td .action-buttons .btn {
+  margin: 3px 0;
+}
+
+.borrow-status-badge {
+  padding: 0.25rem 0.375rem;
+  font-size: 0.875rem;
+  min-width: 100%;
+}
+
+td .borrow-status-badge {
+  font-size: 0.75rem;
+  width: 80%;
 }

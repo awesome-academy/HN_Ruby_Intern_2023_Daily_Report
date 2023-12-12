@@ -1,0 +1,43 @@
+<% provide :title, t("admin.title.show", name: t("borrows._name")) %>
+<% populate_borrow(@borrow) => {
+    user:, start:, due:, turns:, full_name:
+}%>
+<div class="col-12">
+  <%= navigate_to %>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="border-bottom text-center pb-4">
+            <%= image_tag get_image(user), class: "img-lg rounded-circle mb-3" %>
+            <div class="fs-6">
+              <b><%= user.username %></b>
+            </div>
+          </div>
+          <!-- Contact -->
+          <div class="py-4">
+            <%= render("admin/shared/info_field", name: t("borrows.user"), value: full_name) %>
+            <%= render("admin/shared/info_field", name: t("borrows.start_at"), value: start) %>
+            <%= render("admin/shared/info_field", name: t("borrows.end_at"), value: due) %>
+            <%= render("admin/shared/info_field", name: t("borrows.turns"), value: turns) %>
+            <%= render "admin/shared/info_field", name: t("borrows.status") do %>
+              <%= render "status_badge", borrow: @borrow %>
+            <% end %>
+            <%= render "admin/shared/info_field", name: t("borrows.reject_reason") do %>
+              <%= @borrow.response&.content %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <%= render "action_buttons", borrow: @borrow %>
+          <div class="mt-4 py-2">
+            <%= yield :tab_content %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% if @borrow.pending? %>
+  <% content_for :hidden_content, render("reject_response") %>
+<% end %>

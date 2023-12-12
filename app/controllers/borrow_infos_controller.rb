@@ -58,8 +58,8 @@ class BorrowInfosController < ApplicationController
   def borrow_info_params
     params
       .require(:borrow_info)
-      .permit :start_at, :end_at, :status, :remain_turns, :account_id,
-              :renewal_at
+      .permit :start_at, :end_at, :status, :turns,
+              :account_id, :renewal_at
   end
 
   def save_borrow_info

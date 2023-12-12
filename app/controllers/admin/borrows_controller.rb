@@ -12,24 +12,57 @@ class Admin::BorrowsController < Admin::BaseController
     respond_to_list items
   end
 
-  def show; end
+  def show
+    @pagy, @books = pagy @borrow.books.remain_least.with_attached_image
+    render "admin/shared/tab_books"
+  end
 
-  def return; end
+  def return
+    if @borrow.approved? && @borrow.add_to_book_borrowed_count(-1)
+      respond_to_change_status :returned
+    else
+      redirect_back_or_to admin_borrows_path
+    end
+  end
 
-  def reject; end
+  def reject
+    if @borrow.pending? && @borrow.create_response(content: reject_params)
+      respond_to_change_status :rejected
+    else
+      redirect_back_or_to admin_borrows_path
+    end
+  end
 
-  def approve; end
+  def approve
+    if @borrow.pending? && @borrow.add_to_book_borrowed_count(1)
+      respond_to_change_status :approved
+    else
+      redirect_back_or_to admin_borrows_path
+    end
+  end
 
   private
 
   def get_borrow
     @borrow = BorrowInfo.find_by id: params[:id]
-    return if @borrow&.is_activated
+    return if @borrow
 
     flash[:danger] = {
       content: t("admin.notif.item_not_found", name: t("borrows._name"))
     }
     redirect_to admin_borrows_path
+  end
+
+  def respond_to_change_status to
+    @borrow.update_attribute :status, to
+    flash[:success] = {
+      content: t("admin.notif.update_borrow_status_success",
+                 status: t("borrows.#{to}"))
+    }
+    respond_to do |format|
+      format.turbo_stream{render :change_status}
+      format.html{redirect_to admin_borrows_path}
+    end
   end
 
   def respond_to_list borrows
@@ -42,7 +75,7 @@ class Admin::BorrowsController < Admin::BaseController
     s = params[:sort]
     borrows = s ? borrows.sort_on(s, params[:desc]) : borrows.due_first
 
-    @pagy, @borrows = pagy borrows, items: params[:item]
+    @pagy, @borrows = pagy borrows
   end
 
   def transform_params
@@ -59,7 +92,11 @@ class Admin::BorrowsController < Admin::BaseController
   end
 
   def get_group
-    @group = params[:group].to_sym
+    @group = params[:group]&.to_sym
     @group = :approved unless %i(pending history).include? @group
+  end
+
+  def reject_params
+    params.require(:reject_reason)
   end
 end

@@ -1,5 +1,5 @@
 <% populate_borrow(borrow) => {
-    user:, start:, due:, updated_at:, status:,
+    user:, start:, due:, updated_at:,
     borrow_path:, id:, full_name:, turns:
 }%>
 <tr id="<%= id %>">
@@ -16,18 +16,11 @@
   <% unless @group == :history %>
     <td><%= link_to due, borrow_path %></td>
   <% end %>
-  <td><%= turns %></td>
-  <% if @group == :history %>
-    <td>
-      <div class="d-flex flex-column">
-        <% if borrow.rejected? %>
-          <span class="badge badge-outline-danger"><%= status %></span>
-        <% elsif borrow.returned? %>
-          <span class="badge badge-outline-warning"><%= status %></span>
-        <% end %>
-      </div>
-    </td>
-  <% else %>
-    <td></td>
+  <td><%= pluralize turns, t("borrows.turn") %></td>
+  <% if %i(history pending).include? @group %>
+    <td><%= render "status_badge", borrow: %></td>
+  <% end %>
+  <% if %i(approved pending).include? @group %>
+    <td><%= render "action_buttons", borrow: %></td>
   <% end %>
 </tr>

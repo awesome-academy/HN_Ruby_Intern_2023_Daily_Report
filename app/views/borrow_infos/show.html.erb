@@ -1,5 +1,4 @@
 <% provide :title, t(".borrow_info") %>
-
 <div>
   <% breadcrumb :borrow_info, @borrow_info %>
   <%= render "shared/error_messages", model: @borrow_info, as: "borrow_info" %>
@@ -12,7 +11,7 @@
       <%= t "new_return_date" %>
     <% end %>
   </p>
-  <p><span class="fw-semibold"><%= t "borrow_infos.borrow_renewals" %>: </span><%= @borrow_info.remain_turns %></p>
+  <p><span class="fw-semibold"><%= t "borrow_infos.borrow_renewals" %>: </span><%= @borrow_info.turns %></p>
   <p><span class="fw-semibold"><%= t "status" %>: </span><span class="fs-6 badge text-bg-<%= set_class_based_on(@borrow_info.status) %>"><%= t("#{@borrow_info.status}") %></span></p>
   <%= show_actions @borrow_info.status %>
 </div>

@@ -9,7 +9,7 @@ module Admin::BooksHelper
       title: book.title,
       description: book.description,
       publish_date: localize_date(book.publish_date, :long),
-      amount: book.amount,
+      remain: book.remain,
       isbn: format_isbn(book.isbn),
       updated_at: localize_date(book.updated_at, :long),
       publisher: book.publisher,

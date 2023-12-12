@@ -8,11 +8,11 @@ class BorrowInfo < ApplicationRecord
                         dependent: :destroy
   has_many :books, through: :borrowings
 
-  validates :start_at, :end_at, :status, :remain_turns, presence: true
+  validates :start_at, :end_at, :status, :turns, presence: true
+
   validate :start_at_validation, :end_at_validation, on: :create
   validates :renewal_at, presence: true, on: :update
   validate :renewal_at_validation, on: :update
-  validates :remain_turns, numericality: {greater_than: Settings.digit_0}
 
   scope :due_first, ->{order(end_at: :desc)}
   scope :includes_user, lambda {\
@@ -54,5 +54,18 @@ class BorrowInfo < ApplicationRecord
 
   def finished?
     rejected? || returned?
+  end
+
+  def type
+    turns.positive? ? :incrementing : :new
+  end
+
+  def add_to_book_borrowed_count value
+    transaction do
+      books.each do |book|
+        book.borrowed_count += value
+        book.save!
+      end
+    end
   end
 end
