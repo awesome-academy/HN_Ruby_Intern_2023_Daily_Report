@@ -18,10 +18,6 @@ vi:
   email: "Email"
   password: "Mật khẩu"
   remember_me: "Ghi nhớ đăng nhập"
-  sessions:
-    new:
-      new_user: "Người dùng mới?"
-      sign_up_now: "Đăng ký ngay!"
   library: "Thư viện"
   account: "Tài khoản"
   profile: "Trang cá nhân"
@@ -76,9 +72,16 @@ vi:
     edit:
       update_profile: "Cập nhật thông tin"
       leave_password_blank: "Bỏ trống nếu không muốn thay đổi"
-    new:
-      have_account: "Đã có tài khoản?"
-      sign_in_now: "Đăng nhập ngay!"
+      new_password: "Mật khẩu mới"
+    registrations:
+      new:
+        have_account: "Đã có tài khoản?"
+        sign_in_now: "Đăng nhập ngay!"
+    sessions:
+      new:
+        forgot_password: "Quên mật khẩu?"
+        new_user: "Người dùng mới?"
+        sign_up_now: "Đăng ký ngay!"
   change: "Thay đổi"
   male: "Nam"
   female: "Nữ"
@@ -93,19 +96,20 @@ vi:
     show:
       borrow_info: "Thông tin mượn sách"
       borrow_book_list: "Những sách đã mượn"
+      turns_left: "(Bạn còn %{turns_count} lượt gia hạn)"
     borrow_date: "Ngày mượn sách"
     return_date: "Ngày trả sách"
     borrow_renewals: "Số lần gia hạn mượn sách còn lại"
   status: "Trạng thái mượn sách"
   pending: "Đang chờ"
   approved: "Được chấp nhận"
-  rejected: "Từ chối"
+  rejected: "Bị từ chối"
+  canceled: "Đã hủy"
   returned: "Đã trả sách"
   borrow_history: "Lịch sử mượn sách"
   date_greater_than_today: "phải từ ngày hôm nay trở lên"
   date_maximum_10_days: "tối đa là 10 ngày kể từ khi mượn"
   unknown_status_request: "Không tìm thấy trạng thái thông tin mượn sách"
-  self_cancel: "Bạn đã hủy yêu cầu mượn sách"
   cancel_request_successfully: "Hủy yêu cầu mượn sách thành công"
   cancel_request_failed: "Hủy yêu cầu mượn sách thất bại"
   renew_request_successfully: "Gia hạn mượn sách thành công. Vui lòng đợi sự chấp thuận từ quản lý thư viện"
@@ -113,6 +117,7 @@ vi:
   borrow_renewals_date: "Ngày gia hạn mượn sách"
   if_want: "Nếu bạn có nhu cầu"
   renewals: "Gia hạn"
+  canceled_date: "Ngày hủy yêu cầu mượn sách"
   reject_reason: "Lý do từ chối yêu cầu mượn sách"
   actual_return_date: "Ngày trả sách thực tế"
   return_date_greater_than_borrow_date: "phải lớn hơn ngày mượn sách"
@@ -141,6 +146,7 @@ vi:
         password: "Mật khẩu"
         password_confirmation: "Nhập lại mật khẩu"
         username: "Tên đăng nhập"
+        current_password: "Mật khẩu hiện tại"
       book:
         title: "Tên sách"
         description: "Mô tả"
@@ -177,7 +183,7 @@ vi:
         return_date: "Ngày trả sách"
         end_at: "Ngày trả sách"
         renewal_at: "Ngày gia hạn"
-        remain_turns: "Số lượt gia hạn còn lại"
+        turns: "Số lượt gia hạn đã dùng"
   validations:
     isbn_valid: "chỉ bao gồm 10 hoặc 13 chữ số , cùng với các ký tự -"
     image_type_valid: "chỉ hỗ trợ các định dạng JPEG, PNG, GIF"

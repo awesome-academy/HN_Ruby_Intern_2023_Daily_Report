@@ -70,9 +70,10 @@ group :test do
 end
 
 gem "active_storage_validations", "~> 0.9.8"
-gem "bcrypt", "~> 3.1.7"
 gem "bootstrap", "~> 5.3.2"
+gem "cancancan"
 gem "config"
+gem "devise", "~> 4.9"
 gem "faker"
 gem "figaro"
 gem "gretel"

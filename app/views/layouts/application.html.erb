@@ -16,9 +16,7 @@
   <body>
     <%= render "layouts/header" %>
     <div class="container pt-4">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
+      <%= render "shared/alerts" %>
       <%= breadcrumbs style: :bootstrap5 %>
       <%= yield %>
     </div>

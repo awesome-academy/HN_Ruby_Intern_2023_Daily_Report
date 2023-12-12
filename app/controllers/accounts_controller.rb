@@ -1,25 +1,9 @@
 class AccountsController < ApplicationController
-  before_action :require_login, only: %i(show edit update)
-  before_action :set_account, only: %i(show edit update)
-  before_action :correct_account, only: %i(show edit update)
+  before_action :authenticate_account!
+  before_action :set_account
+  before_action :correct_account
 
   def show; end
-
-  def new
-    @account = Account.new
-  end
-
-  def create
-    @account = Account.new account_params
-    if @account.save
-      reset_session
-      store_to_session @account
-      flash[:success] = t "account_create_success"
-      redirect_to edit_account_path(@account)
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
 
   def edit
     return unless @account.user_info.nil?
@@ -28,7 +12,8 @@ class AccountsController < ApplicationController
   end
 
   def update
-    if @account.update account_params
+    if @account.update_with_password(account_params)
+      sign_in(@account, bypass: true)
       flash[:success] = t "update_success"
       redirect_to @account
     else
@@ -49,13 +34,14 @@ class AccountsController < ApplicationController
   def account_params
     params
       .require(:account)
-      .permit :email, :password, :password_confirmation, :username, :avatar,
+      .permit :email, :password, :password_confirmation, :current_password,
+              :username, :avatar,
               user_info_attributes:
                 %i(id name gender address phone citizen_id dob)
   end
 
   def correct_account
-    return if @account == @current_account
+    return if @account == current_account
 
     flash[:warning] = t "account_not_found"
     redirect_to root_path

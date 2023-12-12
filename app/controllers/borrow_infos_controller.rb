@@ -1,9 +1,10 @@
 class BorrowInfosController < ApplicationController
   include CartActions
 
-  before_action :require_login
+  before_action :authenticate_account!
   before_action :set_cart, only: %i(new)
   before_action :check_cart_empty, only: %i(new)
+  before_action :check_user_info, except: %i(index show)
   before_action :set_borrow_info, only: %i(show handle_status_action)
 
   def index
@@ -22,13 +23,14 @@ class BorrowInfosController < ApplicationController
 
   def create
     @borrow_info = BorrowInfo.new borrow_info_params
-    @borrow_info.account_id = current_account.id if logged_in?
+    @borrow_info.account_id = current_account.id if account_signed_in?
 
-    if current_account.user_info.present?
-      save_borrow_info
+    if @borrow_info.save
+      move_item_from_cart
+      flash[:success] = t "borrow_info_success"
+      redirect_to @borrow_info
     else
-      flash[:warning] = t "borrow_info_fill_user_info"
-      redirect_to edit_account_path(current_account)
+      render :new, status: :bad_request
     end
   end
 
@@ -58,18 +60,7 @@ class BorrowInfosController < ApplicationController
   def borrow_info_params
     params
       .require(:borrow_info)
-      .permit :start_at, :end_at, :status, :turns,
-              :account_id, :renewal_at
-  end
-
-  def save_borrow_info
-    if @borrow_info.save
-      move_item_from_cart
-      flash[:success] = t "borrow_info_success"
-      redirect_to @borrow_info
-    else
-      render :new, status: :bad_request
-    end
+      .permit :start_at, :end_at, :status, :turns, :account_id, :renewal_at
   end
 
   def move_item_from_cart
@@ -83,10 +74,7 @@ class BorrowInfosController < ApplicationController
   end
 
   def cancel_borrow_request
-    @borrow_info.update_attribute(:status, "rejected")
-    @borrow_response = @borrow_info.build_response(content: t("self_cancel"))
-
-    if @borrow_response.save
+    if @borrow_info.update_attribute(:status, "canceled")
       flash[:success] = t "cancel_request_successfully"
       redirect_to @borrow_info
     else
@@ -98,8 +86,7 @@ class BorrowInfosController < ApplicationController
   def update_return_date
     if @borrow_info.update borrow_info_params.except(:start_at, :end_at)
       @borrow_info.update_attribute(:status, "pending")
-      @borrow_info.update_attribute(:remain_turns,
-                                    @borrow_info.remain_turns - 1)
+      @borrow_info.update_attribute(:turns, @borrow_info.turns + 1)
       @borrow_info.update_attribute(:end_at, borrow_info_params[:renewal_at])
       flash[:success] = t "renew_request_successfully"
       redirect_to @borrow_info
@@ -108,7 +95,7 @@ class BorrowInfosController < ApplicationController
     end
   end
 
-  def translate_status_to_english status
+  def translate_status_to_english status # rubocop:disable Metrics/PerceivedComplexity
     case status&.downcase
     when t("pending")&.downcase
       "pending"
@@ -116,6 +103,8 @@ class BorrowInfosController < ApplicationController
       "approved"
     when t("rejected")&.downcase
       "rejected"
+    when t("canceled")&.downcase
+      "canceled"
     when t("returned")&.downcase
       "returned"
     else

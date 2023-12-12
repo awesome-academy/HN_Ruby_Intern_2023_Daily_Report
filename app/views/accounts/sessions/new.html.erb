@@ -1,0 +1,31 @@
+<% provide :title, t("log_in") %>
+
+<div class="mx-auto auth-form">
+  <h1><%= t "log_in" %></h1>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="mb-3">
+      <%= f.label :email, t("email"), class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password, t("password"), class: "form-label" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+    </div>
+
+    <div class="mb-3 form-check d-flex justify-content-between">
+      <div>
+        <%= f.check_box :remember_me, class: "form-check-input" %>
+        <%= f.label :remember_me, t("remember_me"), class: "form-check-label" %>
+      </div>
+      <div>
+        <%= link_to t(".forgot_password"), new_password_path(resource_name) %><br />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= f.submit t("log_in"), class: "btn btn-primary form-control" %>
+    </div>
+  <% end %>
+  <p><%= t ".new_user" %> <%= link_to t(".sign_up_now"), new_account_registration_path %></p>
+</div>

@@ -11,7 +11,10 @@
       <%= t "new_return_date" %>
     <% end %>
   </p>
-  <p><span class="fw-semibold"><%= t "borrow_infos.borrow_renewals" %>: </span><%= @borrow_info.turns %></p>
+  <p>
+    <span class="fw-semibold"><%= t "activerecord.attributes.borrow_info.turns" %>: </span><%= @borrow_info.turns %>
+    <span class="text-secondary"><%= t(".turns_left", turns_count: 5 - @borrow_info.turns) %></span>
+  </p>
   <p><span class="fw-semibold"><%= t "status" %>: </span><span class="fs-6 badge text-bg-<%= set_class_based_on(@borrow_info.status) %>"><%= t("#{@borrow_info.status}") %></span></p>
   <%= show_actions @borrow_info.status %>
 </div>
