@@ -78,4 +78,19 @@ module Admin::BaseHelper
       }
     ]
   end
+
+  def required? obj, attribute
+    target = obj.instance_of?(Class) ? obj : obj.class
+    target.validators_on(attribute)
+          .map(&:class)
+          .include?(ActiveRecord::Validations::PresenceValidator)
+  end
+
+  def validated_fields_of obj, validator =
+    ActiveRecord::Validations::PresenceValidator
+    target = obj.instance_of?(Class) ? obj : obj.class
+    target.validators.select do |v|
+      v.instance_of?(validator)
+    end.map(&:attributes).flatten
+  end
 end

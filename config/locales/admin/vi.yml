@@ -123,7 +123,7 @@ vi:
       to_list: 'Đến trang danh sách'
       upload: 'Tải lên %{name}'
       table_info: 'Hiển thị %{from} - %{to} / %{total}'
-      search: 'Lọc'
+      search: 'Tìm kiếm'
       new: 'Thêm mới'
       create: 'Tạo'
       edit: 'Cập nhật'
@@ -152,6 +152,15 @@ vi:
       login_fail: 'Đăng nhập thất bại'
       login_success: 'Xin chào'
       send_remind_email_success: 'Gửi email nhắc nhở thành công'
+      delete_book_fail_borrowed: 'Xóa sách thất bại do có các yêu cầu mượn chưa trả'
+    hint:
+      search:
+        borrows: 'Tìm kiếm theo người mượn: họ tên, email, tên đăng nhập'
+        books: 'Tìm kiếm theo tên sách, ISBN, tác giả, thể loại, nhà xuất bản'
+        authors: 'Tìm kiếm theo tên tác giả, email, mô tả'
+        genres: 'Tìm kiếm theo tên thể loại, mô tả'
+        publishers: 'Tìm kiếm theo tên nhà xuất bản, email, địa chỉ, mô tả'
+        users: 'Tìm kiếm theo tên đăng nhập, email, họ tên, SĐT'
     title:
       index: 'Danh sách %{name}'
       new: 'Thêm %{name}'

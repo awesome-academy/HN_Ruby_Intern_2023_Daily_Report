@@ -56,8 +56,12 @@ class Admin::BooksController < Admin::BaseController
   end
 
   def destroy
-    custom_condition = @book.update is_active: false
-    admin_destroy @book, :book, custom_condition:
+    if @book.borrowed_count.positive?
+      flash[:error] = t "admin.notif.delete_book_fail_borrowed"
+      return application_notify
+    end
+    destroy_method = @book.update is_active: false
+    admin_destroy @book, :book, destroy_method:
   end
 
   private

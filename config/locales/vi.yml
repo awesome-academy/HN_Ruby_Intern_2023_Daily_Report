@@ -204,3 +204,9 @@ vi:
       warning: "Trường hợp chậm trễ, thư viện sẽ áp dụng cơ chế phạt như chính sách đã được bạn cam kết từ khi tham gia hệ thống."
       note: "Trong trường hợp bạn cần gia hạn, hãy truy cập đường dẫn sau: "
       renewal_button: "Gia hạn"
+  user_mailer:
+    notify_inactive:
+      subject: "Tài khoản của bạn đã bị khóa"
+      info: "Admin của hệ thống đã khóa tài khoản của bạn vào lúc %{time}, với lý do là: "
+      note: "Kể từ thời điểm này, bạn sẽ không thể đăng nhập cũng như không thể tiếp tục mượn sách. Cho tới khi admin kích hoạt lại tài khoản của bạn"
+      reason: "Trả sách trễ hạn quá nhiều lần"

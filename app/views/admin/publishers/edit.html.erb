@@ -1,5 +1,6 @@
 <% action = controller.action_name %>
 <% provide :title, t("admin.title.#{action}", name: t("publishers._name")) %>
+<% required_fields = validated_fields_of Publisher %>
 <div class="col-12">
   <%= navigate_to list: action == "new" %>
   <div class="card">
@@ -17,22 +18,26 @@
               <div class="form-group">
                 <%= f.label :name %>
                 <%= f.text_field :name, class: "form-control",
-                                 placeholder: t("publishers.placeholder.name") %>
+                                 placeholder: t("publishers.placeholder.name"),
+                                 required: required_fields.include?(:name) %>
               </div>
               <div class="form-group">
                 <%= f.label :email %>
                 <%= f.email_field :email, class: "form-control",
-                                 placeholder: t("publishers.placeholder.email") %>
+                                 placeholder: t("publishers.placeholder.email"),
+                                 required: required_fields.include?(:email) %>
               </div>
               <div class="form-group">
                 <%= f.label :address %>
                 <%= f.text_field :address, class: "form-control",
-                                 placeholder: t("publishers.placeholder.address") %>
+                                 placeholder: t("publishers.placeholder.address"),
+                                 required: required_fields.include?(:address) %>
               </div>
               <div class="form-group">
                 <%= f.label :about %>
                 <%= f.text_area :about, class: "form-control",
-                                 placeholder: t("publishers.placeholder.about") %>
+                                 placeholder: t("publishers.placeholder.about"),
+                                 required: required_fields.include?(:about) %>
               </div>
             </div>
           </div>

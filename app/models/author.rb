@@ -13,7 +13,7 @@ class Author < ApplicationRecord
   validates :name, presence: true, length: {
     maximum: Settings.name_max_len
   }
-  validates :about, presence: true, length: {
+  validates :about, length: {
     maximum: Settings.desc_max_len
   }
   validates :email, length: {maximum: Settings.digit_255},

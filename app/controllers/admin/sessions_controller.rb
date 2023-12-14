@@ -8,7 +8,7 @@ class Admin::SessionsController < SessionsController
 
   def on_login_success
     flash[:success] = t "admin.notif.login_success"
-    redirect_back_or admin_root_path
+    redirect_to admin_root_path
   end
 
   def on_login_fail_inactive

@@ -93,7 +93,8 @@ build-iPhoneSimulator/
 
 /test/*
 
-/vendor/theme
+/vendor/theme/*
+!/vendor/theme/admin/
 
 config/settings.local.yml
 config/settings/*.local.yml

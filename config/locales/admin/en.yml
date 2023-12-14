@@ -145,6 +145,15 @@ en:
       login_fail: 'Fail to log you in'
       login_success: 'Welcome'
       send_remind_email_success: 'Send remind email successfully'
+      delete_book_fail_borrowed: 'Delete book fail because there are some requests has not been returned'
+    hint:
+      search:
+        borrows: 'Search by borrower information: full name, email, username'
+        books: 'Search by title, ISBN, author name, genre name, publisher name'
+        authors: 'Search by name, email, about'
+        genres: 'Search by name, description'
+        publishers: 'Search by name, email, address, about'
+        users: 'Search by username, email, fullname, phone'
     title:
       index: 'List of %{name}'
       new: 'New %{name}'
