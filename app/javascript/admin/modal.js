@@ -6,7 +6,7 @@ $(document).on('turbo:load', function () {
       width: '100%',
       placeholder: $(`[data-placeholder-for="${id}"]`).text(),
       dropdownParent: parent_id && $(`#${parent_id}`),
-      minimumInputLength: 0, // only start searching when the user has input 3 or more characters
+      minimumInputLength: 0,
       tags: true, // allow create new value
     });
   });

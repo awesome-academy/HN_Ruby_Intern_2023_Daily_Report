@@ -1,4 +1,15 @@
-@import "bootstrap";
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import 'bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-@import "custom";
+@import 'custom';
+
+body.mailer p {
+  margin-left: 10px;
+}
+body.mailer {
+  padding: 20px;
+}
+
+body.mailer .ms-25 {
+  margin-left: 25%;
+}

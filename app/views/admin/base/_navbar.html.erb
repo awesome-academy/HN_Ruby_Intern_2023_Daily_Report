@@ -1,32 +1,43 @@
 <nav class="navbar p-0 fixed-top d-flex flex-row flex-nowrap">
   <div class="navbar-brand-wrapper d-xs-none d-flex d-lg-none align-items-center justify-content-center">
     <%= link_to "#", class: "navbar-brand brand-logo-mini" do %>
-      <%= image_tag "admin/logo-mini.svg" %>
+      <span class="brand-name"><%= Settings.app_name[0] %></span>
     <% end %>
   </div>
-  <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+  <div class="navbar-menu-wrapper flex-grow d-flex ms-auto">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
       <span class="mdi mdi-menu"></span>
     </button>
     <ul class="navbar-nav navbar-nav-right">
-      <li class="d-none d-lg-inline">
-        <%= debug params %>
-      </li>
       <li class="nav-item dropdown d-none d-lg-block">
         <%= render "dropdown_button", id: "createbtns",
                     button_class: "nav-link btn btn-success px-2" do %>
-          <span class="fs-6">+ <%= t("admin.misc.create") %></span>
+          <span class="fs-6"><b>+</b> <%= t("admin.misc.new") %></span>
         <% end %>
         <%= render "dropdown_menu", id: "createbtns", pos: :right,
                     menu_class: "navbar-dropdown" do %>
-          <%= render "dropdown_item", link: new_admin_book_path, icon: "book",
-                      title: t("books._name") unless current_page?(new_admin_book_path) %>
-          <%= render "dropdown_item", link: new_admin_author_path, icon: "account",
-                      title: t("authors._name") unless current_page?(new_admin_author_path) %>
-          <%= render "dropdown_item", link: new_admin_genre_path, icon: "tag",
-                      title: t("genres._name") unless current_page?(new_admin_genre_path) %>
-          <%= render "dropdown_item", link: new_admin_publisher_path, icon: "briefcase",
-                      title: t("publishers._name") unless current_page?(new_admin_publisher_path) %>
+          <% get_new_buttons.each do |btn| %>
+            <%= render("dropdown_item", link: btn[:link],
+                       icon: btn[:icon], title: btn[:title]) unless
+                       current_page?(btn[:link]) %>
+          <% end %>
+        <% end %>
+      </li>
+      <li class="nav-item dropdown border-left">
+        <% langs = get_languages %>
+        <% cur_locale = I18n.locale %>
+        <% cur_lang = langs[cur_locale] %>
+        <%= render "dropdown_button", id: "languages", button_class: "nav-link" do %>
+          <%= tag.i class: "flag-icon flag-icon-#{cur_lang[:icon]}", title: cur_lang[:title] %>
+        <% end %>
+        <%= render "dropdown_menu", id: "languages", pos: :left,
+                    menu_class: "navbar-dropdown" do %>
+          <% langs.except(cur_locale).each do |locale, lang| %>
+            <%= link_to url_for(locale:), class: "dropdown-item preview-item my-1 align-items-baseline" do %>
+              <%= tag.i class: "flag-icon flag-icon-#{lang[:icon]} preview-thumbnail", title: lang[:title], id:"lang-#{lang[:icon]}" %>
+              <%= tag.span lang[:title], class: "text-white preview-subject ms-3 fs-6" %>
+            <% end %>
+          <% end %>
         <% end %>
       </li>
       <li class="nav-item dropdown border-left">

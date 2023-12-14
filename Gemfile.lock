@@ -145,6 +145,8 @@ GEM
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
+    figaro (1.2.0)
+      thor (>= 0.14.0, < 2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     gretel (4.6.0)
@@ -357,6 +359,7 @@ DEPENDENCIES
   config
   debug
   faker
+  figaro
   gretel
   image_processing (~> 1.12.2)
   importmap-rails

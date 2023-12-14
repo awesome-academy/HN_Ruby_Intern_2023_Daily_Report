@@ -29,37 +29,15 @@ class Admin::GenresController < Admin::BaseController
 
   def create
     @genre = Genre.new genre_params
-    if @genre.save
-      flash[:success] = t "admin.notif.create_success"
-      redirect_to admin_genres_path
-    else
-      respond_to_form_fail @genre
-    end
+    admin_save @genre, :genre
   end
 
   def update
-    if @genre.update genre_params
-      flash[:success] = t "admin.notif.update_success"
-      redirect_to [:admin, @genre]
-    else
-      respond_to_form_fail @genre
-    end
+    admin_update @genre, genre_params, :genre
   end
 
   def destroy
-    if @genre.destroy
-      flash[:success] = t "admin.notif.delete_success"
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.remove(
-            helpers.dom_id(@genre, :genre)
-          )
-        end
-        format.html{redirect_to admin_genres_path}
-      end
-    else
-      flash[:danger] = t "admin.notif.delete_fail" # TODO
-    end
+    admin_destroy @genre, :genre
   end
 
   private
@@ -67,9 +45,7 @@ class Admin::GenresController < Admin::BaseController
     @genre = Genre.find_by id: params[:id]
     return if @genre
 
-    flash[:danger] = {
-      content: t("admin.notif.item_not_found", name: t("genres._name"))
-    }
+    flash[:error] = t "admin.notif.item_not_found", name: t("genres._name")
     redirect_to admin_genres_path
   end
 

@@ -1,0 +1,6 @@
+<ul class="d-flex flex-column border border-2 rounded-2 px-4">
+  <li class="mb-2 ms-3 d-inline"><%= t "admin.misc.errors" %></li>
+  <% obj.errors.full_messages.each do |message| %>
+    <%= tag.li message, class: "text-danger ms-3" %>
+  <% end %>
+</ul>

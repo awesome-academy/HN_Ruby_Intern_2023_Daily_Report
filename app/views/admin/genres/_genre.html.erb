@@ -1,11 +1,10 @@
 <% populate_genre(genre) => {name:, description:, genre_path:, id:, updated_at:}%>
-<% null = Settings.display_for_nil %>
 <tr id="<%= id %>">
   <td><%= @pagy.from + genre_iteration.index %></td>
   <td><%= link_to name, genre_path, title: name %></td>
-  <td><%= description.presence || null %></td>
+  <td class="text-truncate mw-32"><%= description %></td>
   <td><%= updated_at %></td>
   <td>
-    <%= render "admin/shared/form_button", item: genre, name: t("genres._item") %>
+    <%= render "admin/shared/form_button", item: genre, name: :genre %>
   </td>
 </tr>

@@ -61,7 +61,7 @@ end
   about = "#{name} #{Faker::Lorem.paragraph}"
   email = Faker::Internet.email(name: name)
 
-  Publisher.create!(name:, address:, about:, email:)
+  Publisher.create(name:, address:, about:, email:)
 end
 
 # Author
@@ -113,9 +113,9 @@ Book.all.each do |book|
   author_id = Author.pluck(:id).sample
   genre_id = Genre.pluck(:id).sample
 
-  BookAuthor.create!(book_id:, author_id:)
+  BookAuthor.create(book_id:, author_id:)
 
-  BookGenre.create!(book_id:, genre_id:)
+  BookGenre.create(book_id:, genre_id:)
 end
 
 100.times do |i|

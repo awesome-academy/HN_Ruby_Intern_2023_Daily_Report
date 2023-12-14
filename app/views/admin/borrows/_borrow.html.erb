@@ -4,11 +4,11 @@
 }%>
 <tr id="<%= id %>">
   <td><%= (@pagy ? @pagy.from : 1) + borrow_iteration.index %></td>
-  <td class="long-name">
+  <td>
     <%= render "admin/shared/profile", user:,
                 link: admin_user_path(user), username_class: "ps-3" %>
   </td>
-  <td><%= full_name %></td>
+  <td  class="text-truncate mw-6"><%= full_name %></td>
   <td><%= link_to start, borrow_path %></td>
   <% unless @group == :pending %>
     <td><%= link_to updated_at, borrow_path %></td>
@@ -16,7 +16,7 @@
   <% unless @group == :history %>
     <td><%= link_to due, borrow_path %></td>
   <% end %>
-  <td><%= pluralize turns, t("borrows.turn") %></td>
+  <td><%= turns %></td>
   <% if %i(history pending).include? @group %>
     <td><%= render "status_badge", borrow: %></td>
   <% end %>

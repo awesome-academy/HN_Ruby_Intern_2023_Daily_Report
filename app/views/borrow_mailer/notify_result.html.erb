@@ -1,0 +1,8 @@
+<p class="greeting"><%= t "mailer.greeting" %> <b><%= @user %></b>,
+  <%= t ".status" %>
+  <b class="text-<%= @borrow.approved? ? :success : :danger %>"><%= t("borrows.#{@borrow.status}") %></b>.
+</p>
+<% unless @borrow.approved? %>
+  <p><%= t("borrows.reject_reason") %>: <b><%= @borrow.response&.content %></b></p>
+<% end %>
+<%= render "borrow" %>

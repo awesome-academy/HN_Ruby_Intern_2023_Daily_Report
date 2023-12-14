@@ -19,6 +19,7 @@ a {
 a:hover {
   color: yellow;
 }
+
 /** Select2 **/
 .select2-search--inline input {
   color: yellow;
@@ -37,6 +38,15 @@ a:hover {
 }
 
 /** Misc **/
+
+.brand-name {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 0.75rem;
+  text-transform: uppercase;
+}
+
 .navbar .navbar-menu-wrapper .count-indicator .count {
   position: absolute;
   left: 50%;
@@ -116,7 +126,8 @@ a:hover {
   border-right: 1px solid #2c2e33 !important;
 }
 
-.nav-item .nav-link :first-letter,
+.nav-item .nav-link .menu-title:first-letter,
+.nav-item .nav-link .tab-title:first-letter,
 .nav-item .preview-item-content .preview-subject:first-letter,
 .info-field .info-header:first-letter,
 .borrow-status-badge:first-letter {
@@ -151,7 +162,12 @@ a:hover {
   padding: 15px 0 5px 0;
   align-items: center;
 }
+
 /*** Form ***/
+
+.area-large {
+  height: 5rem;
+}
 
 .form-group label {
   font-size: 1rem;
@@ -212,15 +228,21 @@ img.file-original {
   margin-right: 10px;
 }
 
-.table .long-name {
-  max-width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.mw-6 {
+  max-width: 6rem;
+}
+.mw-12 {
+  max-width: 12rem;
+}
+.mw-20 {
+  max-width: 20rem;
+}
+.mw-32 {
+  max-width: 32rem;
 }
 
 .btn-form {
-  min-width: 70px;
+  min-width: 80px;
   max-width: 150px;
   margin: 5px 0;
 }
@@ -317,6 +339,7 @@ th.sortable.desc::after {
 
 .text-description {
   font-size: 0.875rem;
+  margin-top: 5px;
 }
 
 .info-field .ref-list {

@@ -1,10 +1,7 @@
 /*
  *= require vendors/mdi/css/materialdesignicons.min.css
  *= require vendors/css/vendor.bundle.base.css
- *= require vendors/jvectormap/jquery-jvectormap.css
  *= require vendors/flag-icon-css/css/flag-icon.min.css
- *= require vendors/owl-carousel-2/owl.carousel.min.css
- *= require vendors/owl-carousel-2/owl.theme.default.min.css
  *= require vendors/jquery-toast-plugin/jquery.toast.min.css
  *= require select2
  *= require css/style.css
@@ -13,4 +10,13 @@
 
 .form-control:focus {
   color: #ff0;
+}
+
+.btn:focus {
+  border-color: unset;
+  border-width: 2px;
+}
+
+.jq-toast-single {
+  font-size: 0.875rem;
 }

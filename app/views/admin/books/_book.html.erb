@@ -4,7 +4,7 @@
 }%>
 <tr id="<%= id %>">
   <td><%= (@pagy ? @pagy.from : 1) + book_iteration.index %></td>
-  <td class="long-name">
+  <td class="text-truncate mw-12">
     <%= link_to book_path do %>
       <%= image_tag cover, class: "image-rect", title: "ISBN: #{isbn}" %>
       <span title="<%= title %>"><%= title %></span>
@@ -17,12 +17,11 @@
   <td>
     <%= render "admin/shared/ref_list", obj: genres, resource: :genre %>
   </td>
-  <td style="max-width: 100px;">
-    <%= render "admin/shared/ref_list", obj: publisher, resource: :publisher,
-                link_class: "long-name" %>
+  <td class="text-truncate mw-6">
+    <%= render "admin/shared/ref_list", obj: publisher, resource: :publisher %>
   </td>
   <td><%= publish_date %></td>
   <td>
-    <%= render "admin/shared/form_button", item: book, name: t("books._item") %>
+    <%= render "admin/shared/form_button", item: book, name: :book %>
   </td>
 </tr>

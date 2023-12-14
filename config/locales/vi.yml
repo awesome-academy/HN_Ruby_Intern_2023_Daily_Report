@@ -187,3 +187,20 @@ vi:
       date_future: "phải là một ngày trong tương lai"
       date_between: "phải trong khoảng từ %{min} đến %{max}"
       date_eql: "phải là %{other}"
+  mailer:
+    greeting: "Xin chào"
+    thanks: "Cảm ơn bạn"
+    from: "LIBMA Team"
+  borrow_mailer:
+    borrow:
+      button_detail: 'Xem chi tiết phiếu mượn'
+      info: 'Thông tin về phiếu mượn'
+    notify_result:
+      subject: "Kết quả xử lý yêu cầu phiếu mượn"
+      status: 'yêu cầu mượn sách của bạn đã'
+    remind:
+      subject: "Nhắc nhở sắp đến hạn trả sách"
+      content: "Hiện tại đã sắp đến hạn trả sách của bạn. Đề nghị bạn tới thư viện Libma trả sách đúng hạn."
+      warning: "Trường hợp chậm trễ, thư viện sẽ áp dụng cơ chế phạt như chính sách đã được bạn cam kết từ khi tham gia hệ thống."
+      note: "Trong trường hợp bạn cần gia hạn, hãy truy cập đường dẫn sau: "
+      renewal_button: "Gia hạn"

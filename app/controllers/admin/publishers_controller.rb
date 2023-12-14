@@ -29,37 +29,15 @@ class Admin::PublishersController < Admin::BaseController
 
   def create
     @publisher = Publisher.new publisher_params
-    if @publisher.save
-      flash[:success] = t "admin.notif.create_success"
-      redirect_to admin_publishers_path
-    else
-      respond_to_form_fail @publisher
-    end
+    admin_save @publisher, :publisher
   end
 
   def update
-    if @publisher.update publisher_params
-      flash[:success] = t "admin.notif.update_success"
-      redirect_to [:admin, @publisher]
-    else
-      respond_to_form_fail @publisher
-    end
+    admin_update @publisher, publisher_params, :publisher
   end
 
   def destroy
-    if @publisher.destroy
-      flash[:success] = t "admin.notif.delete_success"
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.remove(
-            helpers.dom_id(@publisher, :publisher)
-          )
-        end
-        format.html{redirect_to admin_publishers_path}
-      end
-    else
-      flash[:danger] = t "admin.notif.delete_fail" # TODO
-    end
+    admin_destroy @publisher, :publisher
   end
 
   private
@@ -67,9 +45,7 @@ class Admin::PublishersController < Admin::BaseController
     @publisher = Publisher.find_by id: params[:id]
     return if @publisher
 
-    flash[:danger] = {
-      content: t("admin.notif.item_not_found", name: t("publishers._name"))
-    }
+    flash[:error] = t "admin.notif.item_not_found", name: t("publishers._name")
     redirect_to admin_publishers_path
   end
 

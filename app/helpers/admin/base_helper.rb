@@ -27,7 +27,7 @@ module Admin::BaseHelper
   end
 
   def get_link item, resource, for_text: :name, class: nil
-    text = item&.public_send for_text
+    text = item&.public_send(for_text)
     link_to_if item, text,
                (send("admin_#{resource}_path", item) if item),
                class:, title: text
@@ -57,5 +57,25 @@ module Admin::BaseHelper
       link_to t("admin.misc.back"), "javascript:history.back()",
               class: link_class, data:
     end
+  end
+
+  def get_languages
+    {
+      vi: {icon: "vn", title: "Tiếng Việt"},
+      en: {icon: "us", title: "English (US)"}
+    }
+  end
+
+  def get_new_buttons
+    [
+      {link: new_admin_book_path, icon: :book, title: t("books._name")},
+      {link: new_admin_author_path, icon: :account, title: t("authors._name")},
+      {link: new_admin_genre_path, icon: :tag, title: t("genres._name")},
+      {
+        link: new_admin_publisher_path,
+        icon: :briefcase,
+        title: t("publishers._name")
+      }
+    ]
   end
 end

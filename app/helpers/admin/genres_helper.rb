@@ -5,7 +5,7 @@ module Admin::GenresHelper
       description: genre.description,
       updated_at: localize_date(genre.updated_at, :long),
       genre_path: admin_genre_path(genre),
-      id: dom_id(genre, :genre)
+      id: dom_id(genre)
     }
   end
 

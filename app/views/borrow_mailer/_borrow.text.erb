@@ -1,0 +1,10 @@
+==============================================
+<%= t ".info" %>
+<%= t "borrows.start_at" %>    : <%= l @borrow.start_at, format: :long %>
+<%= t "borrows.end_at" %>      : <%= l @borrow.end_at, format: :long %>
+<%= t "borrows.updated_at" %>     : <%= l @borrow.updated_at, format: :long %>
+<%= t "borrows.books" %>
+<% @borrow.books.pluck(:title).each_with_index do |title, i| %>
+  <%= " #{i + 1}. #{title}" %>
+<% end %>
+<%= t(".button_detail") %>: <%= borrow_info_url(id: @borrow) %>

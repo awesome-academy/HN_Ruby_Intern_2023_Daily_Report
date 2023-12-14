@@ -1,22 +1,13 @@
 class SessionsController < ApplicationController
   def create
     account = Account.find_by email: params.dig(:session, :email)&.downcase
-    unless account&.is_activated && account&.is_active
-      return on_login_fail_inactive
-    end
 
-    return on_login_fail unless account&.authenticate(
-      params.dig(:session, :password)
-    )
+    return unless validate account
 
     reset_session
     store_to_session account
 
-    if params.dig(:session, :remember_me) == "1"
-      remember account
-    else
-      forget account
-    end
+    set_remember_for account
 
     on_login_success
   end
@@ -42,7 +33,35 @@ class SessionsController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
+  def check_before_save_session _account
+    true
+  end
+
   def on_logout
     redirect_to root_path
+  end
+
+  private
+
+  def validate account
+    unless account&.is_activated && account&.is_active
+      on_login_fail_inactive
+      return false
+    end
+
+    unless account&.authenticate(params.dig(:session, :password)) &&
+           check_before_save_session(account)
+      on_login_fail
+      return false
+    end
+    true
+  end
+
+  def set_remember_for account
+    if params.dig(:session, :remember_me) == "1"
+      remember account
+    else
+      forget account
+    end
   end
 end

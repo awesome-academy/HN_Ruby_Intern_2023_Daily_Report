@@ -14,9 +14,10 @@
     <%= render_table_header t("borrows.incrementing"), :turns %>
     <%= render_table_header t("borrows.type"), :type if @group == :pending %>
     <%= render_table_header t("borrows.status"), :status if @group == :history %>
-    <% tag.th unless @group == :history %>
+    <%= tag.th unless @group == :history %>
   </tr>
 <% end %>
 <% content_for :table_body, render(partial: "borrow", collection: @borrows) %>
 <% content_for :table_empty, name: :borrows %>
+<% content_for :hidden_content, render("reject_response") %>
 <%= render "admin/shared/index", name: :borrows %>

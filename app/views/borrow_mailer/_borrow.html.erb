@@ -1,0 +1,26 @@
+<p class="fs-5"><b><%= t ".info" %></b></p>
+<table class="table">
+  <tr>
+    <td><%= t "borrows.start_at" %></td>
+    <td><%= l @borrow.start_at, format: :long %></td>
+  </tr>
+  <tr>
+    <td><%= t "borrows.end_at" %></td>
+    <td><%= l @borrow.end_at, format: :long %></td>
+  </tr>
+  <tr>
+    <td><%= t "borrows.updated_at" %></td>
+    <td><%= l @borrow.updated_at, format: :long %></td>
+  </tr>
+  <tr>
+    <td><%= t "borrows.books" %></td>
+    <td>
+      <ol>
+        <% @borrow.books.pluck(:title).each do |title| %>
+          <%= tag.li title %>
+        <% end %>
+      </ol>
+    </td>
+  </tr>
+</table>
+<%= link_to t(".button_detail"), borrow_info_url(id: @borrow), class: "btn btn-primary ms-25" %>
