@@ -15,11 +15,11 @@
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <%= form.label :borrow_date, class: "form-label fw-semibold" %>
+          <%= form.label :borrow_date, class: "form-label required fw-semibold" %>
           <%= form.date_field :start_at, class: "form-control", min: Date.current, id: "start-at" %>
         </div>
         <div class="mb-3">
-          <%= form.label :return_date, class: "form-label fw-semibold" %>
+          <%= form.label :return_date, class: "form-label required fw-semibold" %>
           <%= form.date_field :end_at, class: "form-control", min: Date.current, id: "end-at" %>
         </div>
         <div class="mb-3">

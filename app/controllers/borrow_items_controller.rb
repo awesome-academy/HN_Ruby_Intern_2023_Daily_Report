@@ -1,6 +1,9 @@
 class BorrowItemsController < ApplicationController
-  before_action :require_login
+  include CartActions
+
+  before_action :authenticate_account!
   before_action :set_borrow_item, only: %i(destroy)
+  before_action :check_user_info
 
   def create
     chosen_book = Book.find_by(id: params[:book_id])

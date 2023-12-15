@@ -6,7 +6,7 @@
   <div class="d-flex justify-content-between align-items-center mt-5 mb-2">
     <h3 class="text-secondary"><%= t "borrow_history" %> - <%= t "#{@borrow_infos_sort.first.status}" if @borrow_infos_sort.any? %></h3>
     <%= form_with url: borrow_infos_path, method: :get, class: "d-flex" do |form| %>
-      <%= form.select :status_option, options_for_select([t("pending"), t("approved"), t("rejected"), t("returned")], selected: params[:status_option]), {}, { class: "form-select" } %>
+      <%= form.select :status_option, options_for_select([t("pending"), t("approved"), t("rejected"), t("canceled"), t("returned")], selected: params[:status_option]), {}, { class: "form-select" } %>
       <%= form.submit t("filter"), class: "btn btn-primary ms-2", name: nil %>
     <% end %>
   </div>
@@ -20,7 +20,7 @@
           <th scope="col"><%= t "borrow_id" %></th>
           <th scope="col"><%= t "activerecord.attributes.borrow_info.borrow_date" %></th>
           <th scope="col"><%= t "activerecord.attributes.borrow_info.return_date" %></th>
-          <th scope="col"><%= t "activerecord.attributes.borrow_info.remain_turns" %></th>
+          <th scope="col"><%= t "activerecord.attributes.borrow_info.turns" %></th>
           <th scope="col"><%= t "status" %></th>
           <th scope="col"><%= t "action" %></th>
         </tr>
@@ -36,7 +36,7 @@
                 <%= t "new_return_date" %>
               <% end %>
             </td>
-            <td><%= borrow_info.remain_turns %></td>
+            <td><%= borrow_info.turns %></td>
             <td class="text-<%= set_class_based_on(borrow_info.status) %>"><%= t "#{@borrow_infos_sort.first.status}" %></td>
             <td><%= link_to t("details"), borrow_info_path(borrow_info) %></td>
           </tr>

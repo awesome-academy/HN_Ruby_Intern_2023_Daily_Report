@@ -1,5 +1,5 @@
 class BorrowInfo < ApplicationRecord
-  enum :status, %i(pending approved rejected returned)
+  enum :status, %i(pending approved rejected canceled returned)
 
   belongs_to :account
   has_one :response, class_name: BorrowResponse.name,
@@ -9,10 +9,10 @@ class BorrowInfo < ApplicationRecord
   has_many :books, through: :borrowings
 
   validates :start_at, :end_at, :status, :turns, presence: true
-
   validate :start_at_validation, :end_at_validation, on: :create
   validates :renewal_at, presence: true, on: :update
   validate :renewal_at_validation, on: :update
+  validates :turns, numericality: {less_than: Settings.digit_5}
 
   scope :due_first, ->{order(end_at: :desc)}
   scope :includes_user, lambda {\

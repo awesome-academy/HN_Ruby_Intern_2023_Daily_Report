@@ -7,6 +7,8 @@ module BorrowInfosHelper
       "success"
     when "rejected"
       "danger"
+    when "canceled"
+      "danger"
     when "returned"
       "warning"
     else
@@ -22,6 +24,8 @@ module BorrowInfosHelper
       renewals_form
     when "rejected"
       rejected_content
+    when "canceled"
+      canceled_content
     when "returned"
       returned_content
     else
@@ -64,6 +68,14 @@ module BorrowInfosHelper
       concat(content_tag(:span,
                          @borrow_info.response.content,
                          class: "text-break"))
+    end
+  end
+
+  def canceled_content
+    content_tag(:div, class: "alert alert-danger") do
+      concat(content_tag(:span, "#{t('canceled_date')}: ",
+                         class: "fw-semibold"))
+      concat(content_tag(:span, @borrow_info.updated_at.to_date))
     end
   end
 

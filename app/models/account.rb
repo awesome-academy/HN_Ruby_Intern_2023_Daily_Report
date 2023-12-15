@@ -1,7 +1,9 @@
 class Account < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   before_save :downcase_email
-
-  attr_accessor :remember_token
 
   has_one :user_info, dependent: :nullify, inverse_of: :account
   has_one_attached :avatar
@@ -42,44 +44,4 @@ class Account < ApplicationRecord
       .references(:user_info)
       .or(UserInfo.bquery(q))
   }
-
-  has_secure_password
-
-  def remember
-    self.remember_token = self.class.new_token
-    update_attribute :remember_digest, self.class.digest(remember_token)
-  end
-
-  # Forgets a user.
-  def forget
-    update_attribute :remember_digest, nil
-  end
-
-  # Returns true if the given token matches the attribute digest.
-  def token_match? attribute, token
-    digest = send "#{attribute}_digest"
-    return false if digest.nil?
-
-    match_digest? digest, token
-  end
-
-  class << self
-    # Returns the hash digest of the given string.
-    def digest str
-      cost = BCrypt::Engine.cost
-      cost = BCrypt::Engine::MIN_COST if ActiveModel::SecurePassword.min_cost
-      BCrypt::Password.create str, cost:
-    end
-
-    # Returns a random token.
-    def new_token
-      SecureRandom.urlsafe_base64
-    end
-  end
-
-  private
-
-  def match_digest? digest, token
-    BCrypt::Password.new(digest).is_password? token
-  end
 end

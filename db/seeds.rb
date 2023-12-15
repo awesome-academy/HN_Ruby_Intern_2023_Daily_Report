@@ -122,8 +122,8 @@ end
   b = BorrowInfo.create(
     start_at: Date.current + 3,
     end_at: Date.current + 10,
-    status: rand(4),
-    remain_turns: rand(5),
+    status: rand(5),
+    turns: rand(5),
     account_id: 1
   )
 end
