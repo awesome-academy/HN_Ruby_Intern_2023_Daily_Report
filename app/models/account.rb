@@ -56,4 +56,12 @@ class Account < ApplicationRecord
   def following? author
     favorite_authors.include? author
   end
+
+  def active_for_authentication?
+    super && is_active?
+  end
+
+  def inactive_message
+    :locked
+  end
 end

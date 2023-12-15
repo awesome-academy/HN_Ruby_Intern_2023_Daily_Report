@@ -9,6 +9,10 @@ $(function () {
   };
 
   window.showToast = ({heading, text, icon = 'success'}) => {
+    let alias = {alert: 'error', notice: 'info'};
+    if (icon in alias) {
+      icon = alias[icon];
+    }
     if (text.length > 0) {
       $.toast({
         heading,

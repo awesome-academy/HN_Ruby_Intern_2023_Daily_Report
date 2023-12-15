@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   namespace :admin do
     scope "(:locale)", locale: /en|vi/ do
       root "home#index"
-      get "/login", to: "sessions#new"
-      post "/login", to: "sessions#create"
-      delete "/logout", to: "sessions#destroy"
+      devise_for :accounts, path: '', controllers: {
+        sessions: "admin/sessions"
+      }, skip: :registrations
 
       resources :authors, :genres, :publishers
       resources :books do

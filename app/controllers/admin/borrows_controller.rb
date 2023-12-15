@@ -18,13 +18,14 @@ class Admin::BorrowsController < Admin::BaseController
   end
 
   def return
-    respond_to_change_status @borrow.approved?, :returned
+    respond_to_change_status @borrow.approved?, :returned, :approved
   end
 
   def reject
     respond_to_change_status(
       @borrow.pending? && @borrow.create_response(content: reject_params),
-      :rejected
+      :rejected,
+      :pending
     )
   end
 
@@ -35,7 +36,7 @@ class Admin::BorrowsController < Admin::BaseController
   end
 
   def approve
-    respond_to_change_status @borrow.pending?, :approved
+    respond_to_change_status @borrow.pending?, :approved, :pending
   end
 
   private
@@ -69,9 +70,9 @@ class Admin::BorrowsController < Admin::BaseController
            %i(approved rejected).include? status
   end
 
-  def respond_to_change_status condition, to
+  def respond_to_change_status condition, to, group
     unless condition || update_books_borrowed_count(to)
-      redirect_to admin_borrows_path
+      redirect_to admin_borrows_path(group:)
     end
 
     @borrow.update_attribute :status, to
@@ -83,7 +84,7 @@ class Admin::BorrowsController < Admin::BaseController
       status: t("borrows.#{to}")
     )
     flash[:success] = text
-    redirect_to admin_borrows_path
+    redirect_to admin_borrows_path(group:)
   end
 
   def respond_to_list borrows

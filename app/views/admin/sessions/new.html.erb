@@ -1,8 +1,8 @@
 <% provide :title, t(".title") %>
-<div class="card col-lg-4 mx-auto">
+<div class="card card-main col-lg-4 mx-auto">
   <div class="card-body px-5 py-5">
     <h3 class="card-title text-left mb-3"><%= t ".title" %></h3>
-    <%= form_with url: admin_login_path, scope: :session, local: true do |f| %>
+    <%= form_with scope: resource_name, url: admin_account_session_path, local: true do |f| %>
       <div class="form-group">
         <%= f.label :email %>
         <%= f.email_field :email, class: "form-control p_input" %>
@@ -18,7 +18,7 @@
             <%= t ".rememberme" %>
           <% end %>
         </div>
-        <%= link_to t(".forgot_pwd"), "#", class: "forgot-pass ms-3" %>
+        <%= link_to t(".forgot_pwd"), new_admin_account_password_path, class: "forgot-pass ms-3" %>
       </div>
       <div class="text-center">
         <%= f.submit t(".login"), name: :login, class: "btn btn-primary btn-block enter-btn" %>

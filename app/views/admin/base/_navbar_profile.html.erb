@@ -6,7 +6,7 @@
       menu_class: "navbar-dropdown" do %>
   <%= render "dropdown_item", link: "#",
           icon: "settings", title: t(".settings") %>
-  <%= render "dropdown_item", link: admin_logout_path,
+  <%= render "dropdown_item", link: destroy_admin_account_session_path,
           icon: "logout", title: t(".logout"),
           link_data: { turbo_method: :delete, turbo_confirm: t("admin.notif.logout_confirm") } %>
 <% end %>

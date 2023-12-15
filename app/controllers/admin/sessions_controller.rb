@@ -1,41 +1,21 @@
-class Admin::SessionsController < SessionsController
-  skip_before_action :current_cart
+class Admin::SessionsController < Devise::SessionsController
   layout "admin/layouts/sessions"
+  skip_before_action :current_cart
 
-  def check_before_save_session account
-    account.is_admin
+  def after_sign_in_path_for account
+    return admin_root_path if account.is_admin?
+
+    flash[:error] = t "devise.sessions.invalid"
+    new_admin_account_session_path
   end
 
-  def on_login_success
-    flash[:success] = t "admin.notif.login_success"
-    redirect_to admin_root_path
+  def after_sign_out_path_for _account
+    new_admin_account_session_path
   end
 
-  def on_login_fail_inactive
-    flash.now[:error] = t "admin.notif.account_not_activated_or_lock"
-    notify
-  end
-
-  def on_login_fail
-    flash.now[:error] = t "admin.notif.invalid_email_password"
-    notify
-  end
-
-  def on_logout
-    redirect_to admin_login_path
-  end
-
-  private
-
-  def notify
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          "application-notify",
-          partial: "admin/shared/notify"
-        )
-      end
-      format.html{render :new, status: :unprocessable_entity}
+  def create
+    super do |resource|
+      sign_out unless resource.is_admin?
     end
   end
 end
