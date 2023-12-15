@@ -4,6 +4,7 @@ vi:
     about: 'khoảng'
     over: 'hơn'
     almost: 'gần'
+    ago: 'trước'
   date:
     formats:
       short: '%d/%m'
@@ -135,6 +136,8 @@ vi:
       send: 'Gửi'
       loading: 'Xin chờ...'
       errors: 'Có một số lỗi sau'
+      detail: 'Chi tiết'
+      read_all: 'Đánh dấu tất cả là đã đọc'
     notif:
       user_info_not_found: 'Tài khoản chưa có thông tin'
       no_items: 'Không có %{item} nào tìm thấy'

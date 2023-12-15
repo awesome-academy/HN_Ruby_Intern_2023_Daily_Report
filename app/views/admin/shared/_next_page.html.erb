@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "#{group}-load-placeholder",
+                    src: public_send(link, page:, format: :turbo_stream),
+                    loading: :lazy do %>
+  <p class="ms-3 my-2"><%= t "admin.misc.loading" %></p>
+<% end %>

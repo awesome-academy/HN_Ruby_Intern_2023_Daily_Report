@@ -20,6 +20,38 @@ a:hover {
   color: yellow;
 }
 
+.inline p {
+  display: inline;
+  margin-bottom: 0;
+}
+
+.mt-n6 {
+  margin-top: -2rem;
+}
+
+.text-small {
+  font-size: 0.75rem;
+}
+
+.max-2-lines {
+  display: block;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 2rem;
+  line-height: 1rem;
+  text-wrap: wrap;
+  text-align: justify;
+}
+
+.unchecked {
+  font-weight: bold;
+}
+
+.checked .checked-change-color {
+  color: inherit !important;
+}
+
 /** Select2 **/
 .select2-search--inline input {
   color: yellow;
@@ -98,6 +130,29 @@ a:hover {
   color: cyan;
 }
 
+.dropdown {
+  position: relative !important;
+}
+
+.navbar-dropdown {
+  right: 20px !important;
+  width: auto !important;
+  max-width: 500px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+@media (max-width: 991px) {
+  .navbar-dropdown {
+    left: 20px !important;
+    right: auto !important;
+  }
+}
+
+.large-dropdown {
+  min-width: 500px;
+}
+
 .preview-list .preview-item:nth-child(5n + 1) .preview-icon i {
   color: #8f5fe8;
 }
@@ -128,7 +183,7 @@ a:hover {
 
 .nav-item .nav-link .menu-title:first-letter,
 .nav-item .nav-link .tab-title:first-letter,
-.nav-item .preview-item-content .preview-subject:first-letter,
+.nav-item .preview-subject:first-letter,
 .info-field .info-header:first-letter,
 .borrow-status-badge:first-letter {
   text-transform: uppercase;

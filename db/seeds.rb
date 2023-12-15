@@ -21,29 +21,27 @@ account = Account.create(
   is_active: true,
 )
 
-# Fake Accounts
+Fake Accounts
 10.times do |i|
-  if i > 0
-    ac = Account.create(
-      email: Faker::Internet.email,
-      username: Faker::Internet.username,
-      password: "111111",
-      password_confirmation: "111111",
-      is_admin: false,
-      is_activated: true,
-      is_active: i % 4 == 0,
-    )
-  else
-    ac = account
-  end
+  Account.create(
+    email: Faker::Internet.email,
+    username: Faker::Internet.username,
+    password: "111111",
+    password_confirmation: "111111",
+    is_admin: false,
+    is_activated: true,
+    is_active: i % 4 == 0,
+  )
+end
 
+Account.where(is_admin: false).each do |ac|
   begin
     img = URI.parse(Faker::LoremFlickr.image).open
     ac.avatar.attach(io: img, filename: "user#{i}-avatar.png")
   rescue
   end
 
-  u = UserInfo.create(
+  UserInfo.new(
     name: Faker::Name.name,
     gender: rand(3),
     address: Faker::Address.full_address,
@@ -51,7 +49,7 @@ account = Account.create(
     citizen_id: Faker::IDNumber.valid,
     dob: Faker::Date.birthday(min_age: 18, max_age: 65),
     account: ac,
-  )
+  ).save(validate: false)
 end
 
 # Publisher
@@ -87,11 +85,13 @@ end
   end
   description = "#{title} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   amount = rand(1..100)
+  borrowed_count = 0
   publish_date = Faker::Date.backward
   isbn = Faker::Code.unique.isbn(base: (rand % 2 == 1 ? 13 : 10))
   publisher_id = Publisher.pluck(:id).sample
 
-  Book.create(title:, description:, amount:, publish_date:, isbn:, publisher_id:)
+  Book.new(title:, description:, amount:, publish_date:,
+              isbn:, publisher_id:, borrowed_count:).save(validate: false)
 end
 
 Book.all.each do |book|
@@ -144,5 +144,39 @@ BorrowInfo.rejected.each do |rej|
   BorrowResponse.create(
     content: Faker::Lorem.paragraph,
     borrow_info_id: rej.id
+  )
+end
+
+Book.all.each do |book|
+  book.update borrowed_count: BorrowItem.where(book_id: book.id).count
+end
+
+# Notification for one user
+30.times do |i|
+  Notification.create(
+    content: Faker::Lorem.paragraph,
+    account_id: Account.pluck(:id).sample,
+    checked: rand(3) == 1,
+    status: rand(3)
+  )
+end
+
+# Notification for all user (except admin)
+10.times do |i|
+  Notification.create(
+    content: Faker::Lorem.paragraph,
+    account_id: nil,
+    checked: rand(3) == 1,
+    status: rand(3)
+  )
+end
+
+# Notification for except admin
+10.times do |i|
+  Notification.create(
+    content: Faker::Lorem.paragraph,
+    account_id: 1,
+    checked: rand(3) == 1,
+    status: rand(3)
   )
 end

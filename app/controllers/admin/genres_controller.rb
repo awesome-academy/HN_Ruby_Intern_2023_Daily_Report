@@ -11,7 +11,7 @@ class Admin::GenresController < Admin::BaseController
     s = params[:sort]
     genres = s ? genres.sort_on(s, params[:desc]) : genres.newest
 
-    @pagy, @genres = pagy genres, items: params[:items]
+    @pagy, @genres = pagy genres
   end
 
   def show

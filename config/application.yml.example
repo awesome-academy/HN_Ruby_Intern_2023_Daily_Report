@@ -11,11 +11,10 @@
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
 development:
-  mailer:
-    address: 'sandbox.smtp.mailtrap.io'
-    host: 'sandbox.smtp.mailtrap.io'
-    port: '2525'
-    username: '<username>'
-    password: '<password>'
-    authentication: 'cram_md5'
-    default_url: 'localhost:3000'
+  mail_address: 'sandbox.smtp.mailtrap.io'
+  mail_host: 'sandbox.smtp.mailtrap.io'
+  mail_port: '2525'
+  mail_username: '<username>'
+  mail_password: '<password>'
+  mail_authentication: 'cram_md5'
+  mail_default_url: 'localhost:3000'

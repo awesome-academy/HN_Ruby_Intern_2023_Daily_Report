@@ -1,6 +1,6 @@
 import '@vendor/js/vendor.bundle.base';
 
-import './notification';
+import './toast';
 
 $(document).on('turbo:load', function () {
   $('form input[type=submit]').on('submit', function (e) {

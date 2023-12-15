@@ -1,4 +1,10 @@
 en:
+  datetime:
+    less_than: 'less than'
+    about: 'about'
+    over: 'over'
+    almost: 'almost'
+    ago: 'ago'
   date:
     formats:
       short: '%b %d, %Y'
@@ -124,10 +130,12 @@ en:
       loading: 'Loading...'
       send: 'Send'
       last_updated: 'Last updated'
-      errors: 'There are some errors on data you typed'
+      errors: 'There are some errors'
       edit: 'Update'
       skip: 'Skip'
       amend: 'Amend'
+      detail: 'Detail'
+      read_all: 'Mark all as read'
     notif:
       user_info_not_found: 'This account does not register the user information'
       no_items: 'No %{item} found'

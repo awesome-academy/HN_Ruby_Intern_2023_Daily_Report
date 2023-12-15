@@ -51,15 +51,15 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: Figaro.mailer.default_url }
+  config.action_mailer.default_url_options = { host: Figaro.env.mail_default_url }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              Figaro.env.mailer.address,
-    port:                 Figaro.env.mailer.port,
-    host:                 Figaro.env.mailer.host,
-    user_name:            Figaro.env.mailer.username,
-    password:             Figaro.env.mailer.password,
-    authentication:       Figaro.env.mailer.authentication
+    address:              Figaro.env.mail_address,
+    port:                 Figaro.env.mail_port,
+    host:                 Figaro.env.mail_host,
+    user_name:            Figaro.env.mail_username,
+    password:             Figaro.env.mail_password,
+    authentication:       Figaro.env.mail_authentication
   }
 
   # Print deprecation notices to the Rails logger.
