@@ -27,7 +27,6 @@ class BorrowInfo < ApplicationRecord
   }
   scope :history, ->{rejected.or(BorrowInfo.returned)}
   scope :for_account, ->(account_id){where(account_id:)}
-  scope :has_status, ->(status){where(status:)}
   scope :desc_order, ->{order(updated_at: :desc)}
 
   def start_at_validation
@@ -67,5 +66,9 @@ class BorrowInfo < ApplicationRecord
         book.save!
       end
     end
+  end
+
+  def self.ransackable_attributes _auth_object = nil
+    %w(status id start_at end_at turns)
   end
 end

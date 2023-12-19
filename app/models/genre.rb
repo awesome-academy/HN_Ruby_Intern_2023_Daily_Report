@@ -13,4 +13,8 @@ class Genre < ApplicationRecord
     where("genres.name LIKE ?", "%#{q}%")
       .or(where("genres.description LIKE ?", "%#{q}%"))
   }
+
+  def self.ransackable_attributes _auth_object = nil
+    %w(name)
+  end
 end

@@ -17,13 +17,11 @@ class Book < ApplicationRecord
   has_many :comments, class_name: BookComment.name,
                       dependent: :destroy
   has_many :commenters, through: :comments
-
   has_one_attached :image
 
   validates :title, :description, :amount, :borrowed_count,
             :publisher, :authors,
             :publish_date, :isbn, presence: true
-
   validates :title, uniqueness: {case_sensitive: false},
                     length: {maximum: Settings.title_max_len}
   validates :amount, numericality: {
@@ -42,11 +40,8 @@ class Book < ApplicationRecord
             }
   validate :borrowed_count_below_amount
 
-  scope :sorted_by_title, ->{order(title: :asc)}
-  scope :ordered_and_grouped_by_first_letter,
-        ->{order(:title).group_by{|book| book.title[0].upcase}}
+  scope :newest_book, ->{order(created_at: :desc)}
   scope :include_authors, ->{includes(:authors)}
-
   scope :includes_info, lambda {\
     includes(:authors, :publisher, :genres)
       .with_attached_image
@@ -62,6 +57,7 @@ class Book < ApplicationRecord
   }
   scope :borrowable, ->{where("amount >= borrowed_count")}
   scope :remain_least, ->{order(Arel.sql("amount - borrowed_count ASC"))}
+  scope :by_first_letter, ->(letter){where("title LIKE ?", "#{letter}%")}
 
   def update_relation_with_ids name, ids
     attribute = send "book_#{name}s"
@@ -71,6 +67,16 @@ class Book < ApplicationRecord
 
   def remain
     amount - borrowed_count
+  end
+
+  class << self
+    def ransackable_attributes _auth_object = nil
+      %w(title description isbn created_at)
+    end
+
+    def ransackable_associations _auth_object = nil
+      %w(authors book_authors book_genres genres publisher)
+    end
   end
 
   private

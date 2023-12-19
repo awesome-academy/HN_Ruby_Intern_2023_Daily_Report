@@ -2,11 +2,11 @@
 
 <div class="mb-5">
   <h1><%= t ".update_profile" %></h1>
-  <%= form_for @account do |f| %>
-    <%= render "shared/error_messages", model: @account, as: "user_update" %>
+  <%= form_for @account, data: { turbo_confirm: t("you_sure?") } do |f| %>
     <div class="d-flex align-items-center my-3">
       <%= avatar_for(@account, 80) %>
       <%= f.file_field :avatar, class: "ms-3" %>
+      <%= render "shared/error_messages", resource: @account, field: :avatar %>
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -14,10 +14,12 @@
         <div class="mb-3">
           <%= f.label :email, class: "form-label required" %>
           <%= f.email_field :email, class: "form-control" %>
+          <%= render "shared/error_messages", resource: @account, field: :email %>
         </div>
         <div class="mb-3">
           <%= f.label :current_password, class: "form-label required" %>
           <%= f.password_field :current_password, class: "form-control" %>
+          <%= render "shared/error_messages", resource: @account, field: :current_password %>
         </div>
         <div class="mb-3">
           <%= f.label :password, class: "form-label" do %>
@@ -25,14 +27,17 @@
             <span class="text-secondary">(<%= t ".leave_password_blank" %>)</span>
           <% end %>
           <%= f.password_field :password, class: "form-control" %>
+          <%= render "shared/error_messages", resource: @account, field: :password %>
         </div>
         <div class="mb-3">
           <%= f.label :password_confirmation, class: "form-label" %>
           <%= f.password_field :password_confirmation, class: "form-control" %>
+          <%= render "shared/error_messages", resource: @account, field: :password_confirmation %>
         </div>
         <div class="mb-3">
           <%= f.label :username, class: "form-label required" %>
           <%= f.text_field :username, class: "form-control" %>
+          <%= render "shared/error_messages", resource: @account, field: :username %>
         </div>
       </div>
       <div class="col-md-6">
@@ -41,22 +46,27 @@
           <div class="mb-3">
             <%= user_info.label :name, class: "form-label required" %>
             <%= user_info.text_field :name, class: "form-control" %>
+            <%= render "shared/error_messages", resource: @account.user_info, field: :name %>
           </div>
           <div class="mb-3">
             <%= user_info.label :address, class: "form-label required" %>
             <%= user_info.text_field :address, class: "form-control" %>
+            <%= render "shared/error_messages", resource: @account.user_info, field: :address %>
           </div>
           <div class="mb-3">
             <%= user_info.label :phone, class: "form-label required" %>
             <%= user_info.telephone_field :phone, class: "form-control" %>
+            <%= render "shared/error_messages", resource: @account.user_info, field: :phone %>
           </div>
           <div class="mb-3">
             <%= user_info.label :citizen_id, t("activerecord.attributes.user_info.citizen_id"), class: "form-label required" %>
             <%= user_info.text_field :citizen_id, class: "form-control" %>
+            <%= render "shared/error_messages", resource: @account.user_info, field: :citizen_id %>
           </div>
           <div class="mb-3">
             <%= user_info.label :dob, t("activerecord.attributes.user_info.dob"), class: "form-label required" %>
             <%= user_info.date_field :dob, class: "form-control" %>
+            <%= render "shared/error_messages", resource: @account.user_info, field: :dob %>
           </div>
           <div class="mb-3">
             <%= user_info.label :gender, class: "form-label required me-3" %>
@@ -72,6 +82,7 @@
               <%= user_info.radio_button :gender, "others", class: "form-check-input" %>
               <%= user_info.label :gender_others, t("others"), class: "form-check-label"%>
             </div>
+            <%= render "shared/error_messages", resource: @account.user_info, field: :gender %>
           </div>
         <% end %>
       </div>

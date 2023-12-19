@@ -6,13 +6,9 @@ vi:
   vietnamese: "Tiếng Việt"
   welcome_text: "Chào mừng đến với LIBMA"
   home_text: "Đây là trang chủ của LIBMA - trang web quản lý sách thư viện."
-  search: "Tìm kiếm..."
+  search: "Tìm kiếm theo tiêu đề, mã ISBN, tên tác giả, ..."
   sign_up: "Đăng Ký"
   create_account: "Tạo tài khoản"
-  shared:
-    error_messages:
-      the_form_contains: "Biểu mẫu có"
-      error: "lỗi"
   account_not_found: "Không tìm thấy tài khoản!"
   account_create_success: "Đăng ký thành công! Vui lòng điền thông tin cá nhân của bạn để có thể mượn sách"
   email: "Email"
@@ -32,6 +28,12 @@ vi:
   books:
     index:
       no_authors_found: "Không tìm thấy tác giả"
+      sort_by: "Sắp xếp theo:"
+      newest: "Sách mới nhất"
+      oldest: "Sách cũ nhất"
+      A-Z: "Từ A-Z"
+      Z-A: "Từ Z-A"
+      no_books_found: "Không tìm thấy sách"
     show:
       add_to_cart: "Thêm vào giỏ hàng"
   invalid_email_password: "Tài khoản hoặc mật khẩu không đúng"

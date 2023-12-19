@@ -8,7 +8,7 @@ module BorrowInfosHelper
     when "rejected"
       "danger"
     when "canceled"
-      "danger"
+      "dark"
     when "returned"
       "warning"
     else
@@ -72,7 +72,7 @@ module BorrowInfosHelper
   end
 
   def canceled_content
-    content_tag(:div, class: "alert alert-danger") do
+    content_tag(:div, class: "alert alert-dark") do
       concat(content_tag(:span, "#{t('canceled_date')}: ",
                          class: "fw-semibold"))
       concat(content_tag(:span, @borrow_info.updated_at.to_date))
@@ -85,5 +85,15 @@ module BorrowInfosHelper
                          class: "fw-semibold"))
       concat(content_tag(:span, @borrow_info.updated_at.to_date))
     end
+  end
+
+  def show_borrow_status_header
+    return " - #{t('all')}" if @q.status_eq.blank?
+
+    " - #{t(BorrowInfo.statuses.keys[@q.status_eq].to_s)}"
+  end
+
+  def status_options
+    BorrowInfo.statuses.map{|key, value| [t(key), value]}
   end
 end

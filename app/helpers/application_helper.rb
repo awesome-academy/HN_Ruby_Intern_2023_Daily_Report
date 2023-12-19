@@ -10,9 +10,9 @@ module ApplicationHelper
     @current_cart.borrowings.sum(&:quantity) if account_signed_in?
   end
 
-  def alert_type_for_flash message_type
+  def type_for_toastr message_type
     case message_type
-    when "alert" then "danger"
+    when "alert" then "error"
     when "notice" then "success"
     else message_type
     end

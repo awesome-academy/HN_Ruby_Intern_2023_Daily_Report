@@ -8,9 +8,9 @@ class BorrowInfosController < ApplicationController
   before_action :set_borrow_info, only: %i(show handle_status_action)
 
   def index
-    status = translate_status_to_english(params[:status_option]) || "pending"
+    @q = BorrowInfo.ransack(params[:q])
     @pagy, @borrow_infos_sort = pagy(
-      BorrowInfo.for_account(current_account).has_status(status).desc_order,
+      @q.result.for_account(current_account).desc_order,
       items: Settings.digit_5
     )
   end
@@ -92,23 +92,6 @@ class BorrowInfosController < ApplicationController
       redirect_to @borrow_info
     else
       render :show, status: :bad_request
-    end
-  end
-
-  def translate_status_to_english status # rubocop:disable Metrics/PerceivedComplexity
-    case status&.downcase
-    when t("pending")&.downcase
-      "pending"
-    when t("approved")&.downcase
-      "approved"
-    when t("rejected")&.downcase
-      "rejected"
-    when t("canceled")&.downcase
-      "canceled"
-    when t("returned")&.downcase
-      "returned"
-    else
-      status
     end
   end
 end

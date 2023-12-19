@@ -9,4 +9,13 @@ module BooksHelper
 
     author_found.id
   end
+
+  def book_sorting_options
+    [
+      [t(".newest"), "created_at desc"],
+      [t(".oldest"), "created_at asc"],
+      [t(".A-Z"), "title asc"],
+      [t(".Z-A"), "title desc"]
+    ]
+  end
 end

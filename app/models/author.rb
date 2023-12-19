@@ -7,7 +7,6 @@ class Author < ApplicationRecord
   has_many :followings, class_name: AuthorFollower.name,
                         dependent: :destroy
   has_many :followers, through: :followings
-
   has_one_attached :avatar
 
   validates :name, presence: true, length: {
@@ -21,7 +20,6 @@ class Author < ApplicationRecord
                     allow_blank: true
   validates :phone, format: Settings.valid_phone_regex,
                     allow_blank: true
-
   validates :avatar,
             content_type: {
               in: Settings.image_type,
@@ -33,6 +31,10 @@ class Author < ApplicationRecord
       .or(where("authors.email LIKE ?", "%#{q}%"))
       .or(where("authors.about LIKE ?", "%#{q}%"))
   }
+
+  def self.ransackable_attributes _auth_object = nil
+    %w(name)
+  end
 
   private
 

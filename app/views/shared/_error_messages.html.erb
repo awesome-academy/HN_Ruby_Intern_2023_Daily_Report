@@ -1,12 +1,3 @@
-<% if model.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-danger">
-      <%= t ".the_form_contains" %> <%= pluralize model.errors.count, t(".error") %>
-    </div>
-    <ul>
-      <% model.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<div class="text-danger mt-2">
+  <%= resource.errors.full_messages_for(field).first if resource.errors.any? && resource.errors.include?(field)  %>
+</div>
