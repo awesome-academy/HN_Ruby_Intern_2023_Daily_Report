@@ -5,6 +5,7 @@ vi:
     failure:
       invalid: "%{authentication_keys} hoặc mật khẩu không đúng"
       not_found_in_database: "%{authentication_keys} hoặc mật khẩu không đúng"
+      unauthenticated: "Bạn cần phải đăng nhập hoặc đăng ký để có thể tiếp tục"
     registrations:
       signed_up: "Chào mừng! Bạn đã đăng nhập thành công"
     sessions:

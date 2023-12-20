@@ -6,3 +6,7 @@
 //= link_tree ../../../vendor/theme/admin/vendors .js
 //= link select2.js
 //= link select2_locale_vi.js
+
+//= link jquery.min.js
+//= link jquery_ujs.js
+//= link toastr.js

@@ -20,4 +20,8 @@ class Publisher < ApplicationRecord
       .or(where("publishers.address LIKE ?", "%#{q}%"))
       .or(where("publishers.about LIKE ?", "%#{q}%"))
   }
+
+  def self.ransackable_attributes _auth_object = nil
+    %w(name)
+  end
 end

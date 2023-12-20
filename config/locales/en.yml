@@ -6,13 +6,9 @@ en:
   vietnamese: "Vietnamese"
   welcome_text: "Welcome to the LIBMA website"
   home_text: "This is the home page for the LIBMA - Library management application."
-  search: "Search..."
+  search: "Search for title, ISBN code, author name, ..."
   sign_up: "Sign up"
   create_account: "Create my account"
-  shared:
-    error_messages:
-      the_form_contains: "The form contains"
-      error: "error"
   account_not_found: "Account not found!"
   account_create_success: "Welcome! Please fill in your information to borrow books"
   email: "Email"
@@ -32,6 +28,12 @@ en:
   books:
     index:
       no_authors_found: "No authors found"
+      sort_by: "Sort by:"
+      newest: "Newest"
+      oldest: "Oldest"
+      A-Z: "A-Z"
+      Z-A: "Z-A"
+      no_books_found: "No books found"
     show:
       add_to_cart: "Add to cart"
   invalid_email_password: "Invalid email or password"

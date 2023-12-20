@@ -3,33 +3,46 @@
 <div>
   <% breadcrumb :books, @books %>
   <h1><%= t "library" %></h1>
-  <div class="search d-flex">
-    <%= form_with url: "/search", method: :get, class: "d-flex flex-grow-1 me-2 position-relative" do |form| %>
-      <%= form.text_field :query, class: "form-control flex-grow-1 pe-5", autocomplete: "off", placeholder: t("search") %>
-      <%= button_tag type: "submit", class: "btn btn-outline-primary position-absolute end-0" do %>
-        <i class="fa-solid fa-magnifying-glass"></i>
-      <% end %>
+  <div class="search d-flex mt-3">
+    <%= search_form_for @q, class: "d-flex flex-grow-1" do |f| %>
+      <div class="d-flex flex-grow-1 me-2 position-relative">
+        <%= f.search_field :title_or_description_or_isbn_or_authors_name_or_publisher_name_or_genres_name_cont, class: "form-control flex-grow-1 pe-5", autocomplete: "off", placeholder: t("search") %>
+        <%= button_tag type: "submit", class: "btn btn-outline-primary position-absolute end-0" do %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        <% end %>
+      </div>
+      <div class="d-flex align-items-center">
+        <%= f.label :s, t(".sort_by") %>
+        <%= f.select :s, options_for_select(book_sorting_options, selected: params.dig(:q,:s)), {}, class: "form-select w-auto mx-2" %>
+        <%= f.submit t("filter"), class: "btn btn-primary" %>
+      </div>
     <% end %>
-    <%= select_tag :search_option, options_for_select([t("all"), t("title"), t("description"), t("author"), t("publisher"), t("genre")]), class: "form-select w-auto custom-select"%>
   </div>
   <div class="filter text-center mt-4">
     <div class="filter-letter">
-      <% ('A'..'Z').each do |letter| %>
-        <a href="#" class="mx-1"><%= letter %></a>
+      <% ("A".."Z").each do |letter| %>
+        <%= link_to letter, books_path(letter: letter), class: "mx-1 fs-5" %>
       <% end %>
-      <a href="#" class="mx-1"><%= t "all" %></a>
+      <%= link_to t("all"), books_path, class: "mx-1 fs-5" %>
     </div>
   </div>
   <div class="d-flex justify-content-center mt-4">
     <%== pagy_bootstrap_nav(@pagy) %>
   </div>
-  <div class="mb-5">
-    <div class="mt-1 row row-cols-1 row-cols-md-5 g-4">
-      <% @books.each do |book| %>
-        <div class="col">
-          <%= render "shared/book_card", book: book %>
-        </div>
+  <% if @books.present? %>
+    <div class="mb-5">
+      <% if params[:letter].present? %>
+        <h2 class="pb-1 border-bottom fw-bold"><%= params[:letter] %></h2>
       <% end %>
+      <div class="mt-1 row row-cols-1 row-cols-md-5 g-4">
+        <% @books.each do |book| %>
+          <div class="col">
+            <%= render "shared/book_card", book: book %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% else %>
+    <%= render "shared/not_found_content", text: t(".no_books_found") %>
+  <% end %>
 </div>

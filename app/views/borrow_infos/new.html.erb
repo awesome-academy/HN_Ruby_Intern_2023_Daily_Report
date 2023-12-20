@@ -3,7 +3,6 @@
 <h1><%= t ".borrow_info_create" %></h1>
 <div class="my-4">
   <%= form_with model: @borrow_info, data: {turbo_method: :post, turbo_confirm: t("you_sure?")} do |form| %>
-    <%= render "shared/error_messages", model: @borrow_info, as: "borrow_info" %>
     <div class="row">
       <div class="col-md-6 row">
         <% @current_cart.borrowings.include_books.each do |borrow_item| %>
@@ -17,10 +16,12 @@
         <div class="mb-3">
           <%= form.label :borrow_date, class: "form-label required fw-semibold" %>
           <%= form.date_field :start_at, class: "form-control", min: Date.current, id: "start-at" %>
+          <%= render "shared/error_messages", resource: @borrow_info, field: :start_at %>
         </div>
         <div class="mb-3">
           <%= form.label :return_date, class: "form-label required fw-semibold" %>
           <%= form.date_field :end_at, class: "form-control", min: Date.current, id: "end-at" %>
+          <%= render "shared/error_messages", resource: @borrow_info, field: :end_at %>
         </div>
         <div class="mb-3">
           <p class="form-label fw-semibold"><%= t "borrow_infos.borrow_renewals" %>: <span class="fw-normal">5</span></p>

@@ -1,0 +1,4 @@
+<% flash.each do |message_type, message| %>
+  <% type = type_for_toastr(message_type) %>
+  <script>toastr.<%= type %>('<%= message %>')</script>
+<% end %>
