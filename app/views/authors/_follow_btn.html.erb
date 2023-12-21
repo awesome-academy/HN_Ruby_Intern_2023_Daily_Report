@@ -1,0 +1,3 @@
+<%= link_to author_followers_path(id: @author.id), data: {turbo_method: :post}, class: "btn btn-primary" do %>
+  <span><%= t ".follow_this_author" %></span>
+<% end %>

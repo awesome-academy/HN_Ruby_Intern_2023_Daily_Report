@@ -1,0 +1,3 @@
+<%= link_to author_follower_path, data: {turbo_method: :delete, turbo_confirm: t("you_sure?")}, class: "btn btn-secondary" do %>
+  <span><%= t ".unfollow_this_author" %></span>
+<% end %>

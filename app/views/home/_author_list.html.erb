@@ -1,0 +1,12 @@
+<h2 class="fw-semibold"><%= t "authors_following" %></h2>
+<hr>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  <% @authors.each do |author| %>
+    <div class="col text-center">
+      <%= link_to author_path(author), class: "text-decoration-none text-reset" do %>
+        <%= avatar_for(author, 100) %>
+        <p class="mt-2"><%= author.name %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

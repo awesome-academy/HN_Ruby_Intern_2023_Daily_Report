@@ -11,6 +11,8 @@ class CartsController < ApplicationController
   def destroy
     @cart.destroy
     session[:cart_id] = nil
+
+    flash[:success] = t "empty_cart_successfully"
     redirect_to carts_path
   end
 end

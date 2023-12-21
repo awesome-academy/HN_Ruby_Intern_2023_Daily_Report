@@ -1,6 +1,15 @@
 <% provide :title, t("home") %>
 
-<div class="text-center">
-  <h1><%= t "welcome_text" %></h1>
-  <p><%= t "home_text" %></p>
-</div>
+<% if account_signed_in? && current_account&.favorite_authors&.present? %>
+  <%= render "author_list" %>
+  <% if @pagy&.prev.present? || @pagy&.next.present? %>
+    <div class="d-flex justify-content-center mt-4">
+      <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="text-center">
+    <h1><%= t "welcome_text" %></h1>
+    <p><%= t "home_text" %></p>
+  </div>
+<% end %>

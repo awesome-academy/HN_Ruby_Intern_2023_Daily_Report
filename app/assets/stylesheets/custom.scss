@@ -4,6 +4,10 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .dropdown-menu a {
@@ -36,10 +40,4 @@ label.required:after{
 
 .auth-form {
   width: 50%;
-}
-
-/* Custom card height */
-
-.card-custom-height {
-  min-height: 26rem;
 }

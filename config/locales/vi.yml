@@ -1,12 +1,11 @@
 vi:
   home: "Trang Chủ"
   log_in: "Đăng Nhập"
-  languages: "Ngôn Ngữ"
-  english: "Tiếng Anh"
-  vietnamese: "Tiếng Việt"
+  en: "Tiếng Anh"
+  vi: "Tiếng Việt"
   welcome_text: "Chào mừng đến với LIBMA"
   home_text: "Đây là trang chủ của LIBMA - trang web quản lý sách thư viện."
-  search: "Tìm kiếm theo tiêu đề, mã ISBN, tên tác giả, ..."
+  search: "Tìm kiếm sách theo tiêu đề, mã ISBN, tên tác giả, ..."
   sign_up: "Đăng Ký"
   create_account: "Tạo tài khoản"
   account_not_found: "Không tìm thấy tài khoản!"
@@ -44,9 +43,19 @@ vi:
   phone: "Số điện thoại"
   authors:
     show:
-      follow_this_author: "Theo dõi tác giả"
       about_this_author: "Thông tin về tác giả"
       list_of_books: "Danh sách các tác phẩm"
+    follow_btn:
+      follow_this_author: "Theo dõi tác giả"
+    unfollow_btn:
+      unfollow_this_author: "Hủy theo dõi tác giả"
+    follow_info:
+      books:
+        one: "quyển sách"
+        other: "quyển sách"
+      followers:
+        one: "người theo dõi"
+        other: "người theo dõi"
   genre: "Thể loại"
   publish_date: "Ngày xuất bản"
   copies: "Số lượng còn lại"
@@ -58,6 +67,7 @@ vi:
   cart: "Giỏ hàng"
   book: "Quyển sách"
   empty_cart: "Làm mới giỏ hàng"
+  empty_cart_successfully: "Làm mới giỏ hàng thành công"
   quantity: "Số lượng"
   function: "Chức năng"
   carts:
@@ -132,6 +142,10 @@ vi:
   details: "Chi tiết"
   no_borrow_info: "Không có thông tin trạng thái mượn sách"
   borrow_info: "Lịch sử mượn sách"
+  author_follow_successfully: "Theo dõi tác giả thành công"
+  author_unfollow_successfully: "Hủy theo dõi tác giả thành công"
+  authors_following: "Tác giả bạn đang theo dõi"
+  copyright: "© Bản quyền thuộc về"
 
   activerecord:
     models:
