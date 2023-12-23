@@ -55,3 +55,9 @@
     <%= pie_chart stat_book_author, suffix: " #{t("books._item")}" %>
   <% end %>
 </div>
+<span class="stat-section-header"><%= t ".utilities_section" %></span>
+<div class="row row-inline">
+  <span class="util-data-info"><%= t (".library_info") %></span>
+  <%= link_to t(".download"), admin_export_library_path(format: :xlsx),
+            target: :_blank, class: "btn btn-primary btn-download" %>
+</div>

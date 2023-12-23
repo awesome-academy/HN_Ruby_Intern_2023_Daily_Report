@@ -44,6 +44,8 @@ en:
   books:
     _name: 'book'
     _item: 'book'
+    id: 'ID'
+    description: 'Description'
     cover: 'Cover'
     title: 'Title'
     amount: 'Amount'
@@ -53,6 +55,9 @@ en:
     detail: 'Detail'
     review: 'Review'
     inactive: 'Deleted'
+    authors: 'Author'
+    genres: 'Genre'
+    publisher: 'Publisher'
     placeholder:
       cover: 'Cover'
       title: 'Title'
@@ -65,10 +70,12 @@ en:
   authors:
     _name: 'author'
     _item: 'author'
-    avatar: 'avatar'
+    id: 'ID'
+    avatar: 'Avatar'
     name: 'Full Name'
     phone: 'Phone'
     email: 'Email'
+    about: 'About'
     placeholder:
       avatar: 'Avatar'
       name: 'Full Name'
@@ -78,6 +85,7 @@ en:
   genres:
     _name: 'genre'
     _item: 'genre'
+    id: 'ID'
     name: 'Name'
     description: 'Description'
     placeholder:
@@ -86,9 +94,11 @@ en:
   publishers:
     _name: 'publisher'
     _item: 'publisher'
+    id: 'ID'
     name: 'Name'
     email: 'Email'
     address: 'Address'
+    about: 'About'
     placeholder:
       name: 'Publisher name'
       about: 'About the publisher'
@@ -148,6 +158,7 @@ en:
       by_month: 'By month'
       by_week: 'By week'
       by_all: 'From all time'
+      notifications: 'Notifications'
     notif:
       user_info_not_found: 'This account does not register the user information'
       no_items: 'No %{item} found'
@@ -211,7 +222,6 @@ en:
         logout: 'Log out'
       navbar:
         messages: 'Messages'
-        notifications: 'Notifications'
         create: 'Create new'
       navbar_profile:
         system: 'System'
@@ -229,6 +239,9 @@ en:
         stat_borrow_genre: 'Number of borrowed books by genres'
         borrow_stat_section: 'Borrow history statistic section'
         library_stat_section: 'Library statistic section'
+        utilities_section: 'Utilities section'
+        library_info: 'Library data includes data about books, authors, genres and publishers'
+        download: 'Download'
       bar:
         best_of_week: 'Best of week'
         best_of_month: 'Best of month'

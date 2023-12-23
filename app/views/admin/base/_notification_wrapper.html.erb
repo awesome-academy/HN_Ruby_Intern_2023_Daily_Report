@@ -7,7 +7,7 @@
       <span class="count bg-danger" id="notification-uncheck-count"><%= count %></span>
     <% end %>
   <% end %>
-  <%= render "dropdown_menu", id: "notifications", title: t(".notifications"),
+  <%= render "dropdown_menu", id: "notifications", title: t("admin.misc.notifications"),
                     menu_class: "navbar-dropdown large-dropdown" do %>
     <%= link_to t("admin.misc.read_all"), read_all_admin_notifications_path,
                 data: {turbo_method: :post},

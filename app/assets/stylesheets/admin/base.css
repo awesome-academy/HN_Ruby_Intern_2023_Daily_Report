@@ -614,3 +614,21 @@ td .borrow-status-badge {
   font-size: 14px;
   margin-left: auto;
 }
+
+.row-inline {
+  flex-direction: row;
+  align-items: center;
+}
+
+.util-data-info {
+  font-size: 16px;
+  width: auto;
+}
+
+.util-data-info::after {
+  content: ' : ';
+}
+
+.btn-download {
+  width: 100px;
+}
