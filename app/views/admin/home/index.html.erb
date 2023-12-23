@@ -1,1 +1,57 @@
 <% provide :title, t(".title") %>
+<% period = @period %>
+<div class="row justify-content-between" id="stat-count">
+  <%= render "box", title: "# #{t 'borrows._name'}", collection: BorrowInfo.not_canceled %>
+  <%= render "box", title: "# #{t 'users._name'}", collection: UserInfo %>
+  <%= render "box", title: "# #{t 'books._name'}", collection: Book.available %>
+  <%= render "box", title: "# #{t 'authors._name'}", collection: Author %>
+  <%= render "box", title: "# #{t 'genres._name'}", collection: Genre %>
+  <%= render "box", title: "# #{t 'publishers._name'}", collection: Publisher%>
+</div>
+<div class="row" id="stat-book-trending">
+  <%= render "bar", title: t(".book_trending") do %>
+    <% trending_book_all_time.each do |book, period| %>
+      <div class="owl-item d-flex flex-column">
+        <div class="stat-bar-trophy">
+          <%= tag.i class: "mdi mdi-trophy-award text-primary",
+                          title: "#{t ".best_of_week"}: #{pluralize(period[:week], t('borrows.times'))}" if period.key? :week %>
+          <%= tag.i class: "mdi mdi-trophy-award text-warning",
+                          title: "#{t ".best_of_month"}: #{pluralize(period[:month], t('borrows.times'))}" if period.key? :month %>
+          <%= tag.i class: "mdi mdi-trophy-award text-danger",
+                          title: "#{t ".best_of_year"}: #{pluralize(period[:year], t('borrows.times'))}" if period.key? :year %>
+        </div>
+        <%= link_to admin_book_path(book), title: book.title, class: "item h-100" do %>
+          <%= image_tag get_image(book, :image), class: "h-100" %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<span class="stat-section-header"><%= t ".borrow_stat_section" %></span>
+<div class="row" id="stat-borrow-count">
+  <%= render "chart", title: t(".stat_borrow_time") do %>
+    <%= line_chart [{
+                    name: t("borrows._name"),
+                    data: stat_borrow_date(period:)
+                  }],
+                  legend: false, ytitle: t(".borrow_count"),
+                  library: {scales: {y: {title: {color: "#999"}}}} %>
+  <% end %>
+</div>
+<div class="row" id="stat-borrow-genre">
+  <%= render "chart", title: t(".stat_borrow_genre") do %>
+    <%= pie_chart stat_borrow_genre(period:), suffix: " #{t("books._item")}" %>
+  <% end %>
+</div>
+<span class="stat-section-header"><%= t ".library_stat_section" %></span>
+<div class="row" id="stat-book-category">
+  <%= render "chart", title: t(".stat_book_genre") do %>
+    <%= pie_chart stat_book_genre, suffix: " #{t("books._item")}" %>
+  <% end %>
+  <%= render "chart", title: t(".stat_book_publisher") do %>
+    <%= pie_chart stat_book_publisher, suffix: " #{t("books._item")}" %>
+  <% end %>
+  <%= render "chart", title: t(".stat_book_author") do %>
+    <%= pie_chart stat_book_author, suffix: " #{t("books._item")}" %>
+  <% end %>
+</div>

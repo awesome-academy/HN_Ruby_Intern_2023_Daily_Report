@@ -5,6 +5,11 @@ vi:
     over: 'hơn'
     almost: 'gần'
     ago: 'trước'
+    week: 'tuần'
+    month: 'tháng'
+    year: 'năm'
+    all: 'mọi khoảng thời gian'
+    quarter: 'quý'
   date:
     formats:
       short: '%d/%m'
@@ -114,6 +119,7 @@ vi:
     finish: 'Hoàn thành'
     updated_at: 'Xác nhận'
     user: 'người mượn'
+    times: 'lượt mượn'
     books: 'Sách mượn'
     type: 'Yêu cầu'
     placeholder:
@@ -139,6 +145,11 @@ vi:
       errors: 'Có một số lỗi sau'
       detail: 'Chi tiết'
       read_all: 'Đánh dấu tất cả là đã đọc'
+      stat_by: 'Thống kê'
+      by_year: 'Theo năm'
+      by_month: 'Theo tháng'
+      by_week: 'Theo tuần'
+      by_all: 'Từ trước đến nay'
     notif:
       user_info_not_found: 'Tài khoản chưa có thông tin'
       no_items: 'Không có %{item} nào tìm thấy'
@@ -212,6 +223,22 @@ vi:
     home:
       index:
         title: 'Trang chủ'
+        book_trending: 'Sách nổi bật'
+        stat_book_genre: 'Số lượng sách theo thể loại'
+        stat_book_publisher: 'Số lượng sách theo nhà xuất bản'
+        stat_book_author: 'Số lượng sách theo tác giả'
+        stat_borrow_time: 'Số phiếu mượn theo thời gian'
+        stat_borrow_genre: 'Sách mượn theo thể loại'
+        borrow_stat_section: 'Phần thống kê lịch sử mượn sách'
+        library_stat_section: 'Phần thống kê thư viện'
+      bar:
+        best_of_week: 'Trong tuần'
+        best_of_month: 'Trong tháng'
+        best_of_year: 'Trong năm'
+      box:
+        change_in_this_period: 'Thay đổi trong %{period}'
+      chart:
+        borrow_count: '# Phiếu mượn'
     sessions:
       new:
         title: 'Đăng nhập'

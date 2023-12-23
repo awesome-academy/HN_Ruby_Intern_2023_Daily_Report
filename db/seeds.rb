@@ -35,11 +35,8 @@ account = Account.create(
 end
 
 Account.where(is_admin: false).each do |ac|
-  begin
-    img = URI.parse(Faker::LoremFlickr.image).open
-    ac.avatar.attach(io: img, filename: "user#{i}-avatar.png")
-  rescue
-  end
+  img = URI.parse(Faker::LoremFlickr.image).open
+  ac.avatar.attach(io: img, filename: "user-avatar.png")
 
   UserInfo.new(
     name: Faker::Name.name,
@@ -107,15 +104,18 @@ end
   Genre.create!(name:, description:)
 end
 
-# Create fake associations for books
-Book.all.each do |book|
-  book_id = book.id
-  author_id = Author.pluck(:id).sample
-  genre_id = Genre.pluck(:id).sample
+Create fake associations for books
+Book.pluck(:id).each do |book_id|
+  author_ids = Author.pluck(:id).sample(rand(1..3))
+  genre_ids = Genre.pluck(:id).sample(rand(1..3))
 
-  BookAuthor.create(book_id:, author_id:)
+  author_ids.each do |author_id|
+    BookAuthor.create book_id:, author_id:
+  end
 
-  BookGenre.create(book_id:, genre_id:)
+  genre_ids.each do |genre_id|
+    BookGenre.create book_id:, genre_id:
+  end
 end
 
 100.times do |i|
@@ -124,19 +124,15 @@ end
     end_at: Date.current + 10,
     status: rand(5),
     turns: rand(5),
-    account_id: 1
+    account_id: Account.pluck(:id).sample
   )
 end
 
-BorrowInfo.all.each do |borrowinfo|
-  borrow_info_id = borrowinfo.id
-  book_id = Book.pluck(:id).sample
+BorrowInfo.pluck(:id).each do |borrow_info_id|
+  book_ids = Book.pluck(:id).sample(rand(1..7))
 
-  BorrowItem.create(borrow_info_id:, book_id:)
-  rand(7).times do |i|
-    book_id = Book.pluck(:id).sample
-
-    BorrowItem.find_or_create_by(borrow_info_id:, book_id:)
+  book_ids.each do |book_id|
+    BorrowItem.create(borrow_info_id:, book_id:)
   end
 end
 
@@ -181,10 +177,19 @@ end
   )
 end
 
-# Account and author follow association
-Author.all.each do |author|
-  account_id = 1
-  author_id = author.id
+BorrowItem.all.each do |borrow|
+  borrow.update_attribute :created_at, Faker::Time.backward(days: 40)
+end
 
-  AuthorFollower.create!(account_id:, author_id:)
+BorrowInfo.all.each do |borrow|
+  borrow.update_attribute :start_at, Faker::Date.backward(days: 700)
+  borrow.update_attribute :created_at, borrow.start_at
+  borrow.update_attribute :end_at, borrow.start_at + rand(30)
+  borrow.update_attribute :updated_at, borrow.end_at + rand(13)
+end
+
+BorrowItem.all.each do |borrow|
+  borrow.update_attribute :created_at, Faker::Date.backward(days: 400)
+  # borrow.update_attribute :end_at, borrow.start_at + rand(30)
+  borrow.update_attribute :updated_at, borrow.created_at
 end

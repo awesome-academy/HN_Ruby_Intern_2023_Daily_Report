@@ -1,0 +1,14 @@
+<div class="stat-bar card">
+  <div class="stat-bar-title vertical">
+    <%= title %>
+  </div>
+  <div class="stat-bar-body">
+    <div class="owl-carousel owl-theme loop owl-loaded h-100">
+      <div class="owl-stage-outer h-100">
+        <div class="owl-stage h-100">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
