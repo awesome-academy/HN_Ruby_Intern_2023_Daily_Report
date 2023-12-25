@@ -16,7 +16,7 @@
   <body>
     <%= render "layouts/header" %>
     <div class="container pt-4 flex-grow-1">
-      <%= render "shared/toastr" %>
+      <div id="toastr"><%= render "shared/toastr" %></div>
       <%= breadcrumbs style: :bootstrap5 %>
       <%= yield %>
     </div>

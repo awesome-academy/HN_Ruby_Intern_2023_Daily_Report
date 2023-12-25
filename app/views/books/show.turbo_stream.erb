@@ -1,0 +1,9 @@
+<%= turbo_stream.append "comments" do %>
+  <% @comments.each do |comment| %>
+    <%= render "book_comments/comment", book: @book, comment: comment %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "load_more_button" do %>
+  <%= render "book_comments/load_more_btn", book: @book %>
+<% end %>

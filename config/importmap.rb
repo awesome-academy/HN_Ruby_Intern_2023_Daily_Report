@@ -21,3 +21,5 @@ pin "select2_locale_vi"
 
 pin "chartkick", to: "chartkick.js"
 pin "Chart.bundle", to: "Chart.bundle.js"
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.js"

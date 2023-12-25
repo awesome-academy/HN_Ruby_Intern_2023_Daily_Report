@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :set_book, only: %i(show)
+
   def index
     @q = Book.ransack(params[:q])
     filtered_books = @q.result(distinct: true)
@@ -12,6 +14,20 @@ class BooksController < ApplicationController
   end
 
   def show
+    comments = @book.comments
+                    .newest_comments.include_accounts_with_avatar
+                    .with_rich_text_content_and_embeds
+    @pagy, @comments = pagy(comments, items: Settings.digit_4)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
+  end
+
+  private
+
+  def set_book
     @book = Book.find_by id: params[:id]
     return if @book
 

@@ -45,7 +45,9 @@ Rails.application.routes.draw do
     }
     resources :accounts, only: %i(show edit update)
 
-    resources :books, only: %i(index show), path: "library"
+    resources :books, only: %i(index show), path: "library" do
+      resources :book_comments, path: "comments"
+    end
     resources :authors, only: %i(show)
 
     resource :carts, only: %i(show destroy)

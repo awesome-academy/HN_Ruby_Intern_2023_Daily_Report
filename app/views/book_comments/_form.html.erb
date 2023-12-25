@@ -1,0 +1,15 @@
+<%= form_with(model: [book, book.comments.build], id: "comment_form") do |f| %>
+  <div class="d-flex">
+    <% if account_signed_in? %>
+      <div class="me-4">
+        <%= avatar_for(current_account, 80) %>
+      </div>
+    <% end %>
+    <div class="flex-grow-1">
+      <div class="mb-3">
+        <%= f.rich_text_area :content %>
+      </div>
+      <%= f.submit t(".post_comment"), class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
