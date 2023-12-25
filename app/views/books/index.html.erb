@@ -21,9 +21,9 @@
   <div class="filter text-center mt-4">
     <div class="filter-letter">
       <% ("A".."Z").each do |letter| %>
-        <%= link_to letter, books_path(letter: letter), class: "mx-1 fs-5" %>
+        <%= link_to letter, books_path(letter: letter), class: "px-2 fs-5" %>
       <% end %>
-      <%= link_to t("all"), books_path, class: "mx-1 fs-5" %>
+      <%= link_to t("all"), books_path, class: "px-2 fs-5" %>
     </div>
   </div>
   <div class="d-flex justify-content-center mt-4">

@@ -23,7 +23,7 @@
                   <%= render "carts/borrow_items" %>
               </tbody>
             <% else %>
-              <p><%= t ".cart_empty" %></p>
+              <%= render "shared/not_found_content", text: t(".cart_empty") %>
             <% end %>
           </table>
         </div>

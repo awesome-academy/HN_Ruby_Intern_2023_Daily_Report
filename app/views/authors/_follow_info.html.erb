@@ -1,0 +1,5 @@
+<% book_count = @author.books.count %>
+<div class="d-flex">
+  <p><span class="fw-bold"><%= book_count %></span> <%= t(".books", count: book_count) %></p>
+  <p class="ms-3"><span class="fw-bold"><%= follower_count %></span> <%= t(".followers", count: follower_count) %></p>
+</div>

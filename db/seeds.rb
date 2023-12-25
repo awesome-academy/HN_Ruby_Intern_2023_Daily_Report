@@ -180,3 +180,11 @@ end
     status: rand(3)
   )
 end
+
+# Account and author follow association
+Author.all.each do |author|
+  account_id = 1
+  author_id = author.id
+
+  AuthorFollower.create!(account_id:, author_id:)
+end

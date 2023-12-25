@@ -1,12 +1,11 @@
 en:
   home: "Home"
   log_in: "Log in"
-  languages: "Languages"
-  english: "English"
-  vietnamese: "Vietnamese"
+  en: "English (US)"
+  vi: "Vietnamese"
   welcome_text: "Welcome to the LIBMA website"
   home_text: "This is the home page for the LIBMA - Library management application."
-  search: "Search for title, ISBN code, author name, ..."
+  search: "Search books by title, ISBN code, author name, ..."
   sign_up: "Sign up"
   create_account: "Create my account"
   account_not_found: "Account not found!"
@@ -44,9 +43,19 @@ en:
   phone: "Phone"
   authors:
     show:
-      follow_this_author: "Follow this author"
       about_this_author: "About this author"
       list_of_books: "List of books"
+    follow_btn:
+      follow_this_author: "Follow this author"
+    unfollow_btn:
+      unfollow_this_author: "Unfollow this author"
+    follow_info:
+      books:
+        one: "book"
+        other: "books"
+      followers:
+        one: "follower"
+        other: "followers"
   genre: "Genre"
   publish_date: "Publish date"
   copies: "Copies"
@@ -58,6 +67,7 @@ en:
   cart: "Cart"
   book: "Books"
   empty_cart: "Empty cart"
+  empty_cart_successfully: "Empty cart successfully"
   quantity: "Quantity"
   function: "Function"
   carts:
@@ -132,6 +142,10 @@ en:
   details: "Details"
   no_borrow_info: "No borrowed information"
   borrow_info: "Borrow information"
+  author_follow_successfully: "Follow the author successfully"
+  author_unfollow_successfully: "Unfollow the author successfully"
+  authors_following: "Authors you are following"
+  copyright: "© Copyright"
 
   activerecord:
     attributes:

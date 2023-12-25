@@ -17,4 +17,8 @@ module ApplicationHelper
     else message_type
     end
   end
+
+  def other_locales
+    I18n.available_locales.reject{|cur_locale| cur_locale == I18n.locale}
+  end
 end

@@ -6,13 +6,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarMain">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item"><%= link_to t("home"), root_path, class: "nav-link", "aria-current": "page" %></li>
           <li class="nav-item"><%= link_to t("library"), books_path, class: "nav-link" %></li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
           <% if account_signed_in? %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <%= t "account" %>
+                <%= avatar_for(current_account, 40) %>
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to t("profile"), current_account, class: "dropdown-item" %></li>
@@ -28,11 +30,17 @@
           <% end %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= t "languages" %>
+              <%= image_tag("/images/#{I18n.locale}.png", size: "20x20", alt: "#{I18n.locale}") %>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><%= link_to t("english"), locale: "en" %></li>
-              <li><%= link_to t("vietnamese"), locale: "vi" %></li>
+              <% other_locales.each do |locale| %>
+                <li>
+                  <%= link_to({locale:}, class: "d-flex align-items-center dropdown-item") do %>
+                    <%= image_tag("/images/#{locale}.png", size: "20x20", alt: "#{locale}") %>
+                    <span class="ms-2"><%= t(locale) %></span>
+                  <% end %>
+                </li>
+              <% end %>
             </ul>
           </li>
           <li class="nav-item">

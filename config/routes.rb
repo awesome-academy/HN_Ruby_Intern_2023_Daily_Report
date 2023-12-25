@@ -53,5 +53,7 @@ Rails.application.routes.draw do
     resources :borrow_infos, only: %i(index show new create)
     post "/status_action", to: "borrow_infos#handle_status_action"
     patch "/status_action", to: "borrow_infos#handle_status_action"
+
+    resources :author_followers, only: %i(create destroy)
   end
 end

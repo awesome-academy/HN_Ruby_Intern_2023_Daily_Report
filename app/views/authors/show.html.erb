@@ -1,13 +1,18 @@
 <% provide :title, @author.name %>
 
+<% user_follow_author = current_account&.following? @author %>
+<% follower_count = @author.followers.count %>
 <div>
-  <h1 class="fw-bold mb-4">
-    <%= avatar_for(@author, 80) %>
-    <%= @author.name %>
-  </h1>
+  <div class="d-flex align-items-center mb-4">
+    <h1 class="fw-bold mb-0 me-4">
+      <%= avatar_for(@author, 100) %>
+      <span><%= @author.name %></span>
+    </h1>
+    <%= render "check_btn", user_follow_author: user_follow_author %>
+  </div>
+  <%= render "follow_info", follower_count: follower_count %>
   <p><span class="fw-semibold">Email: </span><%= @author.email %></p>
   <p><span class="fw-semibold"><%= t "phone" %>: </span><%= @author.phone %></p>
-  <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <%= t ".follow_this_author" %></button>
 </div>
 <div class="mt-5 w-50">
   <h2 class="border-bottom"><%= t ".about_this_author" %></h2>

@@ -44,4 +44,16 @@ class Account < ApplicationRecord
       .references(:user_info)
       .or(UserInfo.bquery(q))
   }
+
+  def follow author
+    favorite_authors << author
+  end
+
+  def unfollow author
+    favorite_authors.delete author
+  end
+
+  def following? author
+    favorite_authors.include? author
+  end
 end
