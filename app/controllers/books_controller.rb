@@ -29,6 +29,9 @@ class BooksController < ApplicationController
 
   def set_book
     @book = Book.find_by id: params[:id]
+    @comments = @book.comments
+                     .newest_comments.include_accounts_with_avatar
+                     .with_rich_text_content_and_embeds
     return if @book
 
     flash[:warning] = t "book_not_found"
