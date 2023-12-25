@@ -21,7 +21,7 @@ account = Account.create(
   is_active: true,
 )
 
-Fake Accounts
+# Fake Accounts
 10.times do |i|
   Account.create(
     email: Faker::Internet.email,

@@ -8,3 +8,8 @@
 body {
   font-family: 'Noto Serif', 'serif';
 }
+
+.card.card-main {
+  width: 60%;
+  max-width: 500px;
+}

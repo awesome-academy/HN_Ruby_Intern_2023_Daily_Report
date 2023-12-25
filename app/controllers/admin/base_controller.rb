@@ -1,7 +1,7 @@
 class Admin::BaseController < ApplicationController
   layout "admin/layouts/base"
   include Admin::BaseHelper
-  before_action :require_admin
+  before_action :require_admin!
   before_action :transform_sort_params, only: :index
   skip_before_action :current_cart
 
@@ -72,8 +72,14 @@ class Admin::BaseController < ApplicationController
 
   private
 
-  def require_admin
-    redirect_to admin_login_path unless current_account&.is_admin?
+  def require_admin!
+    authenticate_admin_account!
+    @current_account = current_admin_account
+
+    return if @current_account&.is_admin?
+
+    flash[:error] = t "devise.failure.unauthenticated"
+    redirect_to new_admin_account_session_path
   end
 
   def transform_sort_params

@@ -6,9 +6,11 @@ vi:
       invalid: "%{authentication_keys} hoặc mật khẩu không đúng"
       not_found_in_database: "%{authentication_keys} hoặc mật khẩu không đúng"
       unauthenticated: "Bạn cần phải đăng nhập hoặc đăng ký để có thể tiếp tục"
+      locked: "Tài khoản của bạn đã bị khóa"
     registrations:
       signed_up: "Chào mừng! Bạn đã đăng nhập thành công"
     sessions:
+      invalid: "Email hoặc mật khẩu không đúng"
       signed_in: "Đăng nhập thành công"
       signed_out: "Đăng xuất thành công"
       already_signed_out: "Đăng xuất thành công"

@@ -121,6 +121,7 @@ vi:
   admin:
     misc:
       back: 'Quay lại'
+      back_login: 'Về trang đăng nhập'
       to_list: 'Đến trang danh sách'
       upload: 'Tải lên %{name}'
       table_info: 'Hiển thị %{from} - %{to} / %{total}'
@@ -217,3 +218,13 @@ vi:
         rememberme: 'Lưu phiên đăng nhập'
         forgot_pwd: 'Quên mật khẩu?'
         login: 'Đăng nhập'
+    passwords:
+      new:
+        title: 'Lấy lại mật khẩu'
+        email_placeholder: 'Nhập email nhận hướng dẫn lấy lại mật khẩu'
+        send_password_reset_email: 'Gửi email'
+      edit:
+        title: 'Thay đổi mật khẩu'
+        new_password: 'Mật khẩu mới'
+        new_password_confirmation: 'Xác nhận mật khẩu mới'
+        change_my_password: 'Đổi mật khẩu'
