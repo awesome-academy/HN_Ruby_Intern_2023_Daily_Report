@@ -1,0 +1,15 @@
+<div class="stat-box card">
+  <div class="stat-box-body">
+    <% max = Settings.max_statistic_number %>
+    <% value = collection.count %>
+    <% change = collection.recently(@period).count %>
+    <span class="stat-box-value" title="<%= value if value > max %>">
+      <%= value > max ? "#{max}+" : value %>
+    </span>
+    <span class="stat-box-change <%= change.negative? ? :negative : :positive %>"
+          title="<%= t('.change_in_this_period', period: t("datetime.#{@period}")) %>">
+      <%= change %>
+    </span>
+    <span class="stat-box-title"><%= title %></span>
+  </div>
+</div>

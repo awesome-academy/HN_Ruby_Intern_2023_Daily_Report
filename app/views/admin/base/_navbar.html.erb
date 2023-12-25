@@ -9,6 +9,18 @@
       <span class="mdi mdi-menu"></span>
     </button>
     <ul class="navbar-nav navbar-nav-right">
+      <% if current_page? admin_root_path %>
+        <li class="nav-item me-3">
+          <div class="nav-control-wrapper">
+            <%= tag.div t("admin.misc.stat_by"), class: "me-2" %>
+            <%= form_with url: admin_root_path, method: :get do |f| %>
+              <%= f.select :period, period_options,
+                         {selected: @period},
+                         {class: "form-control text-white submit-on-change w-auto"} %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
       <li class="nav-item dropdown d-none d-lg-block">
         <%= render "dropdown_button", id: "createbtns",
                     button_class: "nav-link btn btn-success px-2" do %>

@@ -478,3 +478,139 @@ td .borrow-status-badge {
   font-size: 0.75rem;
   width: 80%;
 }
+
+/* Statistic */
+
+.stat-section-header {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.stat-box {
+  min-width: 170px;
+  width: 14%;
+  height: 170px;
+  padding: 0 20px;
+}
+
+.stat-box-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px 0;
+}
+
+.stat-box-value {
+  font-size: 3rem;
+  flex: 3;
+  font-weight: bold;
+}
+
+.stat-box-title {
+  font-size: 0.875rem;
+  flex: 2;
+  text-transform: lowercase;
+}
+
+.stat-box-change {
+  font-size: 1.25rem;
+  align-self: flex-end;
+  flex: 2;
+  font-weight: bold;
+}
+
+.stat-box-change.negative {
+  color: #fc424a;
+}
+
+.stat-box-change.positive {
+  color: #00d25b;
+}
+
+.stat-box-change.negative::before {
+  content: '- ';
+  font-size: 1.5rem;
+}
+
+.stat-box-change.positive::before {
+  content: '+ ';
+  font-size: 1.5rem;
+}
+
+.stat-bar {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: unset;
+  height: 300px; /* height */
+  padding: 0;
+  overflow: hidden;
+}
+
+.row .row .card {
+  margin: 10px;
+}
+
+.stat-bar-title {
+  white-space: nowrap;
+  min-width: 300px; /* height */
+  height: 70px;
+  background-color: #f34141;
+  font-weight: bold;
+  font-size: 20px;
+  color: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-bar-body {
+  padding: 10px;
+  margin-left: calc(-300px + 70px + 10px); /* height */
+}
+
+.stat-bar-img {
+  height: 300px; /* height */
+  margin: 0 20px;
+}
+
+.vertical {
+  transform-origin: right top;
+  transform: translateX(-100%) rotate(-90deg);
+}
+
+.owl-item {
+  min-width: 170px;
+}
+
+.stat-bar-trophy i {
+  font-size: 18px;
+}
+
+.owl-stage {
+  display: flex;
+}
+
+.stat-chart {
+  flex-shrink: unset;
+  padding: 20px;
+  overflow: hidden;
+  flex: 1 1 333px;
+}
+
+.stat-chart-title {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.nav-control-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  margin-left: auto;
+}

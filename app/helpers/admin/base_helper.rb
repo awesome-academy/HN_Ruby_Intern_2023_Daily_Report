@@ -103,4 +103,11 @@ module Admin::BaseHelper
     }
     status2icon[notification.status.to_sym]
   end
+
+  def period_options
+    options = [:year, :month, :week, :all]
+    options.map do |name|
+      [t("admin.misc.by_#{name}"), name]
+    end
+  end
 end

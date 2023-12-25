@@ -15,7 +15,9 @@ pin "toastr"
 
 pin_all_from "app/javascript/admin", under: "admin"
 pin_all_from "vendor/theme/admin/vendors", under: "@vendor", to: "vendors"
-pin_all_from "vendor/theme/admin/js", under: "@vendor", to: "js"
 
 pin "select2"
 pin "select2_locale_vi"
+
+pin "chartkick", to: "chartkick.js"
+pin "Chart.bundle", to: "Chart.bundle.js"

@@ -5,6 +5,11 @@ en:
     over: 'over'
     almost: 'almost'
     ago: 'ago'
+    week: 'week'
+    month: 'month'
+    year: 'year'
+    all: 'all time'
+    quarter: 'quarter'
   date:
     formats:
       short: '%b %d, %Y'
@@ -112,6 +117,7 @@ en:
     finish: 'Finish'
     updated_at: 'Updated at'
     user: 'borrower'
+    times: 'borrow'
     books: 'borrowed books'
     type: 'Type'
     placeholder:
@@ -137,6 +143,11 @@ en:
       amend: 'Amend'
       detail: 'Detail'
       read_all: 'Mark all as read'
+      stat_by: 'Statistic period'
+      by_year: 'By year'
+      by_month: 'By month'
+      by_week: 'By week'
+      by_all: 'From all time'
     notif:
       user_info_not_found: 'This account does not register the user information'
       no_items: 'No %{item} found'
@@ -210,6 +221,22 @@ en:
     home:
       index:
         title: 'Homepage'
+        book_trending: 'Trending books'
+        stat_book_genre: 'Number of books by genres'
+        stat_book_publisher: 'Number of books by publishers'
+        stat_book_author: 'Number of books by authors'
+        stat_borrow_time: 'Number of borrow requests by time'
+        stat_borrow_genre: 'Number of borrowed books by genres'
+        borrow_stat_section: 'Borrow history statistic section'
+        library_stat_section: 'Library statistic section'
+      bar:
+        best_of_week: 'Best of week'
+        best_of_month: 'Best of month'
+        best_of_year: 'Best of year'
+      box:
+        change_in_this_period: 'Change in %{period}'
+      chart:
+        borrow_count: '# Borrow Requests'
     sessions:
       new:
         title: 'Log in'

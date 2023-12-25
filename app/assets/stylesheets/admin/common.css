@@ -3,6 +3,8 @@
  *= require vendors/css/vendor.bundle.base.css
  *= require vendors/flag-icon-css/css/flag-icon.min.css
  *= require vendors/jquery-toast-plugin/jquery.toast.min.css
+ *= require vendors/owl-carousel-2/owl.carousel.min.css
+ *= require vendors/owl-carousel-2/owl.theme.default.min.css
  *= require css/style.css
  *= require select2
  *= require_self

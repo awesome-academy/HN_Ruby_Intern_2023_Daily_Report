@@ -5,4 +5,5 @@ class BorrowItem < ApplicationRecord
 
   scope :include_books,
         ->{includes(book: [:authors, :publisher, {image_attachment: :blob}])}
+  scope :include_book, ->{includes(book: {image_attachment: :blob})}
 end

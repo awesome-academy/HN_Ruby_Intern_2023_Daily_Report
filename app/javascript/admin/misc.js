@@ -15,6 +15,10 @@ $(document).on('turbo:load', function () {
     });
   });
 
+  $('select.submit-on-change').on('change', function () {
+    $(this).closest('form').submit();
+  });
+
   // Active nav items with current url
   let current = location.pathname.replace(/\/$/, '');
   $('.menu-items .nav-link').each(function () {
