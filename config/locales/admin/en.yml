@@ -48,6 +48,7 @@ en:
     inactive_reason: 'Locked reason'
     placeholder:
       inactive_reason: 'Reason for user know why his/her account is locked'
+    admin: 'Admin'
   books:
     _name: 'book'
     _item: 'book'
@@ -195,6 +196,7 @@ en:
       delete_book_fail_borrowed: 'Delete book fail because there are some requests has not been returned'
       require_reject_reason: 'You need to choose or enter a reason to reject this request'
       require_lock_reason: 'You need to choose or enter a reason to lock this account'
+      report_sent: 'Weekly report has been sent to your mailbox'
     hint:
       search:
         borrows: 'Search by borrower information: full name, email, username'
@@ -237,6 +239,7 @@ en:
         borrow_requests: 'Borrow Request'
         users: 'User'
         library: 'Library'
+        background_job: 'Background Jobs'
       dropdown_menu:
         account_settings: 'Account settings'
         change_password: 'Change password'

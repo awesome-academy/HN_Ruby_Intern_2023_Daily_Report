@@ -1,0 +1,15 @@
+<%= t "mailer.greeting" %> <%= t "users.admin" %>, <%= t ".info", from: @from, to: @to %>
+
+==============================================
+<%= t ".new_user" %>: <%= @data[:new_user] %>
+<%= t ".new_books" %>: <%= @data[:new_books].length %>
+<% @data[:new_books].pluck(:title).each_with_index do |title, i| %>
+  <%= " #{i + 1}. #{title}" %>
+<% end %>
+    
+<%= t ".new_borrow" %>: <%= @data[:new_borrow] %>
+  - <%= t "borrows.approved" %>: <%= @data[:approved_borrow] %>
+  - <%= t "borrows.rejected" %>: <%= @data[:rejected_borrow] %>
+<%= t ".returned_borrow" %>:  <%= @data[:returned_borrow] %>
+<%= t ".pending_borrow" %>: <%= @data[:pending_borrow] %>
+==============================================

@@ -249,3 +249,12 @@ en:
     borrow_remind: "You have a borrow request that is due soon"
     borrow_returned_overdue: "Your returned borrowings is overdue"
     account_inactive: "Your account is temporarily locked by Admin"
+  report_mailer:
+    week_report:
+      subject: "Weekly report %{from} - %{to}"
+      info: "This is a weekly report (%{from} - %{to}) for Libma Administrators."
+      new_user: "New users"
+      new_borrow: "New borrow requests"
+      returned_borrow: "Returned borrow requests"
+      pending_borrow: "Pending borrow requests"
+      new_books: "New books"

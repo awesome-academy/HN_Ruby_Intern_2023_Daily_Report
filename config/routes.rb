@@ -1,10 +1,16 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   namespace :admin do
     scope "(:locale)", locale: /en|vi/ do
       root "home#index"
       get "export/library", to: "home#export_library"
 
-      devise_for :accounts, path: '', controllers: {
+      authenticate :admin_account do
+        mount Sidekiq::Web => "/jobs"
+      end
+
+      devise_for :accounts, path: "", controllers: {
         sessions: "admin/sessions"
       }, skip: :registrations
 
