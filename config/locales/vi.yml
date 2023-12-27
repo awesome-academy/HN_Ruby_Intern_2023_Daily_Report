@@ -146,6 +146,21 @@ vi:
   author_unfollow_successfully: "Hủy theo dõi tác giả thành công"
   authors_following: "Tác giả bạn đang theo dõi"
   copyright: "© Bản quyền thuộc về"
+  comment_successfully: "Bình luận thành công"
+  comment_failed: "Bình luận thất bại"
+  comment_deleted: "Xóa bình luận thành công"
+  book_comments:
+    comment:
+      posted: "Đăng"
+      ago: "trước"
+    form:
+      post_comment: "Đăng bình luận"
+    load_more_btn:
+      load_more: "Xem thêm"
+      loading: "Đang tải..."
+  comments: "Bình luận"
+  recent_comments: "Bình luận gần đây"
+  comment_cannot_empty: "không được để trống"
 
   activerecord:
     models:
@@ -156,6 +171,7 @@ vi:
       genre: "Thể loại"
       user_info: "Thông tin người dùng"
       borrow_info: "Thông tin mượn sách"
+      book_comment: "Bình luận"
     attributes:
       account:
         email: "Email"
@@ -200,6 +216,8 @@ vi:
         end_at: "Ngày trả sách"
         renewal_at: "Ngày gia hạn"
         turns: "Số lượt gia hạn đã dùng"
+      book_comment:
+        content: "Nội dung bình luận"
   validations:
     isbn_valid: "chỉ bao gồm 10 hoặc 13 chữ số , cùng với các ký tự -"
     image_type_valid: "chỉ hỗ trợ các định dạng JPEG, PNG, GIF"

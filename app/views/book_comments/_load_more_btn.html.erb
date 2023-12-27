@@ -1,0 +1,8 @@
+<% if @pagy.next.present? %>
+  <%= button_to t(".load_more"), book_path(book),
+    params: { page: @pagy.next },
+    method: :get,
+    class: "btn btn-primary",
+    "data-turbo-stream": true,
+    "data-turbo-submits-with": t(".loading") %>
+<% end %>

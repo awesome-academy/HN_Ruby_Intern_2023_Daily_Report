@@ -26,3 +26,20 @@
     </div>
   </div>
 </div>
+<div class="mt-5">
+  <h2 class="border-bottom mb-3"><%= t "comments" %></h2>
+  <%= render "book_comments/form", book: @book %>
+  <section class="row d-flex justify-content-center mt-5">
+    <div class="col-md-12 col-lg-10">
+      <h4><%= t "recent_comments" %></h4>
+      <div id="comments">
+        <% @comments.each do |comment| %>
+          <%= render "book_comments/comment", book: @book, comment: comment %>
+        <% end %>
+      </div>
+      <div id="load_more_button" class="d-flex justify-content-center mt-4">
+        <%= render "book_comments/load_more_btn", book: @book %>
+      </div>
+    </div>
+  </section>
+</div>

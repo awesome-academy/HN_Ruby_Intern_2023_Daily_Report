@@ -146,6 +146,21 @@ en:
   author_unfollow_successfully: "Unfollow the author successfully"
   authors_following: "Authors you are following"
   copyright: "© Copyright"
+  comment_successfully: "Comment successfully"
+  comment_failed: "Comment failed"
+  comment_deleted: "Comment deleted successfully"
+  book_comments:
+    comment:
+      posted: "Posted"
+      ago: "ago"
+    form:
+      post_comment: "Post comment"
+    load_more_btn:
+      load_more: "Load more"
+      loading: "Loading..."
+  comments: "Comments"
+  recent_comments: "Recent comments"
+  comment_cannot_empty: "cannot be empty"
 
   activerecord:
     attributes:
