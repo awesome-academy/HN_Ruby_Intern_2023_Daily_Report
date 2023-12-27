@@ -296,6 +296,10 @@ img.file-original {
   max-width: 32rem;
 }
 
+.min-w-12 {
+  min-width: 12rem;
+}
+
 .btn-form {
   min-width: 80px;
   max-width: 150px;

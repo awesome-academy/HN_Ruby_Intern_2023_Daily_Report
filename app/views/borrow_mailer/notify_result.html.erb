@@ -2,7 +2,7 @@
   <%= t ".status" %>
   <b class="text-<%= @borrow.approved? ? :success : :danger %>"><%= t("borrows.#{@borrow.status}") %></b>.
 </p>
-<% unless @borrow.approved? %>
+<% if @borrow.rejected? %>
   <p><%= t("borrows.reject_reason") %>: <b><%= @borrow.response&.content %></b></p>
 <% end %>
 <%= render "borrow" %>

@@ -35,7 +35,6 @@ vi:
     female: 'Nữ'
     others: 'Khác'
     citizen_id: 'CMND/CCCD'
-    updated_at: 'Cập nhật lần cuối'
     status: 'Trạng thái'
     join_from: 'Tham gia từ'
     join_about: 'Tham gia'
@@ -43,6 +42,9 @@ vi:
     favorite: 'Yêu thích'
     active: 'Hiệu lực'
     inactive: 'Đã khóa'
+    inactive_reason: 'Lý do khóa tài khoản'
+    placeholder:
+      inactive_reason: 'Phản hồi lý do khóa tài khoản này'
   books:
     _name: 'sách'
     _item: 'cuốn sách'
@@ -147,7 +149,7 @@ vi:
       amend: 'Cập nhật'
       cancel: 'Huỷ'
       skip: 'Bỏ qua'
-      last_updated: 'Cập nhật'
+      last_updated: 'Cập nhật lần cuối'
       send: 'Gửi'
       loading: 'Xin chờ...'
       errors: 'Có một số lỗi sau'
@@ -177,6 +179,8 @@ vi:
       login_success: 'Xin chào'
       send_remind_email_success: 'Gửi email nhắc nhở thành công'
       delete_book_fail_borrowed: 'Xóa sách thất bại do có các yêu cầu mượn chưa trả'
+      require_reject_reason: 'Bạn cần xác định lý do từ chối yêu cầu mượn'
+      require_lock_reason: 'Bạn cần xác định lý do khóa tài khoản'
     hint:
       search:
         borrows: 'Tìm kiếm theo người mượn: họ tên, email, tên đăng nhập'
@@ -185,6 +189,10 @@ vi:
         genres: 'Tìm kiếm theo tên thể loại, mô tả'
         publishers: 'Tìm kiếm theo tên nhà xuất bản, email, địa chỉ, mô tả'
         users: 'Tìm kiếm theo tên đăng nhập, email, họ tên, SĐT'
+      inactive_reason:
+        overdue: 'Trả sách trễ hạn quá nhiều lần'
+        borrow_cancel: 'Hủy yêu cầu quá nhiều lần'
+        spam: 'Bình luận spam quá nhiều lần'
     title:
       index: 'Danh sách %{name}'
       new: 'Thêm %{name}'

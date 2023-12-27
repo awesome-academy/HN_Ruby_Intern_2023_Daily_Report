@@ -24,7 +24,14 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def inactive
-    respond_to_change_active false
+    reason = params[:reason]
+    if reason.blank?
+      flash[:warning] = t "admin.notif.require_lock_reason"
+      application_notify
+    else
+      UserMailer.with(user: @user, reason:).notify_inactive.deliver_later
+      respond_to_change_active false
+    end
   end
 
   private
@@ -45,7 +52,6 @@ class Admin::UsersController < Admin::BaseController
       "admin.notif.update_user_status_success_html",
       status: t("users.#{is_active ? :active : :inactive}")
     )
-    UserMailer.with(user: @user).notify_inactive.deliver_later unless is_active
     respond_to do |format|
       format.turbo_stream do
         flash.now[:success] = text

@@ -3,7 +3,7 @@
 ) => {
   destroy_confirm:, destroy_remote:, row:, item:, name:,
 } %>
-<div class="d-flex flex-<%= row ? :row : :column %> justify-content-end">
+<div class="d-flex flex-<%= row ? :row : :column %> justify-content-end <%= 'min-w-12' if row %>">
   <%= link_to t(".update"), url_for(action: :edit, id: item.id),
                          class: "btn btn-outline-warning btn-form" %>
   <%= link_to t(".delete"), url_for(action: :destroy, id: item.id),

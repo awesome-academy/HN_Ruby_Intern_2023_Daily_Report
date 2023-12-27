@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
     user = params[:user]
     @name = user.user_info.presence&.name || user.username
     @time = l user.updated_at, format: :long
-    @reason = t ".reason"
+    @reason = params[:reason] || t(".reason")
     mail to: user.email
   end
 end

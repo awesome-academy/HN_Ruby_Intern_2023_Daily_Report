@@ -15,6 +15,7 @@
           <div class="py-4">
             <%= render("admin/shared/info_field", name: t("authors.email"), value: email) if email %>
             <%= render("admin/shared/info_field", name: t("authors.phone"), value: phone) if phone %>
+            <%= render "admin/shared/timestamp", object: @author %>
           </div>
         </div>
         <div class="col-lg-8">

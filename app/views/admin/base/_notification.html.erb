@@ -8,7 +8,7 @@
     <%= tag.i class: "mdi mdi-#{icon} text-#{color}" %>
   </div>
   <div class="ms-3 text-truncate text-muted w-100">
-    <%= tag.p notification.content, title: notification.content,
+    <%= tag.p t(notification.content), title: t(notification.content),
               class: "text-#{color} mb-1 max-2-lines checked-change-color" %>
     <div class="my-2 text-muted inline d-flex">
       <%= tag.p time_ago(notification.created_at, suffix: true), class: "" %>

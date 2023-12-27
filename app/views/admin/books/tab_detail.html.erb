@@ -1,4 +1,4 @@
-<% populate_book(@book) => {isbn:, remain:, publisher:, publish_date:, authors:, genres:}%>
+<% populate_book(@book) => {isbn:, publisher:, publish_date:, authors:, genres:}%>
 <% content_for :tab_content do %>
   <%= render "admin/shared/info_field", name: t("books.isbn"), value: isbn %>
   <%= render "admin/shared/info_field", name: t("publishers._name") do %>
@@ -13,6 +13,6 @@
   <%= render "admin/shared/info_field", name: t("books.publish_date"), value: publish_date %>
   <hr>
   <%= render "admin/shared/info_field", name: t("books.amount"), value: @book.amount %>
-  <%= render "admin/shared/info_field", name: t("books.remain"), value: remain %>
+  <%= render "admin/shared/info_field", name: t("books.remain"), value: @book.remain %>
 <% end %>
 <%= render "show" %>

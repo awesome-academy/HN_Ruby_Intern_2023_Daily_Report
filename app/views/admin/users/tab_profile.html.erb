@@ -5,8 +5,7 @@
     <%= render "admin/shared/info_field", name: t("users.gender"), value: gender %>
     <%= render "admin/shared/info_field", name: t("users.dob"), value: dob %>
     <%= render "admin/shared/info_field", name: t("users.citizen_id"), value: citizen_id %>
-    <hr>
-    <%= render "admin/shared/info_field", name: t("users.updated_at"), value: updated_at %>
+    <%= render "admin/shared/timestamp", object: @user %>
   <% else %>
     <%= t "admin.notif.user_info_not_found" %>
   <% end %>

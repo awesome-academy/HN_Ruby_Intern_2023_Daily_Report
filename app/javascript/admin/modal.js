@@ -16,4 +16,8 @@ $(document).on('turbo:load', function () {
     let link = button.attr('href');
     $(this).find('.modal-body form').attr('action', link);
   });
+
+  $('.modal form').on('submit', function (e) {
+    $(this).closest('.modal').modal('hide');
+  });
 });

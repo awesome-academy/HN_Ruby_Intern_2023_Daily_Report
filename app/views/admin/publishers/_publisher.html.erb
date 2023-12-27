@@ -5,7 +5,7 @@
   <td><%= @pagy.from + publisher_iteration.index %></td>
   <td><%= link_to name, publisher_path, title: about %></td>
   <td><%= email %></td>
-  <td class="text-truncate mw-6"><%= address %></td>
+  <td class="text-truncate mw-20"><%= address %></td>
   <td><%= updated_at %></td>
   <td>
     <%= render "admin/shared/form_button", item: publisher, name: :publisher %>
