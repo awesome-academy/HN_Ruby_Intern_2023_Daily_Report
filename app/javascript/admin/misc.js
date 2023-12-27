@@ -5,6 +5,11 @@ $(document).on('turbo:load', function () {
     sidebar.find('.collapse.show').collapse('hide');
   });
 
+  // Open Sidebar on small screen
+  $('[data-toggle="offcanvas"]').on('click', function () {
+    $('.sidebar-offcanvas').toggleClass('active');
+  });
+
   // Select2
   $('.selector2').each(function () {
     const id = $(this).attr('id');
@@ -49,11 +54,6 @@ $(function () {
     } else {
       body.toggleClass('sidebar-icon-only');
     }
-  });
-
-  // Open Sidebar on small screen
-  $('[data-toggle="offcanvas"]').on('click', function () {
-    $('.sidebar-offcanvas').toggleClass('active');
   });
 
   // Check Notification

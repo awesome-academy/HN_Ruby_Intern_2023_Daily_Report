@@ -8,7 +8,9 @@ class ApplicationRecord < ActiveRecord::Base
                            pivot: Time.zone.today|
     return all if period == :all
 
-    where attribute => pivot.public_send("all_#{period}")
+    from = pivot.minus_with_duration Settings.period.public_send(period)
+
+    where attribute => from..pivot
   }
   scope :period_group, lambda{|period = :date, attribute = :created_at|
     group("#{period}(#{attribute})")

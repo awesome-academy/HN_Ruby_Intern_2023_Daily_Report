@@ -85,7 +85,7 @@ class BorrowInfosController < ApplicationController
   end
 
   def cancel_borrow_request
-    if @borrow_info.update_attribute(:status, "canceled")
+    if @borrow_info.perform_action :cancel
       flash[:success] = t "cancel_request_successfully"
       redirect_to @borrow_info
     else

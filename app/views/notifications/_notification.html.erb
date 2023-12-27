@@ -7,7 +7,7 @@
     <%= link_to notification_path(notification), data: {turbo_method: :patch}, class: "dropdown-item d-flex align-items-center" do %>
       <i class="fa-solid fa-circle-<%= icon %> fs-4 me-3 text-<%= color %>"></i>
       <div>
-        <p class="m-0 text-wrap <%= uncheck %>"><%= notification.content %></p>
+        <p class="m-0 text-wrap <%= uncheck %>"><%= t(notification.content) %></p>
         <p class="m-0 text-secondary mt-2"><%= time_ago_in_words(notification.created_at) %> <%= t "ago" %></p>
       </div>
     <% end %>

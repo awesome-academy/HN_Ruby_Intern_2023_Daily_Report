@@ -55,7 +55,7 @@ class Admin::BaseController < ApplicationController
     else
       flash[:error] = t "admin.notif.delete_fail", name: t("#{name}s._name")
     end
-    redirect_back_or_to public_send("admin_#{name}s_path")
+    redirect_to public_send("admin_#{name}s_path")
   end
 
   def application_notify

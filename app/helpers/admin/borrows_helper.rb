@@ -8,8 +8,18 @@ module Admin::BorrowsHelper
       text = borrow.finished? ? :rejected : :renew_rejected
       [:danger, text]
     when :returned then [:warning, :returned]
-    else [:secondary, nil]
+    when :canceled then [:dark, :canceled]
+    else [:secondary, borrow.status]
     end
+  end
+
+  def get_status_filter_for_group group
+    group2options = {
+      history: [:rejected, :returned, :canceled],
+      borrowing: [:rejected, :approved],
+      pending: [:pending, :renewing]
+    }
+    (group2options[group] << :all).index_by{|k| t(k)}
   end
 
   def populate_borrow borrow
@@ -44,12 +54,19 @@ module Admin::BorrowsHelper
         }
       ]
     elsif borrow.borrowing?
+      return_confirm = if borrow.overdue?
+                         penalty = number_to_currency(borrow.penalty)
+                         exceed = borrow.return_exceed
+                         t ".overdue_confirm", penalty:, exceed:
+                       else
+                         t(".return_confirm")
+                       end
       [
         {
           text: t("borrows.return"),
           link: return_admin_borrow_path(borrow),
           color: :primary,
-          confirm: t(".return_confirm")
+          confirm: return_confirm
         },
         {
           text: t("borrows.remind"),

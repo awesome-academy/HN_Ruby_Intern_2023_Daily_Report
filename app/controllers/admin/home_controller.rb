@@ -1,6 +1,6 @@
 class Admin::HomeController < Admin::BaseController
   def index
-    @period = params[:period]&.to_sym || :week
+    @period = params[:period]&.to_sym || :month
   end
 
   def export_library

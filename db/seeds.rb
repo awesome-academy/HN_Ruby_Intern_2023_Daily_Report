@@ -8,7 +8,7 @@ admin = Account.create(
   is_activated: true,
   is_active: true,
 )
-admin.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/admin/face5.jpg"), filename: "admin-face.jpg")
+admin.avatar.attach(io: File.open("#{Rails.root}/app/assets/images/admin/admin-avatar.jpg"), filename: "admin-avatar.jpg")
 
 # Test account
 account = Account.create(
@@ -22,7 +22,7 @@ account = Account.create(
 )
 
 # Fake Accounts
-10.times do |i|
+35.times do |i|
   Account.create(
     email: Faker::Internet.email,
     username: Faker::Internet.username,
@@ -34,11 +34,11 @@ account = Account.create(
   )
 end
 
-Account.where(is_admin: false).each do |ac|
+Account.not_admin.each do |ac|
   img = URI.parse(Faker::LoremFlickr.image).open
   ac.avatar.attach(io: img, filename: "user-avatar.png")
 
-  UserInfo.new(
+  UserInfo.create(
     name: Faker::Name.name,
     gender: rand(3),
     address: Faker::Address.full_address,
@@ -46,7 +46,7 @@ Account.where(is_admin: false).each do |ac|
     citizen_id: Faker::IDNumber.valid,
     dob: Faker::Date.birthday(min_age: 18, max_age: 65),
     account: ac,
-  ).save(validate: false)
+  )
 end
 
 # Publisher
@@ -54,17 +54,17 @@ end
   name = Faker::Book.unique.publisher
   address = Faker::Address.full_address
   about = "#{name} #{Faker::Lorem.paragraph}"
-  email = Faker::Internet.email(name: name)
+  email = Faker::Internet.email
 
   Publisher.create(name:, address:, about:, email:)
 end
 
 # Author
-50.times do |n|
+30.times do |n|
   name = Faker::Name.name
   about = "#{name} #{Faker::Lorem.paragraph}"
   phone = Faker::PhoneNumber.cell_phone
-  email = Faker::Internet.email(name: name)
+  email = Faker::Internet.email
 
   Author.create(name:, about:, phone:, email:)
 end
@@ -74,17 +74,23 @@ Author.all.each do |author|
   author.avatar.attach(io: file_path, filename: "#{author.name}-avatar.png")
 end
 
+# Genre
+30.times do |n|
+  name = Faker::Book.unique.genre
+  description = "#{name} #{Faker::Lorem.paragraph(sentence_count: 5)}"
+
+  Genre.create(name:, description:) do
+end
+
 # Book
 100.times do |n|
-  title = Faker::Book.title
-  while Book.exists?(title: title)
-    title = Faker::Book.title
-  end
-  description = "#{title} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  title = Faker::Book.unique.title
+  description = "#{title} #{Faker::Lorem.paragraph(sentence_count: 10)}"
   amount = rand(1..100)
   borrowed_count = 0
   publish_date = Faker::Date.backward
-  isbn = Faker::Code.unique.isbn(base: (rand % 2 == 1 ? 13 : 10))
+  isbn = Faker::Code.unique.isbn(base: (rand % 2 == 1 ? 13 : 10)).gsub("X", "0")
+
   publisher_id = Publisher.pluck(:id).sample
 
   Book.create(title:, description:, amount:, publish_date:, isbn:, publisher_id:, borrowed_count:)
@@ -93,14 +99,6 @@ end
 Book.all.each do |book|
   file_path = URI.parse(Faker::LoremFlickr.image(size: "200x250")).open
   book.image.attach(io: file_path, filename: "image.jpg")
-end
-
-# Genre
-30.times do |n|
-  name = Faker::Book.unique.genre
-  description = "#{name} #{Faker::Lorem.paragraph}"
-
-  Genre.create!(name:, description:)
 end
 
 # Create fake associations for books
@@ -117,90 +115,101 @@ Book.pluck(:id).each do |book_id|
   end
 end
 
-100.times do |i|
-  b = BorrowInfo.create(
-    start_at: Date.current + 3,
-    end_at: Date.current + 10,
-    status: rand(5),
-    turns: rand(5),
-    account_id: Account.pluck(:id).sample
-  )
+# BorrowInfo
+200.times do |i|
+  start_at = Faker::Date.between(from: 2.years.ago, to: 7.days.after)
+  status = rand(6)
+  BorrowInfo.new(
+    start_at:,
+    end_at: start_at + rand(3..10),
+    status:,
+    turns: status == 0 ? 0 : rand(5),
+    account_id: i % 5 == 0 ? 2 : Account.not_admin.pluck(:id).sample
+  ).save(validate: false)
 end
 
 BorrowInfo.pluck(:id).each do |borrow_info_id|
-  book_ids = Book.pluck(:id).sample(rand(1..7))
+  book_ids = Book.limit(30).pluck(:id).sample(rand(1..7))
 
   book_ids.each do |book_id|
     BorrowItem.create(borrow_info_id:, book_id:)
   end
 end
 
-BorrowInfo.rejected.each do |rej|
+BorrowItem.all.each do |item|
+  created = item.borrow_info.created_at
+  item.update created_at: created, updated_at: created
+end
+
+BorrowInfo.rejected.each do |borrow|
   BorrowResponse.create(
     content: Faker::Lorem.paragraph,
-    borrow_info_id: rej.id
+    borrow_info_id: borrow.id
   )
+end
+
+BorrowInfo.returned.each do |borrow|
+  borrow.update done_at: (borrow.start_at + rand(2..20))
+end
+
+BorrowInfo.canceled.each do |borrow|
+  borrow.update done_at: (borrow.start_at + rand(5..7))
+end
+
+BorrowInfo.renewing.each do |borrow|
+  borrow.update renewal_at: (borrow.end_at + rand(3..10))
+  borrow.update turns: rand(1..5)
 end
 
 Book.all.each do |book|
-  book.update borrowed_count: BorrowItem.where(book_id: book.id).count
-end
-
-# Notification for one user
-30.times do |i|
-  Notification.create(
-    content: Faker::Lorem.paragraph,
-    account_id: Account.pluck(:id).sample,
-    checked: rand(3) == 1,
-    status: rand(3)
-  )
-end
-
-# Notification for all user (except admin)
-10.times do |i|
-  Notification.create(
-    content: Faker::Lorem.paragraph,
-    account_id: nil,
-    checked: rand(3) == 1,
-    status: rand(3)
-  )
-end
-
-# Notification for except admin
-10.times do |i|
-  Notification.create(
-    content: Faker::Lorem.paragraph,
-    account_id: 1,
-    checked: rand(3) == 1,
-    status: rand(3)
-  )
-end
-
-BorrowItem.all.each do |borrow|
-  borrow.update_attribute :created_at, Faker::Time.backward(days: 40)
-end
-
-BorrowInfo.all.each do |borrow|
-  borrow.update_attribute :start_at, Faker::Date.backward(days: 700)
-  borrow.update_attribute :created_at, borrow.start_at
-  borrow.update_attribute :end_at, borrow.start_at + rand(30)
-  borrow.update_attribute :updated_at, borrow.end_at + rand(13)
-end
-
-BorrowItem.all.each do |borrow|
-  borrow.update_attribute :created_at, Faker::Date.backward(days: 400)
-  # borrow.update_attribute :end_at, borrow.start_at + rand(30)
-  borrow.update_attribute :updated_at, borrow.created_at
+  borrowed_count = BorrowItem.where(book_id: book.id).count
+  if borrowed_count >= book.amount
+    book.update! amount: borrowed_count
+  end
+  book.update! borrowed_count:
 end
 
 # BookComment
 Book.all.each do |book|
   5.times do
-    BookComment.create!(
+    BookComment.create(
       book_id: book.id,
-      account_id: 1,
+      account_id: Account.not_admin.pluck(:id).sample,
       star_rate: rand(1..5),
       content: Faker::Lorem.sentence(word_count: 10)
     )
   end
 end
+
+# Notifications
+BorrowInfo.approved.or(BorrowInfo.rejected).each do |borrow|
+  borrow.account.notification_for_me :info,
+                                     "notifications.borrow_#{borrow.status}",
+                                     link: Rails.application.routes.url_helpers.borrow_info_path(id: borrow.id)
+end
+
+BorrowInfo.returned.each do |borrow|
+  return unless borrow.overdue?
+  borrow.account.notification_for_me :notice,
+                                     "notifications.borrow_returned_overdue",
+                                     link: Rails.application.routes.url_helpers.borrow_info_path(id: borrow.id)
+end
+
+10.times do |i|
+  notif = Account.only_admin.first.notification_for_me :info, I18n.t("admin.notif.report_sent")
+  notif.update_attribute :created_at, Faker::Date.backward
+end
+
+
+def fake_created_at klass
+  klass.all.each do |obj|
+    obj.update_column :created_at, Faker::Date.backward(days: 365)
+  end
+end
+
+fake_created_at Book
+fake_created_at Author
+fake_created_at Genre
+fake_created_at UserInfo
+fake_created_at Publisher
+fake_created_at BorrowInfo

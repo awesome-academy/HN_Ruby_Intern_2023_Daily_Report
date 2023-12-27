@@ -128,6 +128,7 @@ en:
     renewing: 'renewing'
     renewals: 'Renewals'
     returned: 'returned'
+    canceled: 'canceled'
     approve: 'Approve'
     reject: 'Reject'
     return: 'Return'
@@ -170,6 +171,7 @@ en:
       by_week: 'By week'
       by_all: 'From all time'
       notifications: 'Notifications'
+      filter: 'Filter by %{type}'
     notif:
       require_admin: 'You need admin verification to access the admin page'
       user_info_not_found: 'This account does not register the user information'
@@ -182,10 +184,12 @@ en:
       approve_borrow_success: 'Approve the borrow request successfully'
       reject_borrow_success: 'Reject the borrow request successfully'
       return_borrow_success: 'The borrow request is returned successfully'
-      approve_borrow_error: 'Error on approving the borrow request'
-      reject_borrow_error: 'Error on rejecting the borrow request'
+      approve_borrow_error: 'Error on approving the borrow request. Because the status of the borrow request has changed or there are books that cannot be borrowed'
+      reject_borrow_error: 'Error on rejecting the borrow request. Because the status of the borrow request has changed or there are books that cannot be borrowed'
       return_borrow_error: 'Error on returning the borrow request'
-      update_user_status_success_html: 'Account status changed to <b>%{status}</b>'
+      active_user_success: 'Active account successfully'
+      inactive_user_success: 'Inactive account successfully'
+      update_user_status_error: 'Error on changing account status'
       create_success: 'Create %{name} successfully'
       update_success: 'Update %{name} successfully'
       delete_success: 'Delete %{name} successfully'
@@ -226,7 +230,8 @@ en:
       action_buttons:
         remind_confirm: 'Are you sure to send remind email to this account?'
         approve_confirm: 'Are you sure to approve this request?'
-        return_confirm: 'You confirm that the user return all their borrowed books?'
+        return_confirm: 'You confirm that the user return all the books?'
+        overdue_confirm: 'This borrowings is %{exceed} days overdue, with a %{penalty} penalty. Have you confirmed that the borrower has returned all the books and paid the fine?'
     shared:
       form_button:
         update: 'Update'
@@ -257,6 +262,7 @@ en:
       index:
         title: 'Homepage'
         book_trending: 'Trending books'
+        no_trending_books: 'No trending books'
         stat_book_genre: 'Number of books by genres'
         stat_book_publisher: 'Number of books by publishers'
         stat_book_author: 'Number of books by authors'

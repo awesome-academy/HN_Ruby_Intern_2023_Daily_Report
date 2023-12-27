@@ -57,7 +57,7 @@ class Admin::BooksController < Admin::BaseController
 
   def destroy
     if @book.borrowed_count.positive?
-      flash[:error] = t "admin.notif.delete_book_fail_borrowed"
+      flash.now[:error] = t "admin.notif.delete_book_fail_borrowed"
       return application_notify
     end
     destroy_method = @book.update is_active: false

@@ -19,6 +19,12 @@ default_image_path: 'default_book.png'
 display_for_nil: 'NULL'
 isbn_max_digits: 13
 
+period:
+  week: 7
+  month: 30
+  year: 365
+  quarter: 90
+
 isbn_regex: !ruby/regexp /\A(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+\z/
 valid_phone_regex: !ruby/regexp /\A\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})\z/
 title_max_len: 255

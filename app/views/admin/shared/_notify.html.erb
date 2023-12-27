@@ -1,12 +1,11 @@
 <div id="application-notify">
+  <input type="text" class="d-none" value="1">
   <script defer>
-    window.addEventListener('load', function() {
-      <% flash.each do |type, message| %>
-        window.showToast({
-          icon: '<%= type %>',
-          text: '<%= raw message %>'
-        });
-      <% end %>
-    })
+    <% flash.each do |type, message| %>
+      window.showToast({
+        icon: '<%= type %>',
+        text: '<%= raw message %>'
+      });
+    <% end %>
   </script>
 </div>

@@ -24,7 +24,7 @@ class Admin::BorrowsController < Admin::BaseController
   def reject
     if params[:reject_reason].blank? ||
        !@borrow.create_response(content: params[:reject_reason])
-      flash[:warning] = t "admin.notif.require_reject_reason"
+      flash.now[:warning] = t "admin.notif.require_reject_reason"
       application_notify
     else
       respond_to_change_status :reject
@@ -36,7 +36,7 @@ class Admin::BorrowsController < Admin::BaseController
     @borrow.account&.notification_for_me :urgent,
                                          "notifications.borrow_remind",
                                          link: borrow_info_path(@borrow)
-    flash[:success] = t "admin.notif.send_remind_email_success"
+    flash.now[:success] = t "admin.notif.send_remind_email_success"
     application_notify
   end
 
@@ -93,6 +93,9 @@ class Admin::BorrowsController < Admin::BaseController
     s = params[:sort]
     borrows = s ? borrows.sort_on(s, params[:desc]) : borrows.newest
 
+    type = params[:type]
+    borrows = borrows.group_status(type) if type
+
     @pagy, @borrows = pagy borrows
   end
 
@@ -102,7 +105,7 @@ class Admin::BorrowsController < Admin::BaseController
       user: "user_infos.name",
       start: "borrow_infos.start_at",
       due: "borrow_infos.end_at",
-      updated: "borrow_infos.updated_at",
+      done: "borrow_infos.done_at",
       type: "borrow_infos.status",
       turns: "borrow_infos.turns"
     }

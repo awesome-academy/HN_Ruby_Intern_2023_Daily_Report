@@ -8,5 +8,6 @@
                          placeholder: t("admin.hint.search.#{controller.controller_name}") %>
     <%= f.submit t("admin.misc.search"), name: :search, class: "btn btn-primary" %>
   <% end %>
+  <%= yield :table_utils %>
   <%= render "admin/shared/pagy_utils" %>
 </div>

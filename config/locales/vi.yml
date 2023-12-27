@@ -172,6 +172,8 @@ vi:
   canceled_date: "Ngày hủy yêu cầu mượn sách"
   reject_reason: "Lý do từ chối yêu cầu mượn sách"
   actual_return_date: "Ngày trả sách thực tế"
+  penalty: "Tiền phạt"
+  exceed: "Số ngày quá hạn"
   return_date_greater_than_borrow_date: "phải lớn hơn ngày mượn sách"
   renewal_date_greater_than_return_date: "phải lớn hơn ngày trả sách gần nhất"
   renewal_date_maximum_10_days: "tối đa là 10 ngày kể từ ngày trả sách gần nhất"

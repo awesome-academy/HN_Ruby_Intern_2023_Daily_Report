@@ -11,10 +11,10 @@
   <td  class="text-truncate mw-6"><%= full_name %></td>
   <td><%= link_to start, borrow_path %></td>
   <% if @group == :history %>
-    <td><%= link_to done, borrow_path %></td>
+    <td><%= link_to done || "", borrow_path %></td>
   <% end %>
   <% unless @group == :history %>
-    <td><%= link_to due, borrow_path %></td>
+    <td><%= link_to due || "", borrow_path %></td>
   <% end %>
   <td><%= turns %></td>
   <td><%= render "status_badge", borrow: %></td>

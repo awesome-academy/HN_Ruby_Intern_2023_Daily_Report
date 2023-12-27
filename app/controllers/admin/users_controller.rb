@@ -26,11 +26,13 @@ class Admin::UsersController < Admin::BaseController
   def inactive
     reason = params[:reason]
     if reason.blank?
-      flash[:warning] = t "admin.notif.require_lock_reason"
+      flash.now[:warning] = t "admin.notif.require_lock_reason"
       application_notify
     else
-      UserMailer.with(user: @user, reason:).notify_inactive.deliver_later
-      respond_to_change_active false
+      return unless respond_to_change_active false
+
+      @user.send_inactive_email reason
+      @user.notification_for_me :notice, "notifications.account_inactive"
     end
   end
 
@@ -40,28 +42,28 @@ class Admin::UsersController < Admin::BaseController
     @user = Account.find_by id: params[:id]
     return if @user&.is_activated
 
-    flash[:error] = {
-      content: t("admin.notif.item_not_found", name: t("accounts._name"))
-    }
+    flash[:error] = t("admin.notif.item_not_found", name: t("accounts._name"))
     redirect_to admin_users_path
   end
 
   def respond_to_change_active is_active
-    @user.update_attribute :is_active, is_active
-    text = t(
-      "admin.notif.update_user_status_success_html",
-      status: t("users.#{is_active ? :active : :inactive}")
-    )
+    is_success = @user.change_is_active_to is_active
+
+    result = is_success ? :success : :error
+    key = "#{is_active ? :active : :inactive}_user_success"
+    key = "update_user_status_error" unless is_success
+
     respond_to do |format|
       format.turbo_stream do
-        flash.now[:success] = text
+        flash.now[result] = t("admin.notif.#{key}")
         render :change_status
       end
       format.html do
-        flash[:success] = text
+        flash[result] = t("admin.notif.#{key}")
         redirect_to admin_users_path
       end
     end
+    is_success
   end
 
   def transform_params
