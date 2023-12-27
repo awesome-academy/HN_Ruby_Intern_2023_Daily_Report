@@ -93,10 +93,7 @@ class BorrowInfosController < ApplicationController
   end
 
   def update_return_date
-    if @borrow_info.update borrow_info_params.except(:start_at, :end_at)
-      @borrow_info.update_attribute(:status, "pending")
-      @borrow_info.update_attribute(:turns, @borrow_info.turns + 1)
-      @borrow_info.update_attribute(:end_at, borrow_info_params[:renewal_at])
+    if @borrow_info.perform_action :renew, borrow_info_params[:renewal_at]
       flash[:success] = t "renew_request_successfully"
       redirect_to @borrow_info
     else

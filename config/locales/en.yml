@@ -131,6 +131,7 @@ en:
   rejected: "Rejected"
   canceled: "Canceled"
   returned: "Returned"
+  renewing: "Renewing"
   borrow_history: "Borrow history"
   date_greater_than_today: "must be equal or greater than today"
   date_maximum_10_days: "maximum is 10 days from the borrow date"

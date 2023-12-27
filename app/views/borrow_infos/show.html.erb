@@ -10,14 +10,14 @@
   <p><span class="fw-semibold"><%= t "borrow_infos.borrow_date" %>: </span><%= @borrow_info.start_at %></p>
   <p>
     <span class="fw-semibold"><%= t "borrow_infos.return_date" %>: </span>
-    <%= @borrow_info.end_at %>
+    <%= @borrow_info.renewing? ? @borrow_info.renewal_at : @borrow_info.end_at %>
     <% if @borrow_info.renewal_at && @borrow_info.errors.empty? %>
       <%= t "new_return_date" %>
     <% end %>
   </p>
   <p>
     <span class="fw-semibold"><%= t "activerecord.attributes.borrow_info.turns" %>: </span><%= @borrow_info.turns %>
-    <span class="text-secondary"><%= t(".turns_left", turns_count: 5 - @borrow_info.turns) %></span>
+    <span class="text-secondary"><%= t(".turns_left", turns_count: Settings.max_renewals - @borrow_info.turns) %></span>
   </p>
   <p><span class="fw-semibold"><%= t "status" %>: </span><span class="fs-6 badge text-bg-<%= set_class_based_on(@borrow_info.status) %>"><%= t("#{@borrow_info.status}") %></span></p>
   <%= show_actions @borrow_info.status %>

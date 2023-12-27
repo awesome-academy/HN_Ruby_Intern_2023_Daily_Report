@@ -17,7 +17,8 @@ module Admin::UsersHelper
       gender: t("users.#{info&.gender}"), # info.gender return string
       citizen_id: info&.citizen_id,
       # Other
-      user_path: admin_user_path(account)
+      user_path: admin_user_path(account),
+      updated_at: localize_date(account.updated_at)
     }
   end
 

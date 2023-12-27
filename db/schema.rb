@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_28_183021) do
-  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_12_29_015334) do
+  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
     t.boolean "is_admin", default: false, null: false
@@ -151,6 +151,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_183021) do
     t.bigint "account_id", null: false
     t.integer "turns", default: 0, null: false
     t.date "renewal_at"
+    t.datetime "done_at"
     t.index ["account_id"], name: "index_borrow_infos_on_account_id"
     t.index ["end_at"], name: "index_borrow_infos_on_end_at"
     t.index ["start_at"], name: "index_borrow_infos_on_start_at"

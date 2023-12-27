@@ -19,8 +19,11 @@ module Admin::BaseHelper
     "#{time_ago}#{" #{t('datetime.ago')}" if suffix}" if date
   end
 
-  def localize_date datetime, format = :short
-    l(datetime.to_date, format:) if datetime
+  def localize_date datetime, format = :short, date: true
+    return unless datetime
+
+    datetime = datetime.to_date if date
+    l datetime, format:
   end
 
   def get_image obj, attribute = :avatar
@@ -61,20 +64,18 @@ module Admin::BaseHelper
     end
   end
 
-  def get_languages
-    {
-      vi: {icon: "vn", title: "Tiếng Việt"},
-      en: {icon: "us", title: "English (US)"}
-    }
+  def current_action? controller_name, action_name
+    controller.controller_name == controller_name.to_s &&
+      controller.action_name == action_name.to_s
   end
 
   def get_new_buttons
     [
-      {link: new_admin_book_path, icon: :book, title: t("books._name")},
-      {link: new_admin_author_path, icon: :account, title: t("authors._name")},
-      {link: new_admin_genre_path, icon: :tag, title: t("genres._name")},
+      {controller: :books, icon: :book, title: t("books._name")},
+      {controller: :authors, icon: :account, title: t("authors._name")},
+      {controller: :genres, icon: :tag, title: t("genres._name")},
       {
-        link: new_admin_publisher_path,
+        controller: :publishers,
         icon: :briefcase,
         title: t("publishers._name")
       }

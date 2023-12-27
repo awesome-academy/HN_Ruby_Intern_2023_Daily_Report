@@ -1,7 +1,6 @@
 $(document).on('turbo:load', function () {
   var sidebar = $('.sidebar');
   // Close other submenu in sidebar on opening any
-
   sidebar.on('show.bs.collapse', '.collapse', function () {
     sidebar.find('.collapse.show').collapse('hide');
   });
@@ -16,7 +15,7 @@ $(document).on('turbo:load', function () {
   });
 
   $('select.submit-on-change').on('change', function () {
-    $(this).closest('form').submit();
+    $(this).closest('form').trigger('submit');
   });
 
   // Active nav items with current url
@@ -51,6 +50,12 @@ $(function () {
       body.toggleClass('sidebar-icon-only');
     }
   });
+
+  // Open Sidebar on small screen
+  $('[data-toggle="offcanvas"]').on('click', function () {
+    $('.sidebar-offcanvas').toggleClass('active');
+  });
+
   // Check Notification
   $(document).on('click', '#notification-read-all', function () {
     $('.notification-item.unchecked')

@@ -1,4 +1,7 @@
 en:
+  language:
+    full: 'English (US)'
+    short: 'us'
   datetime:
     less_than: 'less than'
     about: 'about'
@@ -17,6 +20,7 @@ en:
   time:
     formats:
       short: '%H:%M %d/%m'
+      long: '%H:%M %b %d, %Y'
   accounts:
     _name: 'account'
     email: 'Email'
@@ -117,8 +121,11 @@ en:
     pending: 'pending'
     approved: 'approved'
     rejected: 'rejected'
+    renew_rejected: 'renew rejected'
     new: 'new'
-    incrementing: 'renewals'
+    renew: 'renew'
+    renewing: 'renewing'
+    renewals: 'Renewals'
     returned: 'returned'
     approve: 'Approve'
     reject: 'Reject'
@@ -163,6 +170,7 @@ en:
       by_all: 'From all time'
       notifications: 'Notifications'
     notif:
+      require_admin: 'You need admin verification to access the admin page'
       user_info_not_found: 'This account does not register the user information'
       no_items: 'No %{item} found'
       item_not_found: '%{name} does not exist'
@@ -170,7 +178,12 @@ en:
       cancel_confirm: 'Your typed data will be lost. Do you want to cancel?'
       account_not_activated_or_lock: 'Your account is not activated or is locked by administrator'
       invalid_email_password: 'Email or Password is wrong'
-      update_borrow_status_success_html: 'Borrow request&#145;s status changed to <b>%{status}</b>'
+      approve_borrow_success: 'Approve the borrow request successfully'
+      reject_borrow_success: 'Reject the borrow request successfully'
+      return_borrow_success: 'The borrow request is returned successfully'
+      approve_borrow_error: 'Error on approving the borrow request'
+      reject_borrow_error: 'Error on rejecting the borrow request'
+      return_borrow_error: 'Error on returning the borrow request'
       update_user_status_success_html: 'Account status changed to <b>%{status}</b>'
       create_success: 'Create %{name} successfully'
       update_success: 'Update %{name} successfully'

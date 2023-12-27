@@ -1,5 +1,4 @@
 <% provide(:title, t("borrow_history")) %>
-
 <div class="mb-5">
   <% breadcrumb :borrow_infos, @borrow_infos %>
   <h1><%= t "borrow_history" %></h1>
@@ -38,7 +37,7 @@
             <th scope="row"><%= borrow_info.id %></th>
             <td><%= borrow_info.start_at %></td>
             <td>
-              <%= borrow_info.end_at %>
+              <%= borrow_info.renewing? ? borrow_info.renewal_at : borrow_info.end_at %>
               <% if borrow_info.renewal_at && borrow_info.errors.empty? %>
                 <%= t "new_return_date" %>
               <% end %>

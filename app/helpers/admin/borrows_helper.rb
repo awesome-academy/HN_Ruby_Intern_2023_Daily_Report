@@ -1,12 +1,14 @@
 module Admin::BorrowsHelper
-  def get_borrow_status_color borrow
+  def get_borrow_status borrow
     case borrow.status.to_sym
-    when :pending
-      borrow.type == :new ? :primary : :info
-    when :approved then :success
-    when :rejected then :danger
-    when :returned then :warning
-    else :secondary
+    when :pending then [:primary, :pending]
+    when :renewing then [:info, :renewing]
+    when :approved then [:success, :approved]
+    when :rejected
+      text = borrow.finished? ? :rejected : :renew_rejected
+      [:danger, text]
+    when :returned then [:warning, :returned]
+    else [:secondary, nil]
     end
   end
 
@@ -14,18 +16,16 @@ module Admin::BorrowsHelper
     {
       user: borrow.account,
       full_name: borrow.account.user_info&.name,
-      start: localize_date(borrow.start_at),
-      due: localize_date(borrow.end_at),
+      start: localize_date(borrow.renewing? ? borrow.end_at : borrow.start_at),
+      due: localize_date(borrow.renewing? ? borrow.renewal_at : borrow.end_at),
+      done: localize_date(borrow.done_at, :long),
       turns: pluralize(borrow.turns, t("borrows.turn")),
-      updated_at: localize_date(borrow.updated_at),
-      status: t("borrows.#{borrow.status}"),
-      borrow_path: admin_borrow_path(borrow),
-      id: dom_id(borrow)
+      borrow_path: admin_borrow_path(borrow)
     }
   end
 
   def get_borrow_buttons borrow
-    if borrow.pending?
+    if borrow.pending? || borrow.renewing?
       [
         {
           text: t("borrows.approve"),
@@ -43,7 +43,7 @@ module Admin::BorrowsHelper
           }
         }
       ]
-    elsif borrow.approved?
+    elsif borrow.borrowing?
       [
         {
           text: t("borrows.return"),

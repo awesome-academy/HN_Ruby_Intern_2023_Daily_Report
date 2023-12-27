@@ -1,6 +1,6 @@
 <% provide :title, t("admin.title.show", name: t("borrows._name")) %>
 <% populate_borrow(@borrow) => {
-    user:, start:, due:, turns:, full_name:
+    user:, start:, due:, done:, turns:, full_name:
 }%>
 <div class="col-12">
   <%= navigate_to %>
@@ -14,16 +14,22 @@
               <b><%= user.username %></b>
             </div>
           </div>
-          <!-- Contact -->
           <div class="py-4">
             <%= render("admin/shared/info_field", name: t("borrows.user"), value: full_name) %>
             <%= render("admin/shared/info_field", name: t("borrows.start_at"), value: start) %>
             <%= render("admin/shared/info_field", name: t("borrows.end_at"), value: due) %>
-            <%= render("admin/shared/info_field", name: t("borrows.incrementing"), value: turns) %>
+            <hr>
+            <% is_renew = @borrow.turns.positive? %>
+            <%= render "admin/shared/info_field", name: t("borrows.type") do %>
+              <%= tag.span t("borrows.#{is_renew ? :renew : :new}").upcase, class: "badge badge-outline-primary" %>
+            <% end %>
+            <%= render("admin/shared/info_field", name: t("borrows.renewals"), value: turns) if is_renew %>
             <%= render "admin/shared/info_field", name: t("borrows.status") do %>
               <%= render "status_badge", borrow: @borrow %>
             <% end %>
             <%= render "admin/shared/info_field", name: t("borrows.reject_reason"), value: @borrow.response&.content if @borrow.rejected? %>
+            <%= render "admin/shared/info_field", name: t("borrows.finish"), value: done if done %>
+            <%= render "admin/shared/timestamp", object: @borrow %>
           </div>
         </div>
         <div class="col-lg-8">

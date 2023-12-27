@@ -1,5 +1,5 @@
-<span class="badge badge-<%= get_borrow_status_color borrow %> borrow-status-badge"
+<% color, text = get_borrow_status borrow %>
+<span class="badge badge-<%= color %> borrow-status-badge"
       id="status_<%= dom_id borrow %>">
-  <% status = borrow.pending? ? borrow.type : borrow.status %>
-  <%= t "borrows.#{status}" %>
+  <%= t "borrows.#{text}" %>
 </span>
