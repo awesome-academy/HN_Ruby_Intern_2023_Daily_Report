@@ -22,7 +22,7 @@ class BookCommentsController < ApplicationController
     @comment = @book.comments.find_by id: params[:id]
     @comment.destroy
 
-    flash[:notice] = t "comment_deleted"
+    flash.now[:notice] = t "comment_deleted"
     respond_to do |format|
       format.html{redirect_to @book}
       format.turbo_stream
@@ -35,7 +35,7 @@ class BookCommentsController < ApplicationController
     @book = Book.find_by id: params[:book_id]
     return if @book
 
-    flash[:warning] = t "book_not_found"
+    flash.now[:warning] = t "book_not_found"
     redirect_to books_path
   end
 

@@ -1,0 +1,11 @@
+<%= turbo_stream.append "notifications_list" do %>
+  <%= render partial: "notifications/notification", collection: @notifications %>
+<% end %>
+
+<%= turbo_stream.replace "notifications_pagination" do %>
+  <% if @pagy.next.present? %>
+    <%= turbo_frame_tag "notifications_pagination",
+                        loading: :lazy,
+                        src: notifications_path(format: :turbo_stream, page: @pagy.next) %>
+  <% end %>
+<% end %>

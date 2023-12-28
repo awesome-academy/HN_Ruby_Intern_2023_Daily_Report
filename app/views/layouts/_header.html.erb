@@ -13,8 +13,53 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
           <% if account_signed_in? %>
             <li class="nav-item dropdown">
+              <%= link_to "#", class: "nav-link position-relative", role: "button", data: { bs_toggle: "dropdown" }, aria: { expanded: "false" } do %>
+                <i class="fa-solid fa-bell"></i>
+                <% if unchecked_count.positive? %>
+                  <span class="position-absolute translate-middle p-1 bg-danger rounded-circle"></span>
+                <% end %>
+              <% end %>
+              <ul class="dropdown-menu notifications overflow-auto">
+                <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                  <h6 class="m-0 fw-bold"><%= t "notification" %> <%= "(#{unchecked_count})" if unchecked_count.positive? %></h6>
+                  <%= link_to t("mark_all_as_read"), read_all_notifications_path, data: {turbo_method: :post} %>
+                </div>
+                <% if current_account.notifications.present? %>
+                  <div id="notifications_list"></div>
+                  <%= turbo_frame_tag "notifications_pagination", loading: :lazy, src: notifications_path(format: :turbo_stream) %>
+                <% else %>
+                  <li><hr class="dropdown-divider"></li>
+                  <div class="px-4"><%= render "shared/not_found_content", text: "No notification" %></div>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to carts_path, class: "nav-link btn" do %>
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span id="cart-quantity" class="badge text-bg-secondary"><%= borrow_item_quantity %></span>
+            <% end %>
+          </li>
+          <li class="nav-item dropdown languages">
+            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag("/images/#{I18n.locale}.png", size: "28x28", alt: "#{I18n.locale}") %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% other_locales.each do |locale| %>
+                <li>
+                  <%= link_to({locale:}, class: "d-flex align-items-center dropdown-item") do %>
+                    <%= image_tag("/images/#{locale}.png", size: "20x20", alt: "#{locale}") %>
+                    <span class="ms-2"><%= t(locale) %></span>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+          <% if account_signed_in? %>
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <%= avatar_for(current_account, 40) %>
+                <span class="ms-1"><%= current_account.username %></span>
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to t("profile"), current_account, class: "dropdown-item" %></li>
@@ -28,27 +73,6 @@
             <li class="nav-item"><%= link_to t("log_in"), new_account_session_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to t("sign_up"), new_account_registration_path, class: "nav-link" %></li>
           <% end %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= image_tag("/images/#{I18n.locale}.png", size: "20x20", alt: "#{I18n.locale}") %>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% other_locales.each do |locale| %>
-                <li>
-                  <%= link_to({locale:}, class: "d-flex align-items-center dropdown-item") do %>
-                    <%= image_tag("/images/#{locale}.png", size: "20x20", alt: "#{locale}") %>
-                    <span class="ms-2"><%= t(locale) %></span>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <%= link_to carts_path, class: "nav-link btn" do %>
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span class="badge text-bg-secondary"><%= borrow_item_quantity %></span>
-            <% end %>
-          </li>
         </ul>
       </div>
     </div>

@@ -87,8 +87,7 @@ end
   isbn = Faker::Code.unique.isbn(base: (rand % 2 == 1 ? 13 : 10))
   publisher_id = Publisher.pluck(:id).sample
 
-  Book.new(title:, description:, amount:, publish_date:,
-              isbn:, publisher_id:, borrowed_count:).save(validate: false)
+  Book.create(title:, description:, amount:, publish_date:, isbn:, publisher_id:, borrowed_count:)
 end
 
 Book.all.each do |book|
@@ -104,7 +103,7 @@ end
   Genre.create!(name:, description:)
 end
 
-Create fake associations for books
+# Create fake associations for books
 Book.pluck(:id).each do |book_id|
   author_ids = Author.pluck(:id).sample(rand(1..3))
   genre_ids = Genre.pluck(:id).sample(rand(1..3))

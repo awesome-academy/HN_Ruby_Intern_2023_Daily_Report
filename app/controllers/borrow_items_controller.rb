@@ -11,7 +11,7 @@ class BorrowItemsController < ApplicationController
     if chosen_book.amount > chosen_book.borrowed_count
       handle_cart_item chosen_book
     else
-      flash[:warning] = t "book_out_of_stock"
+      flash.now[:warning] = t "book_out_of_stock"
       redirect_back(fallback_location: root_path)
     end
   end
@@ -31,19 +31,23 @@ class BorrowItemsController < ApplicationController
     @borrow_item = BorrowItem.find_by(id: params[:id])
     return if @borrow_item
 
-    flash[:warning] = t "item_not_found"
+    flash.now[:warning] = t "item_not_found"
     redirect_to root_path
   end
 
   def handle_cart_item chosen_book
     if @current_cart.books.include?(chosen_book)
       @borrow_item = @current_cart.borrowings.find_by(book_id: chosen_book)
-      flash[:warning] = t "book_borrow_one" if @borrow_item.quantity == 1
+      flash.now[:warning] = t "book_borrow_one" if @borrow_item.quantity == 1
     else
       @borrow_item = BorrowItem.new(cart: @current_cart, book: chosen_book)
       @borrow_item.save
-      flash[:success] = t "book_added_successfully"
+      flash.now[:success] = t "book_added_successfully"
     end
-    redirect_back(fallback_location: root_path)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 end

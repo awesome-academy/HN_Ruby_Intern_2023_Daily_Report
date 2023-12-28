@@ -31,7 +31,7 @@ class BooksController < ApplicationController
     @book = Book.find_by id: params[:id]
     return if @book
 
-    flash[:warning] = t "book_not_found"
+    flash.now[:warning] = t "book_not_found"
     redirect_to books_path
   end
 end

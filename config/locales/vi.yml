@@ -152,7 +152,6 @@ vi:
   book_comments:
     comment:
       posted: "Đăng"
-      ago: "trước"
     form:
       post_comment: "Đăng bình luận"
     load_more_btn:
@@ -161,6 +160,9 @@ vi:
   comments: "Bình luận"
   recent_comments: "Bình luận gần đây"
   comment_cannot_empty: "không được để trống"
+  ago: "trước"
+  notification: "Thông báo"
+  mark_all_as_read: "Đánh dấu là đã xem hết"
 
   activerecord:
     models:
