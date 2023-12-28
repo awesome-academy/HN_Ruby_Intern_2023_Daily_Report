@@ -152,7 +152,6 @@ en:
   book_comments:
     comment:
       posted: "Posted"
-      ago: "ago"
     form:
       post_comment: "Post comment"
     load_more_btn:
@@ -161,6 +160,9 @@ en:
   comments: "Comments"
   recent_comments: "Recent comments"
   comment_cannot_empty: "cannot be empty"
+  ago: "ago"
+  notification: "Notification"
+  mark_all_as_read: "Mark all as read"
 
   activerecord:
     attributes:

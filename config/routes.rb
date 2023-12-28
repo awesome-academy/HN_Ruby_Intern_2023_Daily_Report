@@ -59,5 +59,11 @@ Rails.application.routes.draw do
     patch "/status_action", to: "borrow_infos#handle_status_action"
 
     resources :author_followers, only: %i(create destroy)
+
+    resources :notifications, only: %i(index update) do
+      collection do
+        post "read_all", to: "notifications#read_all"
+      end
+    end
   end
 end
