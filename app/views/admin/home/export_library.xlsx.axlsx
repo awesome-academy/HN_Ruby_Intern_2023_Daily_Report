@@ -1,0 +1,79 @@
+wb = xlsx_package.workbook
+
+@header_style = wb.styles.add_style({
+  alignment: {
+    horizontal: :center,
+    vertical: :center,
+    wrap_text: true
+  },
+  b: true,
+  sz: 12
+})
+@item_style = wb.styles.add_style({
+  alignment: {
+    vertical: :center,
+    wrap_text: true
+  }
+})
+@height = 100
+
+wb.add_worksheet(name: t("books._name")) do |sheet|
+  fields = [:id, :cover, :title, :isbn, :amount, :publish_date,
+            :publisher, :authors, :genres, :description]
+  sheet.add_row fields.map{|f| t("books.#{f}")}, style: @header_style
+
+  @books.each do |book|
+    row = sheet.add_row [book.id, "", book.title, book.isbn, book.amount,
+                         book.publish_date, book.publisher&.name,
+                         book.authors.pluck(:name).join("\n"),
+                         book.genres.pluck(:name).join("\n"),
+                         book.description],
+                        height: @height, style: @item_style
+
+    if book.image.attached?
+      meta = book.image.metadata
+      width = meta.fetch(:width, 1) * @height / meta.fetch(:height, 1)
+      path = ActiveStorage::Blob.service.path_for(book.image.key)
+      start_at = "B#{row.row_index + 1}"
+      sheet.add_image(image_src: path, start_at:, noMove: true, height: @height, width:)
+    end
+  end
+end
+
+wb.add_worksheet(name: t("authors._name")) do |sheet|
+  fields = [:id, :avatar, :name, :phone, :email, :about]
+  sheet.add_row fields.map{|f| t("authors.#{f}")}, style: @header_style
+
+  @authors.each do |author|
+    row = sheet.add_row [author.id, "", author.name, author.phone, author.email, author.about],
+                        height: @height, style: @item_style
+
+    if author.avatar.attached?
+      meta = author.avatar.metadata
+      width = meta.fetch(:width, 1) * @height / meta.fetch(:height, 1)
+      path = ActiveStorage::Blob.service.path_for(author.avatar.key)
+      start_at = "B#{row.row_index + 1}"
+      sheet.add_image(image_src: path, start_at:, noMove: true, height: @height, width:)
+    end
+  end
+end
+
+wb.add_worksheet(name: t("genres._name")) do |sheet|
+  fields = [:id, :name, :description]
+  sheet.add_row fields.map{|f| t("genres.#{f}")}, style: @header_style
+
+  @genres.each do |genre|
+    row = sheet.add_row [genre.id, genre.name, genre.description],
+                        style: @item_style
+  end
+end
+
+wb.add_worksheet(name: t("publishers._name")) do |sheet|
+  fields = [:id, :name, :address, :email, :about]
+  sheet.add_row fields.map{|f| t("publishers.#{f}")}, style: @header_style
+
+  @publishers.each do |publisher|
+    row = sheet.add_row [publisher.id, publisher.name, publisher.address, publisher.email, publisher.about],
+                        style: @item_style
+  end
+end

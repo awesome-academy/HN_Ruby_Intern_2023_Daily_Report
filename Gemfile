@@ -72,6 +72,8 @@ end
 gem "active_storage_validations", "~> 0.9.8"
 gem "bootstrap", "~> 5.3.2"
 gem "cancancan"
+gem "caxlsx"
+gem "caxlsx_rails"
 gem "chartkick"
 gem "config"
 gem "devise", "~> 4.9"

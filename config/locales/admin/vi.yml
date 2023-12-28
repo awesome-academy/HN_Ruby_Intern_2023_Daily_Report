@@ -46,6 +46,8 @@ vi:
   books:
     _name: 'sách'
     _item: 'cuốn sách'
+    id: 'ID'
+    description: 'Mô tả'
     cover: 'Ảnh bìa'
     title: 'Tên sách'
     amount: 'Tổng số'
@@ -55,6 +57,9 @@ vi:
     detail: 'Thông tin'
     review: 'Bình luận'
     inactive: 'Đã xóa'
+    authors: 'Tác giả'
+    genres: 'Thể loại'
+    publisher: 'Nhà xuất bản'
     placeholder:
       cover: 'Ảnh bìa'
       title: 'Tiêu đề sách'
@@ -67,6 +72,7 @@ vi:
   authors:
     _name: 'tác giả'
     _item: 'tác giả'
+    id: 'ID'
     avatar: 'Ảnh bìa'
     name: 'Họ tên'
     phone: 'SĐT'
@@ -80,6 +86,7 @@ vi:
   genres:
     _name: 'thể loại'
     _item: 'thể loại'
+    id: 'ID'
     name: 'Tên'
     description: 'Mô tả'
     placeholder:
@@ -88,6 +95,7 @@ vi:
   publishers:
     _name: 'nhà xuất bản'
     _item: 'nhà xuất bản'
+    id: 'ID'
     name: 'Tên'
     email: 'Email'
     address: 'Địa chỉ'
@@ -150,6 +158,7 @@ vi:
       by_month: 'Theo tháng'
       by_week: 'Theo tuần'
       by_all: 'Từ trước đến nay'
+      notifications: 'Thông báo'
     notif:
       user_info_not_found: 'Tài khoản chưa có thông tin'
       no_items: 'Không có %{item} nào tìm thấy'
@@ -213,7 +222,6 @@ vi:
         logout: 'Đăng xuất'
       navbar:
         messages: 'Tin nhắn'
-        notifications: 'Thông báo'
         create: 'Thêm mới'
       navbar_profile:
         system: 'Hệ thống'
@@ -231,6 +239,9 @@ vi:
         stat_borrow_genre: 'Sách mượn theo thể loại'
         borrow_stat_section: 'Phần thống kê lịch sử mượn sách'
         library_stat_section: 'Phần thống kê thư viện'
+        utilities_section: 'Phần tiện ích'
+        library_info: 'Dữ liệu thư viện bao gồm sách, thể loại, tác giả và nhà xuất bản'
+        download: 'Tải về'
       bar:
         best_of_week: 'Trong tuần'
         best_of_month: 'Trong tháng'
