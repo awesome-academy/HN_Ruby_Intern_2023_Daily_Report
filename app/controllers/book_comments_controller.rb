@@ -40,12 +40,12 @@ class BookCommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:book_comment).permit(:content)
+    params.require(:book_comment).permit(:content, :star_rate)
   end
 
   def handle_comment_error
-    flash.now[:alert] = if @comment.rich_text_content.blank?
-                          @comment.errors.full_messages.first
+    flash.now[:alert] = if @comment.errors.present?
+                          @comment.errors.full_messages.join(", ")
                         else
                           t("comment_failed")
                         end

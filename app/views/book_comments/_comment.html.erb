@@ -6,7 +6,14 @@
         <%= avatar_for(account, 60) %>
       </div>
       <div>
-        <h5 class="fw-bold mb-1"><%= account.username %></h5>
+        <div class="d-flex ">
+          <h5 class="fw-bold mb-1"><%= account.username %></h5>
+          <span class="ms-2 star-show">
+            <% comment.star_rate.times do %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+          </span>
+        </div>
         <div class="d-flex align-items-center mb-4">
           <p class="mb-0 text-secondary"><%= t ".posted" %> <%= time_ago_in_words(comment.created_at) %> <%= t "ago" %></p>
           <% if current_account == account %>

@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="m-0"><%= t ".book_ratings" %></h4>
+  </div>
+  <div class="card-body d-flex align-items-center justify-content-between p-4">
+    <div class="fs-5 me-5">
+      <span class="star-show">
+        <span class="fs-3 fw-bold"><%= @book.average_ratings %></span> <%= t ".out_of" %> 5
+      </span>
+      <%= render "books/star_progress" %>
+    </div>
+    <div class="flex-grow-1 ms-5">
+      <% 5.downto(1) do |star| %>
+        <% @book.rating_details(star) => {percentage:, count:} %>
+        <%= render "books/progress_bar", star: star, percentage: percentage, count: count %>
+      <% end %>
+    </div>
+  </div>
+  </div>

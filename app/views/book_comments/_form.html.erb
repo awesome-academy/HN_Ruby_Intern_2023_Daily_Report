@@ -6,6 +6,17 @@
       </div>
     <% end %>
     <div class="flex-grow-1">
+      <div class="mb-2">
+        <span class="text-secondary"><%= t ".rate_book" %>: </span>
+        <span class="star-rating">
+          <% (1..5).each do |i| %>
+            <%= f.label :star_rate, style: "--i:#{i}", for: "rate-#{i}" do %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+            <%= f.radio_button :star_rate, i, id: "rate-#{i}" %>
+          <% end %>
+        </span>
+      </div>
       <div class="mb-3">
         <%= f.rich_text_area :content %>
       </div>

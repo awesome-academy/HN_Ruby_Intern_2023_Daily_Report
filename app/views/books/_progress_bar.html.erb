@@ -1,0 +1,7 @@
+<div class="d-flex align-items-center mb-2">
+  <span><%= star %> <%= t "stars" %></span>
+  <div class="progress w-75 mx-3 me-3" role="progressbar" aria-label="progress" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100" style="height: 10px">
+    <div class="progress-bar bg-star-color" style="width: <%= percentage %>%;"></div>
+  </div>
+  <span>(<%= count %>)</span>
+</div>

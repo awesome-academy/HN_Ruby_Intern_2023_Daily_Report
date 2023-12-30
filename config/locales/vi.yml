@@ -36,6 +36,9 @@ vi:
       no_books_found: "Không tìm thấy sách"
     show:
       add_to_cart: "Thêm vào giỏ hàng"
+    ratings:
+      book_ratings: "Đánh giá"
+      out_of: "trên"
   invalid_email_password: "Tài khoản hoặc mật khẩu không đúng"
   account_not_activated_or_lock: "Tài khoản của bạn chưa kích hoạt hoặc đã bị khóa"
   book_not_found: "Sách không tồn tại"
@@ -155,15 +158,16 @@ vi:
       posted: "Đăng"
     form:
       post_comment: "Đăng bình luận"
+      rate_book: "Đánh giá quyển sách này"
     load_more_btn:
       load_more: "Xem thêm"
       loading: "Đang tải..."
   comments: "Bình luận"
   recent_comments: "Bình luận gần đây"
-  comment_cannot_empty: "không được để trống"
   ago: "trước"
   notification: "Thông báo"
   mark_all_as_read: "Đánh dấu là đã xem hết"
+  stars: "sao"
 
   activerecord:
     models:
@@ -221,6 +225,7 @@ vi:
         turns: "Số lượt gia hạn đã dùng"
       book_comment:
         content: "Nội dung bình luận"
+        star_rate: "Đánh giá"
   validations:
     isbn_valid: "chỉ bao gồm 10 hoặc 13 chữ số , cùng với các ký tự -"
     image_type_valid: "chỉ hỗ trợ các định dạng JPEG, PNG, GIF"

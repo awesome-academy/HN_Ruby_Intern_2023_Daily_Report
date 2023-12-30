@@ -36,6 +36,9 @@ en:
       no_books_found: "No books found"
     show:
       add_to_cart: "Add to cart"
+    ratings:
+      book_ratings: "Book ratings"
+      out_of: "out of"
   invalid_email_password: "Invalid email or password"
   account_not_activated_or_lock: "Account is locked or not to be activated"
   book_not_found: "Book not found"
@@ -155,15 +158,16 @@ en:
       posted: "Posted"
     form:
       post_comment: "Post comment"
+      rate_book: "Rate this book"
     load_more_btn:
       load_more: "Load more"
       loading: "Loading..."
   comments: "Comments"
   recent_comments: "Recent comments"
-  comment_cannot_empty: "cannot be empty"
   ago: "ago"
   notification: "Notification"
   mark_all_as_read: "Mark all as read"
+  stars: "stars"
 
   activerecord:
     attributes:
@@ -178,6 +182,9 @@ en:
         end_at: "Return date"
         renewal_at: "Renewal date"
         turns: "Number of book renewals used"
+      book_comment:
+        content: "Comments"
+        star_rate: "Ratings"
   validations:
     isbn_valid: "must have 10 or 13 digits, with any -"
     image_type_valid: "must be in JPEG, PNG, GIF format"
