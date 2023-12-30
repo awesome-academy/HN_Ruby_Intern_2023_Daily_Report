@@ -35,7 +35,7 @@ module BorrowInfosHelper
 
   def cancel_btn
     link_to t("cancel_borrow_request"),
-            status_action_path(
+            status_action_borrow_info_path(
               id: @borrow_info.id,
               status: @borrow_info.status
             ),
@@ -45,8 +45,8 @@ module BorrowInfosHelper
 
   def renewals_form
     form_with(model: @borrow_info,
-              url: status_action_path(id: @borrow_info.id,
-                                      status: @borrow_info.status),
+              url: status_action_borrow_info_path(id: @borrow_info.id,
+                                                  status: @borrow_info.status),
               data: {turbo_method: :patch, turbo_confirm: t("you_sure?")},
               class: "d-flex align-items-center my-4") do |form|
       concat(form.label(
