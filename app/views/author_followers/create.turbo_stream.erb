@@ -1,0 +1,11 @@
+<%= turbo_stream.update "follow_form" do %>
+  <%= render partial: "authors/unfollow_btn" %>
+<% end %>
+
+<%= turbo_stream.update "follow_info" do %>
+  <%= render "authors/follow_info" %>
+<% end %>
+
+<%= turbo_stream.update "toastr" do %>
+  <%= render "shared/toastr" %>
+<% end %>

@@ -6,7 +6,7 @@
   <div class="search d-flex mt-3">
     <%= search_form_for @q, class: "d-flex flex-grow-1" do |f| %>
       <div class="d-flex flex-grow-1 me-2 position-relative">
-        <%= f.search_field :title_or_description_or_isbn_or_authors_name_or_publisher_name_or_genres_name_cont, class: "form-control flex-grow-1 pe-5", autocomplete: "off", placeholder: t("search") %>
+        <%= f.search_field :title_cont, class: "form-control flex-grow-1 pe-5", autocomplete: "off", placeholder: t("search") %>
         <%= button_tag type: "submit", class: "btn btn-outline-primary position-absolute end-0" do %>
           <i class="fa-solid fa-magnifying-glass"></i>
         <% end %>

@@ -1,4 +1,6 @@
 class NotificationsController < ApplicationController
+  before_action :authenticate_account!
+
   def index
     notifications = Notification.for_me(current_account).created_order
 

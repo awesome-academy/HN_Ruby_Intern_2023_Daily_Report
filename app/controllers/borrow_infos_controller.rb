@@ -5,8 +5,8 @@ class BorrowInfosController < ApplicationController
   before_action :set_cart, only: %i(new)
   before_action :check_cart_empty, only: %i(new)
   before_action :check_user_info, except: %i(index show)
-  before_action :set_borrow_info,
-                only: %i(show handle_status_action download preview)
+  before_action :set_borrow_info, except: %i(index new create)
+  before_action :correct_account, except: %i(index)
 
   def index
     @q = BorrowInfo.ransack(params[:q])
@@ -63,7 +63,7 @@ class BorrowInfosController < ApplicationController
     return if @borrow_info
 
     flash[:warning] = t "borrow_info_not_found"
-    redirect_to root_path
+    redirect_to borrow_infos_path
   end
 
   def borrow_info_params
@@ -99,6 +99,13 @@ class BorrowInfosController < ApplicationController
     else
       render :show, status: :bad_request
     end
+  end
+
+  def correct_account
+    return if @borrow_info && @borrow_info.account == current_account
+
+    flash.now[:warning] = t "borrow_info_not_found"
+    redirect_to borrow_infos_path
   end
 
   def send_pdf disposition:

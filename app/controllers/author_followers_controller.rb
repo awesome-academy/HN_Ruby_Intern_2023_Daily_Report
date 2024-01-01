@@ -5,15 +5,23 @@ class AuthorFollowersController < ApplicationController
   def create
     current_account.follow @author
 
-    flash[:success] = t "author_follow_successfully"
-    redirect_to @author
+    flash.now[:success] = t "author_follow_successfully"
+
+    respond_to do |format|
+      format.html{redirect_to @author}
+      format.turbo_stream
+    end
   end
 
   def destroy
     current_account.unfollow @author if current_account.following? @author
 
-    flash[:success] = t "author_unfollow_successfully"
-    redirect_to @author
+    flash.now[:success] = t "author_unfollow_successfully"
+
+    respond_to do |format|
+      format.html{redirect_to @author}
+      format.turbo_stream
+    end
   end
 
   private

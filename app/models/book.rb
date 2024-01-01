@@ -69,6 +69,8 @@ class Book < ApplicationRecord
     order(borrowed_count: :desc).limit(limit)
   }
 
+  ransack_alias :title, :title_or_description_or_isbn_or_authors_name_or_publisher_name_or_genres_name # rubocop:disable Layout/LineLength
+
   def update_relation_with_ids name, ids
     attribute = send "book_#{name}s"
     attribute.clear
