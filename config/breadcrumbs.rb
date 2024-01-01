@@ -1,5 +1,5 @@
 crumb :root do
-  link t("home"), root_path
+  link t("home_text"), root_path
 end
 
 crumb :books do

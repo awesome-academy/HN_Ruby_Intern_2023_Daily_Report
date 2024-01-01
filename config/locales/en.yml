@@ -1,11 +1,17 @@
 en:
   penalty_per_overdue: 1
-  home: "Home"
+  home_text: "Home"
+  home:
+    index:
+      book_maybe_you_like: "Maybe you will like"
+      book_favourite_authors: "Books from your favourite authors"
+      book_top_rates: "Top rated books"
+      book_most_borrowed: "Most borrowed books"
   log_in: "Log in"
   en: "English (US)"
   vi: "Vietnamese"
   welcome_text: "Welcome to the LIBMA website"
-  home_text: "This is the home page for the LIBMA - Library management application."
+  home_intro: "This is the home page for the LIBMA - Library management application."
   search: "Search books by title, ISBN code, author name, ..."
   sign_up: "Sign up"
   create_account: "Create my account"

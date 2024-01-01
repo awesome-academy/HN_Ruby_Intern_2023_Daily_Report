@@ -14,3 +14,4 @@
   <p><%= t "activerecord.attributes.user_info.citizen_id" %>: <%= @account.user_info.citizen_id %></p>
   <p><%= t "activerecord.attributes.user_info.dob" %>: <%= @account.user_info.dob %></p>
 <% end %>
+<%= render "author_list" if account_has?(:favorite_authors) %>

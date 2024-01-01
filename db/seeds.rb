@@ -192,3 +192,15 @@ BorrowItem.all.each do |borrow|
   # borrow.update_attribute :end_at, borrow.start_at + rand(30)
   borrow.update_attribute :updated_at, borrow.created_at
 end
+
+# BookComment
+Book.all.each do |book|
+  5.times do
+    BookComment.create!(
+      book_id: book.id,
+      account_id: 1,
+      star_rate: rand(1..5),
+      content: Faker::Lorem.sentence(word_count: 10)
+    )
+  end
+end

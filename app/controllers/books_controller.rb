@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   def index
     @q = Book.ransack(params[:q])
     filtered_books = @q.result(distinct: true)
-                       .with_attached_image.include_authors.newest_book
+                       .with_image_and_authors.newest_book
 
     if params[:letter].present?
       filtered_books = filtered_books.by_first_letter(params[:letter])

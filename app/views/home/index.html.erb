@@ -1,15 +1,13 @@
-<% provide :title, t("home") %>
+<% provide :title, t("home_text") %>
 
-<% if account_signed_in? && current_account&.favorite_authors&.present? %>
-  <%= render "author_list" %>
-  <% if @pagy&.prev.present? || @pagy&.next.present? %>
-    <div class="d-flex justify-content-center mt-4">
-      <%== pagy_bootstrap_nav(@pagy) %>
-    </div>
-  <% end %>
+<% if account_signed_in? %>
+  <%= render "books_carousel", title: t(".book_top_rates"), books: @books[:top_rated_books] %>
+  <%= render "books_carousel", title: t(".book_most_borrowed"), books: @books[:most_borrowed_books] %>
+  <%= render "books_carousel", title: t(".book_maybe_you_like"), books: @books[:books_with_same_genre] if account_has?(:borrow_requests) %>
+  <%= render "books_carousel", title: t(".book_favourite_authors"), books: @books[:books_from_favorite_authors] if account_has?(:favorite_authors) %>
 <% else %>
   <div class="text-center">
     <h1><%= t "welcome_text" %></h1>
-    <p><%= t "home_text" %></p>
+    <p><%= t "home_intro" %></p>
   </div>
 <% end %>

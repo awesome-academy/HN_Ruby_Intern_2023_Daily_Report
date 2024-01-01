@@ -3,7 +3,16 @@ class AccountsController < ApplicationController
   before_action :set_account
   before_action :correct_account
 
-  def show; end
+  def show
+    return if @account&.favorite_authors.blank?
+
+    @authors = @account.favorite_authors
+
+    @pagy, @authors = pagy(
+      @authors.with_attached_avatar,
+      items: Settings.digit_4
+    )
+  end
 
   def edit
     return unless @account.user_info.nil?

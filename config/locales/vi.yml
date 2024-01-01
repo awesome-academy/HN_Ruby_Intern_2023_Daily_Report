@@ -1,11 +1,17 @@
 vi:
   penalty_per_overdue: 20000
-  home: "Trang Chủ"
+  home_text: "Trang Chủ"
+  home:
+    index:
+      book_maybe_you_like: "Có thể bạn sẽ thích"
+      book_favourite_authors: "Sách từ tác giả bạn yêu thích"
+      book_top_rates: "Sách được đánh giá cao"
+      book_most_borrowed: "Những sách được mượn nhiều nhất"
   log_in: "Đăng Nhập"
   en: "Tiếng Anh"
   vi: "Tiếng Việt"
   welcome_text: "Chào mừng đến với LIBMA"
-  home_text: "Đây là trang chủ của LIBMA - trang web quản lý sách thư viện."
+  home_intro: "Đây là trang chủ của LIBMA - trang web quản lý sách thư viện."
   search: "Tìm kiếm sách theo tiêu đề, mã ISBN, tên tác giả, ..."
   sign_up: "Đăng Ký"
   create_account: "Tạo tài khoản"
