@@ -72,11 +72,29 @@ class Account < ApplicationRecord
     Notification.create status:, content:, link:, account_id: id
   end
 
+  def books_with_same_genre limit = 6
+    return [] if borrow_requests.blank?
+
+    genre_ids = borrow_requests.joins(books: :genres).pluck("genres.id").uniq
+    fetch_books(:genres, genre_ids, limit)
+  end
+
+  def books_from_favorite_authors limit = 6
+    fetch_books(:authors, favorite_authors.ids, limit)
+  end
+
   private
 
   def after_change_status
     return if is_active
 
     notification_for_me :notice, "notifications.account_inactive"
+  end
+
+  def fetch_books association, ids, limit
+    Book.with_image_and_authors
+        .joins(association)
+        .where(association => {id: ids})
+        .limit(limit)
   end
 end

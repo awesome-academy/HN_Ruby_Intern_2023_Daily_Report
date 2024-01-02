@@ -41,6 +41,7 @@ class Book < ApplicationRecord
 
   scope :newest_book, ->{order(created_at: :desc)}
   scope :include_authors, ->{includes(:authors)}
+  scope :with_image_and_authors, ->{with_attached_image.include_authors}
   scope :includes_info, lambda {\
     includes(:authors, :publisher, :genres)
       .with_attached_image
@@ -57,6 +58,16 @@ class Book < ApplicationRecord
   scope :borrowable, ->{where("amount >= borrowed_count")}
   scope :remain_least, ->{order(Arel.sql("amount - borrowed_count ASC"))}
   scope :by_first_letter, ->(letter){where("title LIKE ?", "#{letter}%")}
+  scope :top_rated_books, lambda {|limit = 6|
+    joins(:comments)
+      .select("books.*, AVG(book_comments.star_rate) as avg_star_rate")
+      .group("books.id")
+      .order("avg_star_rate DESC")
+      .limit(limit)
+  }
+  scope :most_borrowed_books, lambda {|limit = 6|
+    order(borrowed_count: :desc).limit(limit)
+  }
 
   def update_relation_with_ids name, ids
     attribute = send "book_#{name}s"

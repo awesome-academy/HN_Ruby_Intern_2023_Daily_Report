@@ -1,5 +1,4 @@
-<h2 class="fw-semibold"><%= t "authors_following" %></h2>
-<hr>
+<h2 class="fw-semibold mb-4 mt-5"><%= t "authors_following" %></h2>
 <div class="row row-cols-1 row-cols-md-4 g-4">
   <% @authors.each do |author| %>
     <div class="col text-center">
@@ -10,3 +9,8 @@
     </div>
   <% end %>
 </div>
+<% if @pagy&.prev.present? || @pagy&.next.present? %>
+  <div class="d-flex justify-content-center mt-4">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+<% end %>

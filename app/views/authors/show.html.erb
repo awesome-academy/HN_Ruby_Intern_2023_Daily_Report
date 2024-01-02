@@ -21,7 +21,7 @@
 <div class="mt-5">
   <h2 class="border-bottom"><%= t ".list_of_books" %></h2>
   <div class="mt-1 mb-5 row row-cols-1 row-cols-md-5 g-4">
-    <% @author.books.with_attached_image.include_authors.each do |book| %>
+    <% @author.books.with_image_and_authors.each do |book| %>
       <div class="col">
         <%= render "shared/book_card", book: book %>
       </div>
