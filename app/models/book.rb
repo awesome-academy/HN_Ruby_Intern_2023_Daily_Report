@@ -68,6 +68,18 @@ class Book < ApplicationRecord
     amount - borrowed_count
   end
 
+  def average_ratings
+    comments.average(:star_rate).to_f.round(1)
+  end
+
+  def rating_details value
+    total_comments = comments.count
+    count = comments.where(star_rate: value).count
+    percentage = (count.to_f / total_comments) * 100
+
+    {percentage:, count:}
+  end
+
   class << self
     def ransackable_attributes _auth_object = nil
       %w(title description isbn created_at)

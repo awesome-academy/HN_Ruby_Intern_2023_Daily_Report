@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_21_043601) do
-  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_12_28_183021) do
+  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
     t.boolean "is_admin", default: false, null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_043601) do
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "star_rate", null: false
     t.index ["account_id"], name: "index_book_comments_on_account_id"
     t.index ["book_id"], name: "index_book_comments_on_book_id"
   end
@@ -123,17 +124,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_043601) do
     t.index ["book_id", "genre_id"], name: "index_book_genres_on_book_id_and_genre_id", unique: true
     t.index ["book_id"], name: "index_book_genres_on_book_id"
     t.index ["genre_id"], name: "index_book_genres_on_genre_id"
-  end
-
-  create_table "book_rates", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "book_id", null: false
-    t.bigint "account_id", null: false
-    t.integer "value", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_book_rates_on_account_id"
-    t.index ["book_id", "account_id"], name: "index_book_rates_on_book_id_and_account_id", unique: true
-    t.index ["book_id"], name: "index_book_rates_on_book_id"
   end
 
   create_table "books", charset: "utf8mb4", force: :cascade do |t|
@@ -251,8 +241,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_043601) do
   add_foreign_key "book_favorites", "books"
   add_foreign_key "book_genres", "books"
   add_foreign_key "book_genres", "genres"
-  add_foreign_key "book_rates", "accounts"
-  add_foreign_key "book_rates", "books"
   add_foreign_key "books", "publishers"
   add_foreign_key "borrow_infos", "accounts"
   add_foreign_key "borrow_items", "books"

@@ -6,6 +6,10 @@
   <%= turbo_stream.prepend "comments" do %>
     <%= render "comment", comment: @comment, book: @book %>
   <% end %>
+
+  <%= turbo_stream.update "ratings" do %>
+    <%= render "books/ratings" %>
+  <% end %>
 <% end %>
 
 <%= turbo_stream.update "toastr" do %>

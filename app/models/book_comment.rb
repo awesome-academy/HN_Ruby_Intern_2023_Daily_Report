@@ -4,17 +4,22 @@ class BookComment < ApplicationRecord
   belongs_to :book, class_name: Book.name
   has_rich_text :content
 
-  validate :comment_content_validate
+  validates :content, presence: true
+  validates :star_rate, presence: true
+  validates :star_rate, numericality: {in: 1..Settings.digit_5},
+            allow_blank: true
 
   scope :include_accounts_with_avatar,
         ->{includes(commenter: {avatar_attachment: :blob})}
   scope :newest_comments, ->{order(created_at: :desc)}
 
-  private
+  class << self
+    def ransackable_attributes _auth_object = nil
+      %w(star_rate)
+    end
 
-  def comment_content_validate
-    return if content.present?
-
-    errors.add(:content, I18n.t("comment_cannot_empty"))
+    def ransackable_associations _auth_object = nil
+      %w(book commenter)
+    end
   end
 end
