@@ -5,7 +5,8 @@ class BorrowInfosController < ApplicationController
   before_action :set_cart, only: %i(new)
   before_action :check_cart_empty, only: %i(new)
   before_action :check_user_info, except: %i(index show)
-  before_action :set_borrow_info, only: %i(show handle_status_action)
+  before_action :set_borrow_info,
+                only: %i(show handle_status_action download preview)
 
   def index
     @q = BorrowInfo.ransack(params[:q])
@@ -45,6 +46,14 @@ class BorrowInfosController < ApplicationController
     else
       flash[:danger] = t "unknown_status_request"
     end
+  end
+
+  def download
+    send_pdf(disposition: "attachment")
+  end
+
+  def preview
+    send_pdf(disposition: "inline")
   end
 
   private
@@ -93,5 +102,15 @@ class BorrowInfosController < ApplicationController
     else
       render :show, status: :bad_request
     end
+  end
+
+  def send_pdf disposition:
+    pdf = BorrowInfoPdf.new(@borrow_info)
+    send_data(
+      pdf.render,
+      filename: t("pdf_filename") + "#{@borrow_info.id}.pdf",
+      type: "application/pdf",
+      disposition:
+    )
   end
 end

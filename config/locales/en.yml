@@ -113,6 +113,9 @@ en:
       borrow_info: "Borrow information"
       borrow_book_list: "List of borrowed books"
       turns_left: "(You have %{turns_count} turns left)"
+    pdf_btns:
+      preview_pdf: "Preview"
+      download_pdf: "Download"
     borrow_date: "Borrow date"
     return_date: "Return date"
     borrow_renewals: "Number of book borrow renewals"
@@ -168,6 +171,19 @@ en:
   notification: "Notification"
   mark_all_as_read: "Mark all as read"
   stars: "stars"
+  pdf_filename: "borrow_infomation_"
+  pdf_borrow_info: "Borrow Information"
+  pdf_user_info: "USER INFORMATION"
+  pdf_borrow_info: "BORROW INFORMATION"
+  pdf_username: "Username"
+  pdf_borrow_date: "Borrow date"
+  pdf_return_date: "Return date"
+  pdf_borrowed_books: "BORROWED BOOKS"
+  pdf_no: "No"
+  pdf_title: "Title"
+  pdf_isbn: "ISBN"
+  pdf_publisher: "Publisher"
+  pdf_renewal_used: "Number of book renewals used"
 
   activerecord:
     attributes:

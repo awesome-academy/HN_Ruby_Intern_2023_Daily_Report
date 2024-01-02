@@ -113,6 +113,9 @@ vi:
       borrow_info: "Thông tin mượn sách"
       borrow_book_list: "Những sách đã mượn"
       turns_left: "(Bạn còn %{turns_count} lượt gia hạn)"
+    pdf_btns:
+      preview_pdf: "Xem trước"
+      download_pdf: "Tải xuống"
     borrow_date: "Ngày mượn sách"
     return_date: "Ngày trả sách"
     borrow_renewals: "Số lần gia hạn mượn sách còn lại"
@@ -168,6 +171,19 @@ vi:
   notification: "Thông báo"
   mark_all_as_read: "Đánh dấu là đã xem hết"
   stars: "sao"
+  pdf_filename: "thong_tin_dat_sach_"
+  pdf_borrow_info: "Thông Tin Đặt Sách"
+  pdf_user_info: "THÔNG TIN NGƯỜI DÙNG"
+  pdf_borrow_info: "THÔNG TIN MƯỢN SÁCH"
+  pdf_username: "Tên đăng nhập"
+  pdf_borrow_date: "Ngày mượn sách"
+  pdf_return_date: "Ngày trả sách"
+  pdf_borrowed_books: "NHỮNG SÁCH ĐÃ MƯỢN"
+  pdf_no: "Số thứ tự"
+  pdf_title: "Tiêu đề"
+  pdf_isbn: "ISBN"
+  pdf_publisher: "Nhà xuất bản"
+  pdf_renewal_used: "Số lượt gia hạn đã dùng"
 
   activerecord:
     models:

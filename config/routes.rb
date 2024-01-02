@@ -54,9 +54,14 @@ Rails.application.routes.draw do
 
     resource :carts, only: %i(show destroy)
     resources :borrow_items, only: %i(create destroy)
-    resources :borrow_infos, only: %i(index show new create)
-    post "/status_action", to: "borrow_infos#handle_status_action"
-    patch "/status_action", to: "borrow_infos#handle_status_action"
+    resources :borrow_infos, only: %i(index show new create) do
+      member do
+        get "download", to: "borrow_infos#download"
+        get "preview", to: "borrow_infos#preview"
+        post "status_action", to: "borrow_infos#handle_status_action"
+        patch "status_action", to: "borrow_infos#handle_status_action"
+      end
+    end
 
     resources :author_followers, only: %i(create destroy)
 
