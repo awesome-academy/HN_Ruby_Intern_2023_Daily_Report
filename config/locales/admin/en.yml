@@ -41,6 +41,9 @@ en:
     favorite: 'Favorite'
     active: 'Active'
     inactive: 'Locked'
+    inactive_reason: 'Locked reason'
+    placeholder:
+      inactive_reason: 'Reason for user know why his/her account is locked'
   books:
     _name: 'book'
     _item: 'book'
@@ -177,6 +180,8 @@ en:
       login_success: 'Welcome'
       send_remind_email_success: 'Send remind email successfully'
       delete_book_fail_borrowed: 'Delete book fail because there are some requests has not been returned'
+      require_reject_reason: 'You need to choose or enter a reason to reject this request'
+      require_lock_reason: 'You need to choose or enter a reason to lock this account'
     hint:
       search:
         borrows: 'Search by borrower information: full name, email, username'
@@ -185,6 +190,10 @@ en:
         genres: 'Search by name, description'
         publishers: 'Search by name, email, address, about'
         users: 'Search by username, email, fullname, phone'
+      inactive_reason:
+        overdue: 'Returning books late too many times'
+        borrow_cancel: 'Cancel borrows too many times'
+        spam: 'Spam too much on comments'
     title:
       index: 'List of %{name}'
       new: 'New %{name}'

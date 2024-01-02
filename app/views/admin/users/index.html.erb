@@ -13,4 +13,5 @@
 <% end %>
 <% content_for :table_body, render(partial: "user", collection: @users) %>
 <% content_for :table_empty, name: :users %>
+<% content_for :hidden_content, render("inactive_reason") %>
 <%= render "admin/shared/index", name: :users %>

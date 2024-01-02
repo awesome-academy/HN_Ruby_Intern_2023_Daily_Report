@@ -1,12 +1,17 @@
 <% provide :title, t("admin.title.show", name: t("books._name")) %>
-<% populate_book(@book) => {cover:, title:, description:}%>
+<% populate_book(@book) => {cover:, title:, description:} %>
 <div class="col-12">
   <%= navigate_to %>
   <div class="card">
     <div class="card-body">
       <div class="row">
         <div class="col-lg-4 order-2 order-lg-0">
-          <%= image_tag cover, class: "cover-rect" %>
+          <div class="text-center pb-4">
+            <%= image_tag cover, class: "cover-rect" %>
+          </div>
+          <div class="py-4">
+            <%= render "admin/shared/timestamp", object: @book %>
+          </div>
         </div>
         <div class="col-lg-8">
           <div class="d-flex justify-content-between">

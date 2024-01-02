@@ -12,7 +12,7 @@ class BorrowInfo < ApplicationRecord
   validate :start_at_validation, :end_at_validation, on: :create
   validates :renewal_at, presence: true, on: :update
   validate :renewal_at_validation, on: :update
-  validates :turns, numericality: {less_than: Settings.digit_5}
+  validates :turns, numericality: {less_than: Settings.digit_5.to_i}
 
   scope :due_first, ->{order(end_at: :desc)}
   scope :includes_user, lambda {\
@@ -28,6 +28,8 @@ class BorrowInfo < ApplicationRecord
   scope :history, ->{rejected.or(BorrowInfo.returned)}
   scope :for_account, ->(account_id){where(account_id:)}
   scope :desc_order, ->{order(updated_at: :desc)}
+
+  after_update :after_change_status, if: :saved_change_to_status?
 
   def start_at_validation
     return if start_at && start_at >= Date.current
@@ -59,6 +61,15 @@ class BorrowInfo < ApplicationRecord
     turns.positive? ? :incrementing : :new
   end
 
+  def overdue?
+    returned? && updated_at > end_at
+  end
+
+  def penalty
+    exceed = (updated_at.to_date - end_at.to_date).to_i
+    overdue? ? I18n.t("penalty_per_overdue") * exceed : 0
+  end
+
   def add_to_book_borrowed_count value
     transaction do
       books.each do |book|
@@ -70,5 +81,21 @@ class BorrowInfo < ApplicationRecord
 
   def self.ransackable_attributes _auth_object = nil
     %w(status id start_at end_at turns)
+  end
+
+  private
+
+  def after_change_status
+    link = Rails.application.routes.url_helpers.borrow_info_path(id:)
+    if %w(approved rejected).include? status
+      BorrowMailer.with(borrow: self).notify_result.deliver_later
+      account&.notification_for_me :info,
+                                   "notifications.borrow_#{status}",
+                                   link:
+    elsif overdue?
+      account&.notification_for_me :notice,
+                                   "notifications.borrow_returned_overdue",
+                                   link:
+    end
   end
 end

@@ -22,15 +22,24 @@ class Admin::BorrowsController < Admin::BaseController
   end
 
   def reject
-    respond_to_change_status(
-      @borrow.pending? && @borrow.create_response(content: reject_params),
-      :rejected,
-      :pending
-    )
+    if params[:reject_reason].blank?
+      flash[:warning] = t "admin.notif.require_reject_reason"
+      application_notify
+    else
+      reason = @borrow.create_response(content: params[:reject_reason])
+      respond_to_change_status(
+        @borrow.pending? && reason,
+        :rejected,
+        :pending
+      )
+    end
   end
 
   def remind
     BorrowMailer.with(borrow: @borrow).remind.deliver_later
+    @borrow.account&.notification_for_me :urgent,
+                                         "notifications.borrow_remind",
+                                         link: borrow_info_path(@borrow)
     flash[:success] = t "admin.notif.send_remind_email_success"
     application_notify
   end
@@ -65,26 +74,19 @@ class Admin::BorrowsController < Admin::BaseController
     pass
   end
 
-  def send_notify_email status
-    BorrowMailer.with(borrow: @borrow).notify_result.deliver_later if
-           %i(approved rejected).include? status
-  end
-
-  def respond_to_change_status condition, to, group
-    unless condition || update_books_borrowed_count(to)
-      redirect_to admin_borrows_path(group:)
+  def respond_to_change_status condition, status, group
+    unless condition || update_books_borrowed_count(status)
+      redirect_back_or_to admin_borrows_path(group:)
     end
 
-    @borrow.update_attribute :status, to
-
-    send_notify_email to
+    @borrow.update_attribute :status, status
 
     text = t(
       "admin.notif.update_borrow_status_success_html",
-      status: t("borrows.#{to}")
+      status: t("borrows.#{status}")
     )
     flash[:success] = text
-    redirect_to admin_borrows_path(group:)
+    redirect_back_or_to admin_borrows_path(group:)
   end
 
   def respond_to_list borrows
@@ -116,9 +118,5 @@ class Admin::BorrowsController < Admin::BaseController
   def get_group
     @group = params[:group]&.to_sym
     @group = :approved unless %i(pending history).include? @group
-  end
-
-  def reject_params
-    params.require(:reject_reason)
   end
 end

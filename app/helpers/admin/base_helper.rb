@@ -1,5 +1,6 @@
 module Admin::BaseHelper
   def format_time_ago string
+    string = string.dup # incase string is frozen
     bad_words = [
       t("datetime.less_than"),
       t("datetime.about"),
@@ -15,7 +16,7 @@ module Admin::BaseHelper
 
   def time_ago date, suffix: false
     time_ago = format_time_ago time_ago_in_words(date)
-    "#{time_ago} #{t('datetime.ago') if suffix}" if date
+    "#{time_ago}#{" #{t('datetime.ago')}" if suffix}" if date
   end
 
   def localize_date datetime, format = :short

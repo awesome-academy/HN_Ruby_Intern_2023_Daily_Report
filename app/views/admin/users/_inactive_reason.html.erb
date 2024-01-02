@@ -1,0 +1,21 @@
+<% content_for :modal_body do %>
+  <% reason_samples = I18n.backend.translations.dig(I18n.locale, :admin, :hint, :inactive_reason) || {} %>
+  <%= form_with do |f| %>
+    <%= tag.p t("users.placeholder.inactive_reason"), class: "d-none",
+                          data: {placeholder_for: :reason} %>
+    <%= f.select :reason, reason_samples.values,
+                          {prompt: true},
+                          {
+                            required: true,
+                            class: "form-control",
+                            data: {parent_id: :inactive_reason_modal}
+                          } %>
+    <div class="modal-footer">
+      <%= f.submit t("admin.misc.send"), class: "btn btn-success btn-control" %>
+      <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+        <%= t "admin.misc.cancel" %>
+      </button>
+    </div>
+  <% end %>
+<% end %>
+<%= render "admin/shared/modal", id: :inactive_reason_modal, title: t("users.inactive_reason") %>

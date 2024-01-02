@@ -45,6 +45,8 @@ class Account < ApplicationRecord
       .or(UserInfo.bquery(q))
   }
 
+  after_update :after_change_status, if: :saved_change_to_is_active?
+
   def follow author
     favorite_authors << author
   end
@@ -63,5 +65,17 @@ class Account < ApplicationRecord
 
   def inactive_message
     :locked
+  end
+
+  def notification_for_me status, content, link: nil
+    Notification.create status:, content:, link:, account_id: id
+  end
+
+  private
+
+  def after_change_status
+    return if is_active
+
+    notification_for_me :notice, "notifications.account_inactive"
   end
 end

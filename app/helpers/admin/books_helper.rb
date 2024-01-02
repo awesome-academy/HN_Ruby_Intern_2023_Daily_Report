@@ -9,7 +9,6 @@ module Admin::BooksHelper
       title: book.title,
       description: book.description,
       publish_date: localize_date(book.publish_date, :year),
-      remain: book.remain,
       isbn: format_isbn(book.isbn),
       updated_at: localize_date(book.updated_at, :long),
       publisher: book.publisher,
@@ -27,12 +26,6 @@ module Admin::BooksHelper
         title: t("books.detail"),
         id: :book_detail,
         link: admin_book_path(book)
-      },
-      {
-        icon: :comment,
-        title: t("books.review"),
-        id: :book_review,
-        link: "#"
       }
     ]
   end

@@ -16,7 +16,6 @@ module Admin::UsersHelper
       dob: localize_date(info&.dob, :long),
       gender: t("users.#{info&.gender}"), # info.gender return string
       citizen_id: info&.citizen_id,
-      updated_at: localize_date(info&.updated_at, :long),
       # Other
       user_path: admin_user_path(account)
     }
@@ -29,21 +28,27 @@ module Admin::UsersHelper
   def get_status_button account
     return unless account&.is_activated
 
-    is_active = account.is_active
-
-    status_text = is_active ? t("users.active") : t("users.inactive")
-    do_text = is_active ? t(".do_inactive") : t(".do_active")
-
-    confirm_text = t(".do_active_confirm")
-    confirm_text = t(".do_inactive_confirm") if is_active
-
-    color = is_active ? :success : :danger
-
-    link = inactive_admin_user_path account
-    link = active_admin_user_path account unless is_active
-    id = dom_id account, :status
-
-    {status_text:, do_text:, confirm_text:, link:, color:, id:}
+    if account.is_active?
+      {
+        link: inactive_admin_user_path(account),
+        color: :success,
+        confirm_text: t(".do_inactive_confirm"),
+        status_text: t("users.active"),
+        do_text: t(".do_inactive"),
+        data: {
+          bs_toggle: :modal,
+          bs_target: "#inactive_reason_modal"
+        }
+      }
+    else
+      {
+        link: active_admin_user_path(account),
+        color: :danger,
+        confirm_text: t(".do_active_confirm"),
+        status_text: t("users.inactive"),
+        do_text: t(".do_active")
+      }
+    end
   end
 
   def get_user_tab_headers user
@@ -53,12 +58,6 @@ module Admin::UsersHelper
         title: t("users.profile"),
         id: :user_profile,
         link: admin_user_path(user)
-      },
-      {
-        icon: :heart,
-        title: t("users.favorite"),
-        id: :user_favorite,
-        link: "#"
       }
     ]
   end

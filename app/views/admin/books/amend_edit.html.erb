@@ -1,7 +1,6 @@
 <% action = controller.action_name %>
 <% provide :title, t("admin.title.#{action}", name: t("books._name")) %>
 <% populate_book(@book) => {cover:, title:, description:} %>
-<% required_fields = validated_fields_of Book %>
 <div class="col-12">
   <%= navigate_to %>
   <div class="card">
@@ -28,7 +27,7 @@
                                   {selected: @book.publisher_id, prompt: true},
                                   {
                                     class: "form-control selector2",
-                                    required: required_fields.include?(:publisher)
+                                    required: true
                                   } %>
               </div>
               <div class="form-group">
@@ -39,8 +38,7 @@
                       {selected: @book.authors.map(&:id)},
                       {
                         class: "form-control selector2",
-                        multiple: true,
-                        required: required_fields.include?(:authors)
+                        multiple: true
                       } %>
               </div>
               <div class="form-group">
@@ -51,8 +49,7 @@
                       {selected: @book.genres.map(&:id)},
                       {
                         class: "form-control selector2",
-                        multiple: true,
-                        required: required_fields.include?(:genres)
+                        multiple: true
                       } %>
               </div>
             </div>

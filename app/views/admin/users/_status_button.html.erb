@@ -1,8 +1,12 @@
 <% if btn = get_status_button(user) %>
-  <% btn => {link:, color:, id:, do_text:, status_text:, confirm_text:} %>
-  <%= button_to link, form: {id:, data: {turbo_confirm: confirm_text}},
-                class: "btn btn-flip btn-outline-#{color}", remote: true do %>
-    <span><%= do_text %></span>
-    <span><%= status_text %></span>
+  <%= link_to btn[:link],
+              id: dom_id(user, :status),
+              data: {
+                turbo_method: :post,
+                turbo_confirm: btn[:confirm_text]
+              }.merge(btn[:data] || {}),
+              class: "btn btn-flip btn-outline-#{btn[:color]}" do %>
+    <span><%= btn[:do_text] %></span>
+    <span><%= btn[:status_text] %></span>
   <% end %>
 <% end %>

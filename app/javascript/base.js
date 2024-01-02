@@ -2,6 +2,8 @@ import "bootstrap";
 import "jquery";
 import "jquery_ujs";
 import "toastr";
+import "trix";
+import "@rails/actiontext";
 
 // not working??
 toastr.options = {
