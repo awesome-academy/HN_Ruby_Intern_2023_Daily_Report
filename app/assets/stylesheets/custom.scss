@@ -10,20 +10,11 @@ body {
   flex-direction: column;
 }
 
-.dropdown-menu a {
+.languages a {
   @extend .dropdown-item !optional;
 }
 
-/* Error explaination display */
-
-#error_explanation {
-  color: red;
-
-  ul {
-    color: red;
-    margin: 0 0 30px;
-  }
-}
+/* Error display */
 
 .field_with_errors {
   .form-control {
@@ -40,4 +31,11 @@ label.required:after{
 
 .auth-form {
   width: 50%;
+}
+
+/* Dropdown menu for notification */
+
+.notifications {
+  width: 500px;
+  max-height: 420px;
 }

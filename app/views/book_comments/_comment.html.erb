@@ -8,7 +8,7 @@
       <div>
         <h5 class="fw-bold mb-1"><%= account.username %></h5>
         <div class="d-flex align-items-center mb-4">
-          <p class="mb-0 text-secondary"><%= t ".posted" %> <%= time_ago_in_words(comment.created_at) %> <%= t ".ago" %></p>
+          <p class="mb-0 text-secondary"><%= t ".posted" %> <%= time_ago_in_words(comment.created_at) %> <%= t "ago" %></p>
           <% if current_account == account %>
             <%= link_to [book, comment], data: {turbo_method: :delete, turbo_confirm: t("you_sure?")}, class: "link-danger ms-3" do %>
               <i class="fa-solid fa-trash-can"></i>

@@ -1,0 +1,7 @@
+<%= turbo_stream.update "toastr" do %>
+  <%= render "shared/toastr" %>
+<% end %>
+
+<%= turbo_stream.update "cart-quantity" do %>
+  <%= borrow_item_quantity %>
+<% end %>

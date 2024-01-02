@@ -27,6 +27,7 @@ class Account < ApplicationRecord
                       dependent: :destroy
   has_many :commented_books, through: :comments,
                              source: :book
+  has_many :notifications, dependent: :destroy
 
   validates :email, presence: true, length: {maximum: Settings.digit_255},
                     format: Settings.valid_email_regex,
