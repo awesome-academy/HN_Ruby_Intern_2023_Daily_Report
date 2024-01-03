@@ -3,6 +3,7 @@ module BorrowInfosHelper
     case status
     when "pending" then "info"
     when "approved" then "success"
+    when "renewing" then "purple"
     when "rejected" then "danger"
     when "canceled" then "dark"
     when "returned" then "warning"
@@ -14,6 +15,7 @@ module BorrowInfosHelper
     case status
     when "pending" then cancel_btn
     when "approved" then renewals_form
+    when "renewing" then cancel_btn
     when "rejected" then rejected_content
     when "canceled" then canceled_content
     when "returned" then returned_content
