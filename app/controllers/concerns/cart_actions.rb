@@ -3,6 +3,14 @@ module CartActions
 
   private
 
+  def current_cart
+    @current_cart ||= Cart.find_by(id: session[:cart_id])
+    return if @current_cart
+
+    @current_cart = Cart.create
+    session[:cart_id] = @current_cart.id
+  end
+
   def set_cart
     @cart = @current_cart
   end

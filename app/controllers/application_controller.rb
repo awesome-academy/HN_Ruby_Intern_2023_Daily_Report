@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
+  include CartActions
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
@@ -24,13 +25,5 @@ class ApplicationController < ActionController::Base
     I18n.locale = I18n.default_locale
     I18n.locale = locale if I18n.available_locales.include?(locale)
     @pagy_locale = params[:locale]
-  end
-
-  def current_cart
-    @current_cart ||= Cart.find_by(id: session[:cart_id])
-    return if @current_cart
-
-    @current_cart = Cart.create
-    session[:cart_id] = @current_cart.id
   end
 end
