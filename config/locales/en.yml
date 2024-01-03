@@ -152,7 +152,10 @@ en:
   filter: "Filter"
   borrow_id: "Borrow ID"
   action: "Action"
-  new_return_date: "(New return date)"
+  days_left:
+    one: "day left"
+    other: "days left"
+  penalty_fees_day: "Penalty fees a day: 1$"
   details: "Details"
   no_borrow_info: "No borrowed information"
   borrow_info: "Borrow information"

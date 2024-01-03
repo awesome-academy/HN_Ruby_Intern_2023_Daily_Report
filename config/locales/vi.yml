@@ -152,7 +152,10 @@ vi:
   filter: "Lọc"
   borrow_id: "Mã yêu cầu"
   action: "Hành động"
-  new_return_date: "(Ngày trả sách mới)"
+  days_left:
+    one: "ngày còn lại"
+    other: "ngày còn lại"
+  penalty_fees_day: "Phí nộp phạt mỗi ngày muộn: 20.000đ"
   details: "Chi tiết"
   no_borrow_info: "Không có thông tin trạng thái mượn sách"
   borrow_info: "Lịch sử mượn sách"

@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   def index
     @q = Book.ransack(params[:q])
     filtered_books = @q.result(distinct: true)
-                       .with_image_and_authors.newest_book
+                       .with_image_and_authors.newest_book.available
 
     if params[:letter].present?
       filtered_books = filtered_books.by_first_letter(params[:letter])
@@ -28,7 +28,7 @@ class BooksController < ApplicationController
   private
 
   def set_book
-    @book = Book.find_by id: params[:id]
+    @book = Book.find_by(id: params[:id], is_active: true)
     return if @book
 
     flash.now[:warning] = t "book_not_found"

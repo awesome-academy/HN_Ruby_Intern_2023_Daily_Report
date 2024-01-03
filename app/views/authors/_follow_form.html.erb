@@ -1,0 +1,7 @@
+<div id="follow_form">
+  <% if current_account&.following? @author %>
+    <%= render "unfollow_btn" %>
+  <% else %>
+    <%= render "follow_btn" %>
+  <% end %>
+</div>

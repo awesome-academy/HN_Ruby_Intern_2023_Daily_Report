@@ -133,6 +133,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     dry-configurable (1.1.0)
       dry-core (~> 1.0, < 2)
       zeitwerk (~> 2.6)
@@ -200,6 +201,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
+    libv8 (3.16.14.19.1-x86_64-linux)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -288,6 +290,7 @@ GEM
     rake (13.1.0)
     rdoc (6.6.0)
       psych (>= 4.0.0)
+    ref (2.0.0)
     regexp_parser (2.8.2)
     reline (0.4.0)
       io-console (~> 0.5)
@@ -303,7 +306,7 @@ GEM
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-rails (6.0.3)
+    rspec-rails (6.1.0)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
@@ -348,6 +351,16 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (6.0.0)
+      activesupport (>= 5.2.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov-rcov (0.3.3)
+      simplecov (>= 0.4.1)
+    simplecov_json_formatter (0.1.4)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -358,6 +371,9 @@ GEM
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
     stringio (3.0.9)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     thor (1.3.0)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -407,6 +423,7 @@ DEPENDENCIES
   config
   debug
   devise (~> 4.9)
+  execjs
   faker
   figaro
   gretel
@@ -423,15 +440,19 @@ DEPENDENCIES
   rails (~> 7.0.5)
   rails-i18n
   ransack!
-  rspec-rails (~> 6.0.0)
+  rspec-rails (~> 6.1.0)
   rubocop (~> 1.26)
   rubocop-checkstyle_formatter
   rubocop-rails (~> 2.14.0)
   sassc-rails
   select2-rails
   selenium-webdriver
+  shoulda-matchers (~> 6.0)
+  simplecov
+  simplecov-rcov
   sprockets-rails
   stimulus-rails
+  therubyracer
   toastr-rails
   turbo-rails
   tzinfo-data

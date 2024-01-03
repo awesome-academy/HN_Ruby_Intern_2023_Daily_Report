@@ -1,35 +1,23 @@
 module BorrowInfosHelper
   def set_class_based_on status
     case status
-    when "pending"
-      "info"
-    when "approved"
-      "success"
-    when "rejected"
-      "danger"
-    when "canceled"
-      "dark"
-    when "returned"
-      "warning"
-    else
-      "primary"
+    when "pending" then "info"
+    when "approved" then "success"
+    when "rejected" then "danger"
+    when "canceled" then "dark"
+    when "returned" then "warning"
+    else ""
     end
   end
 
   def show_actions status
     case status
-    when "pending"
-      cancel_btn
-    when "approved"
-      renewals_form
-    when "rejected"
-      rejected_content
-    when "canceled"
-      canceled_content
-    when "returned"
-      returned_content
-    else
-      ""
+    when "pending" then cancel_btn
+    when "approved" then renewals_form
+    when "rejected" then rejected_content
+    when "canceled" then canceled_content
+    when "returned" then returned_content
+    else ""
     end
   end
 

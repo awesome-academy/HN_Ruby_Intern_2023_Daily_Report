@@ -11,8 +11,11 @@
   <p>
     <span class="fw-semibold"><%= t "borrow_infos.return_date" %>: </span>
     <%= @borrow_info.renewing? ? @borrow_info.renewal_at : @borrow_info.end_at %>
-    <% if @borrow_info.renewal_at && @borrow_info.errors.empty? %>
-      <%= t "new_return_date" %>
+    <% if @borrow_info.status == "approved" %>
+      <% days_left = (@borrow_info.end_at - Date.current).to_i %>
+      <span class="fw-bold text-danger">
+        (<%= days_left >= 0 ? "#{days_left} #{t('days_left', count: days_left)}" : t('penalty_fees_day') %>)
+      </span>
     <% end %>
   </p>
   <p>
