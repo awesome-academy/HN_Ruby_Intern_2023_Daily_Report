@@ -79,7 +79,7 @@ end
   name = Faker::Book.unique.genre
   description = "#{name} #{Faker::Lorem.paragraph(sentence_count: 5)}"
 
-  Genre.create(name:, description:) do
+  Genre.create(name:, description:)
 end
 
 # Book
