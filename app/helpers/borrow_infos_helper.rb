@@ -44,6 +44,9 @@ module BorrowInfosHelper
   end
 
   def renewals_form
+    return if @borrow_info.out_of_turns?
+    return if @borrow_info.out_of_renew_date?
+
     form_with(model: @borrow_info,
               url: status_action_borrow_info_path(id: @borrow_info.id,
                                                   status: @borrow_info.status),

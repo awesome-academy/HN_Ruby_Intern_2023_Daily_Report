@@ -5,8 +5,9 @@ class Admin::SessionsController < Devise::SessionsController
   def after_sign_in_path_for account
     return admin_root_path if account.is_admin?
 
-    flash[:error] = t "devise.sessions.invalid"
-    new_admin_account_session_path
+    sign_out
+    flash[:alert] = t "admin.notif.require_admin"
+    root_path
   end
 
   def after_sign_out_path_for _account

@@ -9,7 +9,7 @@
     </div>
     <p class="fst-italic text-truncate mw-100"><%= book.description %></p>
     <div class="divider"></div>
-    <p class="mt-auto"><%= t "books.remain" %>: <%= book.remain %></p>
+    <p class="mt-auto"><%= t "books.remain" %>: <%= book.remain %>/<%= book.amount %></p>
     <p><%= t "books.publish_date" %>: <%= localize_date(book.publish_date, :long) %></p>
     <p><%= t "books.isbn" %>: <%= format_isbn(book.isbn) %></p>
   </div>

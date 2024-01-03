@@ -4,9 +4,9 @@ class Admin::BorrowsController < Admin::BaseController
 
   def index
     items = case @group
-            when :pending then BorrowInfo.pending
+            when :pending then BorrowInfo.waiting
             when :history then BorrowInfo.history
-            else BorrowInfo.approved
+            else BorrowInfo.borrowing
             end
 
     respond_to_list items
@@ -18,20 +18,16 @@ class Admin::BorrowsController < Admin::BaseController
   end
 
   def return
-    respond_to_change_status @borrow.approved?, :returned, :approved
+    respond_to_change_status :return
   end
 
   def reject
-    if params[:reject_reason].blank?
+    if params[:reject_reason].blank? ||
+       !@borrow.create_response(content: params[:reject_reason])
       flash[:warning] = t "admin.notif.require_reject_reason"
       application_notify
     else
-      reason = @borrow.create_response(content: params[:reject_reason])
-      respond_to_change_status(
-        @borrow.pending? && reason,
-        :rejected,
-        :pending
-      )
+      respond_to_change_status :reject
     end
   end
 
@@ -45,7 +41,7 @@ class Admin::BorrowsController < Admin::BaseController
   end
 
   def approve
-    respond_to_change_status @borrow.pending?, :approved, :pending
+    respond_to_change_status :approve
   end
 
   private
@@ -62,31 +58,29 @@ class Admin::BorrowsController < Admin::BaseController
     redirect_to admin_borrows_path
   end
 
-  def update_books_borrowed_count status
-    pass = %i(approved returned).include?(status) &&
-           @borrow.add_to_book_borrowed_count(status == :approved ? 1 : -1)
-    unless pass
-      flash[:error] = t(
-        "admin.notif.update_borrow_status_fail",
-        status: t("borrows.#{status}")
-      )
-    end
-    pass
+  def respond_to_change_status action
+    group = action == :return ? :borrowing : :pending
+    result = @borrow.perform_action(action) ? :success : :error
+
+    notify_result_to_user(action) if result == :success
+
+    flash[result] = t "admin.notif.#{action}_borrow_#{result}"
+    redirect_back_or_to admin_borrows_path(group:)
   end
 
-  def respond_to_change_status condition, status, group
-    unless condition || update_books_borrowed_count(status)
-      redirect_back_or_to admin_borrows_path(group:)
+  def notify_result_to_user action
+    link = borrow_info_path @borrow
+    account = @borrow.account
+    if %i(approve reject).include? action
+      BorrowMailer.with(borrow: @borrow).notify_result.deliver_later
+      account&.notification_for_me :info,
+                                   "notifications.borrow_#{@borrow.status}",
+                                   link:
+    elsif @borrow.overdue?
+      account&.notification_for_me :notice,
+                                   "notifications.borrow_returned_overdue",
+                                   link:
     end
-
-    @borrow.update_attribute :status, status
-
-    text = t(
-      "admin.notif.update_borrow_status_success_html",
-      status: t("borrows.#{status}")
-    )
-    flash[:success] = text
-    redirect_back_or_to admin_borrows_path(group:)
   end
 
   def respond_to_list borrows
@@ -104,11 +98,12 @@ class Admin::BorrowsController < Admin::BaseController
 
   def transform_params
     permit_sorts = {
-      user: "accounts.username",
+      account: "accounts.username",
+      user: "user_infos.name",
       start: "borrow_infos.start_at",
       due: "borrow_infos.end_at",
       updated: "borrow_infos.updated_at",
-      status: "borrow_infos.status",
+      type: "borrow_infos.status",
       turns: "borrow_infos.turns"
     }
     s = params[:sort]&.downcase&.to_sym
@@ -117,6 +112,6 @@ class Admin::BorrowsController < Admin::BaseController
 
   def get_group
     @group = params[:group]&.to_sym
-    @group = :approved unless %i(pending history).include? @group
+    @group = :borrowing unless %i(pending history).include? @group
   end
 end

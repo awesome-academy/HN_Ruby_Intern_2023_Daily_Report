@@ -131,6 +131,7 @@ vi:
   rejected: "Bị từ chối"
   canceled: "Đã hủy"
   returned: "Đã trả sách"
+  renewing: "Chờ gia hạn"
   borrow_history: "Lịch sử mượn sách"
   date_greater_than_today: "phải từ ngày hôm nay trở lên"
   date_maximum_10_days: "tối đa là 10 ngày kể từ khi mượn"

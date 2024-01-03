@@ -1,8 +1,8 @@
 <% populate_borrow(borrow) => {
-    user:, start:, due:, updated_at:,
-    borrow_path:, id:, full_name:, turns:
+    user:, start:, due:, done:,
+    borrow_path:, full_name:, turns:
 }%>
-<tr id="<%= id %>">
+<tr id="<%= dom_id borrow %>">
   <td><%= (@pagy ? @pagy.from : 1) + borrow_iteration.index %></td>
   <td>
     <%= render "admin/shared/profile", user:,
@@ -10,17 +10,15 @@
   </td>
   <td  class="text-truncate mw-6"><%= full_name %></td>
   <td><%= link_to start, borrow_path %></td>
-  <% unless @group == :pending %>
-    <td><%= link_to updated_at, borrow_path %></td>
+  <% if @group == :history %>
+    <td><%= link_to done, borrow_path %></td>
   <% end %>
   <% unless @group == :history %>
     <td><%= link_to due, borrow_path %></td>
   <% end %>
   <td><%= turns %></td>
-  <% if %i(history pending).include? @group %>
-    <td><%= render "status_badge", borrow: %></td>
-  <% end %>
-  <% if %i(approved pending).include? @group %>
+  <td><%= render "status_badge", borrow: %></td>
+  <% if %i(borrowing pending).include? @group %>
     <td><%= render "action_buttons", borrow: %></td>
   <% end %>
 </tr>

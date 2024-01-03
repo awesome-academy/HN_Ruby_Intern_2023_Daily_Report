@@ -8,8 +8,7 @@ digit_4: 4
 digit_0: 0
 
 # Số lần gia hạn tối đa
-increment_max_times: 5
-days_per_increment: 15
+max_renewals: 5
 n_trending_items: 5
 n_pie_items: 10
 max_statistic_number: 9999

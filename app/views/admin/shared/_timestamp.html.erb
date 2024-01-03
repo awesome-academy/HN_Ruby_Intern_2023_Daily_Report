@@ -1,3 +1,3 @@
 <hr>
 <%= render "admin/shared/info_field", name: t("admin.misc.last_updated"),
-                         value: localize_date(object&.updated_at, :long) %>
+                         value: localize_date(object&.updated_at, :long, date: false) %>

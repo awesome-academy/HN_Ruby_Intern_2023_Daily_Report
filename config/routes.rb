@@ -27,8 +27,8 @@ Rails.application.routes.draw do
         end
         collection do
           get ":group", to: "borrows#index", as: "",
-                        constraints: {group: /pending|history|approved/},
-                        defaults: {group: :approved}
+                        constraints: {group: /pending|history|borrowing/},
+                        defaults: {group: :borrowing}
         end
       end
       resources :notifications, only: %i(index update) do

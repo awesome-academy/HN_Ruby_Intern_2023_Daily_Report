@@ -9,7 +9,7 @@
       <span class="mdi mdi-menu"></span>
     </button>
     <ul class="navbar-nav navbar-nav-right">
-      <% if current_page? admin_root_path %>
+      <% if current_action? :home, :index %>
         <li class="nav-item me-3">
           <div class="nav-control-wrapper">
             <%= tag.div t("admin.misc.stat_by"), class: "me-2" %>
@@ -29,24 +29,23 @@
         <%= render "dropdown_menu", id: "createbtns",
                     menu_class: "navbar-dropdown" do %>
           <% get_new_buttons.each do |btn| %>
-            <%= render("dropdown_item", link: btn[:link],
+            <%= render("dropdown_item",
+                       link: url_for(controller: "admin/#{btn[:controller]}", action: :new),
                        icon: btn[:icon], title: btn[:title]) unless
-                       current_page?(btn[:link]) %>
+                       current_action?(btn[:controller], :new) %>
           <% end %>
         <% end %>
       </li>
       <li class="nav-item dropdown">
-        <% langs = get_languages %>
-        <% cur_locale = I18n.locale %>
-        <% cur_lang = langs[cur_locale] %>
         <%= render "dropdown_button", id: "languages", button_class: "nav-link" do %>
-          <%= tag.i class: "flag-icon flag-icon-#{cur_lang[:icon]}", title: cur_lang[:title] %>
+          <%= tag.i class: "flag-icon flag-icon-#{t 'language.short'}", title: t("language.full") %>
         <% end %>
-        <%= render "dropdown_menu", id: "languages", pos: :left,
+        <%= render "dropdown_menu", id: "languages",
                     menu_class: "navbar-dropdown" do %>
-          <% langs.except(cur_locale).each do |locale, lang| %>
+          <% other_locales.each do |locale| %>
+            <% lang = I18n.backend.translations.dig(locale, :language) %>
             <%= render "dropdown_item", link: url_for(locale:), icon_type: "flag-icon",
-                                        icon: lang[:icon], title: lang[:title] %>
+                                        icon: lang[:short], title: lang[:full] %>
           <% end %>
         <% end %>
       </li>
