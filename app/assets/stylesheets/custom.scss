@@ -159,3 +159,14 @@ label.required:after{
 .carousel-inner .carousel-item-start {
 transform: translateX(0);
 }
+
+/* renewing color */
+
+.text-purple {
+  color: purple !important;
+}
+
+.text-bg-purple {
+  color: #ffffff;
+  background-color: purple !important;
+}

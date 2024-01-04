@@ -6,7 +6,7 @@ class BorrowInfosController < ApplicationController
   before_action :check_cart_empty, only: %i(new)
   before_action :check_user_info, except: %i(index show)
   before_action :set_borrow_info, except: %i(index new create)
-  before_action :correct_account, except: %i(index)
+  before_action :correct_account, except: %i(index new create)
 
   def index
     @q = BorrowInfo.ransack(params[:q])
@@ -43,6 +43,8 @@ class BorrowInfosController < ApplicationController
       cancel_borrow_request
     when "approved"
       update_return_date
+    when "renewing"
+      cancel_borrow_request
     else
       flash[:danger] = t "unknown_status_request"
     end
