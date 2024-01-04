@@ -1,8 +1,8 @@
 class Account < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
   before_save :downcase_email
 
   has_one :user_info, dependent: :nullify, inverse_of: :account
@@ -82,6 +82,12 @@ class Account < ApplicationRecord
 
   def books_from_favorite_authors limit = 6
     fetch_books(:authors, favorite_authors.ids, limit)
+  end
+
+  def activate
+    self.is_active = true
+    self.is_activated = true
+    save!
   end
 
   private
