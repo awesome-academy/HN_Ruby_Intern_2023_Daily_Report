@@ -94,4 +94,7 @@ gem "rails-i18n"
 gem "ransack", github: "activerecord-hackery/ransack"
 gem "sassc-rails"
 gem "select2-rails"
+gem "sidekiq"
 gem "toastr-rails"
+
+gem "whenever"

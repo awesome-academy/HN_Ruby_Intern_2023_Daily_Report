@@ -1,0 +1,40 @@
+<p class="greeting"><%= t "mailer.greeting" %> <b><%= t "users.admin" %></b>,
+  <%= t ".info", from: @from, to: @to %>
+</p>
+<table class="table w-50">
+  <tr>
+    <td><%= t ".new_user" %></td>
+    <td><%= @data[:new_user] %></td>
+  </tr>
+  <tr>
+    <td><%= t ".new_books" %></td>
+    <td>
+      <%= @data[:new_books].length %>
+      <ol>
+        <% @data[:new_books].pluck(:title).each do |title| %>
+          <%= tag.li title %>
+        <% end %>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <td><%= t ".new_borrow" %></td>
+    <td class="fw-bold"><%= @data[:new_borrow] %></td>
+  </tr>
+  <tr>
+    <td class="ps-25"><%= t "borrows.approved" %></td>
+    <td><%= @data[:approved_borrow] %></td>
+  </tr>
+  <tr>
+    <td class="ps-25"><%= t "borrows.rejected" %></td>
+    <td><%= @data[:rejected_borrow] %></td>
+  </tr>
+  <tr>
+    <td><%= t ".returned_borrow" %></td>
+    <td><%= @data[:returned_borrow] %></td>
+  </tr>
+  <tr>
+    <td><%= t ".pending_borrow" %></td>
+    <td class="fw-bold"><%= @data[:pending_borrow] %></td>
+  </tr>
+</table>

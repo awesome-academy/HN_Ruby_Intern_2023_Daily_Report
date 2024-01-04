@@ -4,10 +4,11 @@ class ApplicationRecord < ActiveRecord::Base
   scope :sort_on, ->(col, desc){order Arel.sql("#{col} #{:desc if desc}")}
   scope :newest, ->{order(updated_at: :desc)}
 
-  scope :recently, lambda{|period = :month, attribute = :created_at|
+  scope :recently, lambda{|period = :month, attribute: :created_at,
+                           pivot: Time.zone.today|
     return all if period == :all
 
-    where attribute => Time.zone.today.public_send("all_#{period}")
+    where attribute => pivot.public_send("all_#{period}")
   }
   scope :period_group, lambda{|period = :date, attribute = :created_at|
     group("#{period}(#{attribute})")

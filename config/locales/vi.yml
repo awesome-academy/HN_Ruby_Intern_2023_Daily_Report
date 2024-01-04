@@ -290,3 +290,12 @@ vi:
     borrow_remind: "Nhắc nhở sắp tới hạn trả sách của bạn"
     borrow_returned_overdue: "Bạn bị phạt do trả sách quá hạn"
     account_inactive: "Tài khoản của bạn tạm thời bị khóa bởi Admin"
+  report_mailer:
+    week_report:
+      subject: "Báo cáo hàng tuần từ %{from} - %{to}"
+      info: "Đây là báo cáo hàng tuần (%{from} - %{to}) được gửi tới Administrators của Libma."
+      new_user: "Số lượng người dùng mới"
+      new_borrow: "Yêu cầu mượn sách mới"
+      returned_borrow: "Số lượt trả"
+      pending_borrow: "Yêu cầu cần duyệt"
+      new_books: "Sách mới thêm"

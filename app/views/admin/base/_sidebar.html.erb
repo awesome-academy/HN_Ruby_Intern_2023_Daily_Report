@@ -27,5 +27,6 @@
       <%= render "nav_item", link: admin_genres_path, icon: "tag", title: t("genres._name") %>
       <%= render "nav_item", link: admin_publishers_path, icon: "briefcase", title: t("publishers._name") %>
     <% end %>
+    <%= render "nav_item", link: admin_sidekiq_web_path, icon: "cube", title: t(".background_job"), new_tab: true %>
   </ul>
 </nav>

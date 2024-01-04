@@ -18,3 +18,4 @@ development:
   mail_password: '<password>'
   mail_authentication: 'cram_md5'
   mail_default_url: 'localhost:3000'
+  redis_url: 'redis://localhost:7777'

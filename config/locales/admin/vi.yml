@@ -48,6 +48,7 @@ vi:
     inactive_reason: 'Lý do khóa tài khoản'
     placeholder:
       inactive_reason: 'Phản hồi lý do khóa tài khoản này'
+    admin: 'Admin'
   books:
     _name: 'sách'
     _item: 'cuốn sách'
@@ -193,6 +194,7 @@ vi:
       delete_book_fail_borrowed: 'Xóa sách thất bại do có các yêu cầu mượn chưa trả'
       require_reject_reason: 'Bạn cần xác định lý do từ chối yêu cầu mượn'
       require_lock_reason: 'Bạn cần xác định lý do khóa tài khoản'
+      report_sent: 'Báo cáo hàng tuần đã được gửi vào email của bạn'
     hint:
       search:
         borrows: 'Tìm kiếm theo người mượn: họ tên, email, tên đăng nhập'
@@ -235,6 +237,7 @@ vi:
         borrow_requests: 'Yêu cầu mượn sách'
         users: 'Quản lý người dùng'
         library: 'Quản lý thư viện'
+        background_job: 'Tác vụ chạy nền'
       dropdown_menu:
         account_settings: 'Thiết lập tài khoản'
         change_password: 'Đổi mật khẩu'

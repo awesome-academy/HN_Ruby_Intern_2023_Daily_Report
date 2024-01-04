@@ -39,6 +39,7 @@ class Account < ApplicationRecord
   scope :exclude, ->(account){where.not(id: account.id)}
   scope :includes_info, ->{includes(:user_info).with_attached_avatar}
   scope :only_activated, ->{where(is_activated: true)}
+  scope :only_admin, ->{where(is_admin: true)}
   scope :bquery, lambda {|q|
     where("accounts.username LIKE ?", "%#{q}%")
       .or(where("accounts.email LIKE ?", "%#{q}%"))

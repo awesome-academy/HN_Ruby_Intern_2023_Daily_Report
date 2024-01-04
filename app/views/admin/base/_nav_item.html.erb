@@ -1,5 +1,5 @@
 <li class="nav-item menu-items">
-  <%= link_to link, class: "nav-link" do %>
+  <%= link_to link, class: "nav-link", target: ("_blank" if defined?(new_tab) && new_tab) do %>
     <span class="menu-icon">
       <i class="mdi mdi-<%= icon %>"></i>
     </span>
