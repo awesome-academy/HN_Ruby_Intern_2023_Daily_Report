@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :publisher do
-    name { "John" }
-    email { "john@example.com" }
-    address { "123 Street" }
-    about { "About John" }
+    sequence(:name, "aaa"){|n| "#{Faker::Book.publisher}-#{n}"}
+    address{Faker::Address.full_address}
+    about{Faker::Lorem.paragraph}
   end
 end
