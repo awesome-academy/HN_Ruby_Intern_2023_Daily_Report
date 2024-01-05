@@ -15,11 +15,13 @@ module Admin::BaseHelper
   end
 
   def time_ago date, suffix: false
+    return unless date
+
     time_ago = format_time_ago time_ago_in_words(date)
-    "#{time_ago}#{" #{t('datetime.ago')}" if suffix}" if date
+    "#{time_ago}#{" #{t('datetime.ago')}" if suffix}"
   end
 
-  def localize_date datetime, format = :short, date: true
+  def localize_date datetime, format = :long, date: true
     return unless datetime
 
     datetime = datetime.to_date if date

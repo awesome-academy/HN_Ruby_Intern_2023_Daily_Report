@@ -9,21 +9,26 @@
   <%= render "box", title: "# #{t 'publishers._name'}", collection: Publisher%>
 </div>
 <div class="row" id="stat-book-trending">
-  <%= render "bar", title: t(".book_trending") do %>
-    <% trending_book_all_time.each do |book, period| %>
-      <div class="owl-item d-flex flex-column">
-        <div class="stat-bar-trophy">
-          <%= tag.i class: "mdi mdi-trophy-award text-primary",
+  <% trending_books = trending_book_all_time %>
+  <% if trending_books.empty? %>
+    <%= tag.span t(".no_trending_books"), class: "fs-5 fw-bold" %>
+  <% else %>
+    <%= render "bar", title: t(".book_trending") do %>
+      <% trending_books.each do |book, period| %>
+        <div class="owl-item d-flex flex-column">
+          <div class="stat-bar-trophy">
+            <%= tag.i class: "mdi mdi-trophy-award text-primary",
                           title: "#{t ".best_of_week"}: #{pluralize(period[:week], t('borrows.times'))}" if period.key? :week %>
-          <%= tag.i class: "mdi mdi-trophy-award text-warning",
+            <%= tag.i class: "mdi mdi-trophy-award text-warning",
                           title: "#{t ".best_of_month"}: #{pluralize(period[:month], t('borrows.times'))}" if period.key? :month %>
-          <%= tag.i class: "mdi mdi-trophy-award text-danger",
+            <%= tag.i class: "mdi mdi-trophy-award text-danger",
                           title: "#{t ".best_of_year"}: #{pluralize(period[:year], t('borrows.times'))}" if period.key? :year %>
+          </div>
+          <%= link_to admin_book_path(book), title: book.title, class: "item h-100" do %>
+            <%= image_tag get_image(book, :image), class: "h-100" %>
+          <% end %>
         </div>
-        <%= link_to admin_book_path(book), title: book.title, class: "item h-100" do %>
-          <%= image_tag get_image(book, :image), class: "h-100" %>
-        <% end %>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

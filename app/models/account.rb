@@ -40,14 +40,13 @@ class Account < ApplicationRecord
   scope :includes_info, ->{includes(:user_info).with_attached_avatar}
   scope :only_activated, ->{where(is_activated: true)}
   scope :only_admin, ->{where(is_admin: true)}
+  scope :not_admin, ->{where(is_admin: false)}
   scope :bquery, lambda {|q|
     where("accounts.username LIKE ?", "%#{q}%")
       .or(where("accounts.email LIKE ?", "%#{q}%"))
       .references(:user_info)
       .or(UserInfo.bquery(q))
   }
-
-  after_update :after_change_status, if: :saved_change_to_is_active?
 
   def follow author
     favorite_authors << author
@@ -73,6 +72,16 @@ class Account < ApplicationRecord
     Notification.create status:, content:, link:, account_id: id
   end
 
+  def send_inactive_email reason
+    UserMailer.with(user: self, reason:).notify_inactive.deliver_later
+  end
+
+  def change_is_active_to is_active
+    return if self.is_active == is_active
+
+    update_attribute :is_active, is_active
+  end
+
   def books_with_same_genre limit = 6
     return [] if borrow_requests.blank?
 
@@ -91,12 +100,6 @@ class Account < ApplicationRecord
   end
 
   private
-
-  def after_change_status
-    return if is_active
-
-    notification_for_me :notice, "notifications.account_inactive"
-  end
 
   def fetch_books association, ids, limit
     Book.with_image_and_authors

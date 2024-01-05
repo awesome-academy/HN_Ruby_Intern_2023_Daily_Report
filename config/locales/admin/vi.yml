@@ -83,6 +83,7 @@ vi:
     name: 'Họ tên'
     phone: 'SĐT'
     email: 'Email'
+    about: 'Thông tin'
     placeholder:
       avatar: 'Ảnh bìa'
       name: 'Họ tên đầy đủ'
@@ -105,6 +106,7 @@ vi:
     name: 'Tên'
     email: 'Email'
     address: 'Địa chỉ'
+    about: 'Thông tin'
     placeholder:
       name: 'Tên nhà xuất bản'
       about: 'Giới thiệu chung về nhà xuất bản'
@@ -126,6 +128,7 @@ vi:
     renew_rejected: 'không được gia hạn'
     return: 'Trả sách'
     returned: 'đã trả'
+    canceled: 'đã hủy'
     reject_reason: 'Lý do từ chối'
     history: 'Lịch sử mượn'
     start_at: 'Ngày mượn'
@@ -168,6 +171,7 @@ vi:
       by_week: 'Theo tuần'
       by_all: 'Từ trước đến nay'
       notifications: 'Thông báo'
+      filter: 'Lọc theo %{type}'
     notif:
       require_admin: 'Bạn cần đăng nhập dưới tài khoản admin để tiếp tục'
       user_info_not_found: 'Tài khoản chưa có thông tin'
@@ -180,10 +184,12 @@ vi:
       approve_borrow_success: 'Đã chấp nhận yêu cầu mượn'
       reject_borrow_success: 'Đã từ chối yêu cầu mượn'
       return_borrow_success: 'Đã ghi nhận phiếu mượn được trả'
-      approve_borrow_error: 'Có lỗi xảy ra khi chấp nhận yêu cầu mượn'
-      reject_borrow_error: 'Có lỗi xảy ra khi từ chối yêu cầu mượn'
+      approve_borrow_error: 'Có lỗi xảy ra khi chấp nhận yêu cầu mượn. Do trạng thái phiếu mượn đã thay đổi hoặc có sách không thể mượn'
+      reject_borrow_error: 'Có lỗi xảy ra khi từ chối yêu cầu mượn. Do trạng thái phiếu mượn đã thay đổi hoặc có sách không thể mượn'
       return_borrow_error: 'Có lỗi xảy ra khi trả phiếu mượn'
-      update_user_status_success_html: 'Trạng thái tài khoản được cập nhật thành <b>%{status}</b>'
+      active_user_success: 'Kích hoạt tài khoản thành công'
+      inactive_user_success: 'Khóa tài khoản thành công'
+      update_user_status_error: 'Có lỗi xảy ra khi cập nhật trạng thái cho tài khoản'
       create_success: 'Tạo %{name} thành công'
       update_success: 'Cập nhật %{name} thành công'
       delete_success: 'Xóa %{name} thành công'
@@ -225,6 +231,7 @@ vi:
         remind_confirm: 'Bạn có muốn gửi email nhắc nhở tới người dùng này?'
         approve_confirm: 'Bạn chấp thuận với yêu cầu mượn này?'
         return_confirm: 'Bạn xác nhận người dùng này đã trả đủ sách?'
+        overdue_confirm: 'Phiếu mượn này quá hạn %{exceed} ngày, với số tiền phạt là %{penalty}. Bạn xác nhận người mượn đã trả đủ sách và nộp đủ tiền phạt?'
     shared:
       form_button:
         update: 'Sửa'
@@ -255,6 +262,7 @@ vi:
       index:
         title: 'Trang chủ'
         book_trending: 'Sách nổi bật'
+        no_trending_books: 'Không có sách nổi bật'
         stat_book_genre: 'Số lượng sách theo thể loại'
         stat_book_publisher: 'Số lượng sách theo nhà xuất bản'
         stat_book_author: 'Số lượng sách theo tác giả'

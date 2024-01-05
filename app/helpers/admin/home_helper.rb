@@ -69,6 +69,7 @@ module Admin::HomeHelper
 
   def group_by_period collection, period: :month
     group_by_map = {
+      week: :date,
       month: :date,
       year: :week,
       all: :quarter

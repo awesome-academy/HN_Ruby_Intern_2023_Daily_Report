@@ -8,13 +8,21 @@
     <%= render_table_header t("accounts._name"), :account %>
     <%= render_table_header t("users.full_name"), :user %>
     <%= render_table_header t("borrows.start_at"), :start %>
-    <%= render_table_header t("borrows.finish"), :updated if @group == :history %>
+    <%= render_table_header t("borrows.finish"), :done if @group == :history %>
     <%= render_table_header t("borrows.end_at"), :due unless @group == :history %>
     <%= render_table_header t("borrows.renewals"), :turns %>
     <%= render_table_header t("borrows.type"), :type unless @group == :history %>
     <%= render_table_header t("borrows.status"), :type if @group == :history %>
     <%= tag.th unless @group == :history %>
   </tr>
+<% end %>
+<% content_for :table_utils do %>
+  <%= form_with url: url_for, method: :get, class: "d-flex flex-row col-lg-4 ms-auto align-items-baseline mb-2" do |f| %>
+    <%= f.label :type, t("admin.misc.filter", type: t("borrows.type")), class: "me-2 text-nowrap" %>
+    <%= f.select :type, get_status_filter_for_group(@group),
+                        {selected: params[:type] || :all, prompt: true},
+                        class: "form-control submit-on-change text-white" %>
+  <% end %>
 <% end %>
 <% content_for :table_body, render(partial: "borrow", collection: @borrows) %>
 <% content_for :table_empty, name: :borrows %>

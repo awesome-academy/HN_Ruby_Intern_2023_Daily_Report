@@ -13,7 +13,9 @@ $(function () {
     if (icon in alias) {
       icon = alias[icon];
     }
-    if (text.length > 0) {
+    // Use input to take advantage of remember form values -> prevent reshow toast on back
+    let shown_checker = $('#application-notify input');
+    if (text.length > 0 && shown_checker.val()) {
       $.toast({
         heading,
         text,
@@ -23,6 +25,7 @@ $(function () {
         hideAfter: 5000,
         loaderBg: BG_COLOR[icon],
       });
+      shown_checker.val('');
     }
   };
 });

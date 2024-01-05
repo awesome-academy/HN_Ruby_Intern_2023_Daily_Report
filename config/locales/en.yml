@@ -172,6 +172,8 @@ en:
   canceled_date: "Canceled date"
   reject_reason: "Reject reason"
   actual_return_date: "Actual return date"
+  penalty: "Penalty"
+  exceed: "Date exceed"
   return_date_greater_than_borrow_date: "must greater than borrow date"
   renewal_date_greater_than_return_date: "must greater than the previous return date"
   renewal_date_maximum_10_days: "maximum is 10 days from the previous return date"

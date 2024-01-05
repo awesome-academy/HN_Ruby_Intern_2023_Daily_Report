@@ -30,6 +30,7 @@ class BorrowInfo < ApplicationRecord
   scope :borrowing, ->{approved.or(BorrowInfo.rejected.where(done_at: nil))}
   scope :for_account, ->(account_id){where(account_id:)}
   scope :desc_order, ->{order(updated_at: :desc)}
+  scope :group_status, ->(status){where(status:) if status != "all"}
 
   def start_at_validation
     return if start_at && start_at >= Date.current
@@ -62,7 +63,7 @@ class BorrowInfo < ApplicationRecord
   end
 
   def overdue?
-    returned? && updated_at > end_at
+    (done_at || Time.zone.today) > end_at
   end
 
   def out_of_turns?
@@ -70,12 +71,43 @@ class BorrowInfo < ApplicationRecord
   end
 
   def out_of_renew_date?
-    Time.zone.today > end_at + Settings.digit_10
+    Time.zone.today > end_at
+  end
+
+  def return_exceed
+    final = done_at&.to_date || Time.zone.today
+    (final - end_at.to_date).to_i
   end
 
   def penalty
-    exceed = (updated_at.to_date - end_at.to_date).to_i
-    overdue? ? I18n.t("penalty_per_overdue") * exceed : 0
+    overdue? ? I18n.t("penalty_per_overdue") * return_exceed : 0
+  end
+
+  def perform_action action, *args
+    transaction do
+      send action, *args
+    end
+  rescue ActiveRecord::RecordInvalid
+    reload
+    false
+  end
+
+  def self.ransackable_attributes _auth_object = nil
+    %w(status id start_at end_at turns)
+  end
+
+  private
+
+  def add_to_book_borrowed_count value
+    transaction do
+      update_books = books.map do |b|
+        [b.id, {
+          id: b.id,
+          borrowed_count: b.borrowed_count + value
+        }]
+      end.to_h
+      Book.update! update_books.keys, update_books.values
+    end
   end
 
   def approve
@@ -119,26 +151,16 @@ class BorrowInfo < ApplicationRecord
     save!
   end
 
-  def perform_action action, *args
-    transaction do
-      send action, *args
-    end
-    true
-  rescue ActiveRecord::RecordInvalid
-    reload
-    false
-  end
+  def cancel
+    return unless %w(pending renewing).include? status
 
-  def self.ransackable_attributes _auth_object = nil
-    %w(status id start_at end_at turns)
-  end
-
-  def add_to_book_borrowed_count value
-    transaction do
-      books.each do |book|
-        book.borrowed_count += value
-        book.save!
-      end
+    if pending?
+      self.status = :canceled
+      self.done_at = Time.zone.now
+    else
+      self.renewal_at = nil
+      self.status = :approved
     end
+    save!
   end
 end

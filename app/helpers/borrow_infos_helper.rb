@@ -68,15 +68,27 @@ module BorrowInfosHelper
     content_tag(:div, class: "alert alert-dark") do
       concat(content_tag(:span, "#{t('canceled_date')}: ",
                          class: "fw-semibold"))
-      concat(content_tag(:span, @borrow_info.updated_at.to_date))
+      concat(content_tag(:span, @borrow_info.done_at.to_date))
     end
   end
 
   def returned_content
-    content_tag(:div, class: "alert alert-warning") do
-      concat(content_tag(:span, "#{t('actual_return_date')}: ",
-                         class: "fw-semibold"))
-      concat(content_tag(:span, @borrow_info.updated_at.to_date))
+    content_tag(:div) do
+      concat(content_tag(:div, class: "alert alert-warning") do
+               concat(content_tag(:span, "#{t('actual_return_date')}: ",
+                                  class: "fw-semibold"))
+               concat(content_tag(:span, @borrow_info.done_at.to_date))
+             end)
+      concat(penalty_content) if @borrow_info.overdue?
+    end
+  end
+
+  def penalty_content
+    content_tag(:div, class: "alert alert-danger fw-bold") do
+      concat(content_tag(:span, "#{t('penalty')}: "))
+      concat(content_tag(:span, number_to_currency(@borrow_info.penalty)))
+      concat(content_tag(:span, " (#{t('exceed')}: "))
+      concat(content_tag(:span, "#{@borrow_info.return_exceed})"))
     end
   end
 
