@@ -1,0 +1,26 @@
+<% provide :title, t(".change_your_password") %>
+
+<div class="mx-auto auth-form">
+  <h1><%= t ".change_your_password" %></h1>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="mb-3">
+      <%= f.label :password, t(".new_password"), class: "form-label required" %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
+      <%= render "shared/error_messages", resource:, field: :password %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password_confirmation, t(".confirm_new_password"), class: "form-label required" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      <%= render "shared/error_messages", resource:, field: :password_confirmation %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.submit t(".change_my_password"), class: "btn btn-primary form-control" %>
+    </div>
+  <% end %>
+
+  <%= render "accounts/shared/links" %>
+</div>

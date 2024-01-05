@@ -1,6 +1,40 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
+  scope "(:locale)", locale: /en|vi/ do
+    root "home#index"
+    devise_for :accounts, controllers: {
+      sessions: "accounts/sessions",
+      registrations: "accounts/registrations",
+      confirmations: "accounts/confirmations"
+    }
+    resources :accounts, only: %i(show edit update)
+
+    resources :books, only: %i(index show), path: "library" do
+      resources :book_comments, path: "comments"
+    end
+    resources :authors, only: %i(show)
+
+    resource :carts, only: %i(show destroy)
+    resources :borrow_items, only: %i(create destroy)
+    resources :borrow_infos, only: %i(index show new create) do
+      member do
+        get "download", to: "borrow_infos#download"
+        get "preview", to: "borrow_infos#preview"
+        post "status_action", to: "borrow_infos#handle_status_action"
+        patch "status_action", to: "borrow_infos#handle_status_action"
+      end
+    end
+
+    resources :author_followers, only: %i(create destroy)
+
+    resources :notifications, only: %i(index update) do
+      collection do
+        post "read_all", to: "notifications#read_all"
+      end
+    end
+  end
+
   namespace :admin do
     scope "(:locale)", locale: /en|vi/ do
       root "home#index"
@@ -12,7 +46,7 @@ Rails.application.routes.draw do
 
       devise_for :accounts, path: "", controllers: {
         sessions: "admin/sessions"
-      }, skip: :registrations
+      }, skip: [:registrations]
 
       resources :authors, :genres, :publishers
       resources :books do
@@ -41,39 +75,6 @@ Rails.application.routes.draw do
         collection do
           post "read_all", to: "notifications#read_all"
         end
-      end
-    end
-  end
-
-  scope "(:locale)", locale: /en|vi/ do
-    root "home#index"
-    devise_for :accounts, controllers: {
-      sessions: "accounts/sessions",
-      registrations: "accounts/registrations"
-    }
-    resources :accounts, only: %i(show edit update)
-
-    resources :books, only: %i(index show), path: "library" do
-      resources :book_comments, path: "comments"
-    end
-    resources :authors, only: %i(show)
-
-    resource :carts, only: %i(show destroy)
-    resources :borrow_items, only: %i(create destroy)
-    resources :borrow_infos, only: %i(index show new create) do
-      member do
-        get "download", to: "borrow_infos#download"
-        get "preview", to: "borrow_infos#preview"
-        post "status_action", to: "borrow_infos#handle_status_action"
-        patch "status_action", to: "borrow_infos#handle_status_action"
-      end
-    end
-
-    resources :author_followers, only: %i(create destroy)
-
-    resources :notifications, only: %i(index update) do
-      collection do
-        post "read_all", to: "notifications#read_all"
       end
     end
   end

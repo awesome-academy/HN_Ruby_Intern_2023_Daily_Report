@@ -14,6 +14,10 @@ en:
   home_intro: "This is the home page for the LIBMA - Library management application."
   search: "Search books by title, ISBN code, author name, ..."
   sign_up: "Sign up"
+  forgot_password: "Forgot your password?"
+  no_confirmation_instructions: "Didn't receive confirmation instructions?"
+  no_unlock_instructions: "Didn't receive unlock instructions?"
+  sign_in_with: "Sign in with"
   create_account: "Create my account"
   account_not_found: "Account not found!"
   account_create_success: "Welcome! Please fill in your information to borrow books"
@@ -104,6 +108,28 @@ en:
         forgot_password: "Forgot your password?"
         new_user: "New user?"
         sign_up_now: "Sign up now!"
+    passwords:
+      new:
+        send_reset_password: "Send me reset password instructions"
+      edit:
+        change_your_password: "Change your password"
+        new_password: "New password"
+        confirm_new_password: "Confirm new password"
+        change_my_password: "Change my password"
+    mailer:
+      reset_password_instructions:
+        hello: "Hello"
+        text1: "Someone has requested a link to change your password. You can do this through the link below."
+        change_password: "Change my password"
+        text2: "If you didn't request this, please ignore this email."
+        text3: "Your password won't change until you access the link above and create a new one."
+      confirmation_instructions:
+        welcome: "Welcome"
+        text1: "You can confirm your account email through the link below:"
+        confirm_my_account: "Confirm my account"
+    confirmations:
+      new:
+        resend_confirmation: "Resend confirmation instructions"
   change: "Change"
   male: "Male"
   female: "Female"

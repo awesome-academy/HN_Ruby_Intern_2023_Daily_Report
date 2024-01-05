@@ -27,5 +27,6 @@
       <%= f.submit t("log_in"), class: "btn btn-primary form-control" %>
     </div>
   <% end %>
-  <p><%= t ".new_user" %> <%= link_to t(".sign_up_now"), new_account_registration_path %></p>
+  <p class="m-0"><%= t ".new_user" %> <%= link_to t(".sign_up_now"), new_account_registration_path %></p>
+  <%= link_to t("no_confirmation_instructions"), new_confirmation_path(resource_name) %>
 </div>

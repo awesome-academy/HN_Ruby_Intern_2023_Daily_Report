@@ -14,6 +14,10 @@ vi:
   home_intro: "Đây là trang chủ của LIBMA - trang web quản lý sách thư viện."
   search: "Tìm kiếm sách theo tiêu đề, mã ISBN, tên tác giả, ..."
   sign_up: "Đăng Ký"
+  forgot_password: "Quên mật khẩu?"
+  no_confirmation_instructions: "Chưa nhận được email xác nhận tài khoản?"
+  no_unlock_instructions: "Chưa nhận được email mở khóa tài khoản?"
+  sign_in_with: "Đăng nhập với"
   create_account: "Tạo tài khoản"
   account_not_found: "Không tìm thấy tài khoản!"
   account_create_success: "Đăng ký thành công! Vui lòng điền thông tin cá nhân của bạn để có thể mượn sách"
@@ -104,6 +108,28 @@ vi:
         forgot_password: "Quên mật khẩu?"
         new_user: "Người dùng mới?"
         sign_up_now: "Đăng ký ngay!"
+    passwords:
+      new:
+        send_reset_password: "Gửi yêu cầu đặt lại mật khẩu"
+      edit:
+        change_your_password: "Đổi mật khẩu của bạn"
+        new_password: "Mật khẩu mới"
+        confirm_new_password: "Nhập lại mật khẩu mới"
+        change_my_password: "Đổi mật khẩu"
+    mailer:
+      reset_password_instructions:
+        hello: "Xin chào"
+        text1: "Ai đó đã yêu cầu thay đổi mật khẩu của bạn. Vui lòng bấm đường dẫn phía dưới để thực hiện."
+        change_password: "Đổi mật khẩu"
+        text2: "Nếu bạn không phải người yêu cầu đổi mật khẩu, xin vui lòng bỏ qua email này."
+        text3: "Mật khẩu của bạn sẽ không đổi trừ khi bạn bấm vào đường dẫn phía dưới và thay đổi nó."
+      confirmation_instructions:
+        welcome: "Xin chào"
+        text1: "Xác nhận email của bạn qua đường dẫn phía dưới:"
+        confirm_my_account: "Xác nhận email"
+    confirmations:
+      new:
+        resend_confirmation: "Gửi lại email xác nhận"
   change: "Thay đổi"
   male: "Nam"
   female: "Nữ"
