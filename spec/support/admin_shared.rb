@@ -43,7 +43,6 @@ RSpec.shared_examples "check errors" do |assign_key, name, *keys|
   end
 end
 
-
 RSpec.shared_examples "CRUD" do |name|
   let(name){create(name)}
   let("#{name}_params"){attributes_for(name)}

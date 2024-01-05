@@ -6,7 +6,9 @@ class Admin::NotificationsController < Admin::BaseController
   end
 
   def read_all
-    Notification.unchecked.in_batches.update_all(checked: true)
+    Notification.for_me(@current_account)
+                .unchecked.in_batches
+                .update_all(checked: true)
   end
 
   def update
