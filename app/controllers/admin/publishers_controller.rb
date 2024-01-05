@@ -15,7 +15,7 @@ class Admin::PublishersController < Admin::BaseController
   end
 
   def show
-    @tab_id = :publisher
+    @tab_id = :publisher_books
     @pagy, @books = pagy @publisher.books.newest.with_attached_image
     render "admin/shared/tab_books"
   end
