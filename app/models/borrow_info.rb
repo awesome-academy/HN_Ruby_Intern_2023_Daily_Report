@@ -101,6 +101,8 @@ class BorrowInfo < ApplicationRecord
   def add_to_book_borrowed_count value
     transaction do
       update_books = books.map do |b|
+        raise ActiveRecord::Rollback unless b.is_active
+
         [b.id, {
           id: b.id,
           borrowed_count: b.borrowed_count + value
@@ -118,7 +120,7 @@ class BorrowInfo < ApplicationRecord
       self.renewal_at = nil
       self.turns += 1
     else
-      add_to_book_borrowed_count(1)
+      return unless add_to_book_borrowed_count(1)
     end
     self.status = :approved
     save!
@@ -138,7 +140,8 @@ class BorrowInfo < ApplicationRecord
     return if done_at
 
     self.done_at = Time.zone.now
-    add_to_book_borrowed_count(-1)
+    return unless add_to_book_borrowed_count(-1)
+
     self.status = :returned
     save!
   end
