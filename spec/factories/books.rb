@@ -15,8 +15,12 @@ FactoryBot.define do
       end
     end
 
-    factory :borrowed_book do
-      borrowed_count {2}
+    trait :borrowable_book do
+      borrowed_count{1}
+    end
+
+    trait :non_borrowable_book do
+      borrowed_count{amount}
     end
   end
 end

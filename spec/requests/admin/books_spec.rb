@@ -251,7 +251,7 @@ RSpec.describe Admin::BooksController, :admin, type: :controller do
 
   describe "DELETE #destroy" do
     context "when the book has some copies borrowed" do
-      let(:book) {create(:borrowed_book)}
+      let(:book) {create(:book, :borrowable_book)}
       before do
         delete :destroy, params: {id: book.id, format: :turbo_stream}
       end

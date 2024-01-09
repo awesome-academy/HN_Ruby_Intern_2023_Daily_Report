@@ -63,7 +63,6 @@ class Admin::BorrowsController < Admin::BaseController
     result = @borrow.perform_action(action) ? :success : :error
 
     notify_result_to_user(action) if result == :success
-
     flash[result] = t "admin.notif.#{action}_borrow_#{result}"
     redirect_back_or_to admin_borrows_path(group:)
   end
@@ -71,6 +70,7 @@ class Admin::BorrowsController < Admin::BaseController
   def notify_result_to_user action
     link = borrow_info_path @borrow
     account = @borrow.account
+
     if %i(approve reject).include? action
       BorrowMailer.with(borrow: @borrow).notify_result.deliver_later
       account&.notification_for_me :info,

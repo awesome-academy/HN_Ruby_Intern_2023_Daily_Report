@@ -101,14 +101,16 @@ RSpec.describe BorrowInfosController, type: :controller do
     end
 
     context "when status is match the case pending" do
-      before { post :handle_status_action,  params: { id: borrow_info1.id, status: "pending" } }
+      let(:borrow_info){create(:borrow_info, :pending)}
+      before { post :handle_status_action,  params: { id: borrow_info.id, status: "pending" } }
 
       it_behaves_like "displays flash message", :success, "cancel_request_successfully"
     end
 
     context "when status is match the case approved" do
+      let(:borrow_info){create(:borrow_info, :approved)}
       before do
-        patch :handle_status_action, params: { id: borrow_info1.id, status: "approved", borrow_info: { renewal_at: Date.current + 15 } }
+        patch :handle_status_action, params: { id: borrow_info.id, status: "approved", borrow_info: { renewal_at: borrow_info.end_at + 15 } }
       end
 
       context "when renew request is false" do
@@ -123,13 +125,15 @@ RSpec.describe BorrowInfosController, type: :controller do
     end
 
     context "when status is match the case renewing" do
-      before { post :handle_status_action,  params: { id: borrow_info1.id, status: "renewing" } }
+      let(:borrow_info){create(:borrow_info, :renewing)}
+      before { post :handle_status_action,  params: { id: borrow_info.id, status: "renewing" } }
 
       it_behaves_like "displays flash message", :success, "cancel_request_successfully"
     end
 
     context "when status is not match the case" do
-      before { post :handle_status_action,  params: { id: borrow_info1.id, status: "" } }
+      let(:borrow_info){create(:borrow_info)}
+      before { post :handle_status_action,  params: { id: borrow_info.id, status: "" } }
 
       it_behaves_like "displays flash message", :danger, "unknown_status_request"
     end

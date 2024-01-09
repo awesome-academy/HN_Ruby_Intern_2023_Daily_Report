@@ -86,7 +86,7 @@ class BorrowInfosController < ApplicationController
 
   def cancel_borrow_request
     if @borrow_info.perform_action :cancel
-      flash[:success] = t "cancel_request_successfully"
+      flash.now[:success] = t "cancel_request_successfully"
       redirect_to @borrow_info
     else
       flash[:danger] = t "cancel_request_failed"
@@ -96,7 +96,7 @@ class BorrowInfosController < ApplicationController
 
   def update_return_date
     if @borrow_info.perform_action :renew, borrow_info_params[:renewal_at]
-      flash[:success] = t "renew_request_successfully"
+      flash.now[:success] = t "renew_request_successfully"
       redirect_to @borrow_info
     else
       render :show, status: :bad_request
