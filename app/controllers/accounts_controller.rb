@@ -22,7 +22,7 @@ class AccountsController < ApplicationController
 
   def update
     if @account.update_with_password(account_params)
-      sign_in(@account, bypass: true)
+      bypass_sign_in @account
       flash[:success] = t "update_success"
       redirect_to @account
     else
