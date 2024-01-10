@@ -20,7 +20,7 @@ class NotificationsController < ApplicationController
     @notification.update checked: true
 
     if @notification.link
-      redirect_to(@notification.link)
+      redirect_to(@notification.link, allow_other_host: true)
     else
       redirect_back(fallback_location: root_path)
     end
