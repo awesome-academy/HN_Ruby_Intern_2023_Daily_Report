@@ -8,7 +8,7 @@ RSpec.describe UserInfo, type: :model do
 
     context "when a match is found" do
       it "returns user_infos that match the name query" do
-        expect(UserInfo.bquery("John")).to include(user_info1)
+        expect(UserInfo.bquery("Gilberto Bernhard")).to include(user_info1)
       end
 
       it "returns user_infos that match the phone query" do
