@@ -21,6 +21,6 @@ RSpec.describe AuthorsController, type: :controller do
       it "redirect root page" do
         expect(response).to redirect_to root_path
       end
-      end
     end
+  end
 end
