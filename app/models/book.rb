@@ -10,7 +10,7 @@ class Book < ApplicationRecord
   has_many :borrowings, class_name: BorrowItem.name,
                         dependent: :destroy
   has_many :borrow_requests, through: :borrowings,
-                             source: :request
+                             source: :borrow_info
   has_many :rates, class_name: BookRate.name,
                    dependent: :destroy
   has_many :raters, through: :rates
