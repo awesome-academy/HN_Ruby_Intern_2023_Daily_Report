@@ -44,10 +44,8 @@ class BookCommentsController < ApplicationController
   end
 
   def handle_comment_error
-    flash.now[:alert] = if @comment.errors.present?
-                          @comment.errors.full_messages.join(", ")
-                        else
-                          t("comment_failed")
-                        end
+    return if @comment.errors.blank?
+
+    flash.now[:alert] = @comment.errors.full_messages.join(", ")
   end
 end
