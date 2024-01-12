@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe Publisher, type: :model do
   describe ".bquery" do
-    let(:publisher1) { create(:publisher) }
-    let(:publisher2) { create(:publisher, name: "Jane", email: "jane@example.com", address: "456 Street", about: "About Jane") }
+    let(:publisher1) { create(:publisher, name: "John", email: "john@example.com", address: "456 Street") }
+    let(:publisher2) { create(:publisher, address: "456 Street", about: "About Jane") }
 
     context "when a match is found" do
       it "returns publishers that match the name query" do
@@ -15,7 +15,7 @@ RSpec.describe Publisher, type: :model do
       end
 
       it "returns publishers that match the address query" do
-        expect(Publisher.bquery("456 Street")).to include(publisher2)
+        expect(Publisher.bquery("456 Street")).to include(publisher2, publisher1)
       end
 
       it "returns publishers that match the about query" do

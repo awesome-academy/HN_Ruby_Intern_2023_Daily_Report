@@ -34,7 +34,7 @@ class Admin::BooksController < Admin::BaseController
   end
 
   def update
-    return redirect_to amend_admin_book_path(@book) if params.key? :skip
+    return redirect_to amend_admin_book_path(@book) if params[:skip].present?
 
     admin_update @book, book_params, :book,
                  success_to: :amend_admin_book_path
@@ -43,15 +43,18 @@ class Admin::BooksController < Admin::BaseController
   def amend_edit; end
 
   def amend
-    return redirect_to admin_book_path(@book) if params.key? :skip
+    return redirect_to admin_book_path(@book) if params[:skip].present?
 
-    update_book
+    p = relation_params
+    ret = @book.update_relation p[:publisher],
+                                p[:authors],
+                                p[:genres]
 
-    if @book.errors.any?
-      respond_to_form_fail @book
-    else
+    if ret
       flash[:success] = t "admin.notif.update_success", name: t("books._name")
       redirect_to [:admin, @book]
+    else
+      respond_to_form_fail @book
     end
   end
 
@@ -60,7 +63,7 @@ class Admin::BooksController < Admin::BaseController
       flash.now[:error] = t "admin.notif.delete_book_fail_borrowed"
       return application_notify
     end
-    destroy_method = @book.update is_active: false
+    destroy_method = @book.delete_temporarily
     admin_destroy @book, :book, destroy_method:
   end
 
@@ -73,25 +76,13 @@ class Admin::BooksController < Admin::BaseController
     redirect_to admin_books_path
   end
 
-  def update_book
-    publisher_id = params.dig(:book, :publisher)
-    author_ids = params.dig(:book, :authors)
-    genre_ids = params.dig(:book, :genres)
-
-    @book.transaction do
-      @book.update(publisher_id:) if publisher_id
-      @book.update_relation_with_ids(:author, author_ids) if author_ids
-      @book.update_relation_with_ids(:genre, genre_ids) if genre_ids
-    end
-  end
-
   def book_params
     params.require(:book).permit :title, :description, :amount,
                                  :isbn, :publish_date, :image
   end
 
   def relation_params
-    params.require(:book).permit :publisher, :authors, :genres
+    params.require(:book).permit :publisher, authors: [], genres: []
   end
 
   def transform_params

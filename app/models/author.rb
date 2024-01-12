@@ -1,6 +1,5 @@
 class Author < ApplicationRecord
   before_save :downcase_email
-  before_validation :format_phone
 
   has_many :book_authors, dependent: :destroy
   has_many :books, through: :book_authors
@@ -34,11 +33,5 @@ class Author < ApplicationRecord
 
   def self.ransackable_attributes _auth_object = nil
     %w(name)
-  end
-
-  private
-
-  def format_phone
-    phone.gsub!(/[ .-]/, "")
   end
 end

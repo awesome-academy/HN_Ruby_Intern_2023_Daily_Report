@@ -71,12 +71,6 @@ class Book < ApplicationRecord
 
   ransack_alias :title, :title_or_description_or_isbn_or_authors_name_or_publisher_name_or_genres_name # rubocop:disable Layout/LineLength
 
-  def update_relation_with_ids name, ids
-    attribute = send "book_#{name}s"
-    attribute.clear
-    attribute.create(ids.map{|id| {"#{name}_id": id}})
-  end
-
   def remain
     amount - borrowed_count
   end
@@ -103,10 +97,35 @@ class Book < ApplicationRecord
     end
   end
 
+  def update_relation publisher_id, author_ids, genre_ids
+    transaction do
+      update(publisher_id:) if publisher_id
+      update_relation_with_ids(:author, author_ids) if author_ids
+      update_relation_with_ids(:genre, genre_ids) if genre_ids
+    end
+    true
+  rescue ActiveRecord::RecordInvalid => e
+    errors.merge! e.record.errors
+    reload
+    false
+  end
+
+  def delete_temporarily
+    return false unless is_active
+
+    update is_active: false
+  end
+
   private
 
   def borrowed_count_below_amount
     errors.add :borrowed_count, I18n.t("validations.not_borrowable") if
       borrowed_count.negative? || (amount && amount < borrowed_count)
+  end
+
+  def update_relation_with_ids name, ids
+    attribute = send "book_#{name}s"
+    attribute.clear
+    attribute.create!(ids.map{|id| {"#{name}_id": id}})
   end
 end
