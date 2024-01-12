@@ -49,6 +49,8 @@ Account.not_admin.each do |ac|
   )
 end
 
+Account.all.update_all confirmed_at: Time.zone.now
+
 # Publisher
 15.times do |n|
   name = Faker::Book.unique.publisher

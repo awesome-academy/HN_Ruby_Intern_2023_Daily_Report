@@ -55,7 +55,7 @@ class Book < ApplicationRecord
       .or(where("genres.name LIKE ?", "%#{q}%"))
       .or(where("publishers.name LIKE ?", "%#{q}%"))
   }
-  scope :borrowable, ->{where("amount >= borrowed_count")}
+  scope :borrowable, ->{where("is_active = TRUE AND amount >= borrowed_count")}
   scope :remain_least, ->{order(Arel.sql("amount - borrowed_count ASC"))}
   scope :by_first_letter, ->(letter){where("title LIKE ?", "#{letter}%")}
   scope :top_rated_books, lambda {|limit = 6|

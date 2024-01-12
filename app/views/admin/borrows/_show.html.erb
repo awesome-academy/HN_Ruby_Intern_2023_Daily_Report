@@ -42,6 +42,6 @@
     </div>
   </div>
 </div>
-<% if @borrow.pending? %>
+<% if @borrow.pending? || @borrow.renewing? %>
   <% content_for :hidden_content, render("reject_response") %>
 <% end %>

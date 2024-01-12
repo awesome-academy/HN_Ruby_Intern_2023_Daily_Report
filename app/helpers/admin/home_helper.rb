@@ -1,8 +1,10 @@
 module Admin::HomeHelper
-  def populate_key_by collection, raw, *attributes
-    keys = collection.where(id: raw.keys)
-    keys = keys.pluck(*attributes) unless attributes.empty?
-    keys.zip raw.values
+  def populate_key_by raw, *attributes, &block
+    collection = block.call.where(id: raw.keys)
+                      .index_by(&:id)
+                      .values_at(*raw.keys)
+    collection = collection.pluck(*attributes) unless attributes.empty?
+    collection.zip raw.values
   end
 
   def format_period_key raw, type
@@ -40,7 +42,7 @@ module Admin::HomeHelper
       {year: v} if v > 1
     end
     raw = week.deep_merge(month).deep_merge(year).compact
-    populate_key_by Book.with_attached_image, raw
+    populate_key_by(raw){Book.with_attached_image}
   end
 
   def stat_book_genre limit = Settings.n_pie_items
@@ -48,7 +50,7 @@ module Admin::HomeHelper
                    .order("count_id desc")
                    .limit(limit)
                    .count(:id)
-    populate_key_by Genre, raw, :name
+    populate_key_by(raw, :name){Genre}
   end
 
   def stat_book_author limit = Settings.n_pie_items
@@ -56,7 +58,7 @@ module Admin::HomeHelper
                     .order("count_id desc")
                     .limit(limit)
                     .count(:id)
-    populate_key_by Author, raw, :name
+    populate_key_by(raw, :name){Author}
   end
 
   def stat_book_publisher limit = Settings.n_pie_items
@@ -64,7 +66,7 @@ module Admin::HomeHelper
               .order("count_id desc")
               .limit(limit)
               .count(:id)
-    populate_key_by Publisher, raw, :name
+    populate_key_by(raw, :name){Publisher}
   end
 
   def group_by_period collection, period: :month
@@ -94,6 +96,6 @@ module Admin::HomeHelper
                     .order("count_borrow_items_id DESC")
                     .limit(limit)
                     .count("borrow_items.id")
-    populate_key_by Genre, raw, :name
+    populate_key_by(raw, :name){Genre}
   end
 end
