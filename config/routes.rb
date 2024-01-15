@@ -78,4 +78,17 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :api do
+    scope "(:locale)", locale: /en|vi/ do
+      namespace :v1 do
+        post "authenticate", to: "sessions#authenticate"
+        get "me", to: "sessions#me"
+
+        namespace :admin do
+          get "hello", to: "base#hello"
+        end
+      end
+    end
+  end
 end

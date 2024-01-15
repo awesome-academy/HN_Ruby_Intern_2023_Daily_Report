@@ -24,9 +24,6 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
-
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -76,6 +73,7 @@ group :test do
   gem "webdrivers"
 end
 
+gem "active_model_serializers" # Expose attributes for JSON
 gem "active_storage_validations", "~> 0.9.8"
 gem "bootstrap", "~> 5.3.2"
 gem "cancancan"
@@ -89,14 +87,15 @@ gem "figaro"
 gem "gretel"
 gem "image_processing", "~> 1.12.2"
 gem "jquery-rails"
+gem "jwt"
 gem "pagy"
 gem "prawn", "~> 2.4"
 gem "prawn-table"
+gem "rack-cors" # CORS
 gem "rails-i18n"
 gem "ransack", github: "activerecord-hackery/ransack"
 gem "sassc-rails"
 gem "select2-rails"
 gem "sidekiq"
 gem "toastr-rails"
-
 gem "whenever"
