@@ -1,0 +1,5 @@
+vi:
+  bad_credentials: 'Yêu cầu xác thực để tiếp tục'
+  no_permission: 'Tài khoản không có quyền thực hiện thao tác này'
+  record_not_found: 'Không tìm thấy dữ liệu'
+  authenticate_fail: 'Xác thực thất bại'

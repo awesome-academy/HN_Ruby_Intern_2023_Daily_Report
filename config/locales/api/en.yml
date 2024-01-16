@@ -1,0 +1,5 @@
+en:
+  bad_credentials: 'Bad credentials'
+  no_permission: 'This account does not have permissions'
+  record_not_found: 'Record not found'
+  authenticate_fail: 'Fail to authenticate'

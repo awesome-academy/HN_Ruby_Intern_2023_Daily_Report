@@ -99,6 +99,23 @@ class Account < ApplicationRecord
     save!
   end
 
+  def renew_api_token
+    loop do
+      api_token = JwtAuth.issue({user_id: id})
+      unless self.class.exists?(api_token:)
+        update(api_token:)
+        return api_token
+      end
+    end
+  end
+
+  def self.find_from_token token
+    payload = JwtAuth.decode token
+    return unless payload
+
+    find_by id: payload["user_id"], api_token: token
+  end
+
   private
 
   def fetch_books association, ids, limit
