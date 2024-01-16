@@ -213,7 +213,7 @@ a:hover {
 .modal .modal-footer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 15px 0 5px 0;
   align-items: center;
 }
@@ -433,7 +433,7 @@ th.sortable.desc::after {
   display: flex;
   flex-direction: column;
   flex: auto;
-  align-items: start;
+  align-items: flex-start;
   margin: 5px;
 }
 
@@ -451,7 +451,7 @@ th.sortable.desc::after {
 .action-buttons {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   width: 40%;
   max-width: 250px;
   margin-left: auto;

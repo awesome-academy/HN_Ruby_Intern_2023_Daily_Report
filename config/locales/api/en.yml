@@ -1,5 +1,10 @@
 en:
-  bad_credentials: 'Bad credentials'
-  no_permission: 'This account does not have permissions'
-  record_not_found: 'Record not found'
-  authenticate_fail: 'Fail to authenticate'
+  api:
+    bad_credentials: 'Bad credentials'
+    no_permission: 'This account does not have permissions'
+    record_not_found: 'Record not found'
+    authenticate_fail: 'Fail to authenticate'
+    create_fail: 'Errors on create %{name}'
+    update_fail: 'Errors on update %{name}'
+    delete_fail: 'Errors on delete %{name}'
+    delete_book_fail_borrowed: 'Delete book fail because there are some requests has not been returned'
