@@ -12,7 +12,7 @@ RSpec.shared_context "shared admin controller" do
 end
 
 RSpec.configure do |config|
-  config.include_context "shared admin controller", :admin, type: :controller
+  config.include_context "shared admin controller", :admin
 end
 
 RSpec.shared_examples "invalid item" do |name, model_name = nil|

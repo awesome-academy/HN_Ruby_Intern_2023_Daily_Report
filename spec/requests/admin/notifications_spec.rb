@@ -1,7 +1,6 @@
 require "support/admin_shared"
 
-RSpec.describe Admin::NotificationsController, type: :controller do
-  let(:admin){create(:admin)}
+RSpec.describe Admin::NotificationsController, :admin, type: :controller do
   let(:notification){create(:notification, account: admin)}
   before do
     create_list(:notification, 2, account: create(:account))

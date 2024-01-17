@@ -52,7 +52,6 @@ Rails.application.routes.draw do
       resources :books do
         member do
           get :amend, to: "books#amend_edit"
-          get :authors, :genres
           patch :amend
         end
       end
@@ -86,7 +85,11 @@ Rails.application.routes.draw do
         get "me", to: "sessions#me"
 
         namespace :admin do
-          get "hello", to: "base#hello"
+          resources :books, only: %i(index create update show destroy) do
+            member do
+              patch :amend
+            end
+          end
         end
       end
     end
