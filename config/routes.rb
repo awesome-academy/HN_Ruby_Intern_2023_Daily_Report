@@ -90,6 +90,11 @@ Rails.application.routes.draw do
               patch :amend
             end
           end
+          resources :authors, :genres, :publishers do
+            member do
+              get :books
+            end
+          end
         end
       end
     end
