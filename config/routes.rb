@@ -84,6 +84,11 @@ Rails.application.routes.draw do
         post "authenticate", to: "sessions#authenticate"
         get "me", to: "sessions#me"
 
+        post "register", to: "registrations#register"
+        resources :books, only: %i(index show), path: "library" do
+          resources :book_comments, path: "comments"
+        end
+
         namespace :admin do
           resources :books, only: %i(index create update show destroy) do
             member do

@@ -8,3 +8,4 @@ en:
     update_fail: 'Errors on update %{name}'
     delete_fail: 'Errors on delete %{name}'
     delete_book_fail_borrowed: 'Delete book fail because there are some requests has not been returned'
+    register_check_email: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account"
