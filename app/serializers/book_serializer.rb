@@ -11,4 +11,5 @@ class BookSerializer < ApplicationSerializer
   has_one :image, key: :cover do |serializer|
     serializer.link_for_attachment :image
   end
+  has_many :comments
 end

@@ -11,16 +11,16 @@ class API::V1::BaseController < API::ApplicationController
   end
 
   def user_save object, name
-    response_for_action :create, object.save, object, name
+    user_response_for_action :create, object.save, object, name
   end
 
   def user_update object, attributes, name
     result = object.update attributes
-    response_for_action :update, result, object, name
+    user_response_for_action :update, result, object, name
   end
 
   def user_destroy object, name, destroy_method: nil
     result = destroy_method.nil? ? object.destroy : destroy_method
-    response_for_action :delete, result, object, name
+    user_response_for_action :delete, result, object, name
   end
 end

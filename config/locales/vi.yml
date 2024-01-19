@@ -222,6 +222,8 @@ vi:
   pdf_isbn: "ISBN"
   pdf_publisher: "Nhà xuất bản"
   pdf_renewal_used: "Số lượt gia hạn đã dùng"
+  comments:
+    _name: "bình luận"
 
   activerecord:
     models:

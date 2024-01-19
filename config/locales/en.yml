@@ -222,6 +222,8 @@ en:
   pdf_isbn: "ISBN"
   pdf_publisher: "Publisher"
   pdf_renewal_used: "Number of book renewals used"
+  comments:
+    _name: "comment"
 
   activerecord:
     attributes:

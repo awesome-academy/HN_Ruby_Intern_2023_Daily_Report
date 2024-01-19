@@ -16,7 +16,8 @@ class API::V1::BooksController < API::V1::BaseController
   end
 
   def show
-    @book = Book.find_by(id: params[:id], is_active: true)
+    @book = Book.includes(comments: :rich_text_content)
+                .find_by(id: params[:id], is_active: true)
 
     json_response @book
   end

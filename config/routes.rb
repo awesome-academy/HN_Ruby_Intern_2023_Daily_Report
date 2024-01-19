@@ -86,7 +86,7 @@ Rails.application.routes.draw do
 
         post "register", to: "registrations#register"
         resources :books, only: %i(index show), path: "library" do
-          resources :book_comments, path: "comments"
+          resources :book_comments, only: %i(create update destroy), path: "comments"
         end
 
         namespace :admin do
