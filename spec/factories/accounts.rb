@@ -3,6 +3,7 @@ FactoryBot.define do
     sequence(:email, "aaa"){|n| "user+#{n}@example.com"}
     sequence(:username, "aaa"){|n| "hello-world-#{n}"}
     password{"111111"}
+    password_confirmation{"111111"}
     is_activated{true}
     is_active{true}
 

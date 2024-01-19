@@ -33,6 +33,7 @@ class Account < ApplicationRecord
                     format: Settings.valid_email_regex,
                     uniqueness: {case_sensitive: false}
   validates :password, presence: true, length: {in: 6..20}, allow_nil: true
+  validates :password_confirmation, presence: true, on: :create
   validates :username, presence: true, length: {maximum: Settings.digit_50},
                        uniqueness: true
 
